@@ -9,22 +9,21 @@
     <ui:define name="content">
         <div>
             <h:form>
-                <h:dataTable value="" var="">
+                <h:dataTable value="#{doctorController.getEntityList}" var="list">
                     <h:column>
                         <f:facet name="header">Kullanıcı Türü</f:facet>
-                        hasta
                     </h:column> 
                     <h:column>
                         <f:facet name="header">Kullanıcı Adı</f:facet>
-                        efe
+                        #{list.name}
                     </h:column> 
                      <h:column>
                         <f:facet name="header">İsim</f:facet>
-                        efe
+                         #{list.firstName}
                     </h:column> 
                      <h:column>
                         <f:facet name="header">Soyisim</f:facet>
-                        aksu
+                         #{list.lastName}
                     </h:column> 
                 </h:dataTable>
             </h:form>
