@@ -14,6 +14,30 @@ public class AppointmentController extends BaseController<Appointment> {
 
     }
 
+    public AppointmentDAO getAppointmentDao() {
+        return appointmentDao;
+    }
+
+    public void setAppointmentDao(AppointmentDAO appointmentDao) {
+        this.appointmentDao = appointmentDao;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
+    public List<Appointment> getAppointmentList() {
+        return appointmentList;
+    }
+
+    public void setAppointmentList(List<Appointment> appointmentList) {
+        this.appointmentList = appointmentList;
+    }
+
     @Override
     public void AddEntity(Appointment appointment) {
 

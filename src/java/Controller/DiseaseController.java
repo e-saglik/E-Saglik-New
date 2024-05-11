@@ -19,6 +19,30 @@ public class DiseaseController extends BaseController<Disease> {
 
     }
 
+    public DiseaseDAO getDiseaseDao() {
+        return diseaseDao;
+    }
+
+    public void setDiseaseDao(DiseaseDAO diseaseDao) {
+        this.diseaseDao = diseaseDao;
+    }
+
+    public Disease getDisease() {
+        return disease;
+    }
+
+    public void setDisease(Disease disease) {
+        this.disease = disease;
+    }
+
+    public List<Disease> getDiseaseList() {
+        return diseaseList;
+    }
+
+    public void setDiseaseList(List<Disease> diseaseList) {
+        this.diseaseList = diseaseList;
+    }
+
     @Override
     public Disease GetEntityById(int id) {
         return null;

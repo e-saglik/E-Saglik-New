@@ -14,6 +14,30 @@ public class AllergyController extends BaseController<Allergy> {
 
     }
 
+    public AllergyDAO getAllergyDao() {
+        return allergyDao;
+    }
+
+    public void setAllergyDao(AllergyDAO allergyDao) {
+        this.allergyDao = allergyDao;
+    }
+
+    public Allergy getAllergy() {
+        return allergy;
+    }
+
+    public void setAllergy(Allergy allergy) {
+        this.allergy = allergy;
+    }
+
+    public List<Allergy> getAllergyList() {
+        return allergyList;
+    }
+
+    public void setAllergyList(List<Allergy> allergyList) {
+        this.allergyList = allergyList;
+    }
+
     @Override
     public void AddEntity(Allergy allergy) {
 
