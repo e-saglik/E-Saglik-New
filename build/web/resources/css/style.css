@@ -82,3 +82,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-right: 0 !important;
     
 }
+
+.link{
+  text-decoration: none !important;
+  color : var(--bs-nav-link-color);
+}
+
+.space{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
