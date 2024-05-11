@@ -49,4 +49,39 @@ public class DoctorDAO extends BaseDAO<Doctor> {
 
     }
 
+    public void updateDoctor(Doctor d) {
+        try {
+            Statement st = this.getConnection().createStatement();
+            String query = "UPDATE doctor SET name='" + d.getName() + "', firstname='" + d.getFirstName() + "', lastname='" + d.getLastName() + "', email='" + d.getEmail() + "', password='" + d.getPassword() + "', gender='" + d.getGender() + "', phonenumber='" + d.getPhoneNumber() + "', address='" + d.getAddress() + "', specialization='" + d.getSpecialization() + "', hospital='" + d.getHospital() + "', prescription='" + d.getPrescription() + "', appointment='" + d.getAppointment() + "' WHERE id=" + d.getId();
+            st.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteDoctor(int id) {
+        try {
+            Statement st = this.getConnection().createStatement();
+            String query = "DELETE FROM doctor WHERE id=" + id;
+            st.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Doctor getDoctorById(int id) {
+        Doctor doctor = null;
+        try {
+            Statement st = this.getConnection().createStatement();
+            String query = "SELECT * FROM doctor WHERE id=" + id;
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()) {
+                doctor = new Doctor(rs.getString("specialization"), rs.getString("hospital"), rs.getString("prescription"), rs.getString("appointment"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phonenumber"), rs.getString("address"), rs.getInt("id"), rs.getString("name"));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return doctor;
+    }
+
 }
