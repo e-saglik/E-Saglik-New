@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.DoctorDAO;
 import Entity.Doctor;
 import java.util.List;
 
@@ -12,6 +13,8 @@ public class DoctorController extends BaseController<Doctor> {
     
     @Override
     public void AddEntity(Doctor doctor){
+        DoctorDAO dao = new DoctorDAO();
+        dao.createDoctor(doctor);
         
     }
     

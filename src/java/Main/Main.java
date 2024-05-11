@@ -2,17 +2,52 @@
 package Main;
 
 import Controller.BaseController;
+import Controller.DoctorController;
 import Controller.UserController;
 import Converter.DoctorConverter;
 import Entity.Doctor;
 import Entity.Patient;
 import Entity.User;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Main {
 
     public static void main(String[] args) {
+        
+        List<Integer> patientList = new ArrayList<>();
+        patientList.add(1); // Örnek bir hasta ID'si ekleyelim
+
+        // Doctor nesnesi oluşturma
+        Doctor doctor = new Doctor(
+            "Cardiology",      // specialization
+            "City Hospital",   // hospital
+            "Some prescription", // prescription
+            "10:00 AM",        // appointment
+            patientList,       // patientList
+            "aaa",            // firstName
+            "aaaae",             // lastName
+            "johnaaaample.com", // email
+            "passwoaa",     // password
+            "Male",            // gender
+            "1234567890",      // phoneNumber
+            "123 Main St",     // address
+            2,                 // id
+            "Dr. John Doe"     // name
+        );
+        
+        DoctorController dc = new DoctorController();
+        dc.AddEntity(doctor);
+        
+        
+        
+        
+        
+        
+        
+        
         DoctorConverter DC = new DoctorConverter();
         String doctorString = "Doctor{" +
         "id=1" +

@@ -1,17 +1,17 @@
-
 package Entity;
 
 import java.util.List;
 
 public class Doctor extends User {
+
     private String specialization;
     private String hospital;
     private String prescription;
     private String appointment;
-    private List<Integer> patientList ;
+    private List<Integer> patientList;
 
     public Doctor() {
-        
+
     }
 
     public Doctor(String specialization, String hospital, String prescription, String appointment, List<Integer> patientList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
@@ -21,14 +21,22 @@ public class Doctor extends User {
         this.prescription = prescription;
         this.appointment = appointment;
         this.patientList = patientList;
-    } 
-    
-    void prescribeMedication(){
-        
     }
-    
-    void requestTest(){
-        
+
+    public Doctor(String specialization, String hospital, String prescription, String appointment, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
+        super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
+        this.specialization = specialization;
+        this.hospital = hospital;
+        this.prescription = prescription;
+        this.appointment = appointment;
+    }
+
+    void prescribeMedication() {
+
+    }
+
+    void requestTest() {
+
     }
 
     public String getSpecialization() {
@@ -76,7 +84,5 @@ public class Doctor extends User {
         return "Doctor{" + "specialization=" + specialization + ", hospital=" + hospital + ", prescription=" + prescription + ", appointment=" + appointment + ", patientList=" + patientList + '}';
 
     }
-    
-    
-    
+
 }
