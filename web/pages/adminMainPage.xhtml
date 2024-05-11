@@ -12,30 +12,30 @@
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form>
-                        <h:dataTable styleClass="table table-striped" value="#{doctorController.GetEntityList()}" var="list">
+                        <h:dataTable styleClass="table table-striped" value="#{doctorController.GetEntityList()}" var="user">
                             <h:column>
                                 <f:facet name="header">Kullanıcı Id</f:facet>
-                                    #{list.id}
+                                    #{user.id}
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">Kullanıcı Adı</f:facet>
-                                    #{list.name}
+                                    #{user.name}
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">İsim</f:facet>
-                                    #{list.firstName}
+                                    #{user.firstName}
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">Soyisim</f:facet>
-                                    #{list.lastName}
+                                    #{user.lastName}
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">Cinsiyet</f:facet>
-                                    #{list.gender}
+                                    #{user.gender}
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">Sil</f:facet>
-                                <h:commandButton styleClass="btn btn-warning" value="Sil" action="#{doctorController.DeleteEntity(list.id)}"></h:commandButton>
+                                <h:commandButton styleClass="btn btn-warning" value="Sil" action="#{doctorController.DeleteEntity(user.id)}"></h:commandButton>
                             </h:column>
                         </h:dataTable>
                     </h:form>
