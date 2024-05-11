@@ -14,6 +14,16 @@ public class DoctorController extends BaseController<Doctor> {
     private DoctorDAO dao;
     private List<Doctor> list;
 
+    public String updateForm(Doctor doc) {
+        this.doctor = doc;
+        return "index";
+    }
+
+    public String update() {
+        this.getDao().updateDoctor(this.doctor);
+        return "index";
+    }
+
     public String create() {
 
         this.getDao().createDoctor(this.doctor);
