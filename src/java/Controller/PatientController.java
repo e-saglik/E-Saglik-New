@@ -11,9 +11,9 @@ public class PatientController extends BaseController<Patient> {
     private Patient patient;
     private List<Patient> patientList;
 
-    public PatientDAO getPatientDao() {
-        return patientDao;
-    }
+//    public PatientDAO getPatientDao() {
+//        return patientDao;
+//    }
 
     public void setPatientDao(PatientDAO patientDao) {
         this.patientDao = patientDao;
@@ -35,9 +35,9 @@ public class PatientController extends BaseController<Patient> {
         this.patientList = patientList;
     }
 
-    private PatientDAO patientDao;
-    private Patient patient;
-    private List<Patient> patientList;
+//    private PatientDAO patientDao;
+//    private Patient patient;
+//    private List<Patient> patientList;
 
     public PatientController() {
 
