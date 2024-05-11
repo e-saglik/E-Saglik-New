@@ -1,15 +1,10 @@
 package Controller;
 
-import DAO.BaseDAO;
 import DAO.PatientDAO;
 import Entity.Patient;
 import java.util.List;
 
 public class PatientController extends BaseController<Patient> {
-
-        private BaseDAO patientDao;
-    private Patient patient;
-    private List<Patient> patientList;
 
     public PatientDAO getPatientDao() {
         return patientDao;
