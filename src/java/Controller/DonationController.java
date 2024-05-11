@@ -54,7 +54,7 @@ public class DonationController extends BaseController<Donation> {
     }
 
     @Override
-    public void UpdateEntity(int id) {
+    public void UpdateEntity(int id, Donation donation) {
 
     }
 

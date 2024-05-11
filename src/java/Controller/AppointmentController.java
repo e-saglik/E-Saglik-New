@@ -54,7 +54,7 @@ public class AppointmentController extends BaseController<Appointment> {
     }
 
     @Override
-    public void UpdateEntity(int id) {
+    public void UpdateEntity(int id, Appointment appointment) {
 
     }
 
