@@ -29,7 +29,7 @@ public abstract class BaseController<Entity> implements Serializable{
         return null;  
     }
     
-    public void UpdateEntity(int id){
+    public void UpdateEntity(int id, Entity entity){
         
     }
     
