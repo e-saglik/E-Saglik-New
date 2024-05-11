@@ -33,6 +33,10 @@
                                 <f:facet name="header">Cinsiyet</f:facet>
                                     #{list.gender}
                             </h:column> 
+                            <h:column>
+                                <f:facet name="header">Sil</f:facet>
+                                <h:commandButton styleClass="btn btn-warning" value="Sil" action="#{doctorController.DeleteEntity(list.id)}"></h:commandButton>
+                            </h:column>
                         </h:dataTable>
                     </h:form>
                 </div>
