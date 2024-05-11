@@ -38,34 +38,33 @@ public class AdminController extends BaseController<Admin> {
     public void setAdminList(List<Admin> adminList) {
         this.adminList = adminList;
     }
-    
-    
+
     public AdminController() {
-        
+
     }
-    
+
     @Override
-    public void AddEntity(Admin admin){
-        
+    public void AddEntity(Admin admin) {
+
     }
-    
+
     @Override
-    public Admin GetEntityById(int id){       
-        return null;      
+    public Admin GetEntityById(int id) {
+        return null;
     }
-    
+
     @Override
-    public List<Admin> GetEntityList(){
-        return null;  
+    public List<Admin> GetEntityList() {
+        return null;
     }
-    
+
     @Override
-    public void UpdateEntity(int id){
-        
+    public void UpdateEntity(int id, Admin admin) {
+
     }
-    
+
     @Override
-    public void DeleteEntity(int id){
-        
+    public void DeleteEntity(int id) {
+
     }
 }

@@ -54,7 +54,7 @@ public class HospitalController extends BaseController<Hospital> {
     }
 
     @Override
-    public void UpdateEntity(int id) {
+    public void UpdateEntity(int id, Hospital hospital) {
 
     }
 
