@@ -1,8 +1,11 @@
 package Controller;
 
 import Entity.User;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 import java.util.List;
-
+@Named
+@ViewScoped
 public class UserController extends BaseController<User> {
 
     public UserController() {

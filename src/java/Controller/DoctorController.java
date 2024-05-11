@@ -2,8 +2,11 @@ package Controller;
 
 import DAO.DoctorDAO;
 import Entity.Doctor;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 import java.util.List;
-
+@Named
+@ViewScoped
 public class DoctorController extends BaseController<Doctor> {
 
     public DoctorController() {
@@ -25,7 +28,8 @@ public class DoctorController extends BaseController<Doctor> {
     
     @Override
     public List<Doctor> GetEntityList(){
-        return null;  
+        DoctorDAO dao = new DoctorDAO();
+        return dao.getDoctorList();   
     }
     
     @Override
