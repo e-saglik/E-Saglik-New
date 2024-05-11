@@ -6,103 +6,91 @@
                 >
 
     <h:panelGroup layout="block" styleClass="sidebar">
-        <ul class="navbar-nav">
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/hospital.png" alt="Profile"/>
-                    <span>Ziyaretlerim</span>
-                </a>
-            </li>
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/prescription.png" alt="Profile"/>
-                    <span>Reçetelerim</span>
-                </a>
-            </li>
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/report.png" alt="Profile"/>
-                    <span>Raporlarım</span>
-                </a>
-            </li>
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/disaase.png" alt="Profile"/>
-                    <span>Hastalıklarım</span>
-                </a>
-            </li>
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/assay.png" alt="Profile"/>
-                    <span>Tahlillerim</span>
-                </a>
-            </li><li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/x-rays.png" alt="Profile"/>
-                    <span>Radyolojik Görüntülerim</span>
-                </a>
-            </li>
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/microscope.png" alt="Profile"/>
-                    <span>Patoloji Bilgilerim</span>
-                </a>
-            </li>
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/allergy.png" alt="Profile"/>
-                    <span>Alerjilerim</span>
-                </a>
-            </li>
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/insurance.png" alt="Profile"/>
-                    <span>Sigorta İşlemlerim</span>
-                </a>
-            </li> 
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/note.png" alt="Profile"/>
-                    <span>Acil Durum Notlarım</span>
-                </a>
-            </li> 
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/document.png" alt="Profile"/>
-                    <span>Dökümanlarım</span>
-                </a>
-            </li> 
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/vaccine.png" alt="Profile"/>
-                    <span>Aşı Takvimi</span>
-                </a>
-            </li> 
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/medicene.png" alt="Profile"/>
-                    <span>İlaçlarım</span>
-                </a>
-            </li> 
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/appoinment.png" alt="Profile"/>
-                    <span>Randevu</span>
-                </a>
-            </li> 
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/feedback.png" alt="Profile"/>
-                    <span>Geri Bildirim</span>
-                </a>
-            </li> 
-            <li class="nav-item" >
-                <a class="nav-link" href="#" >
-                    <h:graphicImage class="sidebar-icon" name="icons/info.png" alt="Profile"/>
-                    <span>Aydınlatma Metni</span>
-                </a>
-            </li>
-        </ul>
+        <h:form>
+            <ul class="navbar-nav">
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('visitsPage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon" name="icons/hospital.png" alt="Profile"/>Ziyaretlerim
+                    </h:commandLink>           
+                </li>
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('prescriptionPage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon" name="icons/prescription.png" alt="Profile"/>Reçetelerim
+                    </h:commandLink> 
+                </li>
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('reportPage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon" name="icons/report.png" alt="Profile"/>Raporlarım
+                    </h:commandLink> 
+                </li>
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('diseasePage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon" name="icons/disaase.png" alt="Profile"/>Hastalıklarım
+                    </h:commandLink> 
+                </li>
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('assayPage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon" name="icons/assay.png" alt="Profile"/>Tahlillerim
+                    </h:commandLink>
+                </li><li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('radiographPage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon"  name="icons/x-rays.png" alt="Profile"/>Radyolojik Görüntülerim
+                    </h:commandLink>
+                </li>
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('pathologyPage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon"  name="icons/microscope.png" alt="Profile"/>Patoloji Bilgilerim
+                    </h:commandLink>
+                </li>
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('allergyPage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon"  name="icons/allergy.png" alt="Profile"/>Alerjilerim
+                    </h:commandLink>
+                </li>
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('insurancePage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon"   name="icons/insurance.png" alt="Profile"/>Sigorta İşlemlerim
+                    </h:commandLink>
+                </li> 
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('emergencyNotes')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon"  name="icons/note.png" alt="Profile"/>Acil Durum Notlarım
+                    </h:commandLink>
+                </li> 
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('documentsPage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon"  name="icons/document.png" alt="Profile"/>Dökümanlarım
+                    </h:commandLink>
+                </li> 
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('vaccinePage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon"  name="icons/vaccine.png" alt="Profile"/>Aşı Takvimi
+                    </h:commandLink>
+                </li> 
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('medicinePage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon"  name="icons/medicene.png" alt="Profile"/>İlaçlarım
+                    </h:commandLink>
+                </li> 
+                <li class="nav-item space" >
+                    <h:commandLink action="#{navigationController.page('appoinmentPage')}" class="link"> 
+                        <h:graphicImage class="sidebar-icon"  name="icons/appoinment.png" alt="Profile"/>Randevu
+                    </h:commandLink>
+                </li> 
+                <li class="nav-item space" >  
+                    <a class="nav-link" href="#" >
+                        <h:graphicImage class="sidebar-icon" name="icons/feedback.png" alt="Profile"/>
+                        <span>Geri Bildirim</span>
+                    </a>
+                </li> 
+                <li class="nav-item space" >
+                    <a class="nav-link" href="#" >
+                        <h:graphicImage class="sidebar-icon" name="icons/info.png" alt="Profile"/>
+                        <span>Aydınlatma Metni</span>
+                    </a>
+                </li>
+            </ul>
+        </h:form>
     </h:panelGroup>
 
 
