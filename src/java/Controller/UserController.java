@@ -58,7 +58,7 @@ public class UserController extends BaseController<User> {
     }
 
     @Override
-    public void UpdateEntity(int id) {
+    public void UpdateEntity(int id, User user) {
 
     }
 

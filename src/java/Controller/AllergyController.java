@@ -54,7 +54,7 @@ public class AllergyController extends BaseController<Allergy> {
     }
 
     @Override
-    public void UpdateEntity(int id) {
+    public void UpdateEntity(int id, Allergy allergy) {
 
     }
 

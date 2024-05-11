@@ -54,7 +54,7 @@ public class PathologyInformationController extends BaseController<PathologyInfo
     }
 
     @Override
-    public void UpdateEntity(int id) {
+    public void UpdateEntity(int id, PathologyInformation pathologyInformation) {
 
     }
 

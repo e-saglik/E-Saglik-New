@@ -54,7 +54,7 @@ public class TestResultController extends BaseController<TestResult> {
     }
 
     @Override
-    public void UpdateEntity(int id) {
+    public void UpdateEntity(int id, TestResult testResult) {
 
     }
 

@@ -54,7 +54,7 @@ public class NotificationController extends BaseController<Notification> {
     }
 
     @Override
-    public void UpdateEntity(int id) {
+    public void UpdateEntity(int id, Notification notification) {
 
     }
 

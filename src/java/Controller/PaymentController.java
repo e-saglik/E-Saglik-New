@@ -10,36 +10,35 @@ public class PaymentController extends BaseController<Payment> {
     private Payment payment;
     private List<Payment> paymentList;
 
-    
     public PaymentController() {
-        
-    }   
-    
-    @Override
-    public void AddEntity(Payment payment){
-        
+
     }
-    
+
     @Override
-    public Payment GetEntityById(int id){       
-        return null;      
+    public void AddEntity(Payment payment) {
+
     }
-    
+
     @Override
-    public List<Payment> GetEntityList(){
-        return null;  
+    public Payment GetEntityById(int id) {
+        return null;
     }
-    
+
     @Override
-    public void UpdateEntity(int id){
-        
+    public List<Payment> GetEntityList() {
+        return null;
     }
-    
+
     @Override
-    public void DeleteEntity(int id){
-        
+    public void UpdateEntity(int id, Payment payment) {
+
     }
-    
+
+    @Override
+    public void DeleteEntity(int id) {
+
+    }
+
 //    public void AddUser(User user){
 //        
 //    }

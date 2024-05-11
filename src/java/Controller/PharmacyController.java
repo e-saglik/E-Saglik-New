@@ -55,7 +55,7 @@ public class PharmacyController extends BaseController<Pharmacy> {
     }
 
     @Override
-    public void UpdateEntity(int id) {
+    public void UpdateEntity(int id, Pharmacy pharmacy) {
 
     }
 
