@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.AdminDAO;
 import Entity.Admin;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
@@ -10,6 +11,11 @@ import java.util.List;
 @ViewScoped
 public class AdminController extends BaseController<Admin> {
 
+    private AdminDAO adminDao;
+    private Admin admin;
+    private List<Admin> adminList;
+    
+    
     public AdminController() {
         
     }

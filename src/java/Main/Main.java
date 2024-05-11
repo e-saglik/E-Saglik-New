@@ -5,6 +5,7 @@ import Controller.BaseController;
 import Controller.DoctorController;
 import Controller.UserController;
 import Converter.DoctorConverter;
+import DAO.DoctorDAO;
 import Entity.Doctor;
 import Entity.Patient;
 import Entity.User;
@@ -22,61 +23,74 @@ public class Main {
 
         // Doctor nesnesi oluşturma
         Doctor doctor = new Doctor(
-            "Cardiology",      // specialization
-            "City Hospital",   // hospital
+            "Psikyatri",      // specialization
+            "Hospital",   // hospital
             "Some prescription", // prescription
-            "10:00 AM",        // appointment
+            "08:00 AM",        // appointment
             patientList,       // patientList
-            "aaa",            // firstName
-            "aaaae",             // lastName
-            "johnaaaample.com", // email
-            "passwoaa",     // password
-            "Male",            // gender
+            "Canan",            // firstName
+            "Aydın",             // lastName
+            "ccc.com", // email
+            "12345",     // password
+            "Female",            // gender
             "1234567890",      // phoneNumber
-            "123 Main St",     // address
-            2,                 // id
-            "Dr. John Doe"     // name
+            "432 Main St",     // address
+            1,                 // id
+            "Dr. Canan"     // name
         );
         
         DoctorController dc = new DoctorController();
         dc.AddEntity(doctor);
-        
-        
-        
-        
-        
-        
-        
-        
-        DoctorConverter DC = new DoctorConverter();
-        String doctorString = "Doctor{" +
-        "id=1" +
-        ", name='John Doe'" +
-        ", firstName='John'" +
-        ", lastName='Doe'" +
-        ", email='johndoe@example.com'" +
-        ", password='mypassword'" +
-        ", gender='Male'" +
-        ", phoneNumber='1234567890'" +
-        ", address='123 Main Street City'" +
-        ", specialization='Cardiology'" +
-        ", hospital='City Hospital'" +
-        ", prescription='Aspirin, 100mg'" +
-        ", appointment='2024-05-11 10:00 AM'" +
-        ", patientList=[101, 102, 103]" +
-        '}';
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        DoctorConverter DC = new DoctorConverter();
+//        String doctorString = "Doctor{" +
+//        "id=1" +
+//        ", name='John Doe'" +
+//        ", firstName='John'" +
+//        ", lastName='Doe'" +
+//        ", email='johndoe@example.com'" +
+//        ", password='mypassword'" +
+//        ", gender='Male'" +
+//        ", phoneNumber='1234567890'" +
+//        ", address='123 Main Street City'" +
+//        ", specialization='Cardiology'" +
+//        ", hospital='City Hospital'" +
+//        ", prescription='Aspirin, 100mg'" +
+//        ", appointment='2024-05-11 10:00 AM'" +
+//        ", patientList=[101, 102, 103]" +
+//        '}';
+//
+//
+//        try {
+//            Doctor d = DC.ConvertToEntity(doctorString);
+//            String s = DC.ConvertToString(d);
+//            System.out.println(s);
+//            
+//        } catch (IllegalAccessException ex) {
+//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//    
 
 
-        try {
-            Doctor d = DC.ConvertToEntity(doctorString);
-            String s = DC.ConvertToString(d);
-            System.out.println(s);
-            
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+
+
+
+
+
+
+
+
+
+
+}
 }
