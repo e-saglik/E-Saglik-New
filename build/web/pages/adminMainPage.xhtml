@@ -23,6 +23,7 @@
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">İsim</f:facet>
+                                <h:commandLink action="#{doctorController.updateForm(user)}" value="#{user.firstName}"></h:commandLink>
                                     #{user.firstName}
                             </h:column> 
                             <h:column>
@@ -43,27 +44,33 @@
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form>
                         <div class="form-group">
+                            <h:inputHidden value="#{doctorController.entity.name}"></h:inputHidden>
                             <label for="inputName">Kullanıcı Adı</label>
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.name}"></h:inputText>
                         </div>
                         <div class="form-group">
+                            <h:inputHidden value="#{doctorController.entity.firstName}"></h:inputHidden>
                             <label for="inputName">İsim</label>
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.firstName}"></h:inputText>
                         </div>
                         <div class="form-group">
+                            <h:inputHidden value="#{doctorController.entity.lastName}"></h:inputHidden>
                             <label for="inputName">Soyisim</label>
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.lastName}"></h:inputText>
                         </div>
                         <div class="form-group">
+                            <h:inputHidden value="#{doctorController.entity.gender}"></h:inputHidden>
                             <label for="inputName">Cinsiyet</label>
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.gender}"></h:inputText>
                         </div>
                         <div class="form-group">
+                            <h:inputHidden value="#{doctorController.entity.email}"></h:inputHidden>
                             <label for="inputName">E-mail</label>
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.email}"></h:inputText>
                         </div>
                         <div class="form-group">
-                            <h:commandButton styleClass="btn btn-primary" value="Oluştur" action="#{doctorController.create()}"></h:commandButton>
+                            <h:commandButton rendered="#{doctorController.entity.id != null}" styleClass="btn btn-primary" value="Oluştur" action="#{doctorController.update()}"></h:commandButton>
+                            <h:commandButton rendered="#{doctorController.entity.id == null}" styleClass="btn btn-primary" value="Oluştur" action="#{doctorController.create()}"></h:commandButton>
                         </div>
                     </h:form>
                 </div>
