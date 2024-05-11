@@ -5,28 +5,43 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/template/template.xhtml">
-
+    <h:outputStylesheet library="css" name="bootstrap.css" />
+    <h:outputStylesheet name="/css/style.css" />
     <ui:define name="content">
-        <div>
-            <h:form>
-                <h:dataTable value="#{doctorController.GetEntityList()}" var="list">
-                    <h:column>
-                        <f:facet name="header">Kullanıcı Türü</f:facet>
-                    </h:column> 
-                    <h:column>
-                        <f:facet name="header">Kullanıcı Adı</f:facet>
-                        #{list.name}
-                    </h:column> 
-                     <h:column>
-                        <f:facet name="header">İsim</f:facet>
-                         #{list.firstName}
-                    </h:column> 
-                     <h:column>
-                        <f:facet name="header">Soyisim</f:facet>
-                         #{list.lastName}
-                    </h:column> 
-                </h:dataTable>
-            </h:form>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8" style="padding-right: 0">
+                    <h:form>
+                        <h:dataTable styleClass="table table-striped" value="#{doctorController.GetEntityList()}" var="list">
+                            <h:column>
+                                <f:facet name="header">Kullanıcı Id</f:facet>
+                                    #{list.id}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Kullanıcı Adı</f:facet>
+                                    #{list.name}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">İsim</f:facet>
+                                    #{list.firstName}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Soyisim</f:facet>
+                                    #{list.lastName}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Cinsiyet</f:facet>
+                                    #{list.gender}
+                            </h:column> 
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <div class="col-md-4" style="padding-right: 0">
+
+
+                </div>
+
+            </div>
         </div>
     </ui:define>
 </ui:composition>
