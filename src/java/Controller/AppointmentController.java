@@ -1,39 +1,44 @@
 package Controller;
 
+import DAO.AppointmentDAO;
 import Entity.Appointment;
 import java.util.List;
 
 public class AppointmentController extends BaseController<Appointment> {
 
+    private AppointmentDAO appointmentDao;
+    private Appointment appointment;
+    private List<Appointment> appointmentList;
+
     public AppointmentController() {
-        
-    }   
-    
-    @Override
-    public void AddEntity(Appointment appointment){
-        
+
     }
-    
+
     @Override
-    public Appointment GetEntityById(int id){       
-        return null;      
+    public void AddEntity(Appointment appointment) {
+
     }
-    
+
     @Override
-    public List<Appointment> GetEntityList(){
-        return null;  
+    public Appointment GetEntityById(int id) {
+        return null;
     }
-    
+
     @Override
-    public void UpdateEntity(int id){
-        
+    public List<Appointment> GetEntityList() {
+        return null;
     }
-    
+
     @Override
-    public void DeleteEntity(int id){
-        
+    public void UpdateEntity(int id) {
+
     }
-    
+
+    @Override
+    public void DeleteEntity(int id) {
+
+    }
+
 //    public void AddUser(User user){
 //        
 //    }
