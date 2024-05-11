@@ -6,7 +6,6 @@ import java.util.List;
 
 public class PatientController extends BaseController<Patient> {
 
-    
     private PatientDAO patientDao;
     private Patient patient;
     private List<Patient> patientList;
@@ -35,8 +34,6 @@ public class PatientController extends BaseController<Patient> {
         this.patientList = patientList;
     }
 
-
-
     public PatientController() {
 
     }
@@ -57,7 +54,7 @@ public class PatientController extends BaseController<Patient> {
     }
 
     @Override
-    public void UpdateEntity(int id) {
+    public void UpdateEntity(int id, Patient patient) {
 
     }
 

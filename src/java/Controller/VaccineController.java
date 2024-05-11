@@ -54,7 +54,7 @@ public class VaccineController extends BaseController<Vaccine> {
     }
 
     @Override
-    public void UpdateEntity(int id) {
+    public void UpdateEntity(int id, Vaccine vaccine) {
 
     }
 
