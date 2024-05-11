@@ -18,7 +18,7 @@ public class DoctorController extends BaseController<Doctor> {
         
         this.getDao().createDoctor(this.doctor);
         
-        return "index.html";
+        return "index";
         
     }
     
