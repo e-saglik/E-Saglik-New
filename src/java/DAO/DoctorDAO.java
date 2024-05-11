@@ -34,7 +34,7 @@ public class DoctorDAO extends BaseDAO<Doctor> {
 
             Statement st = this.getConnection().createStatement();
 
-            String query = "select * from doctor";
+            String query = "select * from doctor order by id asc";
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
