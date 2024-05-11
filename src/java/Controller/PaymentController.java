@@ -1,10 +1,16 @@
 package Controller;
 
+import DAO.BaseDAO;
 import Entity.Payment;
 import java.util.List;
 
 public class PaymentController extends BaseController<Payment> {
 
+    private BaseDAO paymentDao;
+    private Payment payment;
+    private List<Payment> paymentList;
+
+    
     public PaymentController() {
         
     }   
