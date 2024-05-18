@@ -30,14 +30,6 @@ public class AllergyController extends BaseController<Allergy> {
         this.allergy = allergy;
     }
 
-    public List<Allergy> getAllergyList() {
-        return allergyList;
-    }
-
-    public void setAllergyList(List<Allergy> allergyList) {
-        this.allergyList = allergyList;
-    }
-
     @Override
     public void AddEntity(Allergy allergy) {
 
