@@ -15,71 +15,86 @@ public class DoctorDAO extends BaseDAO<Doctor> {
     }
 
     public void createDoctor(Doctor d) {
-        try {
-
-            Statement st = this.getConnection().createStatement();
-            String query = "INSERT INTO doctor (name, firstname, lastname, email, password, gender, phonenumber, address, specialization, hospital, prescription, appointment) VALUES ('" + d.getName() + "','" + d.getFirstName() + "', '" + d.getLastName() + "', '" + d.getEmail() + "', '" + d.getPassword() + "', '" + d.getGender() + "', '" + d.getPhoneNumber() + "', '" + d.getAddress() + "', '" + d.getSpecialization() + "', '" + d.getHospital() + "', '" + d.getPrescription() + "', '" + d.getAppointment() + "')";
-            st.executeUpdate(query);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        String query = "INSERT INTO doctor (name, firstname, lastname, email, password, gender, phonenumber, address, specialization, hospital, prescription, appointment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+            ps.setString(1, d.getName());
+            ps.setString(2, d.getFirstName());
+            ps.setString(3, d.getLastName());
+            ps.setString(4, d.getEmail());
+            ps.setString(5, d.getPassword());
+            ps.setString(6, d.getGender());
+            ps.setString(7, d.getPhoneNumber());
+            ps.setString(8, d.getAddress());
+            ps.setString(9, d.getSpecialization());
+            ps.setString(10, d.getHospital());
+            ps.setString(11, d.getPrescription());
+            ps.setString(12, d.getAppointment());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     public List<Doctor> getDoctorList() {
-
         List<Doctor> doctorList = new ArrayList<>();
-
-        try {
-
-            Statement st = this.getConnection().createStatement();
-
-            String query = "select * from doctor order by id asc";
-            ResultSet rs = st.executeQuery(query);
+        String query = "SELECT * FROM doctor ORDER BY id ASC";
+        try (Statement st = this.getConnection().createStatement();
+             ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
-                doctorList.add(new Doctor(rs.getString("specialization"), rs.getString("hospital"), rs.getString("prescription"), rs.getString("appointment"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phonenumber"), rs.getString("address"), rs.getInt("id"), rs.getString("name")));
-
+                Doctor doctor = new Doctor(rs.getString("specialization"), rs.getString("hospital"), rs.getString("prescription"), rs.getString("appointment"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phonenumber"), rs.getString("address"), rs.getInt("id"), rs.getString("name"));
+                doctorList.add(doctor);
             }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return doctorList;
-
     }
 
     public void updateDoctor(Doctor d) {
-        try {
-            Statement st = this.getConnection().createStatement();
-            String query = "UPDATE doctor SET name='" + d.getName() + "', firstname='" + d.getFirstName() + "', lastname='" + d.getLastName() + "', email='" + d.getEmail() + "', password='" + d.getPassword() + "', gender='" + d.getGender() + "', phonenumber='" + d.getPhoneNumber() + "', address='" + d.getAddress() + "', specialization='" + d.getSpecialization() + "', hospital='" + d.getHospital() + "', prescription='" + d.getPrescription() + "', appointment='" + d.getAppointment() + "' WHERE id=" + d.getId();
-            st.executeUpdate(query);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        String query = "UPDATE doctor SET name=?, firstname=?, lastname=?, email=?, password=?, gender=?, phonenumber=?, address=?, specialization=?, hospital=?, prescription=?, appointment=? WHERE id=?";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+            ps.setString(1, d.getName());
+            ps.setString(2, d.getFirstName());
+            ps.setString(3, d.getLastName());
+            ps.setString(4, d.getEmail());
+            ps.setString(5, d.getPassword());
+            ps.setString(6, d.getGender());
+            ps.setString(7, d.getPhoneNumber());
+            ps.setString(8, d.getAddress());
+            ps.setString(9, d.getSpecialization());
+            ps.setString(10, d.getHospital());
+            ps.setString(11, d.getPrescription());
+            ps.setString(12, d.getAppointment());
+            ps.setInt(13, d.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     public void deleteDoctor(int id) {
-        try {
-            Statement st = this.getConnection().createStatement();
-            String query = "DELETE FROM doctor WHERE id=" + id;
-            st.executeUpdate(query);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        String query = "DELETE FROM doctor WHERE id=?";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     public Doctor getDoctorById(int id) {
         Doctor doctor = null;
-        try {
-            Statement st = this.getConnection().createStatement();
-            String query = "SELECT * FROM doctor WHERE id=" + id;
-            ResultSet rs = st.executeQuery(query);
-            if (rs.next()) {
-                doctor = new Doctor(rs.getString("specialization"), rs.getString("hospital"), rs.getString("prescription"), rs.getString("appointment"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phonenumber"), rs.getString("address"), rs.getInt("id"), rs.getString("name"));
+        String query = "SELECT * FROM doctor WHERE id=?";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    doctor = new Doctor(rs.getString("specialization"), rs.getString("hospital"), rs.getString("prescription"), rs.getString("appointment"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phonenumber"), rs.getString("address"), rs.getInt("id"), rs.getString("name"));
+                }
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return doctor;
     }

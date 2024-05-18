@@ -1,65 +1,65 @@
 package DAO;
 
-import Entity.Disease;
+import Entity.Pharmacy;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiseaseDAO extends BaseDAO<Disease> {
+public class PharmacyDAO extends BaseDAO<Pharmacy> {
 
-    public DiseaseDAO(Connection connection) {
+    public PharmacyDAO(Connection connection) {
         super(connection);
     }
 
-    public DiseaseDAO() {
+    public PharmacyDAO() {
     }
 
-    public void createDisease(Disease disease) {
-        String query = "INSERT INTO disease (description, id, name) VALUES (?, ?, ?)";
+    public void createPharmacy(Pharmacy pharmacy) {
+        String query = "INSERT INTO pharmacy (location, id, name) VALUES (?, ?, ?)";
         try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
-            ps.setString(1, disease.getDescription());
-            ps.setInt(2, disease.getId());
-            ps.setString(3, disease.getName());
+            ps.setString(1, pharmacy.getLocation());
+            ps.setInt(2, pharmacy.getId());
+            ps.setString(3, pharmacy.getName());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public List<Disease> getDiseaseList() {
-        List<Disease> diseaseList = new ArrayList<>();
-        String query = "SELECT * FROM disease ORDER BY id ASC";
+    public List<Pharmacy> getPharmacyList() {
+        List<Pharmacy> pharmacyList = new ArrayList<>();
+        String query = "SELECT * FROM pharmacy ORDER BY id ASC";
         try (Statement st = this.getConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
-                Disease disease = new Disease(
-                    rs.getString("description"),
+                Pharmacy pharmacy = new Pharmacy(
+                    rs.getString("location"),
                     rs.getInt("id"),
                     rs.getString("name")
                 );
-                diseaseList.add(disease);
+                pharmacyList.add(pharmacy);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return diseaseList;
+        return pharmacyList;
     }
 
-    public void updateDisease(Disease disease) {
-        String query = "UPDATE disease SET description=?, name=? WHERE id=?";
+    public void updatePharmacy(Pharmacy pharmacy) {
+        String query = "UPDATE pharmacy SET location=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
-            ps.setString(1, disease.getDescription());
-            ps.setString(2, disease.getName());
-            ps.setInt(3, disease.getId());
+            ps.setString(1, pharmacy.getLocation());
+            ps.setString(2, pharmacy.getName());
+            ps.setInt(3, pharmacy.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteDisease(int id) {
-        String query = "DELETE FROM disease WHERE id=?";
+    public void deletePharmacy(int id) {
+        String query = "DELETE FROM pharmacy WHERE id=?";
         try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -68,15 +68,15 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         }
     }
 
-    public Disease getDiseaseById(int id) {
-        Disease disease = null;
-        String query = "SELECT * FROM disease WHERE id=?";
+    public Pharmacy getPharmacyById(int id) {
+        Pharmacy pharmacy = null;
+        String query = "SELECT * FROM pharmacy WHERE id=?";
         try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    disease = new Disease(
-                        rs.getString("description"),
+                    pharmacy = new Pharmacy(
+                        rs.getString("location"),
                         rs.getInt("id"),
                         rs.getString("name")
                     );
@@ -85,6 +85,6 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return disease;
+        return pharmacy;
     }
 }
