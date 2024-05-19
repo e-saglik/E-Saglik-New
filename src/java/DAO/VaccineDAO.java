@@ -1,69 +1,65 @@
 package DAO;
 
-import Entity.Disease;
+import Entity.Vaccine;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiseaseDAO extends BaseDAO<Disease> {
+public class VaccineDAO extends BaseDAO<Vaccine> {
 
-    public DiseaseDAO(Connection connection) {
+    public VaccineDAO(Connection connection) {
         super(connection);
     }
 
-    public DiseaseDAO() {
-        
+    public VaccineDAO() {
     }
 
-    
-    
-
-    public void createDisease(Disease disease) {
-        String query = "INSERT INTO disease (description, id, name) VALUES (?, ?, ?)";
+    public void createVaccine(Vaccine vaccine) {
+        String query = "INSERT INTO vaccine (type, id, name) VALUES (?, ?, ?)";
         try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
-            ps.setString(1, disease.getDescription());
-            ps.setInt(2, disease.getId());
-            ps.setString(3, disease.getName());
+            ps.setString(1, vaccine.getType());
+            ps.setInt(2, vaccine.getId());
+            ps.setString(3, vaccine.getName());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public List<Disease> getDiseaseList() {
-        List<Disease> diseaseList = new ArrayList<>();
-        String query = "SELECT * FROM disease ORDER BY id ASC";
+    public List<Vaccine> getVaccineList() {
+        List<Vaccine> vaccineList = new ArrayList<>();
+        String query = "SELECT * FROM vaccine ORDER BY id ASC";
         try (Statement st = this.getConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
-                Disease disease = new Disease(
-                    rs.getString("description"),
+                Vaccine vaccine = new Vaccine(
+                    rs.getString("type"),
                     rs.getInt("id"),
                     rs.getString("name")
                 );
-                diseaseList.add(disease);
+                vaccineList.add(vaccine);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return diseaseList;
+        return vaccineList;
     }
 
-    public void updateDisease(Disease disease) {
-        String query = "UPDATE disease SET description=?, name=? WHERE id=?";
+    public void updateVaccine(Vaccine vaccine) {
+        String query = "UPDATE vaccine SET type=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
-            ps.setString(1, disease.getDescription());
-            ps.setString(2, disease.getName());
-            ps.setInt(3, disease.getId());
+            ps.setString(1, vaccine.getType());
+            ps.setString(2, vaccine.getName());
+            ps.setInt(3, vaccine.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteDisease(int id) {
-        String query = "DELETE FROM disease WHERE id=?";
+    public void deleteVaccine(int id) {
+        String query = "DELETE FROM vaccine WHERE id=?";
         try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -72,15 +68,15 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         }
     }
 
-    public Disease getDiseaseById(int id) {
-        Disease disease = null;
-        String query = "SELECT * FROM disease WHERE id=?";
+    public Vaccine getVaccineById(int id) {
+        Vaccine vaccine = null;
+        String query = "SELECT * FROM vaccine WHERE id=?";
         try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    disease = new Disease(
-                        rs.getString("description"),
+                    vaccine = new Vaccine(
+                        rs.getString("type"),
                         rs.getInt("id"),
                         rs.getString("name")
                     );
@@ -89,6 +85,6 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return disease;
+        return vaccine;
     }
 }

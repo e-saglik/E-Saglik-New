@@ -1,0 +1,94 @@
+package DAO;
+
+import Entity.Notification;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class NotificationDAO extends BaseDAO<Notification> {
+
+    public NotificationDAO(Connection connection) {
+        super(connection);
+    }
+
+    public NotificationDAO() {
+    }
+
+    public void createNotification(Notification notification) {
+        String query = "INSERT INTO notification (message, notification_date, id, name) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+            ps.setString(1, notification.getMassage());
+            ps.setDate(2, new java.sql.Date(notification.getNotificationDate().getTime()));
+            ps.setInt(3, notification.getId());
+            ps.setString(4, notification.getName());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Notification> getNotificationList() {
+        List<Notification> notificationList = new ArrayList<>();
+        String query = "SELECT * FROM notification ORDER BY id ASC";
+        try (Statement st = this.getConnection().createStatement();
+             ResultSet rs = st.executeQuery(query)) {
+
+            while (rs.next()) {
+                Notification notification = new Notification(
+                    rs.getString("message"),
+                    rs.getDate("notification_date"),
+                    rs.getInt("id"),
+                    rs.getString("name")
+                );
+                notificationList.add(notification);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return notificationList;
+    }
+
+    public void updateNotification(Notification notification) {
+        String query = "UPDATE notification SET message=?, notification_date=?, name=? WHERE id=?";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+            ps.setString(1, notification.getMassage());
+            ps.setDate(2, new java.sql.Date(notification.getNotificationDate().getTime()));
+            ps.setString(3, notification.getName());
+            ps.setInt(4, notification.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteNotification(int id) {
+        String query = "DELETE FROM notification WHERE id=?";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Notification getNotificationById(int id) {
+        Notification notification = null;
+        String query = "SELECT * FROM notification WHERE id=?";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    notification = new Notification(
+                        rs.getString("message"),
+                        rs.getDate("notification_date"),
+                        rs.getInt("id"),
+                        rs.getString("name")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return notification;
+    }
+}
