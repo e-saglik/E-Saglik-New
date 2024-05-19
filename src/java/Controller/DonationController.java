@@ -39,47 +39,47 @@ public class DonationController extends BaseController<Donation> {
     }
 
     @Override
-    public void AddEntity(Donation donation) {
+    public void AddEntity(Donation doctor) {
+        if (donationDao == null) {
+            //donationDao = new DonationDAO();
+        }
+        //donationDao.CreateDonation(doctor);
 
     }
 
     @Override
     public Donation GetEntityById(int id) {
+        if (donationDao == null) {
+            //donationDao = new DonationDAO();
+        }
+        //donationDao.GetDonationById(id);
         return null;
     }
 
     @Override
     public List<Donation> GetEntityList() {
+        if (donationDao == null) {
+            //donationDao = new DonationDAO();
+        }
+        //donationDao.GetDonationList();
+
         return null;
     }
 
     @Override
-    public void UpdateEntity(int id, Donation donation) {
-
+    public void UpdateEntity(int id, Donation doctor) {
+        if (donationDao == null) {
+            //donationDao = new DonationDAO();
+        }
+        //donationDao.UpdateDonation(doctor);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (donationDao == null) {
+            //donationDao = new DonationDAO();
+        }
+        //donationDao.DeleteDonation(id);
     }
-
-//    public void AddUser(User user){
-//        
-//    }
-//    
-//    public User GetUserById(int id){      
-//        return null;        
-//    }
-//    
-//    public List<User> GetUserList(){ 
-//        return null;
-//    }
-//    
-//    public void UpdateUser(int id,User user){
-//        
-//    }
-//    
-//    public void DeleteUser(int id){
-//        
-//    }
+    
 }

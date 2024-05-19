@@ -14,11 +14,6 @@ public class DiseaseController extends BaseController<Disease> {
 
     }
 
-    @Override
-    public void AddEntity(Disease disease) {
-
-    }
-
     public DiseaseDAO getDiseaseDao() {
         return diseaseDao;
     }
@@ -44,23 +39,46 @@ public class DiseaseController extends BaseController<Disease> {
     }
 
     @Override
+    public void AddEntity(Disease doctor) {
+        if (diseaseDao == null) {
+            diseaseDao = new DiseaseDAO();
+        }
+        //adminDao.AddAdmin(Admin);
+
+    }
+
+    @Override
     public Disease GetEntityById(int id) {
+        if (diseaseDao == null) {
+            diseaseDao = new DiseaseDAO();
+        }
+        //adminDao.GetDoctorById(id);
         return null;
     }
 
     @Override
     public List<Disease> GetEntityList() {
+        if (diseaseDao == null) {
+            diseaseDao = new DiseaseDAO();
+        }
+        //adminDao.GetDoctorList();
         return null;
     }
 
     @Override
     public void UpdateEntity(int id, Disease disease) {
-
+        if (diseaseDao == null) {
+            diseaseDao = new DiseaseDAO();
+        }
+        //adminDao.UpdateDoctor(doctor);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (diseaseDao == null) {
+            diseaseDao = new DiseaseDAO();
+        }
+        //adminDao.DeleteDoctor(id);
     }
 
 }

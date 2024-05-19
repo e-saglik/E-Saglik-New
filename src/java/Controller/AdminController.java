@@ -44,27 +44,46 @@ public class AdminController extends BaseController<Admin> {
     }
 
     @Override
-    public void AddEntity(Admin admin) {
+    public void AddEntity(Admin doctor) {
+        if (adminDao == null) {
+            adminDao = new AdminDAO();
+        }
+        //adminDao.AddAdmin(Admin);
 
     }
 
     @Override
     public Admin GetEntityById(int id) {
+        if (adminDao == null) {
+            adminDao = new AdminDAO();
+        }
+        //adminDao.GetDoctorById(id);
         return null;
     }
 
     @Override
     public List<Admin> GetEntityList() {
+        if (adminDao == null) {
+            adminDao = new AdminDAO();
+        }
+        //adminDao.GetDoctorList();
         return null;
     }
 
     @Override
-    public void UpdateEntity(int id, Admin admin) {
-
+    public void UpdateEntity(int id, Admin doctor) {
+        if (adminDao == null) {
+            adminDao = new AdminDAO();
+        }
+        //adminDao.UpdateDoctor(doctor);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (adminDao == null) {
+            adminDao = new AdminDAO();
+        }
+        //adminDao.DeleteDoctor(id);
     }
+    
 }

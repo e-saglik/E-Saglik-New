@@ -11,5 +11,9 @@ public class AllergyDAO extends BaseDAO<Allergy> {
         super(connection);
     }
 
+    public AllergyDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
 }

@@ -9,4 +9,10 @@ public class AdminDAO extends BaseDAO<Admin> {
         super(connection);
     }
 
+    public AdminDAO() {
+        
+    }
+    
+    
+
 }

@@ -11,5 +11,9 @@ public class AppointmentDAO extends BaseDAO<Appointment> {
         super(connection);
     }
 
+    public AppointmentDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
    
 }

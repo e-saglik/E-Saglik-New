@@ -32,27 +32,45 @@ public class AllergyController extends BaseController<Allergy> {
 
     @Override
     public void AddEntity(Allergy allergy) {
+        if (allergyDao == null) {
+            allergyDao = new AllergyDAO();
+        }
+        //allergyDao.AddAllergy(Admin);
 
     }
 
     @Override
     public Allergy GetEntityById(int id) {
+        if (allergyDao == null) {
+            allergyDao = new AllergyDAO();
+        }
+        //allergyDao.GetAllergyById(id);
         return null;
     }
 
     @Override
     public List<Allergy> GetEntityList() {
-        return null;
+        if (allergyDao == null) {
+            allergyDao = new AllergyDAO();
+        }
+        //allergyList = allergyDao.GetAllergyList();
+        return allergyList;
     }
 
     @Override
     public void UpdateEntity(int id, Allergy allergy) {
-
+        if (allergyDao == null) {
+            allergyDao = new AllergyDAO();
+        }
+        //allergyDao.UpdateAllergy(doctor);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (allergyDao == null) {
+            allergyDao = new AllergyDAO();
+        }
+        //allergyDao.DeleteAllergy(id);
     }
 
 }

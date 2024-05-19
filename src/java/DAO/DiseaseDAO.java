@@ -13,5 +13,9 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         super(connection);
     }
 
+    public DiseaseDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
 }
