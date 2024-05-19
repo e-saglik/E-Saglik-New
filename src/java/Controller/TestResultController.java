@@ -1,6 +1,7 @@
 package Controller;
 
 import DAO.BaseDAO;
+import DAO.TestResultDAO;
 import Entity.TestResult;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class TestResultController extends BaseController<TestResult> {
         return testResultDao;
     }
 
-    public void setTestResultDao(BaseDAO testResultDao) {
+    public void setTestResultDao(TestResultDAO testResultDao) {
         this.testResultDao = testResultDao;
     }
 
@@ -30,7 +31,7 @@ public class TestResultController extends BaseController<TestResult> {
         this.testResultList = testResultList;
     }
 
-    private BaseDAO testResultDao;
+    private TestResultDAO testResultDao;
     private TestResult testResult;
     private List<TestResult> testResultList;
 
@@ -38,29 +39,40 @@ public class TestResultController extends BaseController<TestResult> {
 
     }
 
-    @Override
-    public void AddEntity(TestResult testResult) {
-
-    }
-
-    @Override
+   @Override
     public TestResult GetEntityById(int id) {
+        if (testResultDao == null) {
+            testResultDao = new TestResultDAO();
+        }
+        testResultDao.GetTestResultById(id);
         return null;
     }
 
     @Override
     public List<TestResult> GetEntityList() {
-        return null;
+        if (testResultDao == null) {
+            testResultDao = new TestResultDAO();
+        }
+        testResultDao.GetTestResultList();
+
+        return testResultDao.GetTestResultList();
     }
 
     @Override
     public void UpdateEntity(int id, TestResult testResult) {
-
+        if (testResultDao == null) {
+            testResultDao = new TestResultDAO();
+        }
+        testResultDao.UpdateTestResult(testResult);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (testResultDao == null) {
+            testResultDao = new TestResultDAO();
+        }
+        testResultDao.DeleteTestResult(id);
     }
+
 
 }

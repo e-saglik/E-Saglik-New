@@ -42,48 +42,39 @@ public class UserController extends BaseController<User> {
 
     }
 
-    @Override
-    public void AddEntity(User user) {
-
-    }
-
-    @Override
+   @Override
     public User GetEntityById(int id) {
+        if (userDao == null) {
+            userDao = new UserDAO();
+        }
+        userDao.GetUserById(id);
         return null;
     }
 
     @Override
     public List<User> GetEntityList() {
-        return null;
+        if (userDao == null) {
+            userDao = new UserDAO();
+        }
+        userDao.GetUserList();
+
+        return userDao.GetUserList();
     }
 
     @Override
     public void UpdateEntity(int id, User user) {
-
+        if (userDao == null) {
+            userDao = new UserDAO();
+        }
+        userDao.UpdateUser(user);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (userDao == null) {
+            userDao = new UserDAO();
+        }
+        userDao.DeleteUser(id);
     }
 
-//    public void AddUser(User user){
-//        
-//    }
-//    
-//    public User GetUserById(int id){      
-//        return null;        
-//    }
-//    
-//    public List<User> GetUserList(){ 
-//        return null;
-//    }
-//    
-//    public void UpdateUser(int id,User user){
-//        
-//    }
-//    
-//    public void DeleteUser(int id){
-//        
-//    }
 }

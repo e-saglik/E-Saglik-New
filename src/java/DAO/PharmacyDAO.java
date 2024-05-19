@@ -14,7 +14,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
     public PharmacyDAO() {
     }
 
-    public void createPharmacy(Pharmacy pharmacy) {
+    public void CreatePharmacy(Pharmacy pharmacy) {
         String query = "INSERT INTO pharmacy (location, id, name) VALUES (?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, pharmacy.getLocation());
@@ -26,7 +26,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
         }
     }
 
-    public List<Pharmacy> getPharmacyList() {
+    public List<Pharmacy> GetPharmacyList() {
         List<Pharmacy> pharmacyList = new ArrayList<>();
         String query = "SELECT * FROM pharmacy ORDER BY id ASC";
         try (Statement st = this.GetConnection().createStatement();
@@ -46,7 +46,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
         return pharmacyList;
     }
 
-    public void updatePharmacy(Pharmacy pharmacy) {
+    public void UpdatePharmacy(Pharmacy pharmacy) {
         String query = "UPDATE pharmacy SET location=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, pharmacy.getLocation());
@@ -58,7 +58,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
         }
     }
 
-    public void deletePharmacy(int id) {
+    public void DeletePharmacy(int id) {
         String query = "DELETE FROM pharmacy WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
@@ -68,7 +68,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
         }
     }
 
-    public Pharmacy getPharmacyById(int id) {
+    public Pharmacy GetPharmacyById(int id) {
         Pharmacy pharmacy = null;
         String query = "SELECT * FROM pharmacy WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {

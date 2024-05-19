@@ -1,6 +1,7 @@
 package Controller;
 
 import DAO.BaseDAO;
+import DAO.RadiographDAO;
 import Entity.Radiograph;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class RadiographController extends BaseController<Radiograph> {
         return radiographDao;
     }
 
-    public void setRadiographDao(BaseDAO radiographDao) {
+    public void setRadiographDao(RadiographDAO radiographDao) {
         this.radiographDao = radiographDao;
     }
 
@@ -30,7 +31,7 @@ public class RadiographController extends BaseController<Radiograph> {
         this.radiographList = radiographList;
     }
 
-    private BaseDAO radiographDao;
+    private RadiographDAO radiographDao;
     private Radiograph radiograph;
     private List<Radiograph> radiographList;
 
@@ -38,29 +39,40 @@ public class RadiographController extends BaseController<Radiograph> {
 
     }
 
-    @Override
-    public void AddEntity(Radiograph radiograph) {
-
-    }
-
-    @Override
+   @Override
     public Radiograph GetEntityById(int id) {
+        if (radiographDao == null) {
+            radiographDao = new RadiographDAO();
+        }
+        radiographDao.GetRadiographById(id);
         return null;
     }
 
     @Override
     public List<Radiograph> GetEntityList() {
-        return null;
+        if (radiographDao == null) {
+            radiographDao = new RadiographDAO();
+        }
+        radiographDao.GetRadiographList();
+
+        return radiographDao.GetRadiographList();
     }
 
     @Override
     public void UpdateEntity(int id, Radiograph radiograph) {
-
+        if (radiographDao == null) {
+            radiographDao = new RadiographDAO();
+        }
+        radiographDao.UpdateRadiograph(radiograph);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (radiographDao == null) {
+            radiographDao = new RadiographDAO();
+        }
+        radiographDao.DeleteRadiograph(id);
     }
+
 
 }

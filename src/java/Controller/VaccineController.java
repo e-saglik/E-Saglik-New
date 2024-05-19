@@ -1,12 +1,13 @@
 package Controller;
 
 import DAO.BaseDAO;
+import DAO.VaccineDAO;
 import Entity.Vaccine;
 import java.util.List;
 
 public class VaccineController extends BaseController<Vaccine> {
 
-    private BaseDAO donationDao;
+    private VaccineDAO donationDao;
     private Vaccine vaccine;
     private List<Vaccine> vaccineList;
 
@@ -14,7 +15,7 @@ public class VaccineController extends BaseController<Vaccine> {
         return donationDao;
     }
 
-    public void setDonationDao(BaseDAO donationDao) {
+    public void setDonationDao(VaccineDAO donationDao) {
         this.donationDao = donationDao;
     }
 
@@ -38,29 +39,40 @@ public class VaccineController extends BaseController<Vaccine> {
 
     }
 
-    @Override
-    public void AddEntity(Vaccine vaccine) {
-
-    }
 
     @Override
     public Vaccine GetEntityById(int id) {
+        if (donationDao == null) {
+            donationDao = new VaccineDAO();
+        }
+        donationDao.GetVaccineById(id);
         return null;
     }
 
     @Override
     public List<Vaccine> GetEntityList() {
-        return null;
+        if (donationDao == null) {
+            donationDao = new VaccineDAO();
+        }
+        donationDao.GetVaccineList();
+
+        return donationDao.GetVaccineList();
     }
 
     @Override
     public void UpdateEntity(int id, Vaccine vaccine) {
-
+        if (donationDao == null) {
+            donationDao = new VaccineDAO();
+        }
+        donationDao.UpdateVaccine(vaccine);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (donationDao == null) {
+            donationDao = new VaccineDAO();
+        }
+        donationDao.DeleteVaccine(id);
     }
 
 }

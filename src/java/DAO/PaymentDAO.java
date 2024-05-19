@@ -14,7 +14,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
     public PaymentDAO() {
     }
 
-    public void createPayment(Payment payment) {
+    public void CreatePayment(Payment payment) {
         String query = "INSERT INTO payment (payment_amount, payment_date, id, name) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDouble(1, payment.getPaymentAmount());
@@ -27,7 +27,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
         }
     }
 
-    public List<Payment> getPaymentList() {
+    public List<Payment> GetPaymentList() {
         List<Payment> paymentList = new ArrayList<>();
         String query = "SELECT * FROM payment ORDER BY id ASC";
         try (Statement st = this.GetConnection().createStatement();
@@ -48,7 +48,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
         return paymentList;
     }
 
-    public void updatePayment(Payment payment) {
+    public void UpdatePayment(Payment payment) {
         String query = "UPDATE payment SET payment_amount=?, payment_date=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDouble(1, payment.getPaymentAmount());
@@ -61,7 +61,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
         }
     }
 
-    public void deletePayment(int id) {
+    public void DeletePayment(int id) {
         String query = "DELETE FROM payment WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
@@ -71,7 +71,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
         }
     }
 
-    public Payment getPaymentById(int id) {
+    public Payment GetPaymentById(int id) {
         Payment payment = null;
         String query = "SELECT * FROM payment WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {

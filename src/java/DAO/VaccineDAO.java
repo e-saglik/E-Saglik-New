@@ -14,7 +14,7 @@ public class VaccineDAO extends BaseDAO<Vaccine> {
     public VaccineDAO() {
     }
 
-    public void createVaccine(Vaccine vaccine) {
+    public void CreateVaccine(Vaccine vaccine) {
         String query = "INSERT INTO vaccine (type, id, name) VALUES (?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, vaccine.getType());
@@ -26,7 +26,7 @@ public class VaccineDAO extends BaseDAO<Vaccine> {
         }
     }
 
-    public List<Vaccine> getVaccineList() {
+    public List<Vaccine> GetVaccineList() {
         List<Vaccine> vaccineList = new ArrayList<>();
         String query = "SELECT * FROM vaccine ORDER BY id ASC";
         try (Statement st = this.GetConnection().createStatement();
@@ -46,7 +46,7 @@ public class VaccineDAO extends BaseDAO<Vaccine> {
         return vaccineList;
     }
 
-    public void updateVaccine(Vaccine vaccine) {
+    public void UpdateVaccine(Vaccine vaccine) {
         String query = "UPDATE vaccine SET type=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, vaccine.getType());
@@ -58,7 +58,7 @@ public class VaccineDAO extends BaseDAO<Vaccine> {
         }
     }
 
-    public void deleteVaccine(int id) {
+    public void DeleteVaccine(int id) {
         String query = "DELETE FROM vaccine WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
@@ -68,7 +68,7 @@ public class VaccineDAO extends BaseDAO<Vaccine> {
         }
     }
 
-    public Vaccine getVaccineById(int id) {
+    public Vaccine GetVaccineById(int id) {
         Vaccine vaccine = null;
         String query = "SELECT * FROM vaccine WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {

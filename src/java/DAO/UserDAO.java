@@ -14,7 +14,7 @@ public class UserDAO extends BaseDAO<User> {
     public UserDAO() {
     }
 
-    public void createUser(User user) {
+    public void CreateUser(User user) {
         String query = "INSERT INTO user (first_name, last_name, email, password, gender, phone_number, address, id, name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, user.getFirstName());
@@ -32,7 +32,7 @@ public class UserDAO extends BaseDAO<User> {
         }
     }
 
-    public List<User> getUserList() {
+    public List<User> GetUserList() {
         List<User> userList = new ArrayList<>();
         String query = "SELECT * FROM user ORDER BY id ASC";
         try (Statement st = this.GetConnection().createStatement();
@@ -58,7 +58,7 @@ public class UserDAO extends BaseDAO<User> {
         return userList;
     }
 
-    public void updateUser(User user) {
+    public void UpdateUser(User user) {
         String query = "UPDATE user SET first_name=?, last_name=?, email=?, password=?, gender=?, phone_number=?, address=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, user.getFirstName());
@@ -76,7 +76,7 @@ public class UserDAO extends BaseDAO<User> {
         }
     }
 
-    public void deleteUser(int id) {
+    public void DeleteUser(int id) {
         String query = "DELETE FROM user WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
@@ -86,7 +86,7 @@ public class UserDAO extends BaseDAO<User> {
         }
     }
 
-    public User getUserById(int id) {
+    public User GetUserById(int id) {
         User user = null;
         String query = "SELECT * FROM user WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {

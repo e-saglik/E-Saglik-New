@@ -1,16 +1,18 @@
 package Controller;
 
 import DAO.BaseDAO;
+import DAO.PathologyInformationDAO;
 import Entity.PathologyInformation;
 import java.util.List;
 
 public class PathologyInformationController extends BaseController<PathologyInformation> {
 
+    
     public BaseDAO getPathologyInformationDao() {
         return pathologyInformationDao;
     }
 
-    public void setPathologyInformationDao(BaseDAO pathologyInformationDao) {
+     public void setNotificationDao(PathologyInformationDAO pathologyInformationDao) {
         this.pathologyInformationDao = pathologyInformationDao;
     }
 
@@ -30,7 +32,7 @@ public class PathologyInformationController extends BaseController<PathologyInfo
         this.pathologyInformationList = pathologyInformationList;
     }
 
-    private BaseDAO pathologyInformationDao;
+    private PathologyInformationDAO pathologyInformationDao;
     private PathologyInformation pathologyInformation;
     private List<PathologyInformation> pathologyInformationList;
 
@@ -38,48 +40,50 @@ public class PathologyInformationController extends BaseController<PathologyInfo
 
     }
 
+ 
     @Override
     public void AddEntity(PathologyInformation pathologyInformation) {
+        if (pathologyInformationDao == null) {
+            pathologyInformationDao = new PathologyInformationDAO();
+        }
+        pathologyInformationDao.CreatePathologyInformation(pathologyInformation);
 
     }
 
     @Override
     public PathologyInformation GetEntityById(int id) {
+        if (pathologyInformationDao == null) {
+            pathologyInformationDao = new PathologyInformationDAO();
+        }
+        pathologyInformationDao.GetPathologyInformationById(id);
         return null;
     }
 
     @Override
     public List<PathologyInformation> GetEntityList() {
-        return null;
+        if (pathologyInformationDao == null) {
+            pathologyInformationDao = new PathologyInformationDAO();
+        }
+        pathologyInformationDao.GetPathologyInformationList();
+
+        return pathologyInformationDao.GetPathologyInformationList();
     }
 
     @Override
     public void UpdateEntity(int id, PathologyInformation pathologyInformation) {
-
+        if (pathologyInformationDao == null) {
+            pathologyInformationDao = new PathologyInformationDAO();
+        }
+        pathologyInformationDao.UpdatePathologyInformation(pathologyInformation);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (pathologyInformationDao == null) {
+            pathologyInformationDao = new PathologyInformationDAO();
+        }
+        pathologyInformationDao.DeletePathologyInformation(id);
     }
 
-//    public void AddUser(User user){
-//        
-//    }
-//    
-//    public User GetUserById(int id){      
-//        return null;        
-//    }
-//    
-//    public List<User> GetUserList(){ 
-//        return null;
-//    }
-//    
-//    public void UpdateUser(int id,User user){
-//        
-//    }
-//    
-//    public void DeleteUser(int id){
-//        
-//    }
+
 }

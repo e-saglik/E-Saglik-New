@@ -1,6 +1,7 @@
 package Controller;
 
 import DAO.BaseDAO;
+import DAO.TreatmentDAO;
 import Entity.Treatment;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class TreatmentController extends BaseController<Treatment> {
         return treatmentDao;
     }
 
-    public void setTreatmentDao(BaseDAO treatmentDao) {
+    public void setTreatmentDao(TreatmentDAO treatmentDao) {
         this.treatmentDao = treatmentDao;
     }
 
@@ -30,7 +31,7 @@ public class TreatmentController extends BaseController<Treatment> {
         this.treatmentList = treatmentList;
     }
 
-    private BaseDAO treatmentDao;
+    private TreatmentDAO treatmentDao;
     private Treatment treatment;
     private List<Treatment> treatmentList;
 
@@ -38,29 +39,40 @@ public class TreatmentController extends BaseController<Treatment> {
 
     }
 
-    @Override
-    public void AddEntity(Treatment treatment) {
-
-    }
-
-    @Override
+   @Override
     public Treatment GetEntityById(int id) {
+        if (treatmentDao == null) {
+            treatmentDao = new TreatmentDAO();
+        }
+        treatmentDao.GetTreatmentById(id);
         return null;
     }
 
     @Override
     public List<Treatment> GetEntityList() {
-        return null;
+        if (treatmentDao == null) {
+            treatmentDao = new TreatmentDAO();
+        }
+        treatmentDao.GetTreatmentList();
+
+        return treatmentDao.GetTreatmentList();
     }
 
     @Override
     public void UpdateEntity(int id, Treatment treatment) {
-
+        if (treatmentDao == null) {
+            treatmentDao = new TreatmentDAO();
+        }
+        treatmentDao.UpdateTreatment(treatment);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (treatmentDao == null) {
+            treatmentDao = new TreatmentDAO();
+        }
+        treatmentDao.DeleteTreatment(id);
     }
+
 
 }

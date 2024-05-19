@@ -14,7 +14,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
     public TreatmentDAO() {
     }
 
-    public void createTreatment(Treatment treatment) {
+    public void CreateTreatment(Treatment treatment) {
         String query = "INSERT INTO treatment (startdate, end_date, description, id, name) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(treatment.getStartdate().getTime()));
@@ -28,7 +28,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
         }
     }
 
-    public List<Treatment> getTreatmentList() {
+    public List<Treatment> GetTreatmentList() {
         List<Treatment> treatmentList = new ArrayList<>();
         String query = "SELECT * FROM treatment ORDER BY id ASC";
         try (Statement st = this.GetConnection().createStatement();
@@ -50,7 +50,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
         return treatmentList;
     }
 
-    public void updateTreatment(Treatment treatment) {
+    public void UpdateTreatment(Treatment treatment) {
         String query = "UPDATE treatment SET startdate=?, end_date=?, description=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(treatment.getStartdate().getTime()));
@@ -64,7 +64,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
         }
     }
 
-    public void deleteTreatment(int id) {
+    public void DeleteTreatment(int id) {
         String query = "DELETE FROM treatment WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
@@ -74,7 +74,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
         }
     }
 
-    public Treatment getTreatmentById(int id) {
+    public Treatment GetTreatmentById(int id) {
         Treatment treatment = null;
         String query = "SELECT * FROM treatment WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {

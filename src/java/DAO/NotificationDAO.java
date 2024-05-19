@@ -14,7 +14,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
     public NotificationDAO() {
     }
 
-    public void createNotification(Notification notification) {
+    public void CreateNotification(Notification notification) {
         String query = "INSERT INTO notification (message, notification_date, id, name) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, notification.getMassage());
@@ -27,7 +27,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
         }
     }
 
-    public List<Notification> getNotificationList() {
+    public List<Notification> GetNotificationList() {
         List<Notification> notificationList = new ArrayList<>();
         String query = "SELECT * FROM notification ORDER BY id ASC";
         try (Statement st = this.GetConnection().createStatement();
@@ -48,7 +48,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
         return notificationList;
     }
 
-    public void updateNotification(Notification notification) {
+    public void UpdateNotification(Notification notification) {
         String query = "UPDATE notification SET message=?, notification_date=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, notification.getMassage());
@@ -61,7 +61,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
         }
     }
 
-    public void deleteNotification(int id) {
+    public void DeleteNotification(int id) {
         String query = "DELETE FROM notification WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
@@ -71,7 +71,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
         }
     }
 
-    public Notification getNotificationById(int id) {
+    public Notification GetNotificationById(int id) {
         Notification notification = null;
         String query = "SELECT * FROM notification WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {

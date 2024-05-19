@@ -14,7 +14,7 @@ public class PathologyInformationDAO extends BaseDAO<PathologyInformation> {
     public PathologyInformationDAO() {
     }
 
-    public void createPathologyInformation(PathologyInformation pathologyInformation) {
+    public void CreatePathologyInformation(PathologyInformation pathologyInformation) {
         String query = "INSERT INTO pathology_information (information_date, information, id, name) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(pathologyInformation.getInformationDate().getTime()));
@@ -27,7 +27,7 @@ public class PathologyInformationDAO extends BaseDAO<PathologyInformation> {
         }
     }
 
-    public List<PathologyInformation> getPathologyInformationList() {
+    public List<PathologyInformation> GetPathologyInformationList() {
         List<PathologyInformation> pathologyInformationList = new ArrayList<>();
         String query = "SELECT * FROM pathology_information ORDER BY id ASC";
         try (Statement st = this.GetConnection().createStatement();
@@ -48,7 +48,7 @@ public class PathologyInformationDAO extends BaseDAO<PathologyInformation> {
         return pathologyInformationList;
     }
 
-    public void updatePathologyInformation(PathologyInformation pathologyInformation) {
+    public void UpdatePathologyInformation(PathologyInformation pathologyInformation) {
         String query = "UPDATE pathology_information SET information_date=?, information=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(pathologyInformation.getInformationDate().getTime()));
@@ -61,7 +61,7 @@ public class PathologyInformationDAO extends BaseDAO<PathologyInformation> {
         }
     }
 
-    public void deletePathologyInformation(int id) {
+    public void DeletePathologyInformation(int id) {
         String query = "DELETE FROM pathology_information WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
@@ -71,7 +71,7 @@ public class PathologyInformationDAO extends BaseDAO<PathologyInformation> {
         }
     }
 
-    public PathologyInformation getPathologyInformationById(int id) {
+    public PathologyInformation GetPathologyInformationById(int id) {
         PathologyInformation pathologyInformation = null;
         String query = "SELECT * FROM pathology_information WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {

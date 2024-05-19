@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.BaseDAO;
-import Entity.Payment;
+import DAO.PharmacyDAO;
 import Entity.Pharmacy;
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class PharmacyController extends BaseController<Pharmacy> {
         return pharmacyDao;
     }
 
-    public void setPharmacyDao(BaseDAO pharmacyDao) {
+    public void setPharmacyDao(PharmacyDAO pharmacyDao) {
         this.pharmacyDao = pharmacyDao;
     }
 
@@ -31,7 +31,7 @@ public class PharmacyController extends BaseController<Pharmacy> {
         this.pharmacyList = pharmacyList;
     }
 
-    private BaseDAO pharmacyDao;
+    private PharmacyDAO pharmacyDao;
     private Pharmacy pharmacy;
     private List<Pharmacy> pharmacyList;
 
@@ -39,48 +39,39 @@ public class PharmacyController extends BaseController<Pharmacy> {
 
     }
 
-    @Override
-    public void AddEntity(Pharmacy pharmacy) {
 
-    }
-
-    @Override
+   @Override
     public Pharmacy GetEntityById(int id) {
+        if (pharmacyDao == null) {
+            pharmacyDao = new PharmacyDAO();
+        }
+        pharmacyDao.GetPharmacyById(id);
         return null;
     }
 
     @Override
     public List<Pharmacy> GetEntityList() {
-        return null;
+        if (pharmacyDao == null) {
+            pharmacyDao = new PharmacyDAO();
+        }
+        pharmacyDao.GetPharmacyList();
+
+        return pharmacyDao.GetPharmacyList();
     }
 
     @Override
     public void UpdateEntity(int id, Pharmacy pharmacy) {
-
+        if (pharmacyDao == null) {
+            pharmacyDao = new PharmacyDAO();
+        }
+        pharmacyDao.UpdatePharmacy(pharmacy);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (pharmacyDao == null) {
+            pharmacyDao = new PharmacyDAO();
+        }
+        pharmacyDao.DeletePharmacy(id);
     }
-
-//    public void AddUser(User user){
-//        
-//    }
-//    
-//    public User GetUserById(int id){      
-//        return null;        
-//    }
-//    
-//    public List<User> GetUserList(){ 
-//        return null;
-//    }
-//    
-//    public void UpdateUser(int id,User user){
-//        
-//    }
-//    
-//    public void DeleteUser(int id){
-//        
-//    }
 }
