@@ -32,17 +32,6 @@ public class DoctorController extends BaseController<Doctor> {
 
     }
 
-    public Doctor getEntity() {
-        if (this.doctor == null) {
-            this.doctor = new Doctor();
-        }
-        return doctor;
-    }
-
-    public void setEntity(Doctor Entity) {
-        this.doctor = Entity;
-    }
-
     public DoctorDAO getDao() {
         if (this.dao == null) {
             this.dao = new DoctorDAO();
@@ -110,4 +99,5 @@ public class DoctorController extends BaseController<Doctor> {
         }
         dao.DeleteDoctor(id);
     }
+    
 }

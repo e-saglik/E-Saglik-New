@@ -14,7 +14,7 @@ public abstract class DBConnection {
             
             
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()+"ajfıowajfıowaj");
         }
         return connection;
     }
