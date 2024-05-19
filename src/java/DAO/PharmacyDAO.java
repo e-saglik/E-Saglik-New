@@ -16,7 +16,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
 
     public void createPharmacy(Pharmacy pharmacy) {
         String query = "INSERT INTO pharmacy (location, id, name) VALUES (?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, pharmacy.getLocation());
             ps.setInt(2, pharmacy.getId());
             ps.setString(3, pharmacy.getName());
@@ -29,7 +29,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
     public List<Pharmacy> getPharmacyList() {
         List<Pharmacy> pharmacyList = new ArrayList<>();
         String query = "SELECT * FROM pharmacy ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -48,7 +48,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
 
     public void updatePharmacy(Pharmacy pharmacy) {
         String query = "UPDATE pharmacy SET location=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, pharmacy.getLocation());
             ps.setString(2, pharmacy.getName());
             ps.setInt(3, pharmacy.getId());
@@ -60,7 +60,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
 
     public void deletePharmacy(int id) {
         String query = "DELETE FROM pharmacy WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -71,7 +71,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
     public Pharmacy getPharmacyById(int id) {
         Pharmacy pharmacy = null;
         String query = "SELECT * FROM pharmacy WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

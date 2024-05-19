@@ -16,7 +16,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
 
     public void createPayment(Payment payment) {
         String query = "INSERT INTO payment (payment_amount, payment_date, id, name) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDouble(1, payment.getPaymentAmount());
             ps.setDate(2, new java.sql.Date(payment.getPaymentDate().getTime()));
             ps.setInt(3, payment.getId());
@@ -30,7 +30,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
     public List<Payment> getPaymentList() {
         List<Payment> paymentList = new ArrayList<>();
         String query = "SELECT * FROM payment ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -50,7 +50,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
 
     public void updatePayment(Payment payment) {
         String query = "UPDATE payment SET payment_amount=?, payment_date=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDouble(1, payment.getPaymentAmount());
             ps.setDate(2, new java.sql.Date(payment.getPaymentDate().getTime()));
             ps.setString(3, payment.getName());
@@ -63,7 +63,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
 
     public void deletePayment(int id) {
         String query = "DELETE FROM payment WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
     public Payment getPaymentById(int id) {
         Payment payment = null;
         String query = "SELECT * FROM payment WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

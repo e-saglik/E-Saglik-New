@@ -18,7 +18,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
 
     public void createVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
         String query = "INSERT INTO vaccination_schedule (vaccine_type, due_date, id, name) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, vaccinationSchedule.getVaccineName().getType());
             ps.setDate(2, new java.sql.Date(vaccinationSchedule.getDueDate().getTime()));
             ps.setInt(3, vaccinationSchedule.getId());
@@ -32,7 +32,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
     public List<VaccinationSchedule> getVaccinationScheduleList() {
         List<VaccinationSchedule> vaccinationScheduleList = new ArrayList<>();
         String query = "SELECT * FROM vaccination_schedule ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -53,7 +53,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
 
     public void updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
         String query = "UPDATE vaccination_schedule SET vaccine_type=?, due_date=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, vaccinationSchedule.getVaccineName().getType());
             ps.setDate(2, new java.sql.Date(vaccinationSchedule.getDueDate().getTime()));
             ps.setString(3, vaccinationSchedule.getName());
@@ -66,7 +66,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
 
     public void deleteVaccinationSchedule(int id) {
         String query = "DELETE FROM vaccination_schedule WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -77,7 +77,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
     public VaccinationSchedule getVaccinationScheduleById(int id) {
         VaccinationSchedule vaccinationSchedule = null;
         String query = "SELECT * FROM vaccination_schedule WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

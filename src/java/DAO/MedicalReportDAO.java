@@ -16,7 +16,7 @@ public class MedicalReportDAO extends BaseDAO<MedicalReport> {
 
     public void createMedicalReport(MedicalReport medicalReport) {
         String query = "INSERT INTO medical_report (medical_report_date, diagnosis, description, id, name) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(medicalReport.getMedicalReportDate().getTime()));
             ps.setString(2, medicalReport.getDiagnosis());
             ps.setString(3, medicalReport.getDescription());
@@ -31,7 +31,7 @@ public class MedicalReportDAO extends BaseDAO<MedicalReport> {
     public List<MedicalReport> getMedicalReportList() {
         List<MedicalReport> medicalReportList = new ArrayList<>();
         String query = "SELECT * FROM medical_report ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -52,7 +52,7 @@ public class MedicalReportDAO extends BaseDAO<MedicalReport> {
 
     public void updateMedicalReport(MedicalReport medicalReport) {
         String query = "UPDATE medical_report SET medical_report_date=?, diagnosis=?, description=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(medicalReport.getMedicalReportDate().getTime()));
             ps.setString(2, medicalReport.getDiagnosis());
             ps.setString(3, medicalReport.getDescription());
@@ -66,7 +66,7 @@ public class MedicalReportDAO extends BaseDAO<MedicalReport> {
 
     public void deleteMedicalReport(int id) {
         String query = "DELETE FROM medical_report WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -77,7 +77,7 @@ public class MedicalReportDAO extends BaseDAO<MedicalReport> {
     public MedicalReport getMedicalReportById(int id) {
         MedicalReport medicalReport = null;
         String query = "SELECT * FROM medical_report WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

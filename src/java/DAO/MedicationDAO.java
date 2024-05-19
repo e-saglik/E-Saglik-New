@@ -16,7 +16,7 @@ public class MedicationDAO extends BaseDAO<Medication> {
 
     public void createMedication(Medication medication) {
         String query = "INSERT INTO medication (dosage, id, name) VALUES (?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, medication.getDosage());
             ps.setInt(2, medication.getId());
             ps.setString(3, medication.getName());
@@ -29,7 +29,7 @@ public class MedicationDAO extends BaseDAO<Medication> {
     public List<Medication> getMedicationList() {
         List<Medication> medicationList = new ArrayList<>();
         String query = "SELECT * FROM medication ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -48,7 +48,7 @@ public class MedicationDAO extends BaseDAO<Medication> {
 
     public void updateMedication(Medication medication) {
         String query = "UPDATE medication SET dosage=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, medication.getDosage());
             ps.setString(2, medication.getName());
             ps.setInt(3, medication.getId());
@@ -60,7 +60,7 @@ public class MedicationDAO extends BaseDAO<Medication> {
 
     public void deleteMedication(int id) {
         String query = "DELETE FROM medication WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -71,7 +71,7 @@ public class MedicationDAO extends BaseDAO<Medication> {
     public Medication getMedicationById(int id) {
         Medication medication = null;
         String query = "SELECT * FROM medication WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

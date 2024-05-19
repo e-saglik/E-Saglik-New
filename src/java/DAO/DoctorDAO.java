@@ -14,9 +14,9 @@ public class DoctorDAO extends BaseDAO<Doctor> {
     public DoctorDAO() {
     }
 
-    public void createDoctor(Doctor d) {
+    public void CreateDoctor(Doctor d) {
         String query = "INSERT INTO doctor (name, firstname, lastname, email, password, gender, phonenumber, address, specialization, hospital, prescription, appointment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, d.getName());
             ps.setString(2, d.getFirstName());
             ps.setString(3, d.getLastName());
@@ -35,10 +35,10 @@ public class DoctorDAO extends BaseDAO<Doctor> {
         }
     }
 
-    public List<Doctor> getDoctorList() {
+    public List<Doctor> GetDoctorList() {
         List<Doctor> doctorList = new ArrayList<>();
         String query = "SELECT * FROM doctor ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -51,9 +51,9 @@ public class DoctorDAO extends BaseDAO<Doctor> {
         return doctorList;
     }
 
-    public void updateDoctor(Doctor d) {
+    public void UpdateDoctor(Doctor d) {
         String query = "UPDATE doctor SET name=?, firstname=?, lastname=?, email=?, password=?, gender=?, phonenumber=?, address=?, specialization=?, hospital=?, prescription=?, appointment=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, d.getName());
             ps.setString(2, d.getFirstName());
             ps.setString(3, d.getLastName());
@@ -73,9 +73,9 @@ public class DoctorDAO extends BaseDAO<Doctor> {
         }
     }
 
-    public void deleteDoctor(int id) {
+    public void DeleteDoctor(int id) {
         String query = "DELETE FROM doctor WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -83,10 +83,10 @@ public class DoctorDAO extends BaseDAO<Doctor> {
         }
     }
 
-    public Doctor getDoctorById(int id) {
+    public Doctor GetDoctorById(int id) {
         Doctor doctor = null;
         String query = "SELECT * FROM doctor WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

@@ -16,7 +16,7 @@ public class HospitalDAO extends BaseDAO<Hospital> {
 
     public void createHospital(Hospital hospital) {
         String query = "INSERT INTO hospital (location, capacity, id, name) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, hospital.getLocation());
             ps.setString(2, hospital.getCapacity());
             ps.setInt(3, hospital.getId());
@@ -30,7 +30,7 @@ public class HospitalDAO extends BaseDAO<Hospital> {
     public List<Hospital> getHospitalList() {
         List<Hospital> hospitalList = new ArrayList<>();
         String query = "SELECT * FROM hospital ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -50,7 +50,7 @@ public class HospitalDAO extends BaseDAO<Hospital> {
 
     public void updateHospital(Hospital hospital) {
         String query = "UPDATE hospital SET location=?, capacity=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, hospital.getLocation());
             ps.setString(2, hospital.getCapacity());
             ps.setString(3, hospital.getName());
@@ -63,7 +63,7 @@ public class HospitalDAO extends BaseDAO<Hospital> {
 
     public void deleteHospital(int id) {
         String query = "DELETE FROM hospital WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class HospitalDAO extends BaseDAO<Hospital> {
     public Hospital getHospitalById(int id) {
         Hospital hospital = null;
         String query = "SELECT * FROM hospital WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

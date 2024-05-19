@@ -16,7 +16,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
 
     public void createTreatment(Treatment treatment) {
         String query = "INSERT INTO treatment (startdate, end_date, description, id, name) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(treatment.getStartdate().getTime()));
             ps.setDate(2, new java.sql.Date(treatment.getEndDate().getTime()));
             ps.setString(3, treatment.getDescription());
@@ -31,7 +31,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
     public List<Treatment> getTreatmentList() {
         List<Treatment> treatmentList = new ArrayList<>();
         String query = "SELECT * FROM treatment ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -52,7 +52,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
 
     public void updateTreatment(Treatment treatment) {
         String query = "UPDATE treatment SET startdate=?, end_date=?, description=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(treatment.getStartdate().getTime()));
             ps.setDate(2, new java.sql.Date(treatment.getEndDate().getTime()));
             ps.setString(3, treatment.getDescription());
@@ -66,7 +66,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
 
     public void deleteTreatment(int id) {
         String query = "DELETE FROM treatment WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -77,7 +77,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
     public Treatment getTreatmentById(int id) {
         Treatment treatment = null;
         String query = "SELECT * FROM treatment WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

@@ -16,7 +16,7 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
 
     public void createInsurance(Insurance insurance) {
         String query = "INSERT INTO insurance (provider, coverage_details, id, name) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, insurance.getProvider());
             ps.setString(2, insurance.getCoverageDetails());
             ps.setInt(3, insurance.getId());
@@ -30,7 +30,7 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
     public List<Insurance> getInsuranceList() {
         List<Insurance> insuranceList = new ArrayList<>();
         String query = "SELECT * FROM insurance ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -50,7 +50,7 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
 
     public void updateInsurance(Insurance insurance) {
         String query = "UPDATE insurance SET provider=?, coverage_details=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, insurance.getProvider());
             ps.setString(2, insurance.getCoverageDetails());
             ps.setString(3, insurance.getName());
@@ -63,7 +63,7 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
 
     public void deleteInsurance(int id) {
         String query = "DELETE FROM insurance WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
     public Insurance getInsuranceById(int id) {
         Insurance insurance = null;
         String query = "SELECT * FROM insurance WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

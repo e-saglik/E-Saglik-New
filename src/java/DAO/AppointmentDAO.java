@@ -19,9 +19,9 @@ public class AppointmentDAO extends BaseDAO<Appointment> {
    
     
 
-    public void createAppointment(Appointment appointment) {
+    public void CreateAppointment(Appointment appointment) {
         String query = "INSERT INTO appointment (appointment_date, appointment_time, status, id, name) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(appointment.getAppointmentDate().getTime()));
             ps.setTime(2, Time.valueOf(appointment.getAppointmentTime()));
             ps.setString(3, appointment.getStatus());
@@ -33,10 +33,10 @@ public class AppointmentDAO extends BaseDAO<Appointment> {
         }
     }
 
-    public List<Appointment> getAppointmentList() {
+    public List<Appointment> GetAppointmentList() {
         List<Appointment> appointmentList = new ArrayList<>();
         String query = "SELECT * FROM appointment ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -55,9 +55,9 @@ public class AppointmentDAO extends BaseDAO<Appointment> {
         return appointmentList;
     }
 
-    public void updateAppointment(Appointment appointment) {
+    public void UpdateAppointment(Appointment appointment) {
         String query = "UPDATE appointment SET appointment_date=?, appointment_time=?, status=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(appointment.getAppointmentDate().getTime()));
             ps.setTime(2, Time.valueOf(appointment.getAppointmentTime()));
             ps.setString(3, appointment.getStatus());
@@ -69,9 +69,9 @@ public class AppointmentDAO extends BaseDAO<Appointment> {
         }
     }
 
-    public void deleteAppointment(int id) {
+    public void DeleteAppointment(int id) {
         String query = "DELETE FROM appointment WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -79,10 +79,10 @@ public class AppointmentDAO extends BaseDAO<Appointment> {
         }
     }
 
-    public Appointment getAppointmentById(int id) {
+    public Appointment GetAppointmentById(int id) {
         Appointment appointment = null;
         String query = "SELECT * FROM appointment WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

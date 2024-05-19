@@ -18,9 +18,9 @@ public class DiseaseDAO extends BaseDAO<Disease> {
     
     
 
-    public void createDisease(Disease disease) {
+    public void CreateDisease(Disease disease) {
         String query = "INSERT INTO disease (description, id, name) VALUES (?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, disease.getDescription());
             ps.setInt(2, disease.getId());
             ps.setString(3, disease.getName());
@@ -30,10 +30,10 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         }
     }
 
-    public List<Disease> getDiseaseList() {
+    public List<Disease> GetDiseaseList() {
         List<Disease> diseaseList = new ArrayList<>();
         String query = "SELECT * FROM disease ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -50,9 +50,9 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         return diseaseList;
     }
 
-    public void updateDisease(Disease disease) {
+    public void UpdateDisease(Disease disease) {
         String query = "UPDATE disease SET description=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, disease.getDescription());
             ps.setString(2, disease.getName());
             ps.setInt(3, disease.getId());
@@ -62,9 +62,9 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         }
     }
 
-    public void deleteDisease(int id) {
+    public void DeleteDisease(int id) {
         String query = "DELETE FROM disease WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -72,10 +72,10 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         }
     }
 
-    public Disease getDiseaseById(int id) {
+    public Disease GetDiseaseById(int id) {
         Disease disease = null;
         String query = "SELECT * FROM disease WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

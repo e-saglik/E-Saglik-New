@@ -16,7 +16,7 @@ public class UserDAO extends BaseDAO<User> {
 
     public void createUser(User user) {
         String query = "INSERT INTO user (first_name, last_name, email, password, gender, phone_number, address, id, name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
             ps.setString(3, user.getEmail());
@@ -35,7 +35,7 @@ public class UserDAO extends BaseDAO<User> {
     public List<User> getUserList() {
         List<User> userList = new ArrayList<>();
         String query = "SELECT * FROM user ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -60,7 +60,7 @@ public class UserDAO extends BaseDAO<User> {
 
     public void updateUser(User user) {
         String query = "UPDATE user SET first_name=?, last_name=?, email=?, password=?, gender=?, phone_number=?, address=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
             ps.setString(3, user.getEmail());
@@ -78,7 +78,7 @@ public class UserDAO extends BaseDAO<User> {
 
     public void deleteUser(int id) {
         String query = "DELETE FROM user WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -89,7 +89,7 @@ public class UserDAO extends BaseDAO<User> {
     public User getUserById(int id) {
         User user = null;
         String query = "SELECT * FROM user WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

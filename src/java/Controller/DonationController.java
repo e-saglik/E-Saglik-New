@@ -1,12 +1,13 @@
 package Controller;
 
 import DAO.BaseDAO;
+import DAO.DonationDAO;
 import Entity.Donation;
 import java.util.List;
 
 public class DonationController extends BaseController<Donation> {
 
-    private BaseDAO donationDao;
+    private DonationDAO donationDao;
     private Donation donation;
     private List<Donation> donationList;
 
@@ -18,7 +19,7 @@ public class DonationController extends BaseController<Donation> {
         return donationDao;
     }
 
-    public void setDonationDao(BaseDAO donationDao) {
+    public void setDonationDao(DonationDAO donationDao) {
         this.donationDao = donationDao;
     }
 
@@ -39,47 +40,47 @@ public class DonationController extends BaseController<Donation> {
     }
 
     @Override
-    public void AddEntity(Donation doctor) {
+    public void AddEntity(Donation donation) {
         if (donationDao == null) {
-            //donationDao = new DonationDAO();
+            donationDao = new DonationDAO();
         }
-        //donationDao.CreateDonation(doctor);
+        donationDao.CreateDonation(donation);
 
     }
 
     @Override
     public Donation GetEntityById(int id) {
         if (donationDao == null) {
-            //donationDao = new DonationDAO();
+            donationDao = new DonationDAO();
         }
-        //donationDao.GetDonationById(id);
+        donationDao.GetDonationById(id);
         return null;
     }
 
     @Override
     public List<Donation> GetEntityList() {
         if (donationDao == null) {
-            //donationDao = new DonationDAO();
+            donationDao = new DonationDAO();
         }
-        //donationDao.GetDonationList();
+        donationDao.GetDonationList();
 
         return null;
     }
 
     @Override
-    public void UpdateEntity(int id, Donation doctor) {
+    public void UpdateEntity(int id, Donation donation) {
         if (donationDao == null) {
-            //donationDao = new DonationDAO();
+            donationDao = new DonationDAO();
         }
-        //donationDao.UpdateDonation(doctor);
+        donationDao.UpdateDonation(donation);
     }
 
     @Override
     public void DeleteEntity(int id) {
         if (donationDao == null) {
-            //donationDao = new DonationDAO();
+            donationDao = new DonationDAO();
         }
-        //donationDao.DeleteDonation(id);
+        donationDao.DeleteDonation(id);
     }
     
 }

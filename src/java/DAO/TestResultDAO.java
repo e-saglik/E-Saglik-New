@@ -16,7 +16,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
 
     public void createTestResult(TestResult testResult) {
         String query = "INSERT INTO test_result (date, test_type, test_name, test_normal_value, test_value, id, name) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(testResult.getDate().getTime()));
             ps.setString(2, testResult.getTestType());
             ps.setString(3, testResult.getTestName());
@@ -33,7 +33,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
     public List<TestResult> getTestResultList() {
         List<TestResult> testResultList = new ArrayList<>();
         String query = "SELECT * FROM test_result ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -56,7 +56,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
 
     public void updateTestResult(TestResult testResult) {
         String query = "UPDATE test_result SET date=?, test_type=?, test_name=?, test_normal_value=?, test_value=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(testResult.getDate().getTime()));
             ps.setString(2, testResult.getTestType());
             ps.setString(3, testResult.getTestName());
@@ -72,7 +72,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
 
     public void deleteTestResult(int id) {
         String query = "DELETE FROM test_result WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -83,7 +83,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
     public TestResult getTestResultById(int id) {
         TestResult testResult = null;
         String query = "SELECT * FROM test_result WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

@@ -14,7 +14,7 @@ public abstract class BaseDAO<T> extends DBConnection {
     public BaseDAO() {
     }
 
-    public Connection getConnection() {
+    public Connection GetConnection() {
         if(this.connection == null){
             
             this.connection = this.connect();
@@ -22,7 +22,7 @@ public abstract class BaseDAO<T> extends DBConnection {
         return connection;
     }
 
-    public void setConnection(Connection connection) {
+    public void SetConnection(Connection connection) {
         this.connection = connection;
     }
 

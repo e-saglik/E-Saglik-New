@@ -14,9 +14,9 @@ public class DonationDAO extends BaseDAO<Donation> {
     public DonationDAO() {
     }
 
-    public void createDonation(Donation donation) {
+    public void CreateDonation(Donation donation) {
         String query = "INSERT INTO donation (donation_type, donor_name, donation_date, id, name) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, donation.getDonationType());
             ps.setString(2, donation.getDonorName());
             ps.setDate(3, new java.sql.Date(donation.getDonationDate().getTime()));
@@ -28,10 +28,10 @@ public class DonationDAO extends BaseDAO<Donation> {
         }
     }
 
-    public List<Donation> getDonationList() {
+    public List<Donation> GetDonationList() {
         List<Donation> donationList = new ArrayList<>();
         String query = "SELECT * FROM donation ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -50,9 +50,9 @@ public class DonationDAO extends BaseDAO<Donation> {
         return donationList;
     }
 
-    public void updateDonation(Donation donation) {
+    public void UpdateDonation(Donation donation) {
         String query = "UPDATE donation SET donation_type=?, donor_name=?, donation_date=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, donation.getDonationType());
             ps.setString(2, donation.getDonorName());
             ps.setDate(3, new java.sql.Date(donation.getDonationDate().getTime()));
@@ -64,9 +64,9 @@ public class DonationDAO extends BaseDAO<Donation> {
         }
     }
 
-    public void deleteDonation(int id) {
+    public void DeleteDonation(int id) {
         String query = "DELETE FROM donation WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -74,10 +74,10 @@ public class DonationDAO extends BaseDAO<Donation> {
         }
     }
 
-    public Donation getDonationById(int id) {
+    public Donation GetDonationById(int id) {
         Donation donation = null;
         String query = "SELECT * FROM donation WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

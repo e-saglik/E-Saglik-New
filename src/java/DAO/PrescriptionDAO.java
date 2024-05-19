@@ -17,7 +17,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
 
     public void createPrescription(Prescription prescription) {
         String query = "INSERT INTO prescription (dosage, medication_list, instructions, id, name) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, prescription.getDosage());
             ps.setString(2, convertListToString(prescription.getMedicationList()));
             ps.setString(3, prescription.getInstructions());
@@ -32,7 +32,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
     public List<Prescription> getPrescriptionList() {
         List<Prescription> prescriptionList = new ArrayList<>();
         String query = "SELECT * FROM prescription ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -53,7 +53,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
 
     public void updatePrescription(Prescription prescription) {
         String query = "UPDATE prescription SET dosage=?, medication_list=?, instructions=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, prescription.getDosage());
             ps.setString(2, convertListToString(prescription.getMedicationList()));
             ps.setString(3, prescription.getInstructions());
@@ -67,7 +67,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
 
     public void deletePrescription(int id) {
         String query = "DELETE FROM prescription WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -78,7 +78,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
     public Prescription getPrescriptionById(int id) {
         Prescription prescription = null;
         String query = "SELECT * FROM prescription WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

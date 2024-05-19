@@ -16,7 +16,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
 
     public void createRadiograph(Radiograph radiograph) {
         String query = "INSERT INTO radiograph (RGDate, image, id, name) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(radiograph.getRGDate().getTime()));
             ps.setString(2, radiograph.getImage());
             ps.setInt(3, radiograph.getId());
@@ -30,7 +30,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
     public List<Radiograph> getRadiographList() {
         List<Radiograph> radiographList = new ArrayList<>();
         String query = "SELECT * FROM radiograph ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -50,7 +50,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
 
     public void updateRadiograph(Radiograph radiograph) {
         String query = "UPDATE radiograph SET RGDate=?, image=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(radiograph.getRGDate().getTime()));
             ps.setString(2, radiograph.getImage());
             ps.setString(3, radiograph.getName());
@@ -63,7 +63,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
 
     public void deleteRadiograph(int id) {
         String query = "DELETE FROM radiograph WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
     public Radiograph getRadiographById(int id) {
         Radiograph radiograph = null;
         String query = "SELECT * FROM radiograph WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

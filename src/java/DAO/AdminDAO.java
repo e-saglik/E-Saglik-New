@@ -21,7 +21,7 @@ public class AdminDAO extends BaseDAO<Admin> {
 
     public void createAdmin(Admin admin) {
         String query = "INSERT INTO admin (authorization_level, first_name, last_name, email, password, gender, phone_number, address, id, name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, admin.getAuthorizationLevel());
             ps.setString(2, admin.getFirstName());
             ps.setString(3, admin.getLastName());
@@ -41,7 +41,7 @@ public class AdminDAO extends BaseDAO<Admin> {
     public List<Admin> getAdminList() {
         List<Admin> adminList = new ArrayList<>();
         String query = "SELECT * FROM admin ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -56,7 +56,7 @@ public class AdminDAO extends BaseDAO<Admin> {
 
     public void updateAdmin(Admin admin) {
         String query = "UPDATE admin SET authorization_level=?, first_name=?, last_name=?, email=?, password=?, gender=?, phone_number=?, address=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, admin.getAuthorizationLevel());
             ps.setString(2, admin.getFirstName());
             ps.setString(3, admin.getLastName());
@@ -75,7 +75,7 @@ public class AdminDAO extends BaseDAO<Admin> {
 
     public void deleteAdmin(int id) {
         String query = "DELETE FROM admin WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -86,7 +86,7 @@ public class AdminDAO extends BaseDAO<Admin> {
     public Admin getAdminById(int id) {
         Admin admin = null;
         String query = "SELECT * FROM admin WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

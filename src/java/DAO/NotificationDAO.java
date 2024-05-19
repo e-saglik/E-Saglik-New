@@ -16,7 +16,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
 
     public void createNotification(Notification notification) {
         String query = "INSERT INTO notification (message, notification_date, id, name) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, notification.getMassage());
             ps.setDate(2, new java.sql.Date(notification.getNotificationDate().getTime()));
             ps.setInt(3, notification.getId());
@@ -30,7 +30,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
     public List<Notification> getNotificationList() {
         List<Notification> notificationList = new ArrayList<>();
         String query = "SELECT * FROM notification ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -50,7 +50,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
 
     public void updateNotification(Notification notification) {
         String query = "UPDATE notification SET message=?, notification_date=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, notification.getMassage());
             ps.setDate(2, new java.sql.Date(notification.getNotificationDate().getTime()));
             ps.setString(3, notification.getName());
@@ -63,7 +63,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
 
     public void deleteNotification(int id) {
         String query = "DELETE FROM notification WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
     public Notification getNotificationById(int id) {
         Notification notification = null;
         String query = "SELECT * FROM notification WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

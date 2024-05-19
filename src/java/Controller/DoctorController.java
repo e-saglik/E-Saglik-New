@@ -20,13 +20,13 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public String update() {
-        this.getDao().updateDoctor(this.doctor);
+        this.getDao().UpdateDoctor(this.doctor);
         return "index";
     }
 
     public String create() {
 
-        this.getDao().createDoctor(this.doctor);
+        this.getDao().CreateDoctor(this.doctor);
 
         return "index";
 
@@ -55,7 +55,7 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public List<Doctor> getList() {
-        this.list = this.getDao().getDoctorList();
+        this.list = this.getDao().GetDoctorList();
         return list;
     }
 
@@ -72,7 +72,7 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.createDoctor(doctor);
+        dao.CreateDoctor(doctor);
 
     }
 
@@ -81,7 +81,7 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.getDoctorById(id);
+        dao.GetDoctorById(id);
         return null;
     }
 
@@ -90,9 +90,9 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.getDoctorList();
+        dao.GetDoctorList();
 
-        return dao.getDoctorList();
+        return dao.GetDoctorList();
     }
 
     @Override
@@ -100,7 +100,7 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.updateDoctor(doctor);
+        dao.UpdateDoctor(doctor);
     }
 
     @Override
@@ -108,6 +108,6 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.deleteDoctor(id);
+        dao.DeleteDoctor(id);
     }
 }

@@ -18,9 +18,9 @@ public class AllergyDAO extends BaseDAO<Allergy> {
     
     
 
-    public void createAllergy(Allergy allergy) {
+    public void CreateAllergy(Allergy allergy) {
         String query = "INSERT INTO allergy (type, severity, id, name) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, allergy.getType());
             ps.setInt(2, allergy.getSeverity());
             ps.setInt(3, allergy.getId());
@@ -31,10 +31,10 @@ public class AllergyDAO extends BaseDAO<Allergy> {
         }
     }
 
-    public List<Allergy> getAllergyList() {
+    public List<Allergy> GetAllergyList() {
         List<Allergy> allergyList = new ArrayList<>();
         String query = "SELECT * FROM allergy ORDER BY id ASC";
-        try (Statement st = this.getConnection().createStatement();
+        try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
@@ -47,9 +47,9 @@ public class AllergyDAO extends BaseDAO<Allergy> {
         return allergyList;
     }
 
-    public void updateAllergy(Allergy allergy) {
+    public void UpdateAllergy(Allergy allergy) {
         String query = "UPDATE allergy SET type=?, severity=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, allergy.getType());
             ps.setInt(2, allergy.getSeverity());
             ps.setString(3, allergy.getName());
@@ -60,9 +60,9 @@ public class AllergyDAO extends BaseDAO<Allergy> {
         }
     }
 
-    public void deleteAllergy(int id) {
+    public void DeleteAllergy(int id) {
         String query = "DELETE FROM allergy WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -70,10 +70,10 @@ public class AllergyDAO extends BaseDAO<Allergy> {
         }
     }
 
-    public Allergy getAllergyById(int id) {
+    public Allergy GetAllergyById(int id) {
         Allergy allergy = null;
         String query = "SELECT * FROM allergy WHERE id=?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
+        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
