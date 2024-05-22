@@ -63,23 +63,4 @@ public class InsuranceController extends BaseController<Insurance> {
 
     }
 
-//    public void AddUser(User user){
-//        
-//    }
-//    
-//    public User GetUserById(int id){      
-//        return null;        
-//    }
-//    
-//    public List<User> GetUserList(){ 
-//        return null;
-//    }
-//    
-//    public void UpdateUser(int id,User user){
-//        
-//    }
-//    
-//    public void DeleteUser(int id){
-//        
-//    }
 }
