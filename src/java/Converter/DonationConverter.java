@@ -39,7 +39,7 @@ public class DonationConverter extends BaseConverter<Donation> {
         Matcher matcher = regexPattern.matcher(string);
 
         if (matcher.find()) {
-            id = Integer.parseInt(matcher.group(1)); // Grup 1, parantez içindeki ifadeyi temsil eder
+            id = Integer.parseInt(matcher.group(1)); 
         } else {
             System.out.println("ID not found.");
         }
@@ -49,7 +49,7 @@ public class DonationConverter extends BaseConverter<Donation> {
             String[] keyValue = part.split("=");
             if (keyValue.length == 2) {
                 String key = keyValue[0];
-                String value = keyValue[1].replace("'", ""); // Single quotes'ı kaldır
+                String value = keyValue[1].replace("'", "");
                 switch (key) {
                     case "name":
                         name = value;
