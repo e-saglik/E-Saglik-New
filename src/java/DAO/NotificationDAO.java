@@ -17,7 +17,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
     public void CreateNotification(Notification notification) {
         String query = "INSERT INTO notification (message, notification_date, id, name) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, notification.getMassage());
+            ps.setString(1, notification.getMessage());
             ps.setDate(2, new java.sql.Date(notification.getNotificationDate().getTime()));
             ps.setInt(3, notification.getId());
             ps.setString(4, notification.getName());
@@ -51,7 +51,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
     public void UpdateNotification(Notification notification) {
         String query = "UPDATE notification SET message=?, notification_date=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, notification.getMassage());
+            ps.setString(1, notification.getMessage());
             ps.setDate(2, new java.sql.Date(notification.getNotificationDate().getTime()));
             ps.setString(3, notification.getName());
             ps.setInt(4, notification.getId());
