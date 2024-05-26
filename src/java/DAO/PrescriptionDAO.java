@@ -15,7 +15,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
     public PrescriptionDAO() {
     }
 
-    public void createPrescription(Prescription prescription) {
+    public void CreatePrescription(Prescription prescription) {
         String query = "INSERT INTO prescription (dosage, medication_list, instructions, id, name) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, prescription.getDosage());
@@ -29,7 +29,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
         }
     }
 
-    public List<Prescription> getPrescriptionList() {
+    public List<Prescription> GetPrescriptionList() {
         List<Prescription> prescriptionList = new ArrayList<>();
         String query = "SELECT * FROM prescription ORDER BY id ASC";
         try (Statement st = this.GetConnection().createStatement();
@@ -51,7 +51,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
         return prescriptionList;
     }
 
-    public void updatePrescription(Prescription prescription) {
+    public void UpdatePrescription(Prescription prescription) {
         String query = "UPDATE prescription SET dosage=?, medication_list=?, instructions=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, prescription.getDosage());
@@ -65,7 +65,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
         }
     }
 
-    public void deletePrescription(int id) {
+    public void DeletePrescription(int id) {
         String query = "DELETE FROM prescription WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
@@ -75,7 +75,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
         }
     }
 
-    public Prescription getPrescriptionById(int id) {
+    public Prescription GetPrescriptionById(int id) {
         Prescription prescription = null;
         String query = "SELECT * FROM prescription WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {

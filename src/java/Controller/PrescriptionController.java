@@ -1,6 +1,7 @@
 package Controller;
 
 import DAO.BaseDAO;
+import DAO.PrescriptionDAO;
 import Entity.Prescription;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class PrescriptionController extends BaseController<Prescription> {
         return prescriptionDao;
     }
 
-    public void setPrescriptionDao(BaseDAO prescriptionDao) {
+    public void setPrescriptionDao(PrescriptionDAO prescriptionDao) {
         this.prescriptionDao = prescriptionDao;
     }
 
@@ -30,7 +31,7 @@ public class PrescriptionController extends BaseController<Prescription> {
         this.prescriptionList = prescriptionList;
     }
 
-    private BaseDAO prescriptionDao;
+    private PrescriptionDAO prescriptionDao;
     private Prescription prescription;
     private List<Prescription> prescriptionList;
 
@@ -38,29 +39,40 @@ public class PrescriptionController extends BaseController<Prescription> {
 
     }
 
-    @Override
-    public void AddEntity(Prescription prescription) {
 
-    }
-
-    @Override
+   @Override
     public Prescription GetEntityById(int id) {
+        if (prescriptionDao == null) {
+            prescriptionDao = new PrescriptionDAO();
+        }
+        prescriptionDao.GetPrescriptionById(id);
         return null;
     }
 
     @Override
     public List<Prescription> GetEntityList() {
-        return null;
+        if (prescriptionDao == null) {
+            prescriptionDao = new PrescriptionDAO();
+        }
+        prescriptionDao.GetPrescriptionList();
+
+        return prescriptionDao.GetPrescriptionList();
     }
 
     @Override
-    public void UpdateEntity(int id, Prescription prescription) {
-
+    public void UpdateEntity(int id, Prescription payment) {
+        if (prescriptionDao == null) {
+            prescriptionDao = new PrescriptionDAO();
+        }
+        prescriptionDao.UpdatePrescription(prescription);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (prescriptionDao == null) {
+            prescriptionDao = new PrescriptionDAO();
+        }
+        prescriptionDao.DeletePrescription(id);
     }
 
 }

@@ -1,7 +1,7 @@
 package Converter;
+
 import Entity.Allergy;
-import Entity.Doctor; 
-import Entity.Hospital;
+import Entity.Doctor;
 import Entity.Patient;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,14 @@ public class AllergyConverter extends BaseConverter<Allergy> {
 
     @Override
     public String ConvertToString(Allergy allergy) {
-       return "Doctor{" +
-            "id=" + allergy.getId() +
-            ", name='" + allergy.getName() + '\'' +
-            ", firstName='" + allergy.getSeverity()+ '\'' +
-            ", lastName='" + allergy.getType()+ '\'' + 
-            '}';
+        return "Allergy{"
+                + "id=" + allergy.getId()
+                + ", name='" + allergy.getName() + '\''
+                + ", type='" + allergy.getType() + '\''
+                + ", severity=" + allergy.getSeverity()
+                + '}';
     }
-    
+
     @Override
     public Allergy ConvertToEntity(String string) throws IllegalAccessException, InstantiationException {
         Allergy allergy = new Allergy();
@@ -37,22 +37,23 @@ public class AllergyConverter extends BaseConverter<Allergy> {
         } else {
             System.out.println("ID not found.");
         }
+
         String[] parts = string.split(", ");
         for (String part : parts) {
             String[] keyValue = part.split("=");
             if (keyValue.length == 2) {
                 String key = keyValue[0];
-                String value = keyValue[1];
+                String value = keyValue[1].replace("'", ""); // Remove single quotes
                 switch (key) {
                     case "name":
                         allergy.setName(value);
                         break;
-                    case "Severity":
+                    case "type":
+                        allergy.setType(value);
+                        break;
+                    case "severity":
                         allergy.setSeverity(Integer.parseInt(value));
                         break;
-                    case "Type":
-                        allergy.setType(value);
-                        break;     
                     default:
                         // Handle unknown key or ignore
                         break;
@@ -61,34 +62,5 @@ public class AllergyConverter extends BaseConverter<Allergy> {
         }
         return allergy;
     }
-    
-    
-
-//  private List<Integer> extractPatientList(String input) {
-//    List<Integer> patientList = new ArrayList<>();
-//
-//    // input'un null veya boş olup olmadığını kontrol edelim
-//    if (input == null || input.isEmpty()) {
-//        return patientList; // Boş bir liste döndürelim
-//    }
-//
-//    // input içerisindeki diziyi alabilmek için köşeli parantezler arasındaki kısmı ayıralım
-//    String[] parts = input.split("=");
-//    if (parts.length != 2) {
-//        return patientList; // Hatalı format için boş bir liste döndürelim
-//    }
-//
-//    // Dizi kısmını alıp virgüllerden ayırarak integer listesine dönüştürelim
-//    String arrayString = parts[1];
-//    String[] numbers = arrayString.replaceAll("[\\[\\]]", "").split(", ");
-//    for (String number : numbers) {
-//        patientList.add(Integer.parseInt(number));
-//    }
-//
-//    return patientList;
-//}
-
- 
-
 
 }

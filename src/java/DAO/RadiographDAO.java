@@ -14,7 +14,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
     public RadiographDAO() {
     }
 
-    public void createRadiograph(Radiograph radiograph) {
+    public void CreateRadiograph(Radiograph radiograph) {
         String query = "INSERT INTO radiograph (RGDate, image, id, name) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(radiograph.getRGDate().getTime()));
@@ -27,7 +27,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
         }
     }
 
-    public List<Radiograph> getRadiographList() {
+    public List<Radiograph> GetRadiographList() {
         List<Radiograph> radiographList = new ArrayList<>();
         String query = "SELECT * FROM radiograph ORDER BY id ASC";
         try (Statement st = this.GetConnection().createStatement();
@@ -48,7 +48,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
         return radiographList;
     }
 
-    public void updateRadiograph(Radiograph radiograph) {
+    public void UpdateRadiograph(Radiograph radiograph) {
         String query = "UPDATE radiograph SET RGDate=?, image=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(radiograph.getRGDate().getTime()));
@@ -61,7 +61,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
         }
     }
 
-    public void deleteRadiograph(int id) {
+    public void DeleteRadiograph(int id) {
         String query = "DELETE FROM radiograph WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
@@ -71,7 +71,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
         }
     }
 
-    public Radiograph getRadiographById(int id) {
+    public Radiograph GetRadiographById(int id) {
         Radiograph radiograph = null;
         String query = "SELECT * FROM radiograph WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {

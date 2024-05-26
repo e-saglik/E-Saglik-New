@@ -1,9 +1,7 @@
 package Converter;
-import Entity.Doctor; 
+
+import Entity.Admin;
 import Entity.Hospital;
-import Entity.Patient;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,14 +13,14 @@ public class HospitalConverter extends BaseConverter<Hospital> {
 
     @Override
     public String ConvertToString(Hospital hospital) {
-       return "Doctor{" +
-            "id=" + hospital.getId() +
-            ", name='" + hospital.getName() + '\'' +
-            ", firstName='" + hospital.getLocation()+ '\'' +
-            ", lastName='" + hospital.getCapacity()+ '\'' + 
-            '}';
+        return "Hospital{"
+                + "id=" + hospital.getId()
+                + ", name='" + hospital.getName() + '\''
+                + ", location='" + hospital.getLocation() + '\''
+                + ", capacity='" + hospital.getCapacity() + '\''
+                + '}';
     }
-    
+
     @Override
     public Hospital ConvertToEntity(String string) throws IllegalAccessException, InstantiationException {
         Hospital hospital = new Hospital();
@@ -31,17 +29,18 @@ public class HospitalConverter extends BaseConverter<Hospital> {
         Matcher matcher = regexPattern.matcher(string);
 
         if (matcher.find()) {
-            String idString = matcher.group(1); // Grup 1, parantez içindeki ifadeyi temsil eder
+            String idString = matcher.group(1);
             hospital.setId(Integer.parseInt(idString));
         } else {
             System.out.println("ID not found.");
         }
+
         String[] parts = string.split(", ");
         for (String part : parts) {
             String[] keyValue = part.split("=");
             if (keyValue.length == 2) {
                 String key = keyValue[0];
-                String value = keyValue[1];
+                String value = keyValue[1].replaceAll("[{}']", "").trim();
                 switch (key) {
                     case "name":
                         hospital.setName(value);
@@ -51,7 +50,7 @@ public class HospitalConverter extends BaseConverter<Hospital> {
                         break;
                     case "capacity":
                         hospital.setCapacity(value);
-                        break;     
+                        break;
                     default:
                         // Handle unknown key or ignore
                         break;
@@ -60,34 +59,4 @@ public class HospitalConverter extends BaseConverter<Hospital> {
         }
         return hospital;
     }
-    
-    
-
-//  private List<Integer> extractPatientList(String input) {
-//    List<Integer> patientList = new ArrayList<>();
-//
-//    // input'un null veya boş olup olmadığını kontrol edelim
-//    if (input == null || input.isEmpty()) {
-//        return patientList; // Boş bir liste döndürelim
-//    }
-//
-//    // input içerisindeki diziyi alabilmek için köşeli parantezler arasındaki kısmı ayıralım
-//    String[] parts = input.split("=");
-//    if (parts.length != 2) {
-//        return patientList; // Hatalı format için boş bir liste döndürelim
-//    }
-//
-//    // Dizi kısmını alıp virgüllerden ayırarak integer listesine dönüştürelim
-//    String arrayString = parts[1];
-//    String[] numbers = arrayString.replaceAll("[\\[\\]]", "").split(", ");
-//    for (String number : numbers) {
-//        patientList.add(Integer.parseInt(number));
-//    }
-//
-//    return patientList;
-//}
-
- 
-
-
 }

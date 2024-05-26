@@ -14,7 +14,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
     public TestResultDAO() {
     }
 
-    public void createTestResult(TestResult testResult) {
+    public void CreateTestResult(TestResult testResult) {
         String query = "INSERT INTO test_result (date, test_type, test_name, test_normal_value, test_value, id, name) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(testResult.getDate().getTime()));
@@ -30,7 +30,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
         }
     }
 
-    public List<TestResult> getTestResultList() {
+    public List<TestResult> GetTestResultList() {
         List<TestResult> testResultList = new ArrayList<>();
         String query = "SELECT * FROM test_result ORDER BY id ASC";
         try (Statement st = this.GetConnection().createStatement();
@@ -54,7 +54,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
         return testResultList;
     }
 
-    public void updateTestResult(TestResult testResult) {
+    public void UpdateTestResult(TestResult testResult) {
         String query = "UPDATE test_result SET date=?, test_type=?, test_name=?, test_normal_value=?, test_value=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setDate(1, new java.sql.Date(testResult.getDate().getTime()));
@@ -70,7 +70,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
         }
     }
 
-    public void deleteTestResult(int id) {
+    public void DeleteTestResult(int id) {
         String query = "DELETE FROM test_result WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
@@ -80,7 +80,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
         }
     }
 
-    public TestResult getTestResultById(int id) {
+    public TestResult GetTestResultById(int id) {
         TestResult testResult = null;
         String query = "SELECT * FROM test_result WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {

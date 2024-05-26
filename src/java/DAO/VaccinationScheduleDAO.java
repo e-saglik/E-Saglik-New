@@ -16,7 +16,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
     public VaccinationScheduleDAO() {
     }
 
-    public void createVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
+    public void CreateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
         String query = "INSERT INTO vaccination_schedule (vaccine_type, due_date, id, name) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, vaccinationSchedule.getVaccineName().getType());
@@ -29,7 +29,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
         }
     }
 
-    public List<VaccinationSchedule> getVaccinationScheduleList() {
+    public List<VaccinationSchedule> GetVaccinationScheduleList() {
         List<VaccinationSchedule> vaccinationScheduleList = new ArrayList<>();
         String query = "SELECT * FROM vaccination_schedule ORDER BY id ASC";
         try (Statement st = this.GetConnection().createStatement();
@@ -51,7 +51,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
         return vaccinationScheduleList;
     }
 
-    public void updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
+    public void UpdateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
         String query = "UPDATE vaccination_schedule SET vaccine_type=?, due_date=?, name=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, vaccinationSchedule.getVaccineName().getType());
@@ -64,7 +64,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
         }
     }
 
-    public void deleteVaccinationSchedule(int id) {
+    public void DeleteVaccinationSchedule(int id) {
         String query = "DELETE FROM vaccination_schedule WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
@@ -74,7 +74,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
         }
     }
 
-    public VaccinationSchedule getVaccinationScheduleById(int id) {
+    public VaccinationSchedule GetVaccinationScheduleById(int id) {
         VaccinationSchedule vaccinationSchedule = null;
         String query = "SELECT * FROM vaccination_schedule WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
