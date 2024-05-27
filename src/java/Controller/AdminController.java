@@ -16,6 +16,9 @@ public class AdminController extends BaseController<Admin> {
     private List<Admin> adminList;
 
     public AdminDAO getAdminDao() {
+        if (this.adminDao == null) {
+            this.adminDao = new AdminDAO();
+        }
         return adminDao;
     }
 
@@ -32,6 +35,7 @@ public class AdminController extends BaseController<Admin> {
     }
 
     public List<Admin> getAdminList() {
+        this.adminList = this.getAdminDao().getAdminList();
         return adminList;
     }
 
@@ -48,7 +52,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        //adminDao.AddAdmin(Admin);
+        adminDao.createAdmin(admin);
 
     }
 
@@ -57,7 +61,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        //adminDao.GetDoctorById(id);
+        adminDao.getAdminById(id);
         return null;
     }
 
@@ -66,7 +70,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        //adminDao.GetDoctorList();
+        adminDao.getAdminList();
         return null;
     }
 
@@ -75,7 +79,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        //adminDao.UpdateDoctor(doctor);
+        adminDao.updateAdmin(doctor);
     }
 
     @Override
@@ -83,7 +87,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        //adminDao.DeleteDoctor(id);
+        adminDao.deleteAdmin(id);
     }
-    
+
 }

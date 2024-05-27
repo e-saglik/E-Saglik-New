@@ -15,6 +15,9 @@ public class AllergyController extends BaseController<Allergy> {
     }
 
     public AllergyDAO getAllergyDao() {
+        if (this.allergyDao == null) {
+            this.allergyDao = new AllergyDAO();
+        }
         return allergyDao;
     }
 
@@ -30,12 +33,21 @@ public class AllergyController extends BaseController<Allergy> {
         this.allergy = allergy;
     }
 
+    public List<Allergy> getAllergyList() {
+        this.allergyList = this.getAllergyDao().GetAllergyList();
+        return allergyList;
+    }
+
+    public void setAllergyList(List<Allergy> allergyList) {
+        this.allergyList = allergyList;
+    }
+
     @Override
     public void AddEntity(Allergy allergy) {
         if (allergyDao == null) {
             allergyDao = new AllergyDAO();
         }
-        //allergyDao.AddAllergy(Admin);
+        allergyDao.CreateAllergy(allergy);
 
     }
 
@@ -44,7 +56,7 @@ public class AllergyController extends BaseController<Allergy> {
         if (allergyDao == null) {
             allergyDao = new AllergyDAO();
         }
-        //allergyDao.GetAllergyById(id);
+        allergyDao.GetAllergyById(id);
         return null;
     }
 
@@ -53,7 +65,7 @@ public class AllergyController extends BaseController<Allergy> {
         if (allergyDao == null) {
             allergyDao = new AllergyDAO();
         }
-        //allergyList = allergyDao.GetAllergyList();
+        allergyList = allergyDao.GetAllergyList();
         return allergyList;
     }
 
@@ -62,7 +74,7 @@ public class AllergyController extends BaseController<Allergy> {
         if (allergyDao == null) {
             allergyDao = new AllergyDAO();
         }
-        //allergyDao.UpdateAllergy(doctor);
+        allergyDao.UpdateAllergy(allergy);
     }
 
     @Override
@@ -70,7 +82,7 @@ public class AllergyController extends BaseController<Allergy> {
         if (allergyDao == null) {
             allergyDao = new AllergyDAO();
         }
-        //allergyDao.DeleteAllergy(id);
+        allergyDao.DeleteAllergy(id);
     }
 
 }

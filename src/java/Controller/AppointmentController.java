@@ -15,6 +15,9 @@ public class AppointmentController extends BaseController<Appointment> {
     }
 
     public AppointmentDAO getAppointmentDao() {
+        if (this.appointmentDao == null) {
+            this.appointmentDao = new AppointmentDAO();
+        }
         return appointmentDao;
     }
 
@@ -31,6 +34,7 @@ public class AppointmentController extends BaseController<Appointment> {
     }
 
     public List<Appointment> getAppointmentList() {
+        this.appointmentList = this.getAppointmentDao().GetAppointmentList();
         return appointmentList;
     }
 
@@ -43,7 +47,7 @@ public class AppointmentController extends BaseController<Appointment> {
         if (appointmentDao == null) {
             appointmentDao = new AppointmentDAO();
         }
-        //appointmentDao.AddAppointment(appointment);
+        appointmentDao.CreateAppointment(appointment);
 
     }
 
@@ -52,7 +56,7 @@ public class AppointmentController extends BaseController<Appointment> {
         if (appointmentDao == null) {
             appointmentDao = new AppointmentDAO();
         }
-        //appointmentDao.GetAppointmentById(id);
+        appointmentDao.GetAppointmentById(id);
         return null;
     }
 
@@ -61,7 +65,7 @@ public class AppointmentController extends BaseController<Appointment> {
         if (appointmentDao == null) {
             appointmentDao = new AppointmentDAO();
         }
-        //appointmentDao.GetAppointmentList();
+        appointmentDao.GetAppointmentList();
         return null;
     }
 
@@ -70,7 +74,7 @@ public class AppointmentController extends BaseController<Appointment> {
         if (appointmentDao == null) {
             appointmentDao = new AppointmentDAO();
         }
-        //appointmentDao.UpdateAppointment(appointment);
+        appointmentDao.UpdateAppointment(appointment);
     }
 
     @Override
@@ -78,7 +82,7 @@ public class AppointmentController extends BaseController<Appointment> {
         if (appointmentDao == null) {
             appointmentDao = new AppointmentDAO();
         }
-        //appointmentDao.DeleteAppointment(id);
+        appointmentDao.DeleteAppointment(id);
     }
 
 }
