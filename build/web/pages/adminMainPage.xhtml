@@ -5,7 +5,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/template/template.xhtml">
-    
+
     <h:outputStylesheet library="css" name="bootstrap.css" />
     <h:outputStylesheet name="/css/style.css" />
     <ui:define name="content">
@@ -33,6 +33,10 @@
                             <h:column>
                                 <f:facet name="header">Cinsiyet</f:facet>
                                     #{user.gender}
+                            </h:column>
+                             <h:column>
+                                <f:facet name="header">E-Mail</f:facet>
+                                    #{user.email}
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">Sil</f:facet>
@@ -43,34 +47,31 @@
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form>
+                        <h:inputText value="#{doctorController.entity.id}"></h:inputText>
                         <div class="form-group">
-                            <h:inputHidden value="#{doctorController.entity.name}"></h:inputHidden>
                             <label for="inputName">Kullanıcı Adı</label>
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.name}"></h:inputText>
                         </div>
                         <div class="form-group">
-                            <h:inputHidden value="#{doctorController.entity.firstName}"></h:inputHidden>
                             <label for="inputName">İsim</label>
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.firstName}"></h:inputText>
                         </div>
                         <div class="form-group">
-                            <h:inputHidden value="#{doctorController.entity.lastName}"></h:inputHidden>
                             <label for="inputName">Soyisim</label>
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.lastName}"></h:inputText>
                         </div>
                         <div class="form-group">
-                            <h:inputHidden value="#{doctorController.entity.gender}"></h:inputHidden>
                             <label for="inputName">Cinsiyet</label>
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.gender}"></h:inputText>
                         </div>
                         <div class="form-group">
-                            <h:inputHidden value="#{doctorController.entity.email}"></h:inputHidden>
                             <label for="inputName">E-mail</label>
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.email}"></h:inputText>
                         </div>
                         <div class="form-group">
-                            <h:commandButton rendered="#{doctorController.entity.id != null}" styleClass="btn btn-primary" value="Oluştur" action="#{doctorController.update()}"></h:commandButton>
-                            <h:commandButton rendered="#{doctorController.entity.id == null}" styleClass="btn btn-primary" value="Oluştur" action="#{doctorController.create()}"></h:commandButton>
+                            <h:commandButton rendered="#{doctorController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{doctorController.update()}"></h:commandButton>
+                            <h:commandButton rendered="#{doctorController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{doctorController.create()}"></h:commandButton>
+                            <h:commandButton rendered="#{doctorController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{doctorController.clearForm()}"></h:commandButton>
                         </div>
                     </h:form>
                 </div>

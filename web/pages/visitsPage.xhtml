@@ -7,39 +7,7 @@
                 template="/template/template.xhtml">
 
     <ui:define name="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8" style="padding-right: 0">
-                    <h:form>
-                        <h:dataTable styleClass="table table-striped" value="#{doctorController.GetEntityList()}" var="user">
-                            <h:column>
-                                <f:facet name="header">Kullanıcı Id</f:facet>
-                                    #{user.id}
-                            </h:column> 
-                            <h:column>
-                                <f:facet name="header">Kullanıcı Adı</f:facet>
-                                    #{user.name}
-                            </h:column> 
-                            <h:column>
-                                <f:facet name="header">İsim</f:facet>
-                                <h:commandLink action="#{doctorController.updateForm(user)}" value="#{user.firstName}"></h:commandLink>
-                            </h:column> 
-                            <h:column>
-                                <f:facet name="header">Soyisim</f:facet>
-                                    #{user.lastName}
-                            </h:column> 
-                            <h:column>
-                                <f:facet name="header">Cinsiyet</f:facet>
-                                    #{user.gender}
-                            </h:column> 
-                            <h:column>
-                                <f:facet name="header">Sil</f:facet>
-                                <h:commandButton styleClass="btn btn-info" value="Detay Görüntüle" action=""></h:commandButton>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
-                </div>
-            </div>
-        </div>
+
+       
     </ui:define>
 </ui:composition>

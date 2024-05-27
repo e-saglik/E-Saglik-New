@@ -10,24 +10,30 @@ import java.util.List;
 @ViewScoped
 public class DoctorController extends BaseController<Doctor> {
 
-    private Doctor doctor;
+    private Doctor entity;
     private DoctorDAO dao;
     private List<Doctor> list;
 
+    public String clearForm() {
+        this.entity = new Doctor();
+        return "index";
+    }
+
     public String updateForm(Doctor doc) {
-        this.doctor = doc;
+        this.entity = doc;
         return "index";
     }
 
     public String update() {
-        this.getDao().UpdateDoctor(this.doctor);
+        this.getDao().UpdateDoctor(this.entity);
+        this.entity = new Doctor();
         return "index";
     }
 
     public String create() {
 
-        this.getDao().CreateDoctor(this.doctor);
-
+        this.getDao().CreateDoctor(this.entity);
+        this.entity = new Doctor();
         return "index";
 
     }
@@ -57,11 +63,11 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     @Override
-    public void AddEntity(Doctor doctor) {
+    public void AddEntity(Doctor entity) {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.CreateDoctor(doctor);
+        dao.CreateDoctor(entity);
 
     }
 
@@ -85,11 +91,11 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     @Override
-    public void UpdateEntity(int id, Doctor doctor) {
+    public void UpdateEntity(int id, Doctor entity) {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.UpdateDoctor(doctor);
+        dao.UpdateDoctor(entity);
     }
 
     @Override
@@ -99,5 +105,16 @@ public class DoctorController extends BaseController<Doctor> {
         }
         dao.DeleteDoctor(id);
     }
-    
+
+    public Doctor getEntity() {
+        if (this.entity == null) {
+            this.entity = new Doctor();
+        }
+        return entity;
+    }
+
+    public void setEntity(Doctor entity) {
+        this.entity = entity;
+    }
+
 }
