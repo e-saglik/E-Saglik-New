@@ -1,10 +1,12 @@
 package DAO;
 
+import Entity.Donation;
 import Util.DBConnection;
 import java.sql.Connection;
-
+import java.util.List;
 
 public abstract class BaseDAO<T> extends DBConnection {
+
     protected Connection connection;
 
     public BaseDAO(Connection connection) {
@@ -15,8 +17,8 @@ public abstract class BaseDAO<T> extends DBConnection {
     }
 
     public Connection GetConnection() {
-        if(this.connection == null){
-            
+        if (this.connection == null) {
+s
             this.connection = this.connect();
         }
         return connection;
@@ -26,7 +28,4 @@ public abstract class BaseDAO<T> extends DBConnection {
         this.connection = connection;
     }
 
-    
-
 }
-
