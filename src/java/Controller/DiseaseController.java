@@ -15,6 +15,9 @@ public class DiseaseController extends BaseController<Disease> {
     }
 
     public DiseaseDAO getDiseaseDao() {
+        if (this.diseaseDao == null) {
+            this.diseaseDao = new DiseaseDAO();
+        }
         return diseaseDao;
     }
 
@@ -31,6 +34,7 @@ public class DiseaseController extends BaseController<Disease> {
     }
 
     public List<Disease> getDiseaseList() {
+        this.diseaseList = this.getDiseaseDao().GetDiseaseList();
         return diseaseList;
     }
 
@@ -39,11 +43,11 @@ public class DiseaseController extends BaseController<Disease> {
     }
 
     @Override
-    public void AddEntity(Disease doctor) {
+    public void AddEntity(Disease disease) {
         if (diseaseDao == null) {
             diseaseDao = new DiseaseDAO();
         }
-        //adminDao.AddAdmin(Admin);
+        diseaseDao.CreateDisease(disease);
 
     }
 
@@ -52,7 +56,7 @@ public class DiseaseController extends BaseController<Disease> {
         if (diseaseDao == null) {
             diseaseDao = new DiseaseDAO();
         }
-        //adminDao.GetDoctorById(id);
+        diseaseDao.GetDiseaseById(id);
         return null;
     }
 
@@ -61,7 +65,7 @@ public class DiseaseController extends BaseController<Disease> {
         if (diseaseDao == null) {
             diseaseDao = new DiseaseDAO();
         }
-        //adminDao.GetDoctorList();
+        diseaseDao.GetDiseaseList();
         return null;
     }
 
@@ -70,7 +74,7 @@ public class DiseaseController extends BaseController<Disease> {
         if (diseaseDao == null) {
             diseaseDao = new DiseaseDAO();
         }
-        //adminDao.UpdateDoctor(doctor);
+        diseaseDao.UpdateDisease(disease);
     }
 
     @Override
@@ -78,7 +82,7 @@ public class DiseaseController extends BaseController<Disease> {
         if (diseaseDao == null) {
             diseaseDao = new DiseaseDAO();
         }
-        //adminDao.DeleteDoctor(id);
+        diseaseDao.DeleteDisease(id);
     }
 
 }
