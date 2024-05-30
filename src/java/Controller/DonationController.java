@@ -15,7 +15,7 @@ public class DonationController extends BaseController<Donation> {
 
     }
 
-    public BaseDAO getDonationDao() {
+    public DonationDAO getDonationDao() {
         if (this.donationDao == null) {
             this.donationDao = new DonationDAO();
         }
