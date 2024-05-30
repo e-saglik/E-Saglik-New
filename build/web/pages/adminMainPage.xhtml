@@ -12,7 +12,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
-                    <h:form>
+                    <h:form id="user-table">
+                        <div class="btn-group">
+                            <h:commandButton action="#{doctorController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{doctorController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
                         <h:dataTable styleClass="table table-striped" value="#{doctorController.GetEntityList()}" var="user">
                             <h:column>
                                 <f:facet name="header">Kullanıcı Id</f:facet>
@@ -34,19 +38,22 @@
                                 <f:facet name="header">Cinsiyet</f:facet>
                                     #{user.gender}
                             </h:column>
-                             <h:column>
+                            <h:column>
                                 <f:facet name="header">E-Mail</f:facet>
                                     #{user.email}
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">Sil</f:facet>
-                                <h:commandButton styleClass="btn btn-warning" value="Sil" action="#{doctorController.DeleteEntity(user.id)}"></h:commandButton>
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{doctorController.updateForm(user)}">
+                                    <f:ajax execute="@this" render="delete-modal"/>
+                                </h:commandButton>
                             </h:column>
                         </h:dataTable>
                     </h:form>
+                     <pre>Bulunduğnuz Sayfa #{doctorController.page}, Toplam Sayfa #{doctorController.pageCount}</pre>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
-                    <h:form>
+                    <h:form id="user-form">
                         <h:inputText value="#{doctorController.entity.id}"></h:inputText>
                         <div class="form-group">
                             <label for="inputName">Kullanıcı Adı</label>
@@ -68,12 +75,45 @@
                             <label for="inputName">E-mail</label>
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.email}"></h:inputText>
                         </div>
-                        <div class="form-group">
-                            <h:commandButton rendered="#{doctorController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{doctorController.update()}"></h:commandButton>
-                            <h:commandButton rendered="#{doctorController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{doctorController.create()}"></h:commandButton>
-                            <h:commandButton rendered="#{doctorController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{doctorController.clearForm()}"></h:commandButton>
+                        <div class="btn-group">
+                            <h:commandButton rendered="#{doctorController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{doctorController.update()}">
+                                <f:ajax execute="user-form" render="user-form user-table"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{doctorController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{doctorController.create()}">
+                                <f:ajax execute="user-form" render="user-form user-table"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{doctorController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{doctorController.clearForm()}">
+                                <f:ajax execute="@this" render="user-form"/>
+                            </h:commandButton>
                         </div>
                     </h:form>
+                </div>
+            </div>
+            <div class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <h:panelGroup layout="block" class="modal-content" id="delete-modal">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Silme işlemi</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bu kullanıcıyı silmek istediğinizden emin misiniz!
+                                <pre>
+                                <b>Kullanıcı Adı :</b> #{doctorController.entity.name}<br />
+                                <b>İsim :</b> #{doctorController.entity.firstName}<br />
+                                <b>Soyisim :</b> #{doctorController.entity.lastName}<br />
+                                </pre>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <h:form>
+                                <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{doctorController.DeleteEntity(doctorController.entity.id)}">
+                                    <f:ajax execute="@this" render="user-table"/>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+                    </h:panelGroup>
                 </div>
             </div>
         </div>

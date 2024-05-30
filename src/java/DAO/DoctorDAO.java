@@ -35,20 +35,37 @@ public class DoctorDAO extends BaseDAO<Doctor> {
         }
     }
 
-    public List<Doctor> GetDoctorList() {
+    public List<Doctor> GetDoctorList(int page,int pageSize) {
         List<Doctor> doctorList = new ArrayList<>();
-        String query = "SELECT * FROM doctor ORDER BY id ASC";
+        int start =(page-1)*pageSize;
+       String query = "SELECT * FROM doctor ORDER BY id ASC LIMIT " + pageSize + " OFFSET " + start;
         try (Statement st = this.GetConnection().createStatement();
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
-                Doctor doctor = new Doctor(rs.getString("specialization"), rs.getString("hospital"), rs.getString("prescription"), rs.getString("appointment"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phonenumber"), rs.getString("address"), rs.getInt("id"), rs.getString("name"));
+                Doctor doctor = new Doctor(rs.getString("specialization"), 
+                        rs.getString("hospital"), rs.getString("prescription"), rs.getString("appointment"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phonenumber"), rs.getString("address"), rs.getInt("id"), rs.getString("name"));
                 doctorList.add(doctor);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return doctorList;
+    }
+    
+    public int count() {
+        int count=0;
+        
+        String query = "SELECT count(id) as doctor_count from doctor";
+        try (
+            Statement st = this.GetConnection().createStatement();
+            ResultSet rs = st.executeQuery(query)) {
+            rs.next();
+            count= rs.getInt("doctor_count");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 
     public void UpdateDoctor(Doctor d) {

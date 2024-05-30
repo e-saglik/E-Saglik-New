@@ -13,29 +13,72 @@ public class DoctorController extends BaseController<Doctor> {
     private Doctor entity;
     private DoctorDAO dao;
     private List<Doctor> list;
-
-    public String clearForm() {
-        this.entity = new Doctor();
-        return "index";
+    
+    private int page=1;
+    private int pageSize=10;
+    private int pageCount;
+    
+    public void next(){
+        if(this.page == getPageCount()){
+            this.page=1;
+        }
+        else{
+            this.page++;    
+        }
+        
     }
 
-    public String updateForm(Doctor doc) {
+    public void previous(){
+        if(this.page == 1){
+            this.page=this.getPageCount();
+        }
+        else{
+            this.page--;    
+        }
+        
+    }
+    
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount = (int) Math.ceil(getDao().count()/(double)pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+    
+    public void clearForm() {
+        this.entity = new Doctor();
+    }
+
+    public void updateForm(Doctor doc) {
         this.entity = doc;
-        return "index";
     }
 
-    public String update() {
+    public void update() {
         this.getDao().UpdateDoctor(this.entity);
-        this.entity = new Doctor();
-        return "index";
+        this.entity = new Doctor();  
     }
 
-    public String create() {
-
+    public void create() {
         this.getDao().CreateDoctor(this.entity);
         this.entity = new Doctor();
-        return "index";
-
     }
 
     public DoctorDAO getDao() {
@@ -50,7 +93,7 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public List<Doctor> getList() {
-        this.list = this.getDao().GetDoctorList();
+        this.list = this.getDao().GetDoctorList(page,pageSize);
         return list;
     }
 
@@ -85,9 +128,9 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.GetDoctorList();
+        dao.GetDoctorList(page,pageSize);
 
-        return dao.GetDoctorList();
+        return dao.GetDoctorList(page,pageSize);
     }
 
     @Override
