@@ -51,9 +51,14 @@ public class Appointment extends BaseEntity {
         this.status = status;
     }   
 
-    @Override
+  @Override
     public String toString() {
-        return "Appointment{" + "appointmentDate=" + appointmentDate + ", appointmentTime=" + appointmentTime + ", status=" + status + '}';
+        return "Appointment{" +
+            "appointmentDate=" + appointmentDate +
+            ", appointmentTime=" + appointmentTime +
+            ", status=" + status +
+            ", polyClinic=" + polyClinic +
+            '}';
     }
 
     public PolyClinic getPolyClinic() {
