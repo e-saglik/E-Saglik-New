@@ -8,13 +8,13 @@ public class Doctor extends User {
     private String hospital;
     private String prescription;
     private String appointment;
-    private List<Integer> patientList;
+    private List<Patient> patientList;
 
     public Doctor() {
 
     }
 
-    public Doctor(String specialization, String hospital, String prescription, String appointment, List<Integer> patientList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
+    public Doctor(String specialization, String hospital, String prescription, String appointment, List<Patient> patientList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
         super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
         this.specialization = specialization;
         this.hospital = hospital;
@@ -71,11 +71,11 @@ public class Doctor extends User {
         this.appointment = appointment;
     }
 
-    public List<Integer> getPatientList() {
+    public List<Patient> getPatientList() {
         return patientList;
     }
 
-    public void setPatientList(List<Integer> patientList) {
+    public void setPatientList(List<Patient> patientList) {
         this.patientList = patientList;
     }
 

@@ -8,21 +8,21 @@ public class Patient extends User {
     private Date dateOfBirth;
     private String bloodType;
     private String appointment;
-    private List<Integer> medicationList;
-    private List<Integer>  medicalReportList;
-    private List<Integer>  testResultList;
-    private List<Integer>  diseaseList;
-    private List<Integer>  allergyList;
+    private List<Patient> medicationList;
+    private List<Patient>  medicalReportList;
+    private List<Patient>  testResultList;
+    private List<Patient>  diseaseList;
+    private List<Patient>  allergyList;
     private String insurance;
     private String vaccinationSchedule;
-    private List<String>  treatmentList;
-    private List<String>  paymentList;
-    private List<String>  notificationList;
+    private List<Patient>  treatmentList;
+    private List<Patient>  paymentList;
+    private List<Patient>  notificationList;
 
     public Patient() {
     }
 
-    public Patient(Date dateOfBirth, String bloodType, String appointment, List<Integer> medicationList, List<Integer> medicalReportList, List<Integer> testResultList, List<Integer> diseaseList, List<Integer> allergyList, String insurance, String vaccinationSchedule, List<String> treatmentList, List<String> paymentList, List<String> notificationList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
+    public Patient(Date dateOfBirth, String bloodType, String appointment, List<Patient> medicationList, List<Patient> medicalReportList, List<Patient> testResultList, List<Patient> diseaseList, List<Patient> allergyList, String insurance, String vaccinationSchedule, List<Patient> treatmentList, List<Patient> paymentList, List<Patient> notificationList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
         super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
         this.dateOfBirth = dateOfBirth;
         this.bloodType = bloodType;
@@ -72,43 +72,43 @@ public class Patient extends User {
         this.appointment = appointment;
     }
 
-    public List<Integer> getMedicationList() {
+    public List<Patient> getMedicationList() {
         return medicationList;
     }
 
-    public void setMedicationList(List<Integer> medicationList) {
+    public void setMedicationList(List<Patient> medicationList) {
         this.medicationList = medicationList;
     }
 
-    public List<Integer> getMedicalReportList() {
+    public List<Patient> getMedicalReportList() {
         return medicalReportList;
     }
 
-    public void setMedicalReportList(List<Integer> medicalReportList) {
+    public void setMedicalReportList(List<Patient> medicalReportList) {
         this.medicalReportList = medicalReportList;
     }
 
-    public List<Integer> getTestResultList() {
+    public List<Patient> getTestResultList() {
         return testResultList;
     }
 
-    public void setTestResultList(List<Integer> testResultList) {
+    public void setTestResultList(List<Patient> testResultList) {
         this.testResultList = testResultList;
     }
 
-    public List<Integer> getDiseaseList() {
+    public List<Patient> getDiseaseList() {
         return diseaseList;
     }
 
-    public void setDiseaseList(List<Integer> diseaseList) {
+    public void setDiseaseList(List<Patient> diseaseList) {
         this.diseaseList = diseaseList;
     }
 
-    public List<Integer> getAllergyList() {
+    public List<Patient> getAllergyList() {
         return allergyList;
     }
 
-    public void setAllergyList(List<Integer> allergyList) {
+    public void setAllergyList(List<Patient> allergyList) {
         this.allergyList = allergyList;
     }
 
@@ -128,27 +128,27 @@ public class Patient extends User {
         this.vaccinationSchedule = vaccinationSchedule;
     }
 
-    public List<String> getTreatmentList() {
+    public List<Patient> getTreatmentList() {
         return treatmentList;
     }
 
-    public void setTreatmentList(List<String> treatmentList) {
+    public void setTreatmentList(List<Patient> treatmentList) {
         this.treatmentList = treatmentList;
     }
 
-    public List<String> getPaymentList() {
+    public List<Patient> getPaymentList() {
         return paymentList;
     }
 
-    public void setPaymentList(List<String> paymentList) {
+    public void setPaymentList(List<Patient> paymentList) {
         this.paymentList = paymentList;
     }
 
-    public List<String> getNotificationList() {
+    public List<Patient> getNotificationList() {
         return notificationList;
     }
 
-    public void setNotificationList(List<String> notificationList) {
+    public void setNotificationList(List<Patient> notificationList) {
         this.notificationList = notificationList;
     }
 
