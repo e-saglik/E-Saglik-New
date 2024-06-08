@@ -3,14 +3,14 @@ import java.util.List;
 
 public class Prescription extends BaseEntity {
     private String dosage;
-    private List<Prescription> medicationList;
+    private List<Medication> medicationList;
     private String instructions;
 
     public Prescription() {
         
     }
 
-    public Prescription(String dosage, List<Prescription> medicationList, String instructions, int id, String name) {
+    public Prescription(String dosage, List<Medication> medicationList, String instructions, int id, String name) {
         super(id, name);
         this.dosage = dosage;
         this.medicationList = medicationList;
@@ -27,11 +27,11 @@ public class Prescription extends BaseEntity {
         this.dosage = dosage;
     }
 
-    public List<Prescription> getMedicationList() {
+    public List<Medication> getMedicationList() {
         return medicationList;
     }
 
-    public void setMedicationList(List<Prescription> medicationList) {
+    public void setMedicationList(List<Medication> medicationList) {
         this.medicationList = medicationList;
     }
 
