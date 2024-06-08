@@ -1,9 +1,12 @@
 package Converter;
 
 import Entity.Admin;
+import Entity.Medication;
 import Entity.Prescription;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,8 +19,8 @@ public class PrescriptionConverter extends BaseConverter<Prescription> {
     @Override
     public String ConvertToString(Prescription prescription) {
         StringBuilder medicationListString = new StringBuilder();
-        for (Integer medication : prescription.getMedicationList()) {
-            medicationListString.append(medication).append(",");
+        for (Medication medication : prescription.getMedicationList()) {
+            medicationListString.append(medication.getId()).append(",");
         }
         // Remove the last comma if there are medications
         if (medicationListString.length() > 0) {
@@ -63,7 +66,7 @@ public class PrescriptionConverter extends BaseConverter<Prescription> {
                         prescription.setInstructions(value);
                         break;
                     case "medicationList":
-                        List<Integer> medicationList = extractMedicationList(value);
+                        List<Medication> medicationList = extractMedicationList(value);
                         prescription.setMedicationList(medicationList);
                         break;
                     default:
@@ -75,15 +78,20 @@ public class PrescriptionConverter extends BaseConverter<Prescription> {
         return prescription;
     }
 
-    private List<Integer> extractMedicationList(String value) {
-        List<Integer> medicationList = new ArrayList<>();
+    private List<Medication> extractMedicationList(String value) {
+        List<Medication> medicationList = new ArrayList<>();
         String[] medications = value.split(",");
+        MedicationConverter MC = new MedicationConverter();
         for (String medication : medications) {
+
             try {
-                medicationList.add(Integer.parseInt(medication));
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid medication number: " + medication);
+                medicationList.add(MC.ConvertToEntity(medication));
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(PrescriptionConverter.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(PrescriptionConverter.class.getName()).log(Level.SEVERE, null, ex);
             }
+ 
         }
         return medicationList;
     }
