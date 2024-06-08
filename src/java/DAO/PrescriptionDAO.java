@@ -1,5 +1,6 @@
 package DAO;
 
+import Entity.Medication;
 import Entity.Prescription;
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,9 +18,16 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
 
     public void CreatePrescription(Prescription prescription) {
         String query = "INSERT INTO prescription (dosage, medication_list, instructions, id, name) VALUES (?, ?, ?, ?, ?)";
+        
+        List<Integer> medIds = new ArrayList<Integer>(); 
+        List<Medication> medList = prescription.getMedicationList();
+        
+        for(int i = 0; i < medList.size(); i++){
+            medIds.add(medList.get(i).getId());
+        }
+        
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, prescription.getDosage());
-            ps.setString(2, convertListToString(prescription.getMedicationList()));
             ps.setString(3, prescription.getInstructions());
             ps.setInt(4, prescription.getId());
             ps.setString(5, prescription.getName());
