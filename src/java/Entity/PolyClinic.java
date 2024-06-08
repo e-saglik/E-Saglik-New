@@ -5,15 +5,19 @@ import java.util.List;
 public class PolyClinic extends BaseEntity {
     private String location;
     private List<Appointment> appointments;
+    private List<Doctor> doctors;
 
     public PolyClinic() {
     }
 
-    public PolyClinic(String location, List<Appointment> appointments, int id, String name) {
+    public PolyClinic(String location, List<Appointment> appointments, List<Doctor> doctors, int id, String name) {
         super(id, name);
         this.location = location;
         this.appointments = appointments;
+        this.doctors = doctors;
     }
+
+   
 
     public String getLocation() {
         return location;
@@ -37,6 +41,14 @@ public class PolyClinic extends BaseEntity {
 
     public void removeAppointment(Appointment appointment) {
         this.appointments.remove(appointment);
+    }
+
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
     }
 
     public Appointment findAppointmentById(int id) {

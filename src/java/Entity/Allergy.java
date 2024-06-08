@@ -3,16 +3,18 @@ package Entity;
 public class Allergy extends BaseEntity {
     private String type;
     private int severity;
+    private Patient patient;
 
     public Allergy() {
         
     }
 
-    public Allergy(String type, int severity, int id, String name) {
+    public Allergy(String type, int severity, Patient patient, int id, String name) {
         super(id, name);
         this.type = type;
         this.severity = severity;
-    } 
+        this.patient = patient;
+    }
 
     public String getType() {
         return type;
@@ -30,6 +32,16 @@ public class Allergy extends BaseEntity {
         this.severity = severity;
     }
 
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Allergy{" + "type=" + type + ", severity=" + severity + '}';
