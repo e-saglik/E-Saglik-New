@@ -92,7 +92,8 @@ public class PatientConverter extends BaseConverter<Patient> {
                         patient.setAllergyList(convertToEntityList(value, ac));
                         break;
                     case "insurance":
-                        patient.setInsurance(value);
+                        InsuranceConverter ıc = new InsuranceConverter();
+                        patient.setInsurance(ıc.ConvertToEntity(value));
                         break;
                     case "vaccinationSchedule":
                         VaccinationScheduleConverter vsc = new VaccinationScheduleConverter();
