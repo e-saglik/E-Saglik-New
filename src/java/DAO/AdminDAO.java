@@ -12,12 +12,8 @@ public class AdminDAO extends BaseDAO<Admin> {
     }
 
     public AdminDAO() {
-        
-    }
-    
-    
 
-    
+    }
 
     public void createAdmin(Admin admin) {
         String query = "INSERT INTO admin (authorization_level, first_name, last_name, email, password, gender, phone_number, address, id, name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -41,8 +37,7 @@ public class AdminDAO extends BaseDAO<Admin> {
     public List<Admin> getAdminList() {
         List<Admin> adminList = new ArrayList<>();
         String query = "SELECT * FROM admin ORDER BY id ASC";
-        try (Statement st = this.GetConnection().createStatement();
-             ResultSet rs = st.executeQuery(query)) {
+        try (Statement st = this.GetConnection().createStatement(); ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
                 Admin admin = new Admin(rs.getString("authorization_level"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phone_number"), rs.getString("address"), rs.getInt("id"), rs.getString("name"));
