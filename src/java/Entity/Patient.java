@@ -13,8 +13,8 @@ public class Patient extends User {
     private List<TestResult>  testResultList;
     private List<Disease>  diseaseList;
     private List<Allergy>  allergyList;
-    private String insurance;
-    private String vaccinationSchedule;
+    private Insurance insurance;
+    private VaccinationSchedule vaccinationSchedule;
     private List<Treatment>  treatmentList;
     private List<Payment>  paymentList;
     private List<Notification>  notificationList;
@@ -22,7 +22,7 @@ public class Patient extends User {
     public Patient() {
     }
 
-    public Patient(Date dateOfBirth, String bloodType, String appointment, List<Medication> medicationList, List<MedicalReport> medicalReportList, List<TestResult> testResultList, List<Disease> diseaseList, List<Allergy> allergyList, String insurance, String vaccinationSchedule, List<Treatment> treatmentList, List<Payment> paymentList, List<Notification> notificationList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
+    public Patient(Date dateOfBirth, String bloodType, String appointment, List<Medication> medicationList, List<MedicalReport> medicalReportList, List<TestResult> testResultList, List<Disease> diseaseList, List<Allergy> allergyList, Insurance insurance, VaccinationSchedule vaccinationSchedule, List<Treatment> treatmentList, List<Payment> paymentList, List<Notification> notificationList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
         super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
         this.dateOfBirth = dateOfBirth;
         this.bloodType = bloodType;
@@ -112,19 +112,19 @@ public class Patient extends User {
         this.allergyList = allergyList;
     }
 
-    public String getInsurance() {
+    public Insurance getInsurance() {
         return insurance;
     }
 
-    public void setInsurance(String ınsurance) {
+    public void setInsurance(Insurance ınsurance) {
         this.insurance = ınsurance;
     }
 
-    public String getVaccinationSchedule() {
+    public VaccinationSchedule getVaccinationSchedule() {
         return vaccinationSchedule;
     }
 
-    public void setVaccinationSchedule(String vaccinationSchedule) {
+    public void setVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
         this.vaccinationSchedule = vaccinationSchedule;
     }
 
