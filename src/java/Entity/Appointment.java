@@ -7,17 +7,21 @@ public class Appointment extends BaseEntity {
     private Date appointmentDate;
     private LocalTime appointmentTime;
     private String status;
+    private PolyClinic polyClinic;
+    private Patient patient;
 
     public Appointment() {
     }
 
-    public Appointment(Date appointmentDate, LocalTime appointmentTime, String status, int id, String name) {
+    public Appointment(Date appointmentDate, LocalTime appointmentTime, String status, PolyClinic polyClinic, Patient patient, int id, String name) {
         super(id, name);
         this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
         this.status = status;
-    }    
-    
+        this.polyClinic = polyClinic;
+        this.patient = patient;
+    }
+
     private void confirmAppointment(){
         
     }
@@ -47,11 +51,33 @@ public class Appointment extends BaseEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }   
+
+    public PolyClinic getPolyClinic() {
+        return polyClinic;
     }
 
-    @Override
-    public String toString() {
-        return "Appointment{" + "appointmentDate=" + appointmentDate + ", appointmentTime=" + appointmentTime + ", status=" + status + '}';
+    public void setPolyClinic(PolyClinic polyClinic) {
+        this.polyClinic = polyClinic;
     }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+    
+      @Override
+    public String toString() {
+        return "Appointment{" +
+            "appointmentDate=" + appointmentDate +
+            ", appointmentTime=" + appointmentTime +
+            ", status=" + status +
+            ", polyClinic=" + polyClinic +
+            '}';
+    }
+    
         
 }

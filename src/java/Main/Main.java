@@ -18,8 +18,8 @@ public class Main {
 
     public static void main(String[] args) {
         
-        List<Integer> patientList = new ArrayList<>();
-        patientList.add(1); // Örnek bir hasta ID'si ekleyelim
+        List<Patient> patientList = new ArrayList<>();
+        patientList.add(new Patient()); // Örnek bir hasta ID'si ekleyelim
 
         // Doctor nesnesi oluşturma
         Doctor doctor = new Doctor(

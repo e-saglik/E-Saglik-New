@@ -1,4 +1,5 @@
 package Converter;
+import DAO.PatientDAO;
 import Entity.Doctor; 
 import Entity.Patient;
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class DoctorConverter extends BaseConverter<Doctor> {
 
     @Override
     public String ConvertToString(Doctor doctor) {
-        for (Integer number : doctor.getPatientList()) {
-            System.out.println(number);
+        for (Patient patient : doctor.getPatientList()) {
+            System.out.println(patient.getId());
         }
        return "Doctor{" +
             "id=" + doctor.getId() +
@@ -97,14 +98,15 @@ public class DoctorConverter extends BaseConverter<Doctor> {
                 }
             }
         }
-        doctor.setPatientList(extractPatientList(string));
+        PatientDAO PD = new PatientDAO();
+        doctor.setPatientList(extractPatientList(string,PD));
         return doctor;
     }
     
     
 
-  private List<Integer> extractPatientList(String input) {
-    List<Integer> patientList = new ArrayList<>();
+private List<Patient> extractPatientList(String input, PatientDAO patientDAO) {
+    List<Patient> patientList = new ArrayList<>();
 
     // input'un null veya boş olup olmadığını kontrol edelim
     if (input == null || input.isEmpty()) {
@@ -121,11 +123,20 @@ public class DoctorConverter extends BaseConverter<Doctor> {
     String arrayString = parts[1];
     String[] numbers = arrayString.replaceAll("[\\[\\]]", "").split(", ");
     for (String number : numbers) {
-        patientList.add(Integer.parseInt(number));
+        try {
+            int id = Integer.parseInt(number);
+            Patient patient = patientDAO.getPatientById(id);
+            if (patient != null) {
+                patientList.add(patient);
+            }
+        } catch (NumberFormatException e) {
+            // Hatalı sayısal değer için işlem yapma
+        }
     }
 
     return patientList;
 }
+
 
     
    private List<Integer> parsePatientList(String value) {

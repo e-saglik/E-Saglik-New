@@ -1,6 +1,8 @@
 
 package Entity;
 
+import Entity.User;
+
 public class Admin extends User {
     private String authorizationLevel;
 
