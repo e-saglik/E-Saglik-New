@@ -13,7 +13,6 @@ public class DoctorController extends BaseController<Doctor> {
     private Doctor entity;
     private DoctorDAO dao;
     private List<Doctor> list;
-    
     private int page=1;
     private int pageSize=10;
     private int pageCount;
