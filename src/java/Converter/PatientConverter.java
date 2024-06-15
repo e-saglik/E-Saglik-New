@@ -1,7 +1,6 @@
 package Converter;
 
-import Entity.Admin;
-import Entity.Patient;
+import Entity.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -73,34 +72,44 @@ public class PatientConverter extends BaseConverter<Patient> {
                         patient.setAppointment(value);
                         break;
                     case "medicationList":
-                        patient.setMedicationList(convertToIntegerList(value));
+                        MedicationConverter mc = new MedicationConverter();
+                        patient.setMedicationList(convertToEntityList(value, mc));
                         break;
                     case "medicalReportList":
-                        patient.setMedicalReportList(convertToIntegerList(value));
+                        MedicalReportConverter mrc = new MedicalReportConverter();
+                        patient.setMedicalReportList(convertToEntityList(value, mrc));
                         break;
                     case "testResultList":
-                        patient.setTestResultList(convertToIntegerList(value));
+                        TestResultConverter trc = new TestResultConverter();
+                        patient.setTestResultList(convertToEntityList(value, trc));
                         break;
                     case "diseaseList":
-                        patient.setDiseaseList(convertToIntegerList(value));
+                        DiseaseConverter dc = new DiseaseConverter();
+                        patient.setDiseaseList(convertToEntityList(value, dc));
                         break;
                     case "allergyList":
-                        patient.setAllergyList(convertToIntegerList(value));
+                        AllergyConverter ac = new AllergyConverter();
+                        patient.setAllergyList(convertToEntityList(value, ac));
                         break;
                     case "insurance":
-                        patient.setInsurance(value);
+                        InsuranceConverter ıc = new InsuranceConverter();
+                        patient.setInsurance(ıc.ConvertToEntity(value));
                         break;
                     case "vaccinationSchedule":
-                        patient.setVaccinationSchedule(value);
+                        VaccinationScheduleConverter vsc = new VaccinationScheduleConverter();
+                        patient.setVaccinationSchedule(vsc.ConvertToEntity(value));
                         break;
                     case "treatmentList":
-                        patient.setTreatmentList(convertToStringList(value));
+                        TreatmentConverter tc = new TreatmentConverter();
+                        patient.setTreatmentList(convertToEntityList(value, tc));
                         break;
                     case "paymentList":
-                        patient.setPaymentList(convertToStringList(value));
+                        PaymentConverter pc = new PaymentConverter();
+                        patient.setPaymentList(convertToEntityList(value, pc));
                         break;
                     case "notificationList":
-                        patient.setNotificationList(convertToStringList(value));
+                        NotificationConverter nc = new NotificationConverter();
+                        patient.setNotificationList(convertToEntityList(value, nc));
                         break;
                     case "firstName":
                         patient.setFirstName(value);
@@ -138,22 +147,17 @@ public class PatientConverter extends BaseConverter<Patient> {
         return patient;
     }
 
-    private List<Integer> convertToIntegerList(String value) {
-        // Assuming the value format is something like "[1, 2, 3]"
+    private <T> List<T> convertToEntityList(String value, BaseConverter<T> converter) {
         value = value.replace("[", "").replace("]", "");
         String[] parts = value.split(", ");
-        List<Integer> list = new ArrayList<>();
+        List<T> list = new ArrayList<>();
         for (String part : parts) {
-            list.add(Integer.parseInt(part));
+            try {
+                list.add(converter.ConvertToEntity(part));
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
         return list;
     }
-
-    private List<String> convertToStringList(String value) {
-        // Assuming the value format is something like "[a, b, c]"
-        value = value.replace("[", "").replace("]", "");
-        String[] parts = value.split(", ");
-        return Arrays.asList(parts);
-    }
-
 }
