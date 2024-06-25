@@ -1,16 +1,18 @@
 package Converter;
+
 import Entity.Appointment;
 import Entity.PolyClinic;
+import Entity.Patient;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.ArrayList;
 
 public class AppointmentConverter extends BaseConverter<Appointment> {
 
@@ -28,6 +30,7 @@ public class AppointmentConverter extends BaseConverter<Appointment> {
             ", status='" + appointment.getStatus() + '\'' +
             ", polyClinicLocation='" + appointment.getPolyClinic().getLocation() + '\'' +
             ", polyClinicId='" + appointment.getPolyClinic().getId() + '\'' +
+            ", polyClinicName='" + appointment.getPolyClinic().getName() + '\'' +
             '}';
     }
 
@@ -39,6 +42,7 @@ public class AppointmentConverter extends BaseConverter<Appointment> {
         LocalTime appointmentTime = null;
         String status = null;
         PolyClinic polyClinic = null;
+        Patient patient = null;
 
         String pattern = "id=(\\d+)";
         Pattern regexPattern = Pattern.compile(pattern);
@@ -52,6 +56,7 @@ public class AppointmentConverter extends BaseConverter<Appointment> {
 
         String polyClinicLocation = null;
         int polyClinicId = 0;
+        String polyClinicName = null;
 
         String[] parts = string.split(", ");
         for (String part : parts) {
@@ -82,6 +87,9 @@ public class AppointmentConverter extends BaseConverter<Appointment> {
                     case "polyClinicId":
                         polyClinicId = Integer.parseInt(value);
                         break;
+                    case "polyClinicName":
+                        polyClinicName = value;
+                        break;
                     default:
                         // Handle unknown key or ignore
                         break;
@@ -90,9 +98,9 @@ public class AppointmentConverter extends BaseConverter<Appointment> {
         }
 
         if (polyClinicLocation != null && polyClinicId != 0) {
-            polyClinic = new PolyClinic(polyClinicLocation, new ArrayList<>(), polyClinicId, "");
+            polyClinic = new PolyClinic(polyClinicLocation, new ArrayList<>(), new ArrayList<>(), polyClinicId, polyClinicName);
         }
 
-        return new Appointment(appointmentDate, appointmentTime, status, polyClinic, id, name);
+        return new Appointment(appointmentDate, appointmentTime, status, polyClinic, patient, id, name);
     }
 }

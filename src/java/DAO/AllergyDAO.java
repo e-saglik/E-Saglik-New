@@ -1,6 +1,7 @@
 package DAO;
 
 import Entity.Allergy;
+import Entity.Patient; // Patient sınıfını import etmeyi unutmayın!
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +16,14 @@ public class AllergyDAO extends BaseDAO<Allergy> {
         
     }
 
-    
-    
-
     public void CreateAllergy(Allergy allergy) {
-        String query = "INSERT INTO allergy (type, severity, id, name) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO allergy (type, severity, id, name, patient_id) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, allergy.getType());
             ps.setInt(2, allergy.getSeverity());
             ps.setInt(3, allergy.getId());
             ps.setString(4, allergy.getName());
+            ps.setInt(5, allergy.getPatient().getId()); // Patient'ın ID'sini ekleyin
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,7 +37,11 @@ public class AllergyDAO extends BaseDAO<Allergy> {
              ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
-                Allergy allergy = new Allergy(rs.getString("type"), rs.getInt("severity"), rs.getInt("id"), rs.getString("name"));
+                // Patient nesnesini almak için ilgili DAO kullanmanız gerekecek
+                PatientDAO patientDAO = new PatientDAO();
+                Patient patient = patientDAO.getPatientById(rs.getInt("patient_id"));
+                
+                Allergy allergy = new Allergy(rs.getString("type"), rs.getInt("severity"), patient, rs.getInt("id"), rs.getString("name"));
                 allergyList.add(allergy);
             }
         } catch (SQLException e) {
@@ -48,12 +51,13 @@ public class AllergyDAO extends BaseDAO<Allergy> {
     }
 
     public void UpdateAllergy(Allergy allergy) {
-        String query = "UPDATE allergy SET type=?, severity=?, name=? WHERE id=?";
+        String query = "UPDATE allergy SET type=?, severity=?, name=?, patient_id=? WHERE id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setString(1, allergy.getType());
             ps.setInt(2, allergy.getSeverity());
             ps.setString(3, allergy.getName());
-            ps.setInt(4, allergy.getId());
+            ps.setInt(4, allergy.getPatient().getId());
+            ps.setInt(5, allergy.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,7 +81,9 @@ public class AllergyDAO extends BaseDAO<Allergy> {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    allergy = new Allergy(rs.getString("type"), rs.getInt("severity"), rs.getInt("id"), rs.getString("name"));
+                    PatientDAO patientDAO = new PatientDAO();
+                    Patient patient = patientDAO.getPatientById(rs.getInt("patient_id"));
+                    allergy = new Allergy(rs.getString("type"), rs.getInt("severity"), patient, rs.getInt("id"), rs.getString("name"));
                 }
             }
         } catch (SQLException e) {
