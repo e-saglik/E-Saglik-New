@@ -1,5 +1,7 @@
 package Converter;
+
 import Entity.Insurance;
+import Entity.Patient;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +27,7 @@ public class InsuranceConverter extends BaseConverter<Insurance> {
         String name = null;
         String provider = null;
         String coverageDetails = null;
+        Patient patient = null; // Added patient variable
 
         String pattern = "id=(\\d+)";
         Pattern regexPattern = Pattern.compile(pattern);
@@ -58,7 +61,7 @@ public class InsuranceConverter extends BaseConverter<Insurance> {
                 }
             }
         }
-        return new Insurance(provider, coverageDetails, id, name);
+        return new Insurance(provider, coverageDetails, patient, id, name); // Updated to include patient
     }
 
 }

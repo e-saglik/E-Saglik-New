@@ -8,8 +8,9 @@
 
     <ui:define name="content">
         <h:form>
-            <h:commandLink action="#{navigationController.page('adminMainPage')}" value="adminpage"></h:commandLink>
-            <h:commandLink action="#{navigationController.page('mainPage')}" value="mainpage"></h:commandLink>
+            <h:commandLink action="#{navigationController.page('adminMainPage')}" value="adminpage"></h:commandLink>/
+            <h:commandLink action="#{navigationController.page('mainPage')}" value="mainpage"></h:commandLink>/
+            <h:commandLink action="#{navigationController.page('login')}" value="loginPage"></h:commandLink>
         </h:form>
     </ui:define>
 </ui:composition>

@@ -1,5 +1,6 @@
 package Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PolyClinic extends BaseEntity {
@@ -16,9 +17,7 @@ public class PolyClinic extends BaseEntity {
         this.appointments = appointments;
         this.doctors = doctors;
     }
-
    
-
     public String getLocation() {
         return location;
     }
