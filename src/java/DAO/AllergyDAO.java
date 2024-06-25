@@ -1,6 +1,7 @@
 package DAO;
 
 import Entity.Allergy;
+import Entity.Patient;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,19 +71,28 @@ public class AllergyDAO extends BaseDAO<Allergy> {
         }
     }
 
-    public Allergy GetAllergyById(int id) {
-        Allergy allergy = null;
-        String query = "SELECT * FROM allergy WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    allergy = new Allergy(rs.getString("type"), rs.getInt("severity"), rs.getInt("id"), rs.getString("name"));
-                }
+   public Allergy GetAllergyById(int id) {
+    Allergy allergy = null;
+    String query = "SELECT * FROM allergy WHERE id=?";
+    try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
+        ps.setInt(1, id);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                // Burada patientId'yi alıyoruz
+                int patientId = rs.getInt("patient_id");
+
+                // Patient nesnesini almak için bir yöntem çağırdığınızı varsayıyoruz
+                Patient patient = getPatientById(patientId);
+
+                // Allergy nesnesini yeni constructor kullanarak oluşturuyoruz
+                allergy = new Allergy(rs.getString("type"), rs.getInt("severity"), patient, rs.getInt("id"), rs.getString("name"));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return allergy;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return allergy;
+}
+
+
 }
