@@ -14,6 +14,11 @@ public class Doctor extends User {
 
     }
 
+    public Doctor(int id, String name, String specialization) {
+        super(id, name);
+        this.specialization = specialization;
+    }
+
     public Doctor(String specialization, String hospital, String prescription, String appointment, List<Patient> patientList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
         super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
         this.specialization = specialization;

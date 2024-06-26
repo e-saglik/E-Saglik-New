@@ -29,16 +29,25 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
 
     public List<Insurance> getInsuranceList() {
         List<Insurance> insuranceList = new ArrayList<>();
-        String query = "SELECT * FROM insurance ORDER BY id ASC";
-        try (Statement st = this.GetConnection().createStatement();
-             ResultSet rs = st.executeQuery(query)) {
+        String query = "SELECT i.*, p.* FROM insurance i "
+                + "INNER JOIN patient p ON i.patient_id = p.id "
+                + "ORDER BY i.id ASC";
+        try (Statement st = this.GetConnection().createStatement(); ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
+                Patient patient = new Patient(
+                        rs.getDate("dateofbirth"),
+                        rs.getString("bloodtype"),
+                        rs.getString("appointment"),
+                    // diğer bilgileri çekmek için ilgili metodlar kullanılabilir
+);
+
                 Insurance insurance = new Insurance(
-                    rs.getString("provider"),
-                    rs.getString("coverage_details"),
-                    rs.getInt("id"),
-                    rs.getString("name")
+                        rs.getString("provider"),
+                        rs.getString("coverage_details"),
+                        patient,
+                        rs.getInt("id"),
+                        rs.getString("name")
                 );
                 insuranceList.add(insurance);
             }
@@ -78,11 +87,11 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    insurance = new Insurance(
-                        rs.getString("provider"),
-                        rs.getString("coverage_details"),
-                        rs.getInt("id"),
-                        rs.getString("name")
+                    Insurance insurance = new Insurance(
+                            rs.getString("provider"),
+                            rs.getString("coverage_details"),
+                            rs.getInt("id"),
+                            rs.getString("name")
                     );
                 }
             }
