@@ -11,6 +11,10 @@ public class PolyClinic extends BaseEntity {
     public PolyClinic() {
     }
 
+    public PolyClinic(int id, String name) {
+        super(id, name);
+    }
+
     public PolyClinic(String location, List<Appointment> appointments, List<Doctor> doctors, int id, String name) {
         super(id, name);
         this.location = location;

@@ -14,6 +14,10 @@ public class User extends BaseEntity{
         
     }
 
+    public User(int id, String name) {
+        super(id, name);
+    }
+
     public User(String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
         super(id, name);
         this.firstName = firstName;

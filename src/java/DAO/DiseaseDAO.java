@@ -4,19 +4,19 @@ import Entity.Disease;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import Entity.Patient;
 
 public class DiseaseDAO extends BaseDAO<Disease> {
+
+    private PatientDAO patientDAO;
 
     public DiseaseDAO(Connection connection) {
         super(connection);
     }
 
     public DiseaseDAO() {
-        
-    }
 
-    
-    
+    }
 
     public void CreateDisease(Disease disease) {
         String query = "INSERT INTO disease (description, id, name) VALUES (?, ?, ?)";
@@ -33,14 +33,17 @@ public class DiseaseDAO extends BaseDAO<Disease> {
     public List<Disease> GetDiseaseList() {
         List<Disease> diseaseList = new ArrayList<>();
         String query = "SELECT * FROM disease ORDER BY id ASC";
-        try (Statement st = this.GetConnection().createStatement();
-             ResultSet rs = st.executeQuery(query)) {
+        try (Statement st = this.GetConnection().createStatement(); ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
+                int patientId = rs.getInt("patient_id");
+                Patient patient = patientDAO.getPatientById(patientId); // Mevcut getPatientById metodunuz kullanılıyor
+
                 Disease disease = new Disease(
-                    rs.getString("description"),
-                    rs.getInt("id"),
-                    rs.getString("name")
+                        rs.getString("description"),
+                        patient,
+                        rs.getInt("id"),
+                        rs.getString("name")
                 );
                 diseaseList.add(disease);
             }
@@ -79,10 +82,14 @@ public class DiseaseDAO extends BaseDAO<Disease> {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
+                    int patientId = rs.getInt("patient_id");
+                    Patient patient = patientDAO.getPatientById(patientId); // Mevcut getPatientById metodunuz kullanılıyor
+
                     disease = new Disease(
-                        rs.getString("description"),
-                        rs.getInt("id"),
-                        rs.getString("name")
+                            rs.getString("description"),
+                            patient,
+                            rs.getInt("id"),
+                            rs.getString("name")
                     );
                 }
             }
@@ -91,4 +98,5 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         }
         return disease;
     }
+
 }

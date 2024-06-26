@@ -1,11 +1,14 @@
 package DAO;
 
 import Entity.Insurance;
+import Entity.Patient;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InsuranceDAO extends BaseDAO<Insurance> {
+
+    private PatientDAO patientDAO;
 
     public InsuranceDAO(Connection connection) {
         super(connection);
@@ -27,25 +30,28 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
         }
     }
 
-    public List<Insurance> getInsuranceList() {
-        List<Insurance> insuranceList = new ArrayList<>();
-        String query = "SELECT * FROM insurance ORDER BY id ASC";
-        try (Statement st = this.GetConnection().createStatement();
-             ResultSet rs = st.executeQuery(query)) {
+    public List<Insurance> GetInsuranceList() {
+        List<Insurance> InsuranceList = new ArrayList<>();
+        String query = "SELECT * FROM disease ORDER BY id ASC";
+        try (Statement st = this.GetConnection().createStatement(); ResultSet rs = st.executeQuery(query)) {
 
             while (rs.next()) {
+                int patientId = rs.getInt("patient_id");
+                Patient patient = patientDAO.getPatientById(patientId); // Mevcut getPatientById metodunuz kullanılıyor
+
                 Insurance insurance = new Insurance(
-                    rs.getString("provider"),
-                    rs.getString("coverage_details"),
-                    rs.getInt("id"),
-                    rs.getString("name")
+                        rs.getString("provider"),
+                        rs.getString("coverage_details"),
+                        patient,
+                        rs.getInt("id"),
+                        rs.getString("name")
                 );
-                insuranceList.add(insurance);
+                InsuranceList.add(insurance);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return insuranceList;
+        return InsuranceList;
     }
 
     public void updateInsurance(Insurance insurance) {
@@ -73,16 +79,22 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
 
     public Insurance getInsuranceById(int id) {
         Insurance insurance = null;
-        String query = "SELECT * FROM insurance WHERE id=?";
+        String query = "SELECT i.*, p.id AS patient_id FROM insurance i "
+                + "INNER JOIN patient p ON i.patient_id = p.id "
+                + "WHERE i.id=?";
         try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
+                    int patientId = rs.getInt("patient_id");
+                    Patient patient = patientDAO.getPatientById(patientId); // Mevcut getPatientById metodunuz kullanılıyor
+
                     insurance = new Insurance(
-                        rs.getString("provider"),
-                        rs.getString("coverage_details"),
-                        rs.getInt("id"),
-                        rs.getString("name")
+                            rs.getString("provider"),
+                            rs.getString("coverage_details"),
+                            patient,
+                            rs.getInt("id"),
+                            rs.getString("name")
                     );
                 }
             }
@@ -91,4 +103,5 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
         }
         return insurance;
     }
+
 }

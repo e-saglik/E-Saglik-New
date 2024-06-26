@@ -1,12 +1,13 @@
 package Entity;
 
 public class Allergy extends BaseEntity {
+
     private String type;
     private int severity;
     private Patient patient;
 
     public Allergy() {
-        
+
     }
 
     public Allergy(String type, int severity, Patient patient, int id, String name) {
@@ -40,13 +41,9 @@ public class Allergy extends BaseEntity {
         this.patient = patient;
     }
 
-    
-    
     @Override
     public String toString() {
         return "Allergy{" + "type=" + type + ", severity=" + severity + '}';
     }
-    
-    
-    
+
 }
