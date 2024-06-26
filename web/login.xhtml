@@ -8,13 +8,11 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-		<h:form>
-			
-			Username: <h:inputText value="#{AdminController.email}" /><br />
-			Password: <h:inputText value="#{AdminController.password}" /><br />
-			
-			
-		</h:form>
-		<hr />
+        <h:form>
+            Username: <h:inputText value="#{userController.user.email}" /><br />
+            Password: <h:inputText value="#{userController.user.password}" /><br />
+            <h:commandButton action="#{userController.login()}" value="Login" />			
+        </h:form>
+        <hr />
     </h:body>
 </html>

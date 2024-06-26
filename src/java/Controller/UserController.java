@@ -2,6 +2,8 @@ package Controller;
 
 import DAO.UserDAO;
 import Entity.User;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.util.List;
@@ -14,6 +16,17 @@ public class UserController extends BaseController<User> {
     private User user;
     private List<User> userList;
 
+    public String login(){
+        if(this.user.getEmail().equals("kullanıcı") && this.user.getPassword().equals("123")){
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("valid_user", this.user);
+            return "/index?faces-redirct=true";
+        }
+        else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hatalı kullanıcı adı veya şifre"));
+            return "/login";
+        }
+    }
+    
     public UserDAO getUserDao() {
         return userDao;
     }
@@ -23,6 +36,9 @@ public class UserController extends BaseController<User> {
     }
 
     public User getUser() {
+        if(this.user == null){
+            this.user= new User();
+        }
         return user;
     }
 
