@@ -44,7 +44,7 @@ public class TestResultController extends BaseController<TestResult> {
         if (testResultDao == null) {
             testResultDao = new TestResultDAO();
         }
-        testResultDao.GetTestResultById(id);
+        testResultDao.getTestResultById(id);
         return null;
     }
 
@@ -53,9 +53,9 @@ public class TestResultController extends BaseController<TestResult> {
         if (testResultDao == null) {
             testResultDao = new TestResultDAO();
         }
-        testResultDao.GetTestResultList();
+        testResultDao.getTestResultList();
 
-        return testResultDao.GetTestResultList();
+        return testResultDao.getTestResultList();
     }
 
     @Override

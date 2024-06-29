@@ -52,7 +52,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        adminDao.createAdmin(admin);
+        adminDao.CreateAdmin(admin);
 
     }
 
@@ -79,7 +79,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        adminDao.updateAdmin(doctor);
+        adminDao.UpdateAdmin(doctor);
     }
 
     @Override
@@ -87,7 +87,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        adminDao.deleteAdmin(id);
+        adminDao.DeleteAdmin(id);
     }
 
 }

@@ -54,7 +54,7 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public int getPageCount() {
-        this.pageCount = (int) Math.ceil(getDao().count()/(double)pageSize);
+        this.pageCount = (int) Math.ceil(getDao().countDoctors()/(double)pageSize);
         return pageCount;
     }
 
@@ -92,7 +92,7 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public List<Doctor> getList() {
-        this.list = this.getDao().GetDoctorList(page,pageSize);
+        this.list = this.getDao().getDoctorList(page,pageSize);
         return list;
     }
 
@@ -118,7 +118,7 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.GetDoctorById(id);
+        dao.getDoctorById(id);
         return null;
     }
 
@@ -127,9 +127,9 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.GetDoctorList(page,pageSize);
+        dao.getDoctorList(page,pageSize);
 
-        return dao.GetDoctorList(page,pageSize);
+        return dao.getDoctorList(page,pageSize);
     }
 
     @Override

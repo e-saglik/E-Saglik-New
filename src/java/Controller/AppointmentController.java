@@ -34,7 +34,7 @@ public class AppointmentController extends BaseController<Appointment> {
     }
 
     public List<Appointment> getAppointmentList() {
-        this.appointmentList = this.getAppointmentDao().GetAppointmentList();
+        this.appointmentList = this.getAppointmentDao().getAppointmentList();
         return appointmentList;
     }
 
@@ -56,7 +56,7 @@ public class AppointmentController extends BaseController<Appointment> {
         if (appointmentDao == null) {
             appointmentDao = new AppointmentDAO();
         }
-        appointmentDao.GetAppointmentById(id);
+        appointmentDao.getAppointmentById(id);
         return null;
     }
 
@@ -65,7 +65,7 @@ public class AppointmentController extends BaseController<Appointment> {
         if (appointmentDao == null) {
             appointmentDao = new AppointmentDAO();
         }
-        appointmentDao.GetAppointmentList();
+        appointmentDao.getAppointmentList();
         return null;
     }
 

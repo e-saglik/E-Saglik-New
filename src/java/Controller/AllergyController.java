@@ -34,7 +34,7 @@ public class AllergyController extends BaseController<Allergy> {
     }
 
     public List<Allergy> getAllergyList() {
-        this.allergyList = this.getAllergyDao().GetAllergyList();
+        this.allergyList = this.getAllergyDao().getAllergyList();
         return allergyList;
     }
 
@@ -56,7 +56,7 @@ public class AllergyController extends BaseController<Allergy> {
         if (allergyDao == null) {
             allergyDao = new AllergyDAO();
         }
-        allergyDao.GetAllergyById(id);
+        allergyDao.getAllergyById(id);
         return null;
     }
 
@@ -65,7 +65,7 @@ public class AllergyController extends BaseController<Allergy> {
         if (allergyDao == null) {
             allergyDao = new AllergyDAO();
         }
-        allergyList = allergyDao.GetAllergyList();
+        allergyList = allergyDao.getAllergyList();
         return allergyList;
     }
 
