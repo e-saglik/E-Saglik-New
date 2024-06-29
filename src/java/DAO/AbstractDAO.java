@@ -7,11 +7,12 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import java.io.Serializable;
 import java.util.List;
 
 @Local
 @Stateless
-public abstract class AbstractDAO<T> {
+public abstract class AbstractDAO<T> implements Serializable {
 
     
     @PersistenceContext(unitName = "E-SaglikDB")
