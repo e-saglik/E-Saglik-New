@@ -63,7 +63,7 @@ public class UserController extends BaseController<User> {
         if (userDao == null) {
             userDao = new UserDAO();
         }
-        userDao.GetUserById(id);
+        userDao.getUserById(id);
         return null;
     }
 
@@ -72,9 +72,9 @@ public class UserController extends BaseController<User> {
         if (userDao == null) {
             userDao = new UserDAO();
         }
-        userDao.GetUserList();
+        userDao.getUserList();
 
-        return userDao.GetUserList();
+        return userDao.getUserList();
     }
 
     @Override

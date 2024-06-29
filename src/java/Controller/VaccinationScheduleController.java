@@ -44,7 +44,7 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
         if (scheduleDao == null) {
             scheduleDao = new VaccinationScheduleDAO();
         }
-        scheduleDao.GetVaccinationScheduleById(id);
+        scheduleDao.getVaccinationScheduleById(id);
         return null;
     }
 
@@ -53,9 +53,9 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
         if (scheduleDao == null) {
             scheduleDao = new VaccinationScheduleDAO();
         }
-        scheduleDao.GetVaccinationScheduleList();
+        scheduleDao.getVaccinationScheduleList();
 
-        return scheduleDao.GetVaccinationScheduleList();
+        return scheduleDao.getVaccinationScheduleList();
     }
 
     @Override

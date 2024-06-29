@@ -45,7 +45,7 @@ public class PharmacyController extends BaseController<Pharmacy> {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }
-        pharmacyDao.GetPharmacyById(id);
+        pharmacyDao.getPharmacyById(id);
         return null;
     }
 
@@ -54,9 +54,9 @@ public class PharmacyController extends BaseController<Pharmacy> {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }
-        pharmacyDao.GetPharmacyList();
+        pharmacyDao.getPharmacyList();
 
-        return pharmacyDao.GetPharmacyList();
+        return pharmacyDao.getPharmacyList();
     }
 
     @Override
