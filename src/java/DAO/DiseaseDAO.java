@@ -15,7 +15,7 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         this.patientDAO = new PatientDAO(); // PatientDAO'nun JPA versiyonunu kullanıyoruz
     }
 
-    public void createDisease(Disease disease) {
+    public void CreateDisease(Disease disease) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(disease);
@@ -33,7 +33,7 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         return query.getResultList();
     }
 
-    public void updateDisease(Disease disease) {
+    public void UpdateDisease(Disease disease) {
         try {
             entityManager.getTransaction().begin();
             entityManager.merge(disease);
@@ -46,7 +46,7 @@ public class DiseaseDAO extends BaseDAO<Disease> {
         }
     }
 
-    public void deleteDisease(int id) {
+    public void DeleteDisease(int id) {
         try {
             entityManager.getTransaction().begin();
             Disease disease = entityManager.find(Disease.class, id);

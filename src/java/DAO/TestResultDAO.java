@@ -13,7 +13,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
         super();
     }
 
-    public void createTestResult(TestResult testResult) {
+    public void CreateTestResult(TestResult testResult) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -35,7 +35,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
         return testResultList;
     }
 
-    public void updateTestResult(TestResult testResult) {
+    public void UpdateTestResult(TestResult testResult) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -50,7 +50,7 @@ public class TestResultDAO extends BaseDAO<TestResult> {
         }
     }
 
-    public void deleteTestResult(int id) {
+    public void DeleteTestResult(int id) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         TestResult testResult = entityManager.find(TestResult.class, id);

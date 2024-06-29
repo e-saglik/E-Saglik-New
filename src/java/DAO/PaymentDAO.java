@@ -13,7 +13,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
         super();
     }
 
-    public void createPayment(Payment payment) {
+    public void CreatePayment(Payment payment) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -34,7 +34,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
         return query.getResultList();
     }
 
-    public void updatePayment(Payment payment) {
+    public void UpdatePayment(Payment payment) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -49,7 +49,7 @@ public class PaymentDAO extends BaseDAO<Payment> {
         }
     }
 
-    public void deletePayment(int id) {
+    public void DeletePayment(int id) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         Payment payment = entityManager.find(Payment.class, id);

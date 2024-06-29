@@ -11,7 +11,7 @@ public class DonationDAO extends BaseDAO<Donation> {
         super();
     }
 
-    public void createDonation(Donation donation) {
+    public void CreateDonation(Donation donation) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(donation);
@@ -29,7 +29,7 @@ public class DonationDAO extends BaseDAO<Donation> {
         return query.getResultList();
     }
 
-    public void updateDonation(Donation donation) {
+    public void UpdateDonation(Donation donation) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().merge(donation);
@@ -42,7 +42,7 @@ public class DonationDAO extends BaseDAO<Donation> {
         }
     }
 
-    public void deleteDonation(int id) {
+    public void DeleteDonation(int id) {
         Donation donation = getEntityManager().find(Donation.class, id);
         if (donation != null) {
             try {

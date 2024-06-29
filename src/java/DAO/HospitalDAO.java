@@ -14,7 +14,7 @@ public class HospitalDAO extends BaseDAO<Hospital> {
         super();
     }
 
-    public void createHospital(Hospital hospital) {
+    public void CreateHospital(Hospital hospital) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(hospital);
@@ -49,7 +49,7 @@ public class HospitalDAO extends BaseDAO<Hospital> {
         return query.getResultList();
     }
 
-    public void updateHospital(Hospital hospital) {
+    public void UpdateHospital(Hospital hospital) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().merge(hospital);
@@ -62,7 +62,7 @@ public class HospitalDAO extends BaseDAO<Hospital> {
         }
     }
 
-    public void deleteHospital(int id) {
+    public void DeleteHospital(int id) {
         Hospital hospital = getEntityManager().find(Hospital.class, id);
         if (hospital != null) {
             try {

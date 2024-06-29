@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AppointmentDAO extends BaseDAO<Appointment> {
 
-    public void createAppointment(Appointment appointment) {
+    public void CreateAppointment(Appointment appointment) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(appointment);
@@ -28,7 +28,7 @@ public class AppointmentDAO extends BaseDAO<Appointment> {
         return query.getResultList();
     }
 
-    public void updateAppointment(Appointment appointment) {
+    public void UpdateAppointment(Appointment appointment) {
         try {
             entityManager.getTransaction().begin();
             entityManager.merge(appointment);
@@ -41,7 +41,7 @@ public class AppointmentDAO extends BaseDAO<Appointment> {
         }
     }
 
-    public void deleteAppointment(int id) {
+    public void DeleteAppointment(int id) {
         try {
             entityManager.getTransaction().begin();
             Appointment appointment = entityManager.find(Appointment.class, id);

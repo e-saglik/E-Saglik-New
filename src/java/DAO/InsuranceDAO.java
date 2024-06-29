@@ -14,7 +14,7 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
         super();
     }
 
-    public void createInsurance(Insurance insurance) {
+    public void CreateInsurance(Insurance insurance) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(insurance);
@@ -33,7 +33,7 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
         return insuranceList;
     }
 
-    public void updateInsurance(Insurance insurance) {
+    public void UpdateInsurance(Insurance insurance) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().merge(insurance);
@@ -46,7 +46,7 @@ public class InsuranceDAO extends BaseDAO<Insurance> {
         }
     }
 
-    public void deleteInsurance(int id) {
+    public void DeleteInsurance(int id) {
         Insurance insurance = getEntityManager().find(Insurance.class, id);
         if (insurance != null) {
             try {

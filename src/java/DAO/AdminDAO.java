@@ -11,7 +11,7 @@ public class AdminDAO extends BaseDAO<Admin> {
         super();
     }
 
-    public void createAdmin(Admin admin) {
+    public void CreateAdmin(Admin admin) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(admin);
@@ -29,7 +29,7 @@ public class AdminDAO extends BaseDAO<Admin> {
         return query.getResultList();
     }
 
-    public void updateAdmin(Admin admin) {
+    public void UpdateAdmin(Admin admin) {
         try {
             entityManager.getTransaction().begin();
             entityManager.merge(admin);
@@ -42,7 +42,7 @@ public class AdminDAO extends BaseDAO<Admin> {
         }
     }
 
-    public void deleteAdmin(int id) {
+    public void DeleteAdmin(int id) {
         try {
             entityManager.getTransaction().begin();
             Admin admin = entityManager.find(Admin.class, id);

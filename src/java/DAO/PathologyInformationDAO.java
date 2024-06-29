@@ -12,7 +12,7 @@ public class PathologyInformationDAO extends BaseDAO<PathologyInformation> {
         super();
     }
 
-    public void createPathologyInformation(PathologyInformation pathologyInformation) {
+    public void CreatePathologyInformation(PathologyInformation pathologyInformation) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(pathologyInformation);
@@ -31,7 +31,7 @@ public class PathologyInformationDAO extends BaseDAO<PathologyInformation> {
         return pathologyInformationList;
     }
 
-    public void updatePathologyInformation(PathologyInformation pathologyInformation) {
+    public void UpdatePathologyInformation(PathologyInformation pathologyInformation) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().merge(pathologyInformation);
@@ -44,7 +44,7 @@ public class PathologyInformationDAO extends BaseDAO<PathologyInformation> {
         }
     }
 
-    public void deletePathologyInformation(int id) {
+    public void DeletePathologyInformation(int id) {
         PathologyInformation pathologyInformation = getEntityManager().find(PathologyInformation.class, id);
         if (pathologyInformation != null) {
             try {

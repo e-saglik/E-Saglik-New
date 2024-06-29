@@ -12,7 +12,7 @@ public class MedicationDAO extends BaseDAO<Medication> {
         super();
     }
 
-    public void createMedication(Medication medication) {
+    public void CreateMedication(Medication medication) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(medication);
@@ -31,7 +31,7 @@ public class MedicationDAO extends BaseDAO<Medication> {
         return medicationList;
     }
 
-    public void updateMedication(Medication medication) {
+    public void UpdateMedication(Medication medication) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().merge(medication);
@@ -44,7 +44,7 @@ public class MedicationDAO extends BaseDAO<Medication> {
         }
     }
 
-    public void deleteMedication(int id) {
+    public void DeleteMedication(int id) {
         Medication medication = getEntityManager().find(Medication.class, id);
         if (medication != null) {
             try {

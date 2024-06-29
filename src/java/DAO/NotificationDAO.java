@@ -12,7 +12,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
         super();
     }
 
-    public void createNotification(Notification notification) {
+    public void CreateNotification(Notification notification) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(notification);
@@ -31,7 +31,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
         return notificationList;
     }
 
-    public void updateNotification(Notification notification) {
+    public void UpdateNotification(Notification notification) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().merge(notification);
@@ -44,7 +44,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
         }
     }
 
-    public void deleteNotification(int id) {
+    public void DeleteNotification(int id) {
         Notification notification = getEntityManager().find(Notification.class, id);
         if (notification != null) {
             try {

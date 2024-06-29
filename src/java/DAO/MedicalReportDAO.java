@@ -13,7 +13,7 @@ public class MedicalReportDAO extends BaseDAO<MedicalReport> {
         super();
     }
 
-    public void createMedicalReport(MedicalReport medicalReport) {
+    public void CreateMedicalReport(MedicalReport medicalReport) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(medicalReport);
@@ -32,7 +32,7 @@ public class MedicalReportDAO extends BaseDAO<MedicalReport> {
         return medicalReportList;
     }
 
-    public void updateMedicalReport(MedicalReport medicalReport) {
+    public void UpdateMedicalReport(MedicalReport medicalReport) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().merge(medicalReport);
@@ -45,7 +45,7 @@ public class MedicalReportDAO extends BaseDAO<MedicalReport> {
         }
     }
 
-    public void deleteMedicalReport(int id) {
+    public void DeleteMedicalReport(int id) {
         MedicalReport medicalReport = getEntityManager().find(MedicalReport.class, id);
         if (medicalReport != null) {
             try {

@@ -13,7 +13,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
         super();
     }
 
-    public void createTreatment(Treatment treatment) {
+    public void CreateTreatment(Treatment treatment) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -35,7 +35,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
         return treatmentList;
     }
 
-    public void updateTreatment(Treatment treatment) {
+    public void UpdateTreatment(Treatment treatment) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -50,7 +50,7 @@ public class TreatmentDAO extends BaseDAO<Treatment> {
         }
     }
 
-    public void deleteTreatment(int id) {
+    public void DeleteTreatment(int id) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         Treatment treatment = entityManager.find(Treatment.class, id);

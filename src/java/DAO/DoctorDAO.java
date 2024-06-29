@@ -12,7 +12,7 @@ public class DoctorDAO extends BaseDAO<Doctor> {
         super();
     }
 
-    public void createDoctor(Doctor doctor) {
+    public void CreateDoctor(Doctor doctor) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(doctor);
@@ -37,7 +37,7 @@ public class DoctorDAO extends BaseDAO<Doctor> {
         return query.getSingleResult();
     }
 
-    public void updateDoctor(Doctor doctor) {
+    public void UpdateDoctor(Doctor doctor) {
         try {
             getEntityManager().getTransaction().begin();
             getEntityManager().merge(doctor);
@@ -50,7 +50,7 @@ public class DoctorDAO extends BaseDAO<Doctor> {
         }
     }
 
-    public void deleteDoctor(int id) {
+    public void DeleteDoctor(int id) {
         Doctor doctor = getEntityManager().find(Doctor.class, id);
         if (doctor != null) {
             try {

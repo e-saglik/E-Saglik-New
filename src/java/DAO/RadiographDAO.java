@@ -13,7 +13,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
         super();
     }
 
-    public void createRadiograph(Radiograph radiograph) {
+    public void CreateRadiograph(Radiograph radiograph) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -35,7 +35,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
         return radiographList;
     }
 
-    public void updateRadiograph(Radiograph radiograph) {
+    public void UpdateRadiograph(Radiograph radiograph) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -50,7 +50,7 @@ public class RadiographDAO extends BaseDAO<Radiograph> {
         }
     }
 
-    public void deleteRadiograph(int id) {
+    public void DeleteRadiograph(int id) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         Radiograph radiograph = entityManager.find(Radiograph.class, id);

@@ -16,7 +16,7 @@ public class PolyClinicDAO extends BaseDAO<PolyClinic> {
         return entityManager.find(PolyClinic.class, id);
     }
 
-    public void createPolyClinic(PolyClinic polyClinic) {
+    public void CreatePolyClinic(PolyClinic polyClinic) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -31,7 +31,7 @@ public class PolyClinicDAO extends BaseDAO<PolyClinic> {
         }
     }
 
-    public void updatePolyClinic(PolyClinic polyClinic) {
+    public void UpdatePolyClinic(PolyClinic polyClinic) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -46,7 +46,7 @@ public class PolyClinicDAO extends BaseDAO<PolyClinic> {
         }
     }
 
-    public void deletePolyClinic(int id) {
+    public void DeletePolyClinic(int id) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         PolyClinic polyClinic = entityManager.find(PolyClinic.class, id);

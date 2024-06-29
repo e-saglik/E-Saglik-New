@@ -13,7 +13,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
         super();
     }
 
-    public void createPharmacy(Pharmacy pharmacy) {
+    public void CreatePharmacy(Pharmacy pharmacy) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -34,7 +34,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
         return query.getResultList();
     }
 
-    public void updatePharmacy(Pharmacy pharmacy) {
+    public void UpdatePharmacy(Pharmacy pharmacy) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -49,7 +49,7 @@ public class PharmacyDAO extends BaseDAO<Pharmacy> {
         }
     }
 
-    public void deletePharmacy(int id) {
+    public void DeletePharmacy(int id) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         Pharmacy pharmacy = entityManager.find(Pharmacy.class, id);

@@ -15,7 +15,7 @@ public class AllergyDAO extends BaseDAO<Allergy> {
         this.patientDAO = new PatientDAO(); // PatientDAO'nun JPA versiyonunu kullanıyoruz
     }
 
-    public void createAllergy(Allergy allergy) {
+    public void CreateAllergy(Allergy allergy) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(allergy);
@@ -33,7 +33,7 @@ public class AllergyDAO extends BaseDAO<Allergy> {
         return query.getResultList();
     }
 
-    public void updateAllergy(Allergy allergy) {
+    public void UpdateAllergy(Allergy allergy) {
         try {
             entityManager.getTransaction().begin();
             entityManager.merge(allergy);
@@ -46,7 +46,7 @@ public class AllergyDAO extends BaseDAO<Allergy> {
         }
     }
 
-    public void deleteAllergy(int id) {
+    public void DeleteAllergy(int id) {
         try {
             entityManager.getTransaction().begin();
             Allergy allergy = entityManager.find(Allergy.class, id);

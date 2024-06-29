@@ -13,7 +13,7 @@ public class PatientDAO extends BaseDAO<Patient> {
         super();
     }
 
-    public void createPatient(Patient patient) {
+    public void CreatePatient(Patient patient) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -34,7 +34,7 @@ public class PatientDAO extends BaseDAO<Patient> {
         return query.getResultList();
     }
 
-    public void updatePatient(Patient patient) {
+    public void UpdatePatient(Patient patient) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -49,7 +49,7 @@ public class PatientDAO extends BaseDAO<Patient> {
         }
     }
 
-    public void deletePatient(int id) {
+    public void DeletePatient(int id) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         Patient patient = entityManager.find(Patient.class, id);

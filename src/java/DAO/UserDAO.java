@@ -13,7 +13,7 @@ public class UserDAO extends BaseDAO<User> {
         super();
     }
 
-    public void createUser(User user) {
+    public void CreateUser(User user) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -35,7 +35,7 @@ public class UserDAO extends BaseDAO<User> {
         return userList;
     }
 
-    public void updateUser(User user) {
+    public void UpdateUser(User user) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -50,7 +50,7 @@ public class UserDAO extends BaseDAO<User> {
         }
     }
 
-    public void deleteUser(int id) {
+    public void DeleteUser(int id) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         User user = entityManager.find(User.class, id);

@@ -14,7 +14,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
         super();
     }
 
-    public void createPrescription(Prescription prescription) {
+    public void CreatePrescription(Prescription prescription) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -36,7 +36,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
         return prescriptionList;
     }
 
-    public void updatePrescription(Prescription prescription) {
+    public void UpdatePrescription(Prescription prescription) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -51,7 +51,7 @@ public class PrescriptionDAO extends BaseDAO<Prescription> {
         }
     }
 
-    public void deletePrescription(int id) {
+    public void DeletePrescription(int id) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         Prescription prescription = entityManager.find(Prescription.class, id);

@@ -13,7 +13,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
         super();
     }
 
-    public void createVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
+    public void CreateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -35,7 +35,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
         return vaccinationScheduleList;
     }
 
-    public void updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
+    public void UpdateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -50,7 +50,7 @@ public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
         }
     }
 
-    public void deleteVaccinationSchedule(int id) {
+    public void DeleteVaccinationSchedule(int id) {
         EntityManager entityManager = getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         VaccinationSchedule vaccinationSchedule = entityManager.find(VaccinationSchedule.class, id);
