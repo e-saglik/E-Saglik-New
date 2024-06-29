@@ -2,9 +2,11 @@ package Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "doctor")
@@ -25,6 +27,9 @@ public class Doctor extends User {
     @OneToMany(mappedBy = "doctor")
     private List<Patient> patientList;
 
+    @ManyToMany
+    private Set<Role> roles;
+
     public Doctor() {
     }
 
@@ -33,13 +38,14 @@ public class Doctor extends User {
         this.specialization = specialization;
     }
 
-    public Doctor(String specialization, String hospital, String prescription, String appointment, List<Patient> patientList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
+    public Doctor(String specialization, String hospital, String prescription, String appointment, List<Patient> patientList, Set<Role> roles, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
         super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
         this.specialization = specialization;
         this.hospital = hospital;
         this.prescription = prescription;
         this.appointment = appointment;
         this.patientList = patientList;
+        this.roles = roles;
     }
 
     public Doctor(String specialization, String hospital, String prescription, String appointment, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
@@ -51,11 +57,11 @@ public class Doctor extends User {
     }
 
     public void prescribeMedication() {
-        // Implementasyon
+        // Implementation
     }
 
     public void requestTest() {
-        // Implementasyon
+        // Implementation
     }
 
     public String getSpecialization() {
@@ -98,6 +104,14 @@ public class Doctor extends User {
         this.patientList = patientList;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +
@@ -106,6 +120,7 @@ public class Doctor extends User {
                 ", prescription='" + prescription + '\'' +
                 ", appointment='" + appointment + '\'' +
                 ", patientList=" + patientList +
+                ", roles=" + roles +
                 '}';
     }
 }

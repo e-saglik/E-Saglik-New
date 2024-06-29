@@ -11,10 +11,12 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Patient")
 public class Patient extends User {
+
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
@@ -60,6 +62,14 @@ public class Patient extends User {
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Notification> notificationList;
+
+    @ManyToMany
+    @JoinTable(
+            name = "patient_role",
+            joinColumns = @JoinColumn(name = "patient_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
 
     public Patient() {
     }
@@ -193,6 +203,14 @@ public class Patient extends User {
         this.notificationList = notificationList;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
@@ -209,6 +227,7 @@ public class Patient extends User {
                 ", treatmentList=" + treatmentList +
                 ", paymentList=" + paymentList +
                 ", notificationList=" + notificationList +
+                ", roles=" + roles +
                 '}';
     }
 }
