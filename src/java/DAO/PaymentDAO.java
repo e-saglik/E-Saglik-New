@@ -1,94 +1,74 @@
 package DAO;
 
 import Entity.Payment;
-import java.sql.*;
-import java.util.ArrayList;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public class PaymentDAO extends BaseDAO<Payment> {
 
-    public PaymentDAO(Connection connection) {
-        super(connection);
-    }
-
     public PaymentDAO() {
+        super();
     }
 
-    public void CreatePayment(Payment payment) {
-        String query = "INSERT INTO payment (payment_amount, payment_date, id, name) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setDouble(1, payment.getPaymentAmount());
-            ps.setDate(2, new java.sql.Date(payment.getPaymentDate().getTime()));
-            ps.setInt(3, payment.getId());
-            ps.setString(4, payment.getName());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<Payment> GetPaymentList() {
-        List<Payment> paymentList = new ArrayList<>();
-        String query = "SELECT * FROM payment ORDER BY id ASC";
-        try (Statement st = this.GetConnection().createStatement();
-             ResultSet rs = st.executeQuery(query)) {
-
-            while (rs.next()) {
-                Payment payment = new Payment(
-                    rs.getDouble("payment_amount"),
-                    rs.getDate("payment_date"),
-                    rs.getInt("id"),
-                    rs.getString("name")
-                );
-                paymentList.add(payment);
+    public void createPayment(Payment payment) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.persist(payment);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return paymentList;
-    }
-
-    public void UpdatePayment(Payment payment) {
-        String query = "UPDATE payment SET payment_amount=?, payment_date=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setDouble(1, payment.getPaymentAmount());
-            ps.setDate(2, new java.sql.Date(payment.getPaymentDate().getTime()));
-            ps.setString(3, payment.getName());
-            ps.setInt(4, payment.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void DeletePayment(int id) {
-        String query = "DELETE FROM payment WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
+    public List<Payment> getPaymentList() {
+        EntityManager entityManager = getEntityManager();
+        TypedQuery<Payment> query = entityManager.createQuery("SELECT p FROM Payment p ORDER BY p.id ASC", Payment.class);
+        return query.getResultList();
+    }
+
+    public void updatePayment(Payment payment) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.merge(payment);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
 
-    public Payment GetPaymentById(int id) {
-        Payment payment = null;
-        String query = "SELECT * FROM payment WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    payment = new Payment(
-                        rs.getDouble("payment_amount"),
-                        rs.getDate("payment_date"),
-                        rs.getInt("id"),
-                        rs.getString("name")
-                    );
+    public void deletePayment(int id) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        Payment payment = entityManager.find(Payment.class, id);
+        if (payment != null) {
+            try {
+                transaction.begin();
+                entityManager.remove(payment);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) {
+                    transaction.rollback();
                 }
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return payment;
+    }
+
+    public Payment getPaymentById(int id) {
+        EntityManager entityManager = getEntityManager();
+        return entityManager.find(Payment.class, id);
     }
 }

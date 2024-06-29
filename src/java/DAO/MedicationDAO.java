@@ -1,90 +1,67 @@
 package DAO;
 
 import Entity.Medication;
-import java.sql.*;
-import java.util.ArrayList;
+
+import jakarta.persistence.TypedQuery;
+
 import java.util.List;
 
 public class MedicationDAO extends BaseDAO<Medication> {
 
-    public MedicationDAO(Connection connection) {
-        super(connection);
-    }
-
     public MedicationDAO() {
+        super();
     }
 
     public void createMedication(Medication medication) {
-        String query = "INSERT INTO medication (dosage, id, name) VALUES (?, ?, ?)";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, medication.getDosage());
-            ps.setInt(2, medication.getId());
-            ps.setString(3, medication.getName());
-            ps.executeUpdate();
-        } catch (SQLException e) {
+        try {
+            getEntityManager().getTransaction().begin();
+            getEntityManager().persist(medication);
+            getEntityManager().getTransaction().commit();
+        } catch (Exception e) {
+            if (getEntityManager().getTransaction().isActive()) {
+                getEntityManager().getTransaction().rollback();
+            }
             e.printStackTrace();
         }
     }
 
     public List<Medication> getMedicationList() {
-        List<Medication> medicationList = new ArrayList<>();
-        String query = "SELECT * FROM medication ORDER BY id ASC";
-        try (Statement st = this.GetConnection().createStatement();
-             ResultSet rs = st.executeQuery(query)) {
-
-            while (rs.next()) {
-                Medication medication = new Medication(
-                    rs.getString("dosage"),
-                    rs.getInt("id"),
-                    rs.getString("name")
-                );
-                medicationList.add(medication);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        TypedQuery<Medication> query = getEntityManager().createQuery("SELECT m FROM Medication m ORDER BY m.id ASC", Medication.class);
+        List<Medication> medicationList = query.getResultList();
         return medicationList;
     }
 
     public void updateMedication(Medication medication) {
-        String query = "UPDATE medication SET dosage=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, medication.getDosage());
-            ps.setString(2, medication.getName());
-            ps.setInt(3, medication.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
+        try {
+            getEntityManager().getTransaction().begin();
+            getEntityManager().merge(medication);
+            getEntityManager().getTransaction().commit();
+        } catch (Exception e) {
+            if (getEntityManager().getTransaction().isActive()) {
+                getEntityManager().getTransaction().rollback();
+            }
             e.printStackTrace();
         }
     }
 
     public void deleteMedication(int id) {
-        String query = "DELETE FROM medication WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        Medication medication = getEntityManager().find(Medication.class, id);
+        if (medication != null) {
+            try {
+                getEntityManager().getTransaction().begin();
+                getEntityManager().remove(medication);
+                getEntityManager().getTransaction().commit();
+            } catch (Exception e) {
+                if (getEntityManager().getTransaction().isActive()) {
+                    getEntityManager().getTransaction().rollback();
+                }
+                e.printStackTrace();
+            }
         }
     }
 
     public Medication getMedicationById(int id) {
-        Medication medication = null;
-        String query = "SELECT * FROM medication WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    medication = new Medication(
-                        rs.getString("dosage"),
-                        rs.getInt("id"),
-                        rs.getString("name")
-                    );
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Medication medication = getEntityManager().find(Medication.class, id);
         return medication;
     }
 }

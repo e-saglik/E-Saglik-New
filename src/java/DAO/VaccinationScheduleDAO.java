@@ -1,98 +1,76 @@
 package DAO;
 
 import Entity.VaccinationSchedule;
-import Entity.Vaccine;
 
-import java.sql.*;
-import java.util.ArrayList;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public class VaccinationScheduleDAO extends BaseDAO<VaccinationSchedule> {
 
-    public VaccinationScheduleDAO(Connection connection) {
-        super(connection);
-    }
-
     public VaccinationScheduleDAO() {
+        super();
     }
 
-    public void CreateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
-        String query = "INSERT INTO vaccination_schedule (vaccine_type, due_date, id, name) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, vaccinationSchedule.getVaccineName().getType());
-            ps.setDate(2, new java.sql.Date(vaccinationSchedule.getDueDate().getTime()));
-            ps.setInt(3, vaccinationSchedule.getId());
-            ps.setString(4, vaccinationSchedule.getName());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<VaccinationSchedule> GetVaccinationScheduleList() {
-        List<VaccinationSchedule> vaccinationScheduleList = new ArrayList<>();
-        String query = "SELECT * FROM vaccination_schedule ORDER BY id ASC";
-        try (Statement st = this.GetConnection().createStatement();
-             ResultSet rs = st.executeQuery(query)) {
-
-            while (rs.next()) {
-                Vaccine vaccine = new Vaccine(rs.getString("vaccine_type"), rs.getInt("id"), rs.getString("name"));
-                VaccinationSchedule vaccinationSchedule = new VaccinationSchedule(
-                    vaccine,
-                    rs.getDate("due_date"),
-                    rs.getInt("id"),
-                    rs.getString("name")
-                );
-                vaccinationScheduleList.add(vaccinationSchedule);
+    public void createVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.persist(vaccinationSchedule);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
-        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<VaccinationSchedule> getVaccinationScheduleList() {
+        EntityManager entityManager = getEntityManager();
+        TypedQuery<VaccinationSchedule> query = entityManager.createQuery("SELECT vs FROM VaccinationSchedule vs ORDER BY vs.id ASC", VaccinationSchedule.class);
+        List<VaccinationSchedule> vaccinationScheduleList = query.getResultList();
         return vaccinationScheduleList;
     }
 
-    public void UpdateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
-        String query = "UPDATE vaccination_schedule SET vaccine_type=?, due_date=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, vaccinationSchedule.getVaccineName().getType());
-            ps.setDate(2, new java.sql.Date(vaccinationSchedule.getDueDate().getTime()));
-            ps.setString(3, vaccinationSchedule.getName());
-            ps.setInt(4, vaccinationSchedule.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void DeleteVaccinationSchedule(int id) {
-        String query = "DELETE FROM vaccination_schedule WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public VaccinationSchedule GetVaccinationScheduleById(int id) {
-        VaccinationSchedule vaccinationSchedule = null;
-        String query = "SELECT * FROM vaccination_schedule WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    Vaccine vaccine = new Vaccine(rs.getString("vaccine_type"), rs.getInt("id"), rs.getString("name"));
-                    vaccinationSchedule = new VaccinationSchedule(
-                        vaccine,
-                        rs.getDate("due_date"),
-                        rs.getInt("id"),
-                        rs.getString("name")
-                    );
-                }
+    public void updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.merge(vaccinationSchedule);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
-        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteVaccinationSchedule(int id) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        VaccinationSchedule vaccinationSchedule = entityManager.find(VaccinationSchedule.class, id);
+        if (vaccinationSchedule != null) {
+            try {
+                transaction.begin();
+                entityManager.remove(vaccinationSchedule);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public VaccinationSchedule getVaccinationScheduleById(int id) {
+        EntityManager entityManager = getEntityManager();
+        VaccinationSchedule vaccinationSchedule = entityManager.find(VaccinationSchedule.class, id);
         return vaccinationSchedule;
     }
 }

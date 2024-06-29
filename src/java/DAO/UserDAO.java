@@ -1,114 +1,76 @@
 package DAO;
 
 import Entity.User;
-import java.sql.*;
-import java.util.ArrayList;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public class UserDAO extends BaseDAO<User> {
 
-    public UserDAO(Connection connection) {
-        super(connection);
-    }
-
     public UserDAO() {
+        super();
     }
 
-    public void CreateUser(User user) {
-        String query = "INSERT INTO user (first_name, last_name, email, password, gender, phone_number, address, id, name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, user.getFirstName());
-            ps.setString(2, user.getLastName());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getPassword());
-            ps.setString(5, user.getGender());
-            ps.setString(6, user.getPhoneNumber());
-            ps.setString(7, user.getAddress());
-            ps.setInt(8, user.getId());
-            ps.setString(9, user.getName());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<User> GetUserList() {
-        List<User> userList = new ArrayList<>();
-        String query = "SELECT * FROM user ORDER BY id ASC";
-        try (Statement st = this.GetConnection().createStatement();
-             ResultSet rs = st.executeQuery(query)) {
-
-            while (rs.next()) {
-                User user = new User(
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("gender"),
-                    rs.getString("phone_number"),
-                    rs.getString("address"),
-                    rs.getInt("id"),
-                    rs.getString("name")
-                );
-                userList.add(user);
+    public void createUser(User user) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.persist(user);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
-        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<User> getUserList() {
+        EntityManager entityManager = getEntityManager();
+        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u ORDER BY u.id ASC", User.class);
+        List<User> userList = query.getResultList();
         return userList;
     }
 
-    public void UpdateUser(User user) {
-        String query = "UPDATE user SET first_name=?, last_name=?, email=?, password=?, gender=?, phone_number=?, address=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, user.getFirstName());
-            ps.setString(2, user.getLastName());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getPassword());
-            ps.setString(5, user.getGender());
-            ps.setString(6, user.getPhoneNumber());
-            ps.setString(7, user.getAddress());
-            ps.setString(8, user.getName());
-            ps.setInt(9, user.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void DeleteUser(int id) {
-        String query = "DELETE FROM user WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public User GetUserById(int id) {
-        User user = null;
-        String query = "SELECT * FROM user WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    user = new User(
-                        rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getString("email"),
-                        rs.getString("password"),
-                        rs.getString("gender"),
-                        rs.getString("phone_number"),
-                        rs.getString("address"),
-                        rs.getInt("id"),
-                        rs.getString("name")
-                    );
-                }
+    public void updateUser(User user) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.merge(user);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
-        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteUser(int id) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        User user = entityManager.find(User.class, id);
+        if (user != null) {
+            try {
+                transaction.begin();
+                entityManager.remove(user);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public User getUserById(int id) {
+        EntityManager entityManager = getEntityManager();
+        User user = entityManager.find(User.class, id);
         return user;
     }
 }

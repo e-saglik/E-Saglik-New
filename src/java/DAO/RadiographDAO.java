@@ -1,94 +1,76 @@
 package DAO;
 
 import Entity.Radiograph;
-import java.sql.*;
-import java.util.ArrayList;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public class RadiographDAO extends BaseDAO<Radiograph> {
 
-    public RadiographDAO(Connection connection) {
-        super(connection);
-    }
-
     public RadiographDAO() {
+        super();
     }
 
-    public void CreateRadiograph(Radiograph radiograph) {
-        String query = "INSERT INTO radiograph (RGDate, image, id, name) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setDate(1, new java.sql.Date(radiograph.getRGDate().getTime()));
-            ps.setString(2, radiograph.getImage());
-            ps.setInt(3, radiograph.getId());
-            ps.setString(4, radiograph.getName());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<Radiograph> GetRadiographList() {
-        List<Radiograph> radiographList = new ArrayList<>();
-        String query = "SELECT * FROM radiograph ORDER BY id ASC";
-        try (Statement st = this.GetConnection().createStatement();
-             ResultSet rs = st.executeQuery(query)) {
-
-            while (rs.next()) {
-                Radiograph radiograph = new Radiograph(
-                    rs.getDate("RGDate"),
-                    rs.getString("image"),
-                    rs.getInt("id"),
-                    rs.getString("name")
-                );
-                radiographList.add(radiograph);
+    public void createRadiograph(Radiograph radiograph) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.persist(radiograph);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
-        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Radiograph> getRadiographList() {
+        EntityManager entityManager = getEntityManager();
+        TypedQuery<Radiograph> query = entityManager.createQuery("SELECT r FROM Radiograph r ORDER BY r.id ASC", Radiograph.class);
+        List<Radiograph> radiographList = query.getResultList();
         return radiographList;
     }
 
-    public void UpdateRadiograph(Radiograph radiograph) {
-        String query = "UPDATE radiograph SET RGDate=?, image=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setDate(1, new java.sql.Date(radiograph.getRGDate().getTime()));
-            ps.setString(2, radiograph.getImage());
-            ps.setString(3, radiograph.getName());
-            ps.setInt(4, radiograph.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void DeleteRadiograph(int id) {
-        String query = "DELETE FROM radiograph WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Radiograph GetRadiographById(int id) {
-        Radiograph radiograph = null;
-        String query = "SELECT * FROM radiograph WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    radiograph = new Radiograph(
-                        rs.getDate("RGDate"),
-                        rs.getString("image"),
-                        rs.getInt("id"),
-                        rs.getString("name")
-                    );
-                }
+    public void updateRadiograph(Radiograph radiograph) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.merge(radiograph);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
-        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteRadiograph(int id) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        Radiograph radiograph = entityManager.find(Radiograph.class, id);
+        if (radiograph != null) {
+            try {
+                transaction.begin();
+                entityManager.remove(radiograph);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Radiograph getRadiographById(int id) {
+        EntityManager entityManager = getEntityManager();
+        Radiograph radiograph = entityManager.find(Radiograph.class, id);
         return radiograph;
     }
 }

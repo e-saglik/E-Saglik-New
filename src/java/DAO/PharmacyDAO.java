@@ -1,90 +1,74 @@
 package DAO;
 
 import Entity.Pharmacy;
-import java.sql.*;
-import java.util.ArrayList;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public class PharmacyDAO extends BaseDAO<Pharmacy> {
 
-    public PharmacyDAO(Connection connection) {
-        super(connection);
-    }
-
     public PharmacyDAO() {
+        super();
     }
 
-    public void CreatePharmacy(Pharmacy pharmacy) {
-        String query = "INSERT INTO pharmacy (location, id, name) VALUES (?, ?, ?)";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, pharmacy.getLocation());
-            ps.setInt(2, pharmacy.getId());
-            ps.setString(3, pharmacy.getName());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<Pharmacy> GetPharmacyList() {
-        List<Pharmacy> pharmacyList = new ArrayList<>();
-        String query = "SELECT * FROM pharmacy ORDER BY id ASC";
-        try (Statement st = this.GetConnection().createStatement();
-             ResultSet rs = st.executeQuery(query)) {
-
-            while (rs.next()) {
-                Pharmacy pharmacy = new Pharmacy(
-                    rs.getString("location"),
-                    rs.getInt("id"),
-                    rs.getString("name")
-                );
-                pharmacyList.add(pharmacy);
+    public void createPharmacy(Pharmacy pharmacy) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.persist(pharmacy);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return pharmacyList;
-    }
-
-    public void UpdatePharmacy(Pharmacy pharmacy) {
-        String query = "UPDATE pharmacy SET location=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, pharmacy.getLocation());
-            ps.setString(2, pharmacy.getName());
-            ps.setInt(3, pharmacy.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void DeletePharmacy(int id) {
-        String query = "DELETE FROM pharmacy WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
+    public List<Pharmacy> getPharmacyList() {
+        EntityManager entityManager = getEntityManager();
+        TypedQuery<Pharmacy> query = entityManager.createQuery("SELECT p FROM Pharmacy p ORDER BY p.id ASC", Pharmacy.class);
+        return query.getResultList();
+    }
+
+    public void updatePharmacy(Pharmacy pharmacy) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.merge(pharmacy);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
 
-    public Pharmacy GetPharmacyById(int id) {
-        Pharmacy pharmacy = null;
-        String query = "SELECT * FROM pharmacy WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    pharmacy = new Pharmacy(
-                        rs.getString("location"),
-                        rs.getInt("id"),
-                        rs.getString("name")
-                    );
+    public void deletePharmacy(int id) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        Pharmacy pharmacy = entityManager.find(Pharmacy.class, id);
+        if (pharmacy != null) {
+            try {
+                transaction.begin();
+                entityManager.remove(pharmacy);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) {
+                    transaction.rollback();
                 }
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return pharmacy;
+    }
+
+    public Pharmacy getPharmacyById(int id) {
+        EntityManager entityManager = getEntityManager();
+        return entityManager.find(Pharmacy.class, id);
     }
 }

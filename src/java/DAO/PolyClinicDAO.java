@@ -1,19 +1,66 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import Entity.PolyClinic;
 
-/**
- *
- * @author mehme
- */
-class PolyClinicDAO {
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
-    PolyClinic getPolyClinicById(int aInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+public class PolyClinicDAO extends BaseDAO<PolyClinic> {
+
+    public PolyClinicDAO() {
+        super();
     }
-    
+
+    public PolyClinic getPolyClinicById(int id) {
+        EntityManager entityManager = getEntityManager();
+        return entityManager.find(PolyClinic.class, id);
+    }
+
+    public void createPolyClinic(PolyClinic polyClinic) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.persist(polyClinic);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePolyClinic(PolyClinic polyClinic) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.merge(polyClinic);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    public void deletePolyClinic(int id) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        PolyClinic polyClinic = entityManager.find(PolyClinic.class, id);
+        if (polyClinic != null) {
+            try {
+                transaction.begin();
+                entityManager.remove(polyClinic);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+        }
+    }
 }

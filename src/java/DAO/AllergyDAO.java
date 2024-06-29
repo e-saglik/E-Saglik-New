@@ -2,104 +2,78 @@ package DAO;
 
 import Entity.Allergy;
 import Entity.Patient;
-import java.sql.*;
-import java.util.ArrayList;
+import jakarta.persistence.TypedQuery;
+
 import java.util.List;
 
 public class AllergyDAO extends BaseDAO<Allergy> {
 
     private PatientDAO patientDAO;
-    
-    public AllergyDAO(Connection connection) {
-        super(connection);
-    }
 
     public AllergyDAO() {
-
+        super();
+        this.patientDAO = new PatientDAO(); // PatientDAO'nun JPA versiyonunu kullanıyoruz
     }
 
-    public void CreateAllergy(Allergy allergy) {
-        String query = "INSERT INTO allergy (type, severity, id, name) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, allergy.getType());
-            ps.setInt(2, allergy.getSeverity());
-            ps.setInt(3, allergy.getId());
-            ps.setString(4, allergy.getName());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<Allergy> GetAllergyList() {
-    List<Allergy> allergyList = new ArrayList<>();
-    String query = "SELECT * FROM allergy ORDER BY id ASC";
-    try (Statement st = this.GetConnection().createStatement(); ResultSet rs = st.executeQuery(query)) {
-
-        while (rs.next()) {
-            int patientId = rs.getInt("patient_id");
-            Patient patient = patientDAO.getPatientById(patientId); // Mevcut getPatientById metodunuz kullanılıyor
-
-            Allergy allergy = new Allergy(
-                rs.getString("type"), 
-                rs.getInt("severity"), 
-                patient, 
-                rs.getInt("id"), 
-                rs.getString("name")
-            );
-            allergyList.add(allergy);
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return allergyList;
-}
-
-
-    public void UpdateAllergy(Allergy allergy) {
-        String query = "UPDATE allergy SET type=?, severity=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, allergy.getType());
-            ps.setInt(2, allergy.getSeverity());
-            ps.setString(3, allergy.getName());
-            ps.setInt(4, allergy.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void DeleteAllergy(int id) {
-        String query = "DELETE FROM allergy WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Allergy GetAllergyById(int id) {
-        Allergy allergy = null;
-        String query = "SELECT * FROM allergy WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    // Burada patientId'yi alıyoruz
-                    int patientId = rs.getInt("patient_id");
-
-                    // Patient nesnesini almak için bir yöntem çağırdığınızı varsayıyoruz
-                    Patient patient = patientDAO.getPatientById(patientId);
-
-                    // Allergy nesnesini yeni constructor kullanarak oluşturuyoruz
-                    allergy = new Allergy(rs.getString("type"), rs.getInt("severity"), patient, rs.getInt("id"), rs.getString("name"));
-                }
+    public void createAllergy(Allergy allergy) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(allergy);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
             }
-        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Allergy> getAllergyList() {
+        TypedQuery<Allergy> query = entityManager.createQuery("SELECT a FROM Allergy a ORDER BY a.id ASC", Allergy.class);
+        return query.getResultList();
+    }
+
+    public void updateAllergy(Allergy allergy) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(allergy);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteAllergy(int id) {
+        try {
+            entityManager.getTransaction().begin();
+            Allergy allergy = entityManager.find(Allergy.class, id);
+            if (allergy != null) {
+                entityManager.remove(allergy);
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    public Allergy getAllergyById(int id) {
+        Allergy allergy = null;
+        try {
+            allergy = entityManager.find(Allergy.class, id);
+            if (allergy != null) {
+                int patientId = allergy.getPatient().getId(); // Allergy nesnesinde Patient'a ulaşmak için bir metod olduğunu varsayıyoruz
+                Patient patient = patientDAO.getPatientById(patientId); // PatientDAO'nun JPA versiyonu ile hasta bilgisini alıyoruz
+                allergy.setPatient(patient); // Allergy nesnesine patient bilgisini set ediyoruz
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return allergy;
     }
-
 }

@@ -1,31 +1,29 @@
 package DAO;
 
-import Entity.Donation;
-import Util.DBConnection;
-import java.sql.Connection;
-import java.util.List;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
-public abstract class BaseDAO<T> extends DBConnection {
+public abstract class BaseDAO<T> {
 
-    protected Connection connection;
-
-    public BaseDAO(Connection connection) {
-        this.connection = connection;
-    }
+    protected EntityManagerFactory entityManagerFactory;
+    protected EntityManager entityManager;
 
     public BaseDAO() {
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("your-persistence-unit-name");
+        this.entityManager = entityManagerFactory.createEntityManager();
     }
 
-    public Connection GetConnection() {
-        if (this.connection == null) {
+    public EntityManager getEntityManager() {
+        return this.entityManager;
+    }
 
-            this.connection = this.connect();
+    public void close() {
+        if (entityManager != null) {
+            entityManager.close();
         }
-        return connection;
+        if (entityManagerFactory != null) {
+            entityManagerFactory.close();
+        }
     }
-
-    public void SetConnection(Connection connection) {
-        this.connection = connection;
-    }
-
 }

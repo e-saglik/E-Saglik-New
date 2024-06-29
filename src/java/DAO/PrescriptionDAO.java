@@ -1,123 +1,77 @@
 package DAO;
 
-import Entity.Medication;
 import Entity.Prescription;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import Entity.Medication;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public class PrescriptionDAO extends BaseDAO<Prescription> {
 
-    public PrescriptionDAO(Connection connection) {
-        super(connection);
-    }
-
     public PrescriptionDAO() {
+        super();
     }
 
-    public void CreatePrescription(Prescription prescription) {
-        String query = "INSERT INTO prescription (dosage, medication_list, instructions, id, name) VALUES (?, ?, ?, ?, ?)";
-        
-        List<Integer> medIds = new ArrayList<Integer>(); 
-        List<Medication> medList = prescription.getMedicationList();
-        
-        for(int i = 0; i < medList.size(); i++){
-            medIds.add(medList.get(i).getId());
-        }
-        
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, prescription.getDosage());
-            ps.setString(3, prescription.getInstructions());
-            ps.setInt(4, prescription.getId());
-            ps.setString(5, prescription.getName());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<Prescription> GetPrescriptionList() {
-        List<Prescription> prescriptionList = new ArrayList<>();
-        String query = "SELECT * FROM prescription ORDER BY id ASC";
-        try (Statement st = this.GetConnection().createStatement();
-             ResultSet rs = st.executeQuery(query)) {
-
-            while (rs.next()) {
-                Prescription prescription = new Prescription(
-                    rs.getString("dosage"),
-                    convertStringToList(rs.getString("medication_list")),
-                    rs.getString("instructions"),
-                    rs.getInt("id"),
-                    rs.getString("name")
-                );
-                prescriptionList.add(prescription);
+    public void createPrescription(Prescription prescription) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.persist(prescription);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
-        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Prescription> getPrescriptionList() {
+        EntityManager entityManager = getEntityManager();
+        TypedQuery<Prescription> query = entityManager.createQuery("SELECT p FROM Prescription p ORDER BY p.id ASC", Prescription.class);
+        List<Prescription> prescriptionList = query.getResultList();
         return prescriptionList;
     }
 
-    public void UpdatePrescription(Prescription prescription) {
-        String query = "UPDATE prescription SET dosage=?, medication_list=?, instructions=?, name=? WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setString(1, prescription.getDosage());
-            ps.setString(2, convertListToString(prescription.getMedicationList()));
-            ps.setString(3, prescription.getInstructions());
-            ps.setString(4, prescription.getName());
-            ps.setInt(5, prescription.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void DeletePrescription(int id) {
-        String query = "DELETE FROM prescription WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Prescription GetPrescriptionById(int id) {
-        Prescription prescription = null;
-        String query = "SELECT * FROM prescription WHERE id=?";
-        try (PreparedStatement ps = this.GetConnection().prepareStatement(query)) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    prescription = new Prescription(
-                        rs.getString("dosage"),
-                        convertStringToList(rs.getString("medication_list")),
-                        rs.getString("instructions"),
-                        rs.getInt("id"),
-                        rs.getString("name")
-                    );
-                }
+    public void updatePrescription(Prescription prescription) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.merge(prescription);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
-        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deletePrescription(int id) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        Prescription prescription = entityManager.find(Prescription.class, id);
+        if (prescription != null) {
+            try {
+                transaction.begin();
+                entityManager.remove(prescription);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Prescription getPrescriptionById(int id) {
+        EntityManager entityManager = getEntityManager();
+        Prescription prescription = entityManager.find(Prescription.class, id);
         return prescription;
-    }
-
-    private String convertListToString(List<Integer> list) {
-        return list.toString().replace("[", "").replace("]", "").replace(" ", "");
-    }
-
-    private List<Integer> convertStringToList(String str) {
-        if (str == null || str.isEmpty()) {
-            return new ArrayList<>();
-        }
-        String[] items = str.split(",");
-        List<Integer> list = new ArrayList<>();
-        for (String item : items) {
-            list.add(Integer.parseInt(item));
-        }
-        return list;
     }
 }
