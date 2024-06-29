@@ -1,9 +1,22 @@
-
 package Entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "Insurance")
 public class Insurance extends BaseEntity {
+    @Column(name = "provider")
     private String provider;
+
+    @Column(name = "coverage_details")
     private String coverageDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     public Insurance() {
@@ -15,7 +28,7 @@ public class Insurance extends BaseEntity {
         this.provider = provider;
         this.coverageDetails = coverageDetails;
         this.patient = patient;
-    }  
+    }
 
     public String getProvider() {
         return provider;
@@ -40,13 +53,15 @@ public class Insurance extends BaseEntity {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "Insurance{" + "provider=" + provider + ", coverageDetails=" + coverageDetails + '}';
+        return "Insurance{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", provider='" + provider + '\'' +
+                ", coverageDetails='" + coverageDetails + '\'' +
+                ", patient=" + patient +
+                '}';
     }
-    
-    
 }

@@ -1,9 +1,17 @@
 package Entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.util.Date;
 
+@Entity
+@Table(name = "Payment")
 public class Payment extends BaseEntity {
+    @Column(name = "payment_amount")
     private double paymentAmount;
+
+    @Column(name = "payment_date")
     private Date paymentDate;
 
     public Payment() {
@@ -15,8 +23,6 @@ public class Payment extends BaseEntity {
         this.paymentAmount = paymentAmount;
         this.paymentDate = paymentDate;
     }
-
-    
 
     public double getPaymentAmount() {
         return paymentAmount;
@@ -36,8 +42,11 @@ public class Payment extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Payment{" + "paymentAmount=" + paymentAmount + ", paymentDate=" + paymentDate + '}';
+        return "Payment{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", paymentAmount=" + paymentAmount +
+                ", paymentDate=" + paymentDate +
+                '}';
     }
-    
-    
 }

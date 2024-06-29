@@ -1,9 +1,17 @@
 package Entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.util.Date;
 
+@Entity
+@Table(name = "PathologyInformation")
 public class PathologyInformation extends BaseEntity {
+    @Column(name = "information_date")
     private Date informationDate;
+
+    @Column(name = "information")
     private String information;
 
     public PathologyInformation() {
@@ -15,8 +23,6 @@ public class PathologyInformation extends BaseEntity {
         this.informationDate = informationDate;
         this.information = information;
     }
-
-    
 
     public Date getInformationDate() {
         return informationDate;
@@ -36,9 +42,11 @@ public class PathologyInformation extends BaseEntity {
 
     @Override
     public String toString() {
-        return "PathologyInformation{" + "informationDate=" + informationDate + ", information=" + information + '}';
+        return "PathologyInformation{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", informationDate=" + informationDate +
+                ", information='" + information + '\'' +
+                '}';
     }
-    
-    
-    
 }

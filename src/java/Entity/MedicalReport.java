@@ -1,10 +1,20 @@
 package Entity;
-    
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.util.Date;
 
+@Entity
+@Table(name = "MedicalReport")
 public class MedicalReport extends BaseEntity {
+    @Column(name = "medical_report_date")
     private Date medicalReportDate;
+
+    @Column(name = "diagnosis")
     private String diagnosis;
+
+    @Column(name = "description")
     private String description;
 
     public MedicalReport() {
@@ -16,11 +26,6 @@ public class MedicalReport extends BaseEntity {
         this.medicalReportDate = medicalReportDate;
         this.diagnosis = diagnosis;
         this.description = description;
-    }
-
-    
-    private void addTestResult(){
-        
     }
 
     public Date getMedicalReportDate() {
@@ -49,8 +54,12 @@ public class MedicalReport extends BaseEntity {
 
     @Override
     public String toString() {
-        return "MedicalReport{" + "medicalReportDate=" + medicalReportDate + ", diagnosis=" + diagnosis + ", description=" + description + '}';
+        return "MedicalReport{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", medicalReportDate=" + medicalReportDate +
+                ", diagnosis='" + diagnosis + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
-    
-    
 }

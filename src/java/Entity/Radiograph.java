@@ -1,13 +1,24 @@
 package Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.util.Date;
 
+@Entity
+@Table(name = "radiographs")
 public class Radiograph extends BaseEntity {
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "rg_date")
     private Date RGDate;
+
+    @Column(name = "image")
     private String image;
 
     public Radiograph() {
-        
     }
 
     public Radiograph(Date RGDate, String image, int id, String name) {
@@ -15,8 +26,6 @@ public class Radiograph extends BaseEntity {
         this.RGDate = RGDate;
         this.image = image;
     }
-
-   
 
     public Date getRGDate() {
         return RGDate;
@@ -38,6 +47,4 @@ public class Radiograph extends BaseEntity {
     public String toString() {
         return "Radiograph{" + "RGDate=" + RGDate + ", image=" + image + '}';
     }
-    
-    
 }

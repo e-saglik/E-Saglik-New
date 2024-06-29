@@ -1,23 +1,65 @@
-
 package Entity;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "Patient")
 public class Patient extends User {
+    @Column(name = "date_of_birth")
     private Date dateOfBirth;
+
+    @Column(name = "blood_type")
     private String bloodType;
+
+    @Column(name = "appointment")
     private String appointment;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Medication> medicationList;
-    private List<MedicalReport>  medicalReportList;
-    private List<TestResult>  testResultList;
-    private List<Disease>  diseaseList;
-    private List<Allergy>  allergyList;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<MedicalReport> medicalReportList;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<TestResult> testResultList;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "Patient_Disease",
+            joinColumns = @JoinColumn(name = "patient_id"),
+            inverseJoinColumns = @JoinColumn(name = "disease_id")
+    )
+    private List<Disease> diseaseList;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<Allergy> allergyList;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "insurance_id")
     private Insurance insurance;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "vaccination_schedule_id")
     private VaccinationSchedule vaccinationSchedule;
-    private List<Treatment>  treatmentList;
-    private List<Payment>  paymentList;
-    private List<Notification>  notificationList;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<Treatment> treatmentList;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<Payment> paymentList;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<Notification> notificationList;
 
     public Patient() {
     }
@@ -38,14 +80,13 @@ public class Patient extends User {
         this.paymentList = paymentList;
         this.notificationList = notificationList;
     }
- 
-    
-    void makeAppointment(){
-        
+
+    public void makeAppointment() {
+        // Implement appointment making logic
     }
-    
-    void viewMedicalReport(){
-        
+
+    public void viewMedicalReport() {
+        // Implement medical report viewing logic
     }
 
     public Date getDateOfBirth() {
@@ -116,8 +157,8 @@ public class Patient extends User {
         return insurance;
     }
 
-    public void setInsurance(Insurance ınsurance) {
-        this.insurance = ınsurance;
+    public void setInsurance(Insurance insurance) {
+        this.insurance = insurance;
     }
 
     public VaccinationSchedule getVaccinationSchedule() {
@@ -154,8 +195,20 @@ public class Patient extends User {
 
     @Override
     public String toString() {
-        return "Patient{" + "dateOfBirth=" + dateOfBirth + ", bloodType=" + bloodType + ", appointment=" + appointment + ", medicationList=" + medicationList + ", medicalReportList=" + medicalReportList + ", testResultList=" + testResultList + ", diseaseList=" + diseaseList + ", allergyList=" + allergyList + ", insurance=" + insurance + ", vaccinationSchedule=" + vaccinationSchedule + ", treatmentList=" + treatmentList + ", paymentList=" + paymentList + ", notificationList=" + notificationList + '}';
+        return "Patient{" +
+                "dateOfBirth=" + dateOfBirth +
+                ", bloodType='" + bloodType + '\'' +
+                ", appointment='" + appointment + '\'' +
+                ", medicationList=" + medicationList +
+                ", medicalReportList=" + medicalReportList +
+                ", testResultList=" + testResultList +
+                ", diseaseList=" + diseaseList +
+                ", allergyList=" + allergyList +
+                ", insurance=" + insurance +
+                ", vaccinationSchedule=" + vaccinationSchedule +
+                ", treatmentList=" + treatmentList +
+                ", paymentList=" + paymentList +
+                ", notificationList=" + notificationList +
+                '}';
     }
-    
-    
 }

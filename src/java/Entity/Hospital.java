@@ -1,12 +1,37 @@
-
 package Entity;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import java.util.List;
 
+@Entity
+@Table(name = "Hospital")
 public class Hospital extends BaseEntity {
+    @Column(name = "location")
     private String location;
+
+    @Column(name = "capacity")
     private String capacity;
+
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(
+        name = "Hospital_PolyClinic",
+        joinColumns = @JoinColumn(name = "hospital_id"),
+        inverseJoinColumns = @JoinColumn(name = "polyclinic_id")
+    )
     private List<PolyClinic> polyClinics;
+
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(
+        name = "Hospital_Doctor",
+        joinColumns = @JoinColumn(name = "hospital_id"),
+        inverseJoinColumns = @JoinColumn(name = "doctor_id")
+    )
     private List<Doctor> doctors;
 
     public Hospital() {
@@ -19,7 +44,7 @@ public class Hospital extends BaseEntity {
         this.capacity = capacity;
         this.polyClinics = polyClinics;
         this.doctors = doctors;
-    }  
+    }
 
     public String getLocation() {
         return location;
@@ -51,12 +76,15 @@ public class Hospital extends BaseEntity {
 
     public void setDoctors(List<Doctor> doctors) {
         this.doctors = doctors;
-    } 
+    }
 
     @Override
     public String toString() {
-        return "Hospital{" + "location=" + location + ", capacity=" + capacity + '}';
+        return "Hospital{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", location='" + location + '\'' +
+                ", capacity='" + capacity + '\'' +
+                '}';
     }
-    
-    
 }
