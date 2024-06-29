@@ -1,7 +1,6 @@
 package Controller;
 
 import DAO.AbstractDAO;
-
 import DAO.PharmacyDAO;
 import Entity.Pharmacy;
 import java.util.List;
