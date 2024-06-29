@@ -1,14 +1,28 @@
 package Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.util.Date;
 
+@Entity
+@Table(name = "treatments")
 public class Treatment extends BaseEntity {
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name = "start_date")
     private Date startdate;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "end_date")
     private Date endDate;
+
+    @Column(name = "description")
     private String description;
 
     public Treatment() {
-        
     }
 
     public Treatment(Date startdate, Date endDate, String description, int id, String name) {
@@ -17,8 +31,6 @@ public class Treatment extends BaseEntity {
         this.endDate = endDate;
         this.description = description;
     }
-
-    
 
     public Date getStartdate() {
         return startdate;
@@ -48,8 +60,4 @@ public class Treatment extends BaseEntity {
     public String toString() {
         return "Treatment{" + "startdate=" + startdate + ", endDate=" + endDate + ", description=" + description + '}';
     }
-    
-    
-    
-    
 }

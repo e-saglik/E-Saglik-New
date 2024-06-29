@@ -1,13 +1,27 @@
 package Entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.CascadeType;
 import java.util.List;
 
+@Entity
+@Table(name = "prescriptions")
 public class Prescription extends BaseEntity {
+
+    @Column(name = "dosage")
     private String dosage;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Medication> medicationList;
+
+    @Column(name = "instructions")
     private String instructions;
 
     public Prescription() {
-        
     }
 
     public Prescription(String dosage, List<Medication> medicationList, String instructions, int id, String name) {
@@ -16,8 +30,6 @@ public class Prescription extends BaseEntity {
         this.medicationList = medicationList;
         this.instructions = instructions;
     }
-
-    
 
     public String getDosage() {
         return dosage;
@@ -47,6 +59,4 @@ public class Prescription extends BaseEntity {
     public String toString() {
         return "Prescription{" + "dosage=" + dosage + ", medicationList=" + medicationList + ", instructions=" + instructions + '}';
     }
-    
-    
 }

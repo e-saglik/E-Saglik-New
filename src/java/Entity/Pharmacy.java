@@ -1,6 +1,13 @@
 package Entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "Pharmacy")
 public class Pharmacy extends BaseEntity {
+    @Column(name = "location")
     private String location;
 
     public Pharmacy() {
@@ -12,8 +19,6 @@ public class Pharmacy extends BaseEntity {
         this.location = location;
     }
 
-    
-
     public String getLocation() {
         return location;
     }
@@ -24,8 +29,10 @@ public class Pharmacy extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Pharmacy{" + "location=" + location + '}';
+        return "Pharmacy{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", location='" + location + '\'' +
+                '}';
     }
-    
-    
 }

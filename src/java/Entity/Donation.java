@@ -18,8 +18,6 @@ public class Donation extends BaseEntity {
         this.donationDate = donationDate;
     }
 
-   
-
     public String getDonationType() {
         return donationType;
     }
@@ -46,9 +44,10 @@ public class Donation extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Donation{" + "donationType=" + donationType + ", donorName=" + donorName + ", donationDate=" + donationDate + '}';
+        return "Donation{" +
+                "donationType='" + donationType + '\'' +
+                ", donorName='" + donorName + '\'' +
+                ", donationDate=" + donationDate +
+                '}';
     }
-    
-    
-    
 }
