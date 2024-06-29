@@ -1,13 +1,13 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
 import DAO.TreatmentDAO;
 import Entity.Treatment;
 import java.util.List;
 
 public class TreatmentController extends BaseController<Treatment> {
 
-    public BaseDAO getTreatmentDao() {
+    public AbstractDAO getTreatmentDao() {
         return treatmentDao;
     }
 

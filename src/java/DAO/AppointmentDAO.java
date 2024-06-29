@@ -8,7 +8,7 @@ import jakarta.persistence.TypedQuery;
 import java.time.LocalTime;
 import java.util.List;
 
-public class AppointmentDAO extends BaseDAO<Appointment> {
+public class AppointmentDAO extends AbstractDAO<Appointment> {
 
     public void CreateAppointment(Appointment appointment) {
         try {

@@ -1,6 +1,6 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
 import DAO.VaccinationScheduleDAO;
 import Entity.VaccinationSchedule;
 import java.util.List;
@@ -11,7 +11,7 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
     private VaccinationSchedule schedule;
     private List<VaccinationSchedule> scheduleList;
 
-    public BaseDAO getScheduleDao() {
+    public AbstractDAO getScheduleDao() {
         return scheduleDao;
     }
 

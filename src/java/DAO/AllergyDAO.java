@@ -6,7 +6,7 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class AllergyDAO extends BaseDAO<Allergy> {
+public class AllergyDAO extends AbstractDAO<Allergy> {
 
     private PatientDAO patientDAO;
 

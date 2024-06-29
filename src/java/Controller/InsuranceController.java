@@ -1,16 +1,16 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
 import Entity.Insurance;
 import java.util.List;
 
 public class InsuranceController extends BaseController<Insurance> {
 
-    public BaseDAO getInsuranceDao() {
+    public AbstractDAO getInsuranceDao() {
         return ınsuranceDao;
     }
 
-    public void setInsuranceDao(BaseDAO ınsuranceDao) {
+    public void setInsuranceDao(AbstractDAO ınsuranceDao) {
         this.ınsuranceDao = ınsuranceDao;
     }
 
@@ -30,7 +30,7 @@ public class InsuranceController extends BaseController<Insurance> {
         this.ınsuranceList = ınsuranceList;
     }
 
-    private BaseDAO ınsuranceDao;
+    private AbstractDAO ınsuranceDao;
     private Insurance ınsurance;
     private List<Insurance> ınsuranceList;
 

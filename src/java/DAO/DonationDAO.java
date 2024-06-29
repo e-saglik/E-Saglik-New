@@ -5,7 +5,7 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class DonationDAO extends BaseDAO<Donation> {
+public class DonationDAO extends AbstractDAO<Donation> {
 
     public DonationDAO() {
         super();

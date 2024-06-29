@@ -1,13 +1,13 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
 import DAO.RadiographDAO;
 import Entity.Radiograph;
 import java.util.List;
 
 public class RadiographController extends BaseController<Radiograph> {
 
-    public BaseDAO getRadiographDao() {
+    public AbstractDAO getRadiographDao() {
         return radiographDao;
     }
 

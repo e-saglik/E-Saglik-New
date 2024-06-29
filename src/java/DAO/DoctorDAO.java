@@ -6,7 +6,7 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class DoctorDAO extends BaseDAO<Doctor> {
+public class DoctorDAO extends AbstractDAO<Doctor> {
 
     public DoctorDAO() {
         super();

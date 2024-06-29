@@ -1,16 +1,16 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
 import Entity.Medication;
 import java.util.List;
 
 public class MedicationController extends BaseController<Medication> {
 
-    public BaseDAO getMedicationDao() {
+    public AbstractDAO getMedicationDao() {
         return medicationDao;
     }
 
-    public void setMedicationDao(BaseDAO medicationDao) {
+    public void setMedicationDao(AbstractDAO medicationDao) {
         this.medicationDao = medicationDao;
     }
 
@@ -30,7 +30,7 @@ public class MedicationController extends BaseController<Medication> {
         this.medicationList = medicationList;
     }
 
-    private BaseDAO medicationDao;
+    private AbstractDAO medicationDao;
     private Medication medication;
     private List<Medication> medicationList;
 

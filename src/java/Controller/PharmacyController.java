@@ -1,13 +1,14 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
+
 import DAO.PharmacyDAO;
 import Entity.Pharmacy;
 import java.util.List;
 
 public class PharmacyController extends BaseController<Pharmacy> {
 
-    public BaseDAO getPharmacyDao() {
+    public AbstractDAO getPharmacyDao() {
         return pharmacyDao;
     }
 

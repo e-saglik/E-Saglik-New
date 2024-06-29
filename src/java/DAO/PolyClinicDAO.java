@@ -5,7 +5,7 @@ import Entity.PolyClinic;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
-public class PolyClinicDAO extends BaseDAO<PolyClinic> {
+public class PolyClinicDAO extends AbstractDAO<PolyClinic> {
 
     public PolyClinicDAO() {
         super();

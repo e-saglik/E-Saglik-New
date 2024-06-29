@@ -6,7 +6,7 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class NotificationDAO extends BaseDAO<Notification> {
+public class NotificationDAO extends AbstractDAO<Notification> {
 
     public NotificationDAO() {
         super();

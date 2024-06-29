@@ -1,13 +1,13 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
 import DAO.PrescriptionDAO;
 import Entity.Prescription;
 import java.util.List;
 
 public class PrescriptionController extends BaseController<Prescription> {
 
-    public BaseDAO getPrescriptionDao() {
+    public AbstractDAO getPrescriptionDao() {
         return prescriptionDao;
     }
 

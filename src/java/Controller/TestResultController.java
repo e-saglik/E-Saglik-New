@@ -1,13 +1,13 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
 import DAO.TestResultDAO;
 import Entity.TestResult;
 import java.util.List;
 
 public class TestResultController extends BaseController<TestResult> {
 
-    public BaseDAO getTestResultDao() {
+    public AbstractDAO getTestResultDao() {
         return testResultDao;
     }
 
