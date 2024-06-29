@@ -1,13 +1,17 @@
-
 package Entity;
 
-import Entity.User;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "admin")
 public class Admin extends User {
+
+    @Column(name = "authorization_level")
     private String authorizationLevel;
 
     public Admin() {
-        
     }
 
     public Admin(String authorizationLevel, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
@@ -15,11 +19,12 @@ public class Admin extends User {
         this.authorizationLevel = authorizationLevel;
     }
 
-    private void addDoctor(){
-        
+    public void addDoctor() {
+        // Implementasyon
     }
-    private void addPatient(){
-        
+
+    public void addPatient() {
+        // Implementasyon
     }
 
     public String getAuthorizationLevel() {
@@ -32,8 +37,6 @@ public class Admin extends User {
 
     @Override
     public String toString() {
-        return "Admin{" + "authorizationLevel=" + authorizationLevel + '}';
+        return "Admin{" + "authorizationLevel=" + authorizationLevel + ", " + super.toString() + '}';
     }
-    
-
 }

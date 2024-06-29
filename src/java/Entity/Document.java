@@ -1,11 +1,24 @@
 package Entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "document")
 public class Document extends BaseEntity {
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "file_name")
     private String fileName;
 
-    public Document() {}
+    public Document() {
+    }
 
     public Document(String title, String description, String fileName, int id, String name) {
         super(id, name);
@@ -40,6 +53,10 @@ public class Document extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Document{" + "title=" + title + ", description=" + description + ", fileName=" + fileName + '}';
+        return "Document{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", fileName='" + fileName + '\'' +
+                '}';
     }
 }

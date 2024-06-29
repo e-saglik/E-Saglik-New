@@ -1,13 +1,27 @@
 package Entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name = "allergy")
 public class Allergy extends BaseEntity {
 
+    @Column(name = "type")
     private String type;
+
+    @Column(name = "severity")
     private int severity;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     public Allergy() {
-
     }
 
     public Allergy(String type, int severity, Patient patient, int id, String name) {
@@ -43,7 +57,6 @@ public class Allergy extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Allergy{" + "type=" + type + ", severity=" + severity + '}';
+        return "Allergy{" + "type=" + type + ", severity=" + severity + ", patient=" + patient + '}';
     }
-
 }

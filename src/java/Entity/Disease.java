@@ -1,12 +1,23 @@
 package Entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "disease")
 public class Disease extends BaseEntity {
 
+    @Column(name = "description")
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     public Disease() {
-
     }
 
     public Disease(String description, Patient patient, int id, String name) {
@@ -35,5 +46,4 @@ public class Disease extends BaseEntity {
     public String toString() {
         return "Disease{" + "description=" + description + '}';
     }
-
 }

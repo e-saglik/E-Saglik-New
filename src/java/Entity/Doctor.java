@@ -1,17 +1,31 @@
 package Entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.List;
 
+@Entity
+@Table(name = "doctor")
 public class Doctor extends User {
 
+    @Column(name = "specialization")
     private String specialization;
+
+    @Column(name = "hospital")
     private String hospital;
+
+    @Column(name = "prescription")
     private String prescription;
+
+    @Column(name = "appointment")
     private String appointment;
+
+    @OneToMany(mappedBy = "doctor")
     private List<Patient> patientList;
 
     public Doctor() {
-
     }
 
     public Doctor(int id, String name, String specialization) {
@@ -36,12 +50,12 @@ public class Doctor extends User {
         this.appointment = appointment;
     }
 
-    void prescribeMedication() {
-
+    public void prescribeMedication() {
+        // Implementasyon
     }
 
-    void requestTest() {
-
+    public void requestTest() {
+        // Implementasyon
     }
 
     public String getSpecialization() {
@@ -86,8 +100,12 @@ public class Doctor extends User {
 
     @Override
     public String toString() {
-        return "Doctor{" + "specialization=" + specialization + ", hospital=" + hospital + ", prescription=" + prescription + ", appointment=" + appointment + ", patientList=" + patientList + '}';
-
+        return "Doctor{" +
+                "specialization='" + specialization + '\'' +
+                ", hospital='" + hospital + '\'' +
+                ", prescription='" + prescription + '\'' +
+                ", appointment='" + appointment + '\'' +
+                ", patientList=" + patientList +
+                '}';
     }
-
 }

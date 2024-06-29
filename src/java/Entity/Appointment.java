@@ -1,13 +1,35 @@
 package Entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.time.LocalTime;
 import java.util.Date;
 
+@Entity
+@Table(name = "appointment")
 public class Appointment extends BaseEntity {
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "appointment_date")
     private Date appointmentDate;
+
+    @Column(name = "appointment_time")
     private LocalTime appointmentTime;
+
+    @Column(name = "status")
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "polyclinic_id")
     private PolyClinic polyClinic;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     public Appointment() {
@@ -22,11 +44,12 @@ public class Appointment extends BaseEntity {
         this.patient = patient;
     }
 
-    private void confirmAppointment(){
-        
+    public void confirmAppointment() {
+        // Implementasyon
     }
-    private void rescheduleAppointment(){
-        
+
+    public void rescheduleAppointment() {
+        // Implementasyon
     }
 
     public Date getAppointmentDate() {
@@ -51,7 +74,7 @@ public class Appointment extends BaseEntity {
 
     public void setStatus(String status) {
         this.status = status;
-    }   
+    }
 
     public PolyClinic getPolyClinic() {
         return polyClinic;
@@ -68,16 +91,15 @@ public class Appointment extends BaseEntity {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
-    
-      @Override
+
+    @Override
     public String toString() {
         return "Appointment{" +
             "appointmentDate=" + appointmentDate +
             ", appointmentTime=" + appointmentTime +
-            ", status=" + status +
+            ", status='" + status + '\'' +
             ", polyClinic=" + polyClinic +
+            ", patient=" + patient +
             '}';
     }
-    
-        
 }
