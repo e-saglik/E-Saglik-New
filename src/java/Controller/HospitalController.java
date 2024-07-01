@@ -53,7 +53,7 @@ public class HospitalController extends BaseController<Hospital> {
         if (hospitalDao == null) {
             hospitalDao = new HospitalDAO();
         }
-        hospitalDao.getById(id);
+        hospitalDao.GetById(id);
         return null;
     }
 
@@ -62,7 +62,7 @@ public class HospitalController extends BaseController<Hospital> {
         if (hospitalDao == null) {
             hospitalDao = new HospitalDAO();
         }
-        hospitalDao.getEntities();
+        hospitalDao.GetList();
         return null;
     }
 

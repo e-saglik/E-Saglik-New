@@ -34,7 +34,7 @@ public class DiseaseController extends BaseController<Disease> {
     }
 
     public List<Disease> getDiseaseList() {
-        this.diseaseList = this.getDiseaseDao().getEntities();
+        this.diseaseList = this.getDiseaseDao().GetList();
         return diseaseList;
     }
 
@@ -56,7 +56,7 @@ public class DiseaseController extends BaseController<Disease> {
         if (diseaseDao == null) {
             diseaseDao = new DiseaseDAO();
         }
-        diseaseDao.getById(id);
+        diseaseDao.GetById(id);
         return null;
     }
 
@@ -65,7 +65,7 @@ public class DiseaseController extends BaseController<Disease> {
         if (diseaseDao == null) {
             diseaseDao = new DiseaseDAO();
         }
-        diseaseDao.getEntities();
+        diseaseDao.GetList();
         return null;
     }
 

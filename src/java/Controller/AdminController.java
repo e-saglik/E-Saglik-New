@@ -34,7 +34,7 @@ public class AdminController extends BaseController<Admin> {
     }
 
     public List<Admin> getAdminList() {
-        this.adminList = this.getAdminDao().getEntities();
+        this.adminList = this.getAdminDao().GetList();
         return adminList;
     }
 
@@ -60,7 +60,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        adminDao.getById(id);
+        adminDao.GetById(id);
         return null;
     }
 
@@ -69,7 +69,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        adminDao.getEntities();
+        adminDao.GetList();
         return null;
     }
 

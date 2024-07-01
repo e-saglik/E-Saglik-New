@@ -34,7 +34,7 @@ public abstract class AbstractDAO<T> implements Serializable {
         entityManager.merge(entity);
     }
 
-    public List<T> getEntities() {
+    public List<T> GetList() {
         Query q = entityManager.createQuery("select c from " + entityClass.getSimpleName() + " c order by c.id desc", entityClass);
         return q.getResultList();
     }
@@ -44,11 +44,11 @@ public abstract class AbstractDAO<T> implements Serializable {
         entityManager.flush();
     }
 
-    public T getById(int id) {
+    public T GetById(int id) {
         return (T) entityManager.find(entityClass, id);
     }
 
-    public List<T> findRange(int[] range) {
+    public List<T> FindRange(int[] range) {
         jakarta.persistence.Query q = entityManager.createQuery("SELECT e FROM " + entityClass.getName() + " e", entityClass);
         q.setMaxResults(range[1] - range[0]);
         q.setFirstResult(range[0]);

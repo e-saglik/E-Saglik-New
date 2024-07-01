@@ -34,7 +34,7 @@ public class DonationController extends BaseController<Donation> {
     }
 
     public List<Donation> getDonationList() {
-        this.donationList = this.getDonationDao().getEntities();
+        this.donationList = this.getDonationDao().GetList();
         return donationList;
     }
 
@@ -56,7 +56,7 @@ public class DonationController extends BaseController<Donation> {
         if (donationDao == null) {
             donationDao = new DonationDAO();
         }
-        donationDao.getById(id);
+        donationDao.GetById(id);
         return null;
     }
 
@@ -65,7 +65,7 @@ public class DonationController extends BaseController<Donation> {
         if (donationDao == null) {
             donationDao = new DonationDAO();
         }
-        donationDao.getEntities();
+        donationDao.GetList();
 
         return null;
     }

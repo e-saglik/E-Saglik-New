@@ -44,7 +44,7 @@ public class RadiographController extends BaseController<Radiograph> {
         if (radiographDao == null) {
             radiographDao = new RadiographDAO();
         }
-        radiographDao.getById(id);
+        radiographDao.GetById(id);
         return null;
     }
 
@@ -53,9 +53,9 @@ public class RadiographController extends BaseController<Radiograph> {
         if (radiographDao == null) {
             radiographDao = new RadiographDAO();
         }
-        radiographDao.getEntities();
+        radiographDao.GetList();
 
-        return radiographDao.getEntities();
+        return radiographDao.GetList();
     }
 
     @Override

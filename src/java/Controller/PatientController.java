@@ -51,7 +51,7 @@ public class PatientController extends BaseController<Patient> {
         if (patientDao == null) {
             patientDao = new PatientDAO();
         }
-        patientDao.getById(id);
+        patientDao.GetById(id);
         return null;
     }
 
@@ -60,7 +60,7 @@ public class PatientController extends BaseController<Patient> {
         if (patientDao == null) {
             patientDao = new PatientDAO();
         }
-        patientDao.getEntities();
+        patientDao.GetList();
         return null;
     }
 

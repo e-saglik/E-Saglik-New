@@ -44,7 +44,7 @@ public class TreatmentController extends BaseController<Treatment> {
         if (treatmentDao == null) {
             treatmentDao = new TreatmentDAO();
         }
-        treatmentDao.getById(id);
+        treatmentDao.GetById(id);
         return null;
     }
 
@@ -53,9 +53,9 @@ public class TreatmentController extends BaseController<Treatment> {
         if (treatmentDao == null) {
             treatmentDao = new TreatmentDAO();
         }
-        treatmentDao.getEntities();
+        treatmentDao.GetList();
 
-        return treatmentDao.getEntities();
+        return treatmentDao.GetList();
     }
 
     @Override

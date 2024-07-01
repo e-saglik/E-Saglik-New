@@ -53,7 +53,7 @@ public class MedicalReportController extends BaseController<MedicalReport> {
         if (medicalReportDao == null) {
             medicalReportDao = new MedicalReportDAO();
         }
-        medicalReportDao.getById(id);
+        medicalReportDao.GetById(id);
 
         return null;
     }
@@ -63,7 +63,7 @@ public class MedicalReportController extends BaseController<MedicalReport> {
         if (medicalReportDao == null) {
             medicalReportDao = new MedicalReportDAO();
         }
-        medicalReportDao.getEntities();
+        medicalReportDao.GetList();
 
         return null;
     }

@@ -53,7 +53,7 @@ public class NotificationController extends BaseController<Notification> {
         if (notificationDao == null) {
             notificationDao = new NotificationDAO();
         }
-        notificationDao.getById(id);
+        notificationDao.GetById(id);
         return null;
     }
 
@@ -63,7 +63,7 @@ public class NotificationController extends BaseController<Notification> {
             notificationDao = new NotificationDAO();
         }
 
-        return notificationDao.getEntities();
+        return notificationDao.GetList();
     }
 
     @Override

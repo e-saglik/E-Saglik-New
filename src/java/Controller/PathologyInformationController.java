@@ -55,7 +55,7 @@ public class PathologyInformationController extends BaseController<PathologyInfo
         if (pathologyInformationDao == null) {
             pathologyInformationDao = new PathologyInformationDAO();
         }
-        pathologyInformationDao.getById(id);
+        pathologyInformationDao.GetById(id);
         return null;
     }
 
@@ -65,7 +65,7 @@ public class PathologyInformationController extends BaseController<PathologyInfo
             pathologyInformationDao = new PathologyInformationDAO();
         }
 
-        return pathologyInformationDao.getEntities();
+        return pathologyInformationDao.GetList();
     }
 
     @Override

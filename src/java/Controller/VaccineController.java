@@ -45,7 +45,7 @@ public class VaccineController extends BaseController<Vaccine> {
         if (donationDao == null) {
             donationDao = new VaccineDAO();
         }
-        donationDao.getById(id);
+        donationDao.GetById(id);
         return null;
     }
 
@@ -54,9 +54,9 @@ public class VaccineController extends BaseController<Vaccine> {
         if (donationDao == null) {
             donationDao = new VaccineDAO();
         }
-        donationDao.getEntities();
+        donationDao.GetList();
 
-        return donationDao.getEntities();
+        return donationDao.GetList();
     }
 
     @Override

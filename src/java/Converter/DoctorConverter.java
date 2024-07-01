@@ -125,7 +125,7 @@ private List<Patient> extractPatientList(String input, PatientDAO patientDAO) {
     for (String number : numbers) {
         try {
             int id = Integer.parseInt(number);
-            Patient patient = patientDAO.getById(id);
+            Patient patient = patientDAO.GetById(id);
             if (patient != null) {
                 patientList.add(patient);
             }

@@ -52,7 +52,7 @@ public class InsuranceController extends BaseController<Insurance> {
         if (ınsuranceDao == null) {
             ınsuranceDao = new InsuranceDAO();
         }
-        ınsuranceDao.getById(id);
+        ınsuranceDao.GetById(id);
         return null;
     }
 
@@ -61,7 +61,7 @@ public class InsuranceController extends BaseController<Insurance> {
         if (ınsuranceDao == null) {
             ınsuranceDao = new InsuranceDAO();
         }
-        ınsuranceDao.getEntities();
+        ınsuranceDao.GetList();
         return null;
     }
 

@@ -53,7 +53,7 @@ public class MedicationController extends BaseController<Medication> {
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }
-        medicationDao.getById(id);
+        medicationDao.GetById(id);
         return null;
     }
 
@@ -62,7 +62,7 @@ public class MedicationController extends BaseController<Medication> {
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }
-        medicationDao.getEntities();
+        medicationDao.GetList();
         return null;
     }
 
