@@ -45,7 +45,7 @@ public class PharmacyController extends BaseController<Pharmacy> {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }
-        pharmacyDao.getPharmacyById(id);
+        pharmacyDao.getById(id);
         return null;
     }
 
@@ -54,9 +54,9 @@ public class PharmacyController extends BaseController<Pharmacy> {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }
-        pharmacyDao.getPharmacyList();
+        pharmacyDao.getEntities();
 
-        return pharmacyDao.getPharmacyList();
+        return pharmacyDao.getEntities();
     }
 
     @Override
@@ -64,15 +64,15 @@ public class PharmacyController extends BaseController<Pharmacy> {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }
-        pharmacyDao.UpdatePharmacy(pharmacy);
+        pharmacyDao.Update(pharmacy);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }
-        pharmacyDao.DeletePharmacy(id);
+        pharmacyDao.Delete(pharmacy);
     }
 
     @Override
@@ -80,6 +80,6 @@ public class PharmacyController extends BaseController<Pharmacy> {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }
-        pharmacyDao.CreatePharmacy(pharmacy);
+        pharmacyDao.Create(pharmacy);
     }
 }

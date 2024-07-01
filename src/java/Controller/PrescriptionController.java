@@ -45,7 +45,7 @@ public class PrescriptionController extends BaseController<Prescription> {
         if (prescriptionDao == null) {
             prescriptionDao = new PrescriptionDAO();
         }
-        prescriptionDao.getPrescriptionById(id);
+        prescriptionDao.getById(id);
         return null;
     }
 
@@ -54,9 +54,9 @@ public class PrescriptionController extends BaseController<Prescription> {
         if (prescriptionDao == null) {
             prescriptionDao = new PrescriptionDAO();
         }
-        prescriptionDao.getPrescriptionList();
+        prescriptionDao.getEntities();
 
-        return prescriptionDao.getPrescriptionList();
+        return prescriptionDao.getEntities();
     }
 
     @Override
@@ -64,15 +64,15 @@ public class PrescriptionController extends BaseController<Prescription> {
         if (prescriptionDao == null) {
             prescriptionDao = new PrescriptionDAO();
         }
-        prescriptionDao.UpdatePrescription(prescription);
+        prescriptionDao.Update(prescription);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (prescriptionDao == null) {
             prescriptionDao = new PrescriptionDAO();
         }
-        prescriptionDao.DeletePrescription(id);
+        prescriptionDao.Delete(prescription);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class PrescriptionController extends BaseController<Prescription> {
         if (prescriptionDao == null) {
             prescriptionDao = new PrescriptionDAO();
         }
-        prescriptionDao.CreatePrescription(prescription);
+        prescriptionDao.Create(prescription);
     }
 
 }

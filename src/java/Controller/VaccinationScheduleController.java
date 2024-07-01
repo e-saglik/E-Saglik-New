@@ -44,7 +44,7 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
         if (scheduleDao == null) {
             scheduleDao = new VaccinationScheduleDAO();
         }
-        scheduleDao.getVaccinationScheduleById(id);
+        scheduleDao.getById(id);
         return null;
     }
 
@@ -53,9 +53,9 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
         if (scheduleDao == null) {
             scheduleDao = new VaccinationScheduleDAO();
         }
-        scheduleDao.getVaccinationScheduleList();
+        scheduleDao.getEntities();
 
-        return scheduleDao.getVaccinationScheduleList();
+        return scheduleDao.getEntities();
     }
 
     @Override
@@ -63,15 +63,15 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
         if (scheduleDao == null) {
             scheduleDao = new VaccinationScheduleDAO();
         }
-        scheduleDao.UpdateVaccinationSchedule(vaccinationSchedule);
+        scheduleDao.Update(vaccinationSchedule);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (scheduleDao == null) {
             scheduleDao = new VaccinationScheduleDAO();
         }
-        scheduleDao.DeleteVaccinationSchedule(id);
+        scheduleDao.Delete(schedule);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
         if (scheduleDao == null) {
             scheduleDao = new VaccinationScheduleDAO();
         }
-        scheduleDao.CreateVaccinationSchedule(schedule);
+        scheduleDao.Create(schedule);
     }
 
 

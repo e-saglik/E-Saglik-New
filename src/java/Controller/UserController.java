@@ -63,7 +63,7 @@ public class UserController extends BaseController<User> {
         if (userDao == null) {
             userDao = new UserDAO();
         }
-        userDao.getUserById(id);
+        userDao.getById(id);
         return null;
     }
 
@@ -72,9 +72,9 @@ public class UserController extends BaseController<User> {
         if (userDao == null) {
             userDao = new UserDAO();
         }
-        userDao.getUserList();
+        userDao.getEntities();
 
-        return userDao.getUserList();
+        return userDao.getEntities();
     }
 
     @Override
@@ -82,15 +82,15 @@ public class UserController extends BaseController<User> {
         if (userDao == null) {
             userDao = new UserDAO();
         }
-        userDao.UpdateUser(user);
+        userDao.Update(user);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (userDao == null) {
             userDao = new UserDAO();
         }
-        userDao.DeleteUser(id);
+        userDao.Delete(user);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class UserController extends BaseController<User> {
         if (userDao == null) {
             userDao = new UserDAO();
         }
-        userDao.CreateUser(user);
+        userDao.Create(user);
     }
 
 }
