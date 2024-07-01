@@ -46,7 +46,7 @@ public class PathologyInformationController extends BaseController<PathologyInfo
         if (pathologyInformationDao == null) {
             pathologyInformationDao = new PathologyInformationDAO();
         }
-        pathologyInformationDao.CreatePathologyInformation(pathologyInformation);
+        pathologyInformationDao.Create(pathologyInformation);
 
     }
 
@@ -55,7 +55,7 @@ public class PathologyInformationController extends BaseController<PathologyInfo
         if (pathologyInformationDao == null) {
             pathologyInformationDao = new PathologyInformationDAO();
         }
-        pathologyInformationDao.getPathologyInformationById(id);
+        pathologyInformationDao.getById(id);
         return null;
     }
 
@@ -64,9 +64,8 @@ public class PathologyInformationController extends BaseController<PathologyInfo
         if (pathologyInformationDao == null) {
             pathologyInformationDao = new PathologyInformationDAO();
         }
-        pathologyInformationDao.getPathologyInformationList();
 
-        return pathologyInformationDao.getPathologyInformationList();
+        return pathologyInformationDao.getEntities();
     }
 
     @Override
@@ -74,15 +73,15 @@ public class PathologyInformationController extends BaseController<PathologyInfo
         if (pathologyInformationDao == null) {
             pathologyInformationDao = new PathologyInformationDAO();
         }
-        pathologyInformationDao.UpdatePathologyInformation(pathologyInformation);
+        pathologyInformationDao.Update(pathologyInformation);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (pathologyInformationDao == null) {
             pathologyInformationDao = new PathologyInformationDAO();
         }
-        pathologyInformationDao.DeletePathologyInformation(id);
+        pathologyInformationDao.Delete(pathologyInformation);
     }
 
 

@@ -44,7 +44,7 @@ public class HospitalController extends BaseController<Hospital> {
         if (hospitalDao == null) {
             hospitalDao = new HospitalDAO();
         }
-        hospitalDao.CreateHospital(hospital);
+        hospitalDao.Create(hospital);
 
     }
 
@@ -53,7 +53,7 @@ public class HospitalController extends BaseController<Hospital> {
         if (hospitalDao == null) {
             hospitalDao = new HospitalDAO();
         }
-        hospitalDao.getHospitalById(id);
+        hospitalDao.getById(id);
         return null;
     }
 
@@ -62,7 +62,7 @@ public class HospitalController extends BaseController<Hospital> {
         if (hospitalDao == null) {
             hospitalDao = new HospitalDAO();
         }
-        hospitalDao.getHospitalList();
+        hospitalDao.getEntities();
         return null;
     }
 
@@ -71,15 +71,15 @@ public class HospitalController extends BaseController<Hospital> {
 if (hospitalDao == null) {
             hospitalDao = new HospitalDAO();
         }
-        hospitalDao.UpdateHospital(hospital);
+        hospitalDao.Update(hospital);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (hospitalDao == null) {
             hospitalDao = new HospitalDAO();
         }
-        hospitalDao.DeleteHospital(id);
+        hospitalDao.Delete(hospital);
     }
 
 }

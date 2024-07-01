@@ -44,7 +44,7 @@ public class MedicationController extends BaseController<Medication> {
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }
-        medicationDao.CreateMedication(medication);
+        medicationDao.Create(medication);
 
     }
 
@@ -53,7 +53,7 @@ public class MedicationController extends BaseController<Medication> {
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }
-        medicationDao.getMedicationById(id);
+        medicationDao.getById(id);
         return null;
     }
 
@@ -62,7 +62,7 @@ public class MedicationController extends BaseController<Medication> {
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }
-        medicationDao.getMedicationList();
+        medicationDao.getEntities();
         return null;
     }
 
@@ -71,15 +71,15 @@ public class MedicationController extends BaseController<Medication> {
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }
-        medicationDao.UpdateMedication(medication);
+        medicationDao.Update(medication);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }
-        medicationDao.DeleteMedication(id);
+        medicationDao.Delete(medication);
     }
 
 }
