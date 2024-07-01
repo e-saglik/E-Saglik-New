@@ -9,18 +9,21 @@
         <h:outputStylesheet library="css" name="bootstrap.min.css" />
     </h:head>
     <h:body>
-        <div class="container .full-height .centered">
+        <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <h:form>
+                        <h:commandButton action="#{navigationController.page('login')}" styleClass="btn btn-info" value="Kullanıcı Girişi"/>
+                        <h:commandButton action="#{navigationController.page('loginAdmin')}" styleClass="btn btn-info" value="Admin Girişi"/>
+                        <h:commandButton action="#{navigationController.page('loginDoctor')}" styleClass="btn btn-info" value="Doktor Girişi"/>
                         <h:panelGrid columns="2" cellpadding="10">
-                            <h:outputLabel value="Username:" for="username" />
+                            <h:outputLabel value="Kullanıcı Adı:" for="username" />
                             <h:inputText id="username" value="#{userController.user.email}" class="form-control" />
 
-                            <h:outputLabel value="Password:" for="password" />
+                            <h:outputLabel value="Sifre:" for="password" />
                             <h:inputSecret id="password" value="#{userController.user.password}" class="form-control" />
                         </h:panelGrid>
-                        <h:commandButton action="#{userController.login()}" value="Login" styleClass="btn btn-primary btn-block" />
+                        <h:commandButton action="#{userController.login()}" value="Giriş" styleClass="btn btn-primary btn-block" />
                     </h:form>
                 </div>
             </div>

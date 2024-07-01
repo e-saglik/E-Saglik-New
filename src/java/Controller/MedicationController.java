@@ -1,16 +1,25 @@
 package Controller;
 
 import DAO.AbstractDAO;
+import DAO.MedicationDAO;
 import Entity.Medication;
 import java.util.List;
 
 public class MedicationController extends BaseController<Medication> {
 
-    public AbstractDAO getMedicationDao() {
+    private MedicationDAO medicationDao;
+    private Medication medication;
+    private List<Medication> medicationList;
+
+    public MedicationController() {
+
+    }
+
+    public MedicationDAO getMedicationDao() {
         return medicationDao;
     }
 
-    public void setMedicationDao(AbstractDAO medicationDao) {
+    public void setMedicationDao(MedicationDAO medicationDao) {
         this.medicationDao = medicationDao;
     }
 
@@ -30,56 +39,47 @@ public class MedicationController extends BaseController<Medication> {
         this.medicationList = medicationList;
     }
 
-    private AbstractDAO medicationDao;
-    private Medication medication;
-    private List<Medication> medicationList;
-
-    public MedicationController() {
-
-    }
-
     @Override
     public void AddEntity(Medication medication) {
+        if (medicationDao == null) {
+            medicationDao = new MedicationDAO();
+        }
+        medicationDao.CreateMedication(medication);
 
     }
 
     @Override
     public Medication GetEntityById(int id) {
+        if (medicationDao == null) {
+            medicationDao = new MedicationDAO();
+        }
+        medicationDao.getMedicationById(id);
         return null;
     }
 
     @Override
     public List<Medication> GetEntityList() {
+        if (medicationDao == null) {
+            medicationDao = new MedicationDAO();
+        }
+        medicationDao.getMedicationList();
         return null;
     }
 
     @Override
     public void UpdateEntity(int id, Medication medication) {
-
+        if (medicationDao == null) {
+            medicationDao = new MedicationDAO();
+        }
+        medicationDao.UpdateMedication(medication);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+        if (medicationDao == null) {
+            medicationDao = new MedicationDAO();
+        }
+        medicationDao.DeleteMedication(id);
     }
 
-//    public void AddUser(User user){
-//        
-//    }
-//    
-//    public User GetUserById(int id){      
-//        return null;        
-//    }
-//    
-//    public List<User> GetUserList(){ 
-//        return null;
-//    }
-//    
-//    public void UpdateUser(int id,User user){
-//        
-//    }
-//    
-//    public void DeleteUser(int id){
-//        
-//    }
 }

@@ -17,30 +17,30 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) {
-        
-        List<Patient> patientList = new ArrayList<>();
-        patientList.add(new Patient()); // Örnek bir hasta ID'si ekleyelim
+//        
+//        List<Patient> patientList = new ArrayList<>();
+//        patientList.add(new Patient()); // Örnek bir hasta ID'si ekleyelim
 
         // Doctor nesnesi oluşturma
-        Doctor doctor = new Doctor(
-            "Psikyatri",      // specialization
-            "Hospital",   // hospital
-            "Some prescription", // prescription
-            "08:00 AM",        // appointment
-            patientList,       // patientList
-            "Canan",            // firstName
-            "Aydın",             // lastName
-            "ccc.com", // email
-            "12345",     // password
-            "Female",            // gender
-            "1234567890",      // phoneNumber
-            "432 Main St",     // address
-            1,                 // id
-            "Dr. Canan"     // name
-        );
-        
-        DoctorController dc = new DoctorController();
-        dc.AddEntity(doctor);
+//        Doctor doctor = new Doctor(
+//            "Psikyatri",      // specialization
+//            "Hospital",   // hospital
+//            "Some prescription", // prescription
+//            "08:00 AM",        // appointment
+//            patientList,       // patientList
+//            "Canan",            // firstName
+//            "Aydın",             // lastName
+//            "ccc.com", // email
+//            "12345",     // password
+//            "Female",            // gender
+//            "1234567890",      // phoneNumber
+//            "432 Main St",     // address
+//            1,                 // id
+//            "Dr. Canan"     // name
+//        );
+//        
+//        DoctorController dc = new DoctorController();
+//        dc.AddEntity(doctor);
 //        
 //        
 //        

@@ -11,6 +11,9 @@
     <h:body>
         <div class="container">
             <div class="row justify-content-center">
+                <h:form>
+
+                </h:form>
                 <div class="col-md-6">
                     <h:form>
                         <h:commandButton action="#{navigationController.page('login')}" styleClass="btn btn-info" value="Kullanıcı Girişi"/>
@@ -20,10 +23,10 @@
                             <h:outputLabel value="Kullanıcı Adı:" for="username" />
                             <h:inputText id="username" value="#{userController.user.email}" class="form-control" />
 
-                            <h:outputLabel value="Sifre:" for="password" />
+                            <h:outputLabel value="Şifre:" for="password" />
                             <h:inputSecret id="password" value="#{userController.user.password}" class="form-control" />
                         </h:panelGrid>
-                        <h:commandButton action="#{userController.login()}" value="Giriş" styleClass="btn btn-primary btn-block" />
+                        <h:commandButton action="#{userController.login()}" value="Login" styleClass="btn btn-primary btn-block" />
                     </h:form>
                 </div>
             </div>
@@ -31,4 +34,3 @@
         <h:outputScript library="js" name="bootstrap.min.js" />
     </h:body>
 </html>
-
