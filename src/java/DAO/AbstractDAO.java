@@ -44,7 +44,7 @@ public abstract class AbstractDAO<T> implements Serializable {
         entityManager.flush();
     }
 
-    public T getById(Long id) {
+    public T getById(int id) {
         return (T) entityManager.find(entityClass, id);
     }
 

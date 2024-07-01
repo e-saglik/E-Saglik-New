@@ -4,7 +4,6 @@ import DAO.AdminDAO;
 import Entity.Admin;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
-import java.io.Serializable;
 import java.util.List;
 
 @Named
@@ -35,7 +34,7 @@ public class AdminController extends BaseController<Admin> {
     }
 
     public List<Admin> getAdminList() {
-        this.adminList = this.getAdminDao().getAdminList();
+        this.adminList = this.getAdminDao().getEntities();
         return adminList;
     }
 
@@ -52,7 +51,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        adminDao.CreateAdmin(admin);
+        adminDao.Create(admin);
 
     }
 
@@ -61,7 +60,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        adminDao.getAdminById(id);
+        adminDao.getById(id);
         return null;
     }
 
@@ -70,7 +69,7 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        adminDao.getAdminList();
+        adminDao.getEntities();
         return null;
     }
 
@@ -79,15 +78,15 @@ public class AdminController extends BaseController<Admin> {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        adminDao.UpdateAdmin(doctor);
+        adminDao.Update(doctor);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (adminDao == null) {
             adminDao = new AdminDAO();
         }
-        adminDao.DeleteAdmin(id);
+        adminDao.Delete(admin);
     }
 
 }
