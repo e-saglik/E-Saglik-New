@@ -50,4 +50,12 @@ public class PaymentController extends BaseController<Payment> {
         paymentDao.DeletePayment(id);
     }
 
+    @Override
+    public void AddEntity(Payment entity) {
+        if (paymentDao == null) {
+            paymentDao = new PaymentDAO();
+        }
+        paymentDao.CreatePayment(payment);
+    }
+
 }

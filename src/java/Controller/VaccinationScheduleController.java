@@ -74,5 +74,13 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
         scheduleDao.DeleteVaccinationSchedule(id);
     }
 
+    @Override
+    public void AddEntity(VaccinationSchedule entity) {
+        if (scheduleDao == null) {
+            scheduleDao = new VaccinationScheduleDAO();
+        }
+        scheduleDao.CreateVaccinationSchedule(schedule);
+    }
+
 
 }
