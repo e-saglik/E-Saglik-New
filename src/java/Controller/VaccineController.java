@@ -75,4 +75,12 @@ public class VaccineController extends BaseController<Vaccine> {
         donationDao.DeleteVaccine(id);
     }
 
+    @Override
+    public void AddEntity(Vaccine entity) {
+        if (donationDao == null) {
+            donationDao = new VaccineDAO();
+        }
+        donationDao.CreateVaccine(vaccine);
+    }
+
 }

@@ -74,5 +74,13 @@ public class TestResultController extends BaseController<TestResult> {
         testResultDao.DeleteTestResult(id);
     }
 
+    @Override
+    public void AddEntity(TestResult entity) {
+        if (testResultDao == null) {
+            testResultDao = new TestResultDAO();
+        }
+        testResultDao.CreateTestResult(testResult);
+    }
+
 
 }
