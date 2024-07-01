@@ -34,7 +34,7 @@ public class DonationController extends BaseController<Donation> {
     }
 
     public List<Donation> getDonationList() {
-        this.donationList = this.getDonationDao().getDonationList();
+        this.donationList = this.getDonationDao().GetList();
         return donationList;
     }
 
@@ -47,7 +47,7 @@ public class DonationController extends BaseController<Donation> {
         if (donationDao == null) {
             donationDao = new DonationDAO();
         }
-        donationDao.CreateDonation(donation);
+        donationDao.Create(donation);
 
     }
 
@@ -56,7 +56,7 @@ public class DonationController extends BaseController<Donation> {
         if (donationDao == null) {
             donationDao = new DonationDAO();
         }
-        donationDao.getDonationById(id);
+        donationDao.GetById(id);
         return null;
     }
 
@@ -65,7 +65,7 @@ public class DonationController extends BaseController<Donation> {
         if (donationDao == null) {
             donationDao = new DonationDAO();
         }
-        donationDao.getDonationList();
+        donationDao.GetList();
 
         return null;
     }
@@ -75,15 +75,15 @@ public class DonationController extends BaseController<Donation> {
         if (donationDao == null) {
             donationDao = new DonationDAO();
         }
-        donationDao.UpdateDonation(donation);
+        donationDao.Update(donation);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (donationDao == null) {
             donationDao = new DonationDAO();
         }
-        donationDao.DeleteDonation(id);
+        donationDao.Delete(donation);
     }
     
 }

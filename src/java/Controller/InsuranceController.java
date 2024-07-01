@@ -44,7 +44,7 @@ public class InsuranceController extends BaseController<Insurance> {
         if (ınsuranceDao == null) {
             ınsuranceDao = new InsuranceDAO();
         }
-        ınsuranceDao.CreateInsurance(ınsurance);
+        ınsuranceDao.Create(ınsurance);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class InsuranceController extends BaseController<Insurance> {
         if (ınsuranceDao == null) {
             ınsuranceDao = new InsuranceDAO();
         }
-        ınsuranceDao.getInsuranceById(id);
+        ınsuranceDao.GetById(id);
         return null;
     }
 
@@ -61,7 +61,7 @@ public class InsuranceController extends BaseController<Insurance> {
         if (ınsuranceDao == null) {
             ınsuranceDao = new InsuranceDAO();
         }
-        ınsuranceDao.getInsuranceList();
+        ınsuranceDao.GetList();
         return null;
     }
 
@@ -70,15 +70,15 @@ public class InsuranceController extends BaseController<Insurance> {
 if (ınsuranceDao == null) {
             ınsuranceDao = new InsuranceDAO();
         }
-        ınsuranceDao.UpdateInsurance(ınsurance);
+        ınsuranceDao.Update(ınsurance);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
 if (ınsuranceDao == null) {
             ınsuranceDao = new InsuranceDAO();
         }
-        ınsuranceDao.DeleteInsurance(id);
+        ınsuranceDao.Delete(ınsurance);
     }
 
 }

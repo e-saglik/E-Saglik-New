@@ -20,7 +20,7 @@ public class PaymentController extends BaseController<Payment> {
         if (paymentDao == null) {
             paymentDao = new PaymentDAO();
         }
-        paymentDao.getPaymentById(id);
+        paymentDao.GetById(id);
         return null;
     }
 
@@ -29,9 +29,9 @@ public class PaymentController extends BaseController<Payment> {
         if (paymentDao == null) {
             paymentDao = new PaymentDAO();
         }
-        paymentDao.getPaymentList();
+        paymentDao.GetList();
 
-        return paymentDao.getPaymentList();
+        return paymentDao.GetList();
     }
 
     @Override
@@ -39,15 +39,15 @@ public class PaymentController extends BaseController<Payment> {
         if (paymentDao == null) {
             paymentDao = new PaymentDAO();
         }
-        paymentDao.UpdatePayment(payment);
+        paymentDao.Update(payment);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (paymentDao == null) {
             paymentDao = new PaymentDAO();
         }
-        paymentDao.DeletePayment(id);
+        paymentDao.Delete(payment);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class PaymentController extends BaseController<Payment> {
         if (paymentDao == null) {
             paymentDao = new PaymentDAO();
         }
-        paymentDao.CreatePayment(payment);
+        paymentDao.Create(payment);
     }
 
 }
