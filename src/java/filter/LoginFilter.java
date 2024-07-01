@@ -40,7 +40,7 @@ public class LoginFilter implements Filter{
             }
         }
         else{
-            if(url.contains("admin") || url.contains("doctor")){
+            if( url.contains("doctor")){
                 res.sendRedirect(req.getContextPath() + "/index.xhtml");
             }
             else{
