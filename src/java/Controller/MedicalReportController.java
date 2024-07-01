@@ -44,7 +44,7 @@ public class MedicalReportController extends BaseController<MedicalReport> {
         if (medicalReportDao == null) {
             medicalReportDao = new MedicalReportDAO();
         }
-        medicalReportDao.CreateMedicalReport(medicalReport);
+        medicalReportDao.Create(medicalReport);
 
     }
 
@@ -53,7 +53,7 @@ public class MedicalReportController extends BaseController<MedicalReport> {
         if (medicalReportDao == null) {
             medicalReportDao = new MedicalReportDAO();
         }
-        medicalReportDao.getMedicalReportById(id);
+        medicalReportDao.getById(id);
 
         return null;
     }
@@ -63,7 +63,7 @@ public class MedicalReportController extends BaseController<MedicalReport> {
         if (medicalReportDao == null) {
             medicalReportDao = new MedicalReportDAO();
         }
-        medicalReportDao.getMedicalReportList();
+        medicalReportDao.getEntities();
 
         return null;
     }
@@ -73,16 +73,16 @@ public class MedicalReportController extends BaseController<MedicalReport> {
         if (medicalReportDao == null) {
             medicalReportDao = new MedicalReportDAO();
         }
-        medicalReportDao.UpdateMedicalReport(medicalReport);
+        medicalReportDao.Update(medicalReport);
 
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (medicalReportDao == null) {
             medicalReportDao = new MedicalReportDAO();
         }
-        medicalReportDao.DeleteMedicalReport(id);
+        medicalReportDao.Delete(medicalReport);
 
     }
 

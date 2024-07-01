@@ -54,7 +54,7 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public int getPageCount() {
-        this.pageCount = (int) Math.ceil(getDao().countDoctors()/(double)pageSize);
+        this.pageCount = (int) Math.ceil(getDao().Count()/(double)pageSize);
         return pageCount;
     }
 
@@ -71,12 +71,12 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public void update() {
-        this.getDao().UpdateDoctor(this.entity);
+        this.getDao().Update(this.entity);
         this.entity = new Doctor();  
     }
 
     public void create() {
-        this.getDao().CreateDoctor(this.entity);
+        this.getDao().Create(this.entity);
         this.entity = new Doctor();
     }
 
