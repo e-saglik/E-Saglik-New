@@ -75,4 +75,12 @@ public class PrescriptionController extends BaseController<Prescription> {
         prescriptionDao.DeletePrescription(id);
     }
 
+    @Override
+    public void AddEntity(Prescription entity) {
+        if (prescriptionDao == null) {
+            prescriptionDao = new PrescriptionDAO();
+        }
+        prescriptionDao.CreatePrescription(prescription);
+    }
+
 }

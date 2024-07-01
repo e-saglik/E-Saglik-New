@@ -74,5 +74,13 @@ public class TreatmentController extends BaseController<Treatment> {
         treatmentDao.DeleteTreatment(id);
     }
 
+    @Override
+    public void AddEntity(Treatment entity) {
+        if (treatmentDao == null) {
+            treatmentDao = new TreatmentDAO();
+        }
+        treatmentDao.CreateTreatment(treatment);
+    }
+
 
 }

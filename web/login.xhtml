@@ -6,13 +6,26 @@
       xmlns:f="jakarta.faces.core">
     <h:head>
         <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
     </h:head>
     <h:body>
-        <h:form>
-            Username: <h:inputText value="#{userController.user.email}" /><br />
-            Password: <h:inputText value="#{userController.user.password}" /><br />
-            <h:commandButton action="#{userController.login()}" value="Login" />			
-        </h:form>
-        <hr />
+        <div class="container .full-height .centered">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h:form>
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <h:outputLabel value="Username:" for="username" />
+                            <h:inputText id="username" value="#{userController.user.email}" class="form-control" />
+
+                            <h:outputLabel value="Password:" for="password" />
+                            <h:inputSecret id="password" value="#{userController.user.password}" class="form-control" />
+                        </h:panelGrid>
+                        <h:commandButton action="#{userController.login()}" value="Login" styleClass="btn btn-primary btn-block" />
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <h:outputScript library="js" name="bootstrap.min.js" />
     </h:body>
 </html>
+

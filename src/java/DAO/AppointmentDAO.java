@@ -3,12 +3,17 @@ package DAO;
 import Entity.Appointment;
 import Entity.Patient;
 import Entity.PolyClinic;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
 import java.time.LocalTime;
 import java.util.List;
 
 public class AppointmentDAO extends AbstractDAO<Appointment> {
+
+    public AppointmentDAO(EntityManager em) {
+        super();
+    }
 
     public void CreateAppointment(Appointment appointment) {
         try {

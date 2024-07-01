@@ -74,4 +74,12 @@ public class PharmacyController extends BaseController<Pharmacy> {
         }
         pharmacyDao.DeletePharmacy(id);
     }
+
+    @Override
+    public void AddEntity(Pharmacy entity) {
+        if (pharmacyDao == null) {
+            pharmacyDao = new PharmacyDAO();
+        }
+        pharmacyDao.CreatePharmacy(pharmacy);
+    }
 }

@@ -74,5 +74,13 @@ public class RadiographController extends BaseController<Radiograph> {
         radiographDao.DeleteRadiograph(id);
     }
 
+    @Override
+    public void AddEntity(Radiograph entity) {
+        if (radiographDao == null) {
+            radiographDao = new RadiographDAO();
+        }
+        radiographDao.CreateRadiograph(radiograph);
+    }
+
 
 }

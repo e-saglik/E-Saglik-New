@@ -93,4 +93,12 @@ public class UserController extends BaseController<User> {
         userDao.DeleteUser(id);
     }
 
+    @Override
+    public void AddEntity(User entity) {
+        if (userDao == null) {
+            userDao = new UserDAO();
+        }
+        userDao.CreateUser(user);
+    }
+
 }
