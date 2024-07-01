@@ -8,7 +8,7 @@ import jakarta.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InsuranceDAO extends BaseDAO<Insurance> {
+public class InsuranceDAO extends AbstractDAO<Insurance> {
 
     public InsuranceDAO() {
         super();

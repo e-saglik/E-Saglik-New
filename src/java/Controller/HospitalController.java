@@ -1,20 +1,20 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
 import Entity.Hospital;
 import java.util.List;
 
 public class HospitalController extends BaseController<Hospital> {
 
-    private BaseDAO hospitalDao;
+    private AbstractDAO hospitalDao;
     private Hospital hospital;
     private List<Hospital> hospitalList;
 
-    public BaseDAO getHospitalDao() {
+    public AbstractDAO getHospitalDao() {
         return hospitalDao;
     }
 
-    public void setHospitalDao(BaseDAO hospitalDao) {
+    public void setHospitalDao(AbstractDAO hospitalDao) {
         this.hospitalDao = hospitalDao;
     }
 

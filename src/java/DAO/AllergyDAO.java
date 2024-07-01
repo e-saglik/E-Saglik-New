@@ -2,17 +2,19 @@ package DAO;
 
 import Entity.Allergy;
 import Entity.Patient;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class AllergyDAO extends BaseDAO<Allergy> {
+public class AllergyDAO extends AbstractDAO<Allergy> {
 
     private PatientDAO patientDAO;
+   
 
-    public AllergyDAO() {
+    public AllergyDAO(EntityManager em) {
         super();
-        this.patientDAO = new PatientDAO(); // PatientDAO'nun JPA versiyonunu kullanıyoruz
+        this.patientDAO = new PatientDAO(); 
     }
 
     public void CreateAllergy(Allergy allergy) {

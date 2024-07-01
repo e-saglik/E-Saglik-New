@@ -1,6 +1,6 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
 import DAO.PaymentDAO;
 import Entity.Payment;
 import java.util.List;

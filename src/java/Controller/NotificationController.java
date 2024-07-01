@@ -1,6 +1,6 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
 import DAO.NotificationDAO;
 import Entity.Notification;
 import java.util.List;
@@ -15,7 +15,7 @@ public class NotificationController extends BaseController<Notification> {
 
     }
 
-    public BaseDAO getNotificationDao() {
+    public AbstractDAO getNotificationDao() {
         return notificationDao;
     }
 

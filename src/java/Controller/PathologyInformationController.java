@@ -1,6 +1,6 @@
 package Controller;
 
-import DAO.BaseDAO;
+import DAO.AbstractDAO;
 import DAO.PathologyInformationDAO;
 import Entity.PathologyInformation;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 public class PathologyInformationController extends BaseController<PathologyInformation> {
 
     
-    public BaseDAO getPathologyInformationDao() {
+    public AbstractDAO getPathologyInformationDao() {
         return pathologyInformationDao;
     }
 

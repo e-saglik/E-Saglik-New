@@ -8,7 +8,7 @@ import jakarta.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HospitalDAO extends BaseDAO<Hospital> {
+public class HospitalDAO extends AbstractDAO<Hospital> {
 
     public HospitalDAO() {
         super();

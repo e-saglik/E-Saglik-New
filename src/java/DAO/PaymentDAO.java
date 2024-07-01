@@ -7,7 +7,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
 
-public class PaymentDAO extends BaseDAO<Payment> {
+public class PaymentDAO extends AbstractDAO<Payment> {
 
     public PaymentDAO() {
         super();

@@ -7,7 +7,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
 
-public class PatientDAO extends BaseDAO<Patient> {
+public class PatientDAO extends AbstractDAO<Patient> {
 
     public PatientDAO() {
         super();

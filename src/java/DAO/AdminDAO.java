@@ -5,7 +5,7 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class AdminDAO extends BaseDAO<Admin> {
+public class AdminDAO extends AbstractDAO<Admin> {
 
     public AdminDAO() {
         super();

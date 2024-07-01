@@ -2,21 +2,27 @@ package Controller;
 
 import DAO.AllergyDAO;
 import Entity.Allergy;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
 import java.util.List;
 
 public class AllergyController extends BaseController<Allergy> {
 
     private AllergyDAO allergyDao;
-    private Allergy allergy;
-    private List<Allergy> allergyList;
+    private EntityManagerFactory emf;
+    private EntityManager em;
 
     public AllergyController() {
-
+        this.emf = Persistence.createEntityManagerFactory("YourPersistenceUnitName");
+        this.em = emf.createEntityManager();
+        this.allergyDao = new AllergyDAO(em);
     }
 
     public AllergyDAO getAllergyDao() {
         if (this.allergyDao == null) {
-            this.allergyDao = new AllergyDAO();
+            this.allergyDao = new AllergyDAO(em);
         }
         return allergyDao;
     }
@@ -25,54 +31,38 @@ public class AllergyController extends BaseController<Allergy> {
         this.allergyDao = allergyDao;
     }
 
-    public Allergy getAllergy() {
-        return allergy;
-    }
-
-    public void setAllergy(Allergy allergy) {
-        this.allergy = allergy;
-    }
-
     public List<Allergy> getAllergyList() {
-        this.allergyList = this.getAllergyDao().getAllergyList();
-        return allergyList;
-    }
-
-    public void setAllergyList(List<Allergy> allergyList) {
-        this.allergyList = allergyList;
+        return this.getAllergyDao().getAllergyList();
     }
 
     @Override
     public void AddEntity(Allergy allergy) {
         if (allergyDao == null) {
-            allergyDao = new AllergyDAO();
+            allergyDao = new AllergyDAO(em);
         }
         allergyDao.CreateAllergy(allergy);
-
     }
 
     @Override
     public Allergy GetEntityById(int id) {
         if (allergyDao == null) {
-            allergyDao = new AllergyDAO();
+            allergyDao = new AllergyDAO(em);
         }
-        allergyDao.getAllergyById(id);
-        return null;
+        return allergyDao.getAllergyById(id);
     }
 
     @Override
     public List<Allergy> GetEntityList() {
         if (allergyDao == null) {
-            allergyDao = new AllergyDAO();
+            allergyDao = new AllergyDAO(em);
         }
-        allergyList = allergyDao.getAllergyList();
-        return allergyList;
+        return allergyDao.getAllergyList();
     }
 
     @Override
     public void UpdateEntity(int id, Allergy allergy) {
         if (allergyDao == null) {
-            allergyDao = new AllergyDAO();
+            allergyDao = new AllergyDAO(em);
         }
         allergyDao.UpdateAllergy(allergy);
     }
@@ -80,9 +70,17 @@ public class AllergyController extends BaseController<Allergy> {
     @Override
     public void DeleteEntity(int id) {
         if (allergyDao == null) {
-            allergyDao = new AllergyDAO();
+            allergyDao = new AllergyDAO(em);
         }
         allergyDao.DeleteAllergy(id);
     }
 
+    public void close() {
+        if (em != null && em.isOpen()) {
+            em.close();
+        }
+        if (emf != null && emf.isOpen()) {
+            emf.close();
+        }
+    }
 }

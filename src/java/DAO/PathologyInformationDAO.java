@@ -6,7 +6,7 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class PathologyInformationDAO extends BaseDAO<PathologyInformation> {
+public class PathologyInformationDAO extends AbstractDAO<PathologyInformation> {
 
     public PathologyInformationDAO() {
         super();
