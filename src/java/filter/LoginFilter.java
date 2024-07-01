@@ -20,7 +20,7 @@ import java.io.IOException;
  * @author zafer
  */
 @WebFilter("/*")
-public class loginFilter implements Filter{
+public class LoginFilter implements Filter{
 
     @Override
     public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {

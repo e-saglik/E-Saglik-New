@@ -45,7 +45,7 @@ public class VaccineController extends BaseController<Vaccine> {
         if (donationDao == null) {
             donationDao = new VaccineDAO();
         }
-        donationDao.getVaccineById(id);
+        donationDao.GetById(id);
         return null;
     }
 
@@ -54,9 +54,9 @@ public class VaccineController extends BaseController<Vaccine> {
         if (donationDao == null) {
             donationDao = new VaccineDAO();
         }
-        donationDao.getVaccineList();
+        donationDao.GetList();
 
-        return donationDao.getVaccineList();
+        return donationDao.GetList();
     }
 
     @Override
@@ -64,15 +64,15 @@ public class VaccineController extends BaseController<Vaccine> {
         if (donationDao == null) {
             donationDao = new VaccineDAO();
         }
-        donationDao.UpdateVaccine(vaccine);
+        donationDao.Update(vaccine);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (donationDao == null) {
             donationDao = new VaccineDAO();
         }
-        donationDao.DeleteVaccine(id);
+        donationDao.Delete(vaccine);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class VaccineController extends BaseController<Vaccine> {
         if (donationDao == null) {
             donationDao = new VaccineDAO();
         }
-        donationDao.CreateVaccine(vaccine);
+        donationDao.Create(vaccine);
     }
 
 }

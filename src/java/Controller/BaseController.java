@@ -23,7 +23,7 @@ public abstract class BaseController<Entity> implements Serializable {
 
     public abstract void UpdateEntity(int id, Entity entity);
 
-    public abstract void DeleteEntity(int id);
+    public abstract void DeleteEntity();
 
     public Entity getEntity() {
         return entity;

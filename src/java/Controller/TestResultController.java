@@ -44,7 +44,7 @@ public class TestResultController extends BaseController<TestResult> {
         if (testResultDao == null) {
             testResultDao = new TestResultDAO();
         }
-        testResultDao.getTestResultById(id);
+        testResultDao.GetById(id);
         return null;
     }
 
@@ -53,9 +53,9 @@ public class TestResultController extends BaseController<TestResult> {
         if (testResultDao == null) {
             testResultDao = new TestResultDAO();
         }
-        testResultDao.getTestResultList();
+        testResultDao.GetList();
 
-        return testResultDao.getTestResultList();
+        return testResultDao.GetList();
     }
 
     @Override
@@ -63,15 +63,15 @@ public class TestResultController extends BaseController<TestResult> {
         if (testResultDao == null) {
             testResultDao = new TestResultDAO();
         }
-        testResultDao.UpdateTestResult(testResult);
+        testResultDao.Update(testResult);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (testResultDao == null) {
             testResultDao = new TestResultDAO();
         }
-        testResultDao.DeleteTestResult(id);
+        testResultDao.Delete(testResult);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class TestResultController extends BaseController<TestResult> {
         if (testResultDao == null) {
             testResultDao = new TestResultDAO();
         }
-        testResultDao.CreateTestResult(testResult);
+        testResultDao.Create(testResult);
     }
 
 

@@ -43,7 +43,7 @@ public class PatientController extends BaseController<Patient> {
         if (patientDao == null) {
             patientDao = new PatientDAO();
         }
-        patientDao.CreatePatient(patient);
+        patientDao.Create(patient);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class PatientController extends BaseController<Patient> {
         if (patientDao == null) {
             patientDao = new PatientDAO();
         }
-        patientDao.getPatientById(id);
+        patientDao.GetById(id);
         return null;
     }
 
@@ -60,7 +60,7 @@ public class PatientController extends BaseController<Patient> {
         if (patientDao == null) {
             patientDao = new PatientDAO();
         }
-        patientDao.getPatientList();
+        patientDao.GetList();
         return null;
     }
 
@@ -69,14 +69,14 @@ public class PatientController extends BaseController<Patient> {
         if (patientDao == null) {
             patientDao = new PatientDAO();
         }
-        patientDao.UpdatePatient(patient);
+        patientDao.Update(patient);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (patientDao == null) {
             patientDao = new PatientDAO();
         }
-        patientDao.DeletePatient(id);
+        patientDao.Delete(patient);
     }
 }

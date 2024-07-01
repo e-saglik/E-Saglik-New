@@ -44,7 +44,7 @@ public class NotificationController extends BaseController<Notification> {
         if (notificationDao == null) {
             notificationDao = new NotificationDAO();
         }
-        notificationDao.CreateNotification(notification);
+        notificationDao.Create(notification);
 
     }
 
@@ -53,7 +53,7 @@ public class NotificationController extends BaseController<Notification> {
         if (notificationDao == null) {
             notificationDao = new NotificationDAO();
         }
-        notificationDao.getNotificationById(id);
+        notificationDao.GetById(id);
         return null;
     }
 
@@ -62,9 +62,8 @@ public class NotificationController extends BaseController<Notification> {
         if (notificationDao == null) {
             notificationDao = new NotificationDAO();
         }
-        notificationDao.getNotificationList();
 
-        return notificationDao.getNotificationList();
+        return notificationDao.GetList();
     }
 
     @Override
@@ -72,15 +71,15 @@ public class NotificationController extends BaseController<Notification> {
         if (notificationDao == null) {
             notificationDao = new NotificationDAO();
         }
-        notificationDao.UpdateNotification(notification);
+        notificationDao.Update(notification);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (notificationDao == null) {
             notificationDao = new NotificationDAO();
         }
-        notificationDao.DeleteNotification(id);
+        notificationDao.Delete(notification);
     }
 
 }

@@ -54,7 +54,7 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public int getPageCount() {
-        this.pageCount = (int) Math.ceil(getDao().countDoctors()/(double)pageSize);
+        this.pageCount = (int) Math.ceil(getDao().Count()/(double)pageSize);
         return pageCount;
     }
 
@@ -71,12 +71,12 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public void update() {
-        this.getDao().UpdateDoctor(this.entity);
+        this.getDao().Update(this.entity);
         this.entity = new Doctor();  
     }
 
     public void create() {
-        this.getDao().CreateDoctor(this.entity);
+        this.getDao().Create(this.entity);
         this.entity = new Doctor();
     }
 
@@ -92,7 +92,7 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public List<Doctor> getList() {
-        this.list = this.getDao().getDoctorList(page,pageSize);
+        this.list = this.getDao().GetList(page,pageSize);
         return list;
     }
 
@@ -109,7 +109,7 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.CreateDoctor(entity);
+        dao.Create(entity);
 
     }
 
@@ -118,7 +118,7 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.getDoctorById(id);
+        dao.GetById(id);
         return null;
     }
 
@@ -127,9 +127,9 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.getDoctorList(page,pageSize);
+        dao.GetList(page,pageSize);
 
-        return dao.getDoctorList(page,pageSize);
+        return dao.GetList(page,pageSize);
     }
 
     @Override
@@ -137,15 +137,15 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.UpdateDoctor(entity);
+        dao.Update(entity);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.DeleteDoctor(id);
+        dao.Delete(entity);
     }
 
     public Doctor getEntity() {

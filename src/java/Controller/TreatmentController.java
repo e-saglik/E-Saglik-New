@@ -44,7 +44,7 @@ public class TreatmentController extends BaseController<Treatment> {
         if (treatmentDao == null) {
             treatmentDao = new TreatmentDAO();
         }
-        treatmentDao.getTreatmentById(id);
+        treatmentDao.GetById(id);
         return null;
     }
 
@@ -53,9 +53,9 @@ public class TreatmentController extends BaseController<Treatment> {
         if (treatmentDao == null) {
             treatmentDao = new TreatmentDAO();
         }
-        treatmentDao.getTreatmentList();
+        treatmentDao.GetList();
 
-        return treatmentDao.getTreatmentList();
+        return treatmentDao.GetList();
     }
 
     @Override
@@ -63,15 +63,15 @@ public class TreatmentController extends BaseController<Treatment> {
         if (treatmentDao == null) {
             treatmentDao = new TreatmentDAO();
         }
-        treatmentDao.UpdateTreatment(treatment);
+        treatmentDao.Update(treatment);
     }
 
     @Override
-    public void DeleteEntity(int id) {
+    public void DeleteEntity() {
         if (treatmentDao == null) {
             treatmentDao = new TreatmentDAO();
         }
-        treatmentDao.DeleteTreatment(id);
+        treatmentDao.Delete(treatment);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class TreatmentController extends BaseController<Treatment> {
         if (treatmentDao == null) {
             treatmentDao = new TreatmentDAO();
         }
-        treatmentDao.CreateTreatment(treatment);
+        treatmentDao.Create(treatment);
     }
 
 
