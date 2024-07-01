@@ -1,16 +1,25 @@
 package Controller;
 
 import DAO.AbstractDAO;
+import DAO.InsuranceDAO;
 import Entity.Insurance;
 import java.util.List;
 
 public class InsuranceController extends BaseController<Insurance> {
 
+    private InsuranceDAO ınsuranceDao;
+    private Insurance ınsurance;
+    private List<Insurance> ınsuranceList;
+
+    public InsuranceController() {
+
+    }
+
     public AbstractDAO getInsuranceDao() {
         return ınsuranceDao;
     }
 
-    public void setInsuranceDao(AbstractDAO ınsuranceDao) {
+    public void setInsuranceDao(InsuranceDAO ınsuranceDao) {
         this.ınsuranceDao = ınsuranceDao;
     }
 
@@ -30,37 +39,46 @@ public class InsuranceController extends BaseController<Insurance> {
         this.ınsuranceList = ınsuranceList;
     }
 
-    private AbstractDAO ınsuranceDao;
-    private Insurance ınsurance;
-    private List<Insurance> ınsuranceList;
-
-    public InsuranceController() {
-
-    }
-
     @Override
     public void AddEntity(Insurance insurance) {
-
+        if (ınsuranceDao == null) {
+            ınsuranceDao = new InsuranceDAO();
+        }
+        ınsuranceDao.CreateInsurance(ınsurance);
     }
 
     @Override
     public Insurance GetEntityById(int id) {
+        if (ınsuranceDao == null) {
+            ınsuranceDao = new InsuranceDAO();
+        }
+        ınsuranceDao.getInsuranceById(id);
         return null;
     }
 
     @Override
     public List<Insurance> GetEntityList() {
+        if (ınsuranceDao == null) {
+            ınsuranceDao = new InsuranceDAO();
+        }
+        ınsuranceDao.getInsuranceList();
         return null;
     }
 
     @Override
     public void UpdateEntity(int id, Insurance ınsurance) {
-
+if (ınsuranceDao == null) {
+            ınsuranceDao = new InsuranceDAO();
+        }
+        ınsuranceDao.UpdateInsurance(ınsurance);
     }
 
     @Override
     public void DeleteEntity(int id) {
-
+if (ınsuranceDao == null) {
+            ınsuranceDao = new InsuranceDAO();
+        }
+        ınsuranceDao.DeleteInsurance(id);
     }
 
 }
