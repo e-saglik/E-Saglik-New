@@ -10,14 +10,18 @@ import java.io.Serializable;
 public class NavigationController implements Serializable{
     
     public String userPage(String p){
-        return "/pages/user/"+p+"?faces-redirct=true";
+        return "/pages/user/"+p+"?faces-redirect=true";
     }
     
     public String adminPage(String p){
-        return "/pages/admin/"+p+"?faces-redirct=true";
+        return "/pages/admin/"+p+"?faces-redirect=true";
     }
     
     public String doctorPage(String p){
-        return "/pages/doctor/"+p+"?faces-redirct=true";
+        return "/pages/doctor/"+p+"?faces-redirect=true";
+    }
+    
+    public String page(String p){
+        return "/"+p+"?faces-redirect=true";
     }
 }
