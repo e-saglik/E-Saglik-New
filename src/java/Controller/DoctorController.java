@@ -92,7 +92,7 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public List<Doctor> getList() {
-        this.list = this.getDao().GetList(page,pageSize);
+        this.list = this.getDao().GetList();
         return list;
     }
 
@@ -127,9 +127,9 @@ public class DoctorController extends BaseController<Doctor> {
         if (dao == null) {
             dao = new DoctorDAO();
         }
-        dao.GetList(page,pageSize);
+        dao.GetList();
 
-        return dao.GetList(page,pageSize);
+        return dao.GetList();
     }
 
     @Override
