@@ -14,7 +14,7 @@ import java.util.Date;
 @NamedQuery(name = "PathologyInformation.findAll", query = "SELECT p FROM PathologyInformation p")
 public class PathologyInformation extends BaseEntity implements Serializable {
     
-    @Column(name = "information_date")
+    @Column(name = "informationdate")
     private Date informationDate;
 
     @Column(name = "information")
@@ -26,12 +26,6 @@ public class PathologyInformation extends BaseEntity implements Serializable {
     
     public PathologyInformation() {
     
-    }
-
-    public PathologyInformation(Date informationDate, String information, int id, String name) {
-        super(id, name);
-        this.informationDate = informationDate;
-        this.information = information;
     }
 
     public Date getInformationDate() {
