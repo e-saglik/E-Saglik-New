@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="testResult-table-form">
-                        <h:dataTable styleClass="table table-striped" value="#{TestResultController.testResults}" var="testResult" id="testResult-table">
+                        <h:dataTable styleClass="table table-striped" value="#{testResultController.GetEntityList()}" var="testResult">
                             <h:column>
                                 <f:facet name="header">Tarih</f:facet>
                                     #{testResult.date}
@@ -36,133 +36,84 @@
                                     #{testResult.testValue}
                             </h:column>
                             <h:column>
-                                <f:facet name="header">İşlemler</f:facet>
+                                <f:facet name="header">Sil</f:facet>
                                 <h:commandButton onclick="$('.modal#{testResult.id}').modal('show')" styleClass="btn btn-warning" value="Sil">
                                     <f:ajax execute="@this" render="delete-modal#{testResult.id}"/>
                                 </h:commandButton>
-                                <h:commandButton onclick="$('.modal-edit#{testResult.id}').modal('show')" styleClass="btn btn-info" value="Güncelle">
-                                    <f:ajax execute="@this" render="edit-modal#{testResult.id}"/>
-                                </h:commandButton>
                             </h:column>
                         </h:dataTable>
-                        <pre>Bulunduğunuz Sayfa #{TestResultController.page}, Toplam Sayfa #{TestResultController.pageCount}</pre>
+                        <pre>Bulunduğunuz Sayfa #{testResultController.page}, Toplam Sayfa #{testResultController.pageCount}</pre>
                         <div class="btn-group">
-                            <h:commandButton action="#{TestResultController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{TestResultController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{testResultController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{testResultController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
                         </div>
                     </h:form>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="testResult-form">
-                        <h:inputText value="#{TestResultController.entity.id}" style="display: none;"></h:inputText>
+                        <h:inputText value="#{testResultController.entity.id}" style="display: none;"></h:inputText>
                         <div class="form-group">
                             <label for="inputDate">Tarih</label>
-                            <h:inputText styleClass="form-control" value="#{TestResultController.entity.date}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.entity.date}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestType">Test Türü</label>
-                            <h:inputText styleClass="form-control" value="#{TestResultController.entity.testType}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testType}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestName">Test Adı</label>
-                            <h:inputText styleClass="form-control" value="#{TestResultController.entity.testName}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testName}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestNormalValue">Normal Değer</label>
-                            <h:inputText styleClass="form-control" value="#{TestResultController.entity.testNormalValue}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testNormalValue}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestValue">Değer</label>
-                            <h:inputText styleClass="form-control" value="#{TestResultController.entity.testValue}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testValue}"></h:inputText>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{TestResultController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{TestResultController.update()}">
+                            <h:commandButton rendered="#{testResultController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{testResultController.UpdateEntity()}">
                                 <f:ajax execute="testResult-form" render="testResult-form testResult-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{TestResultController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{TestResultController.create()}">
+                            <h:commandButton rendered="#{testResultController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{testResultController.AddEntity()}">
                                 <f:ajax execute="testResult-form" render="testResult-form testResult-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{TestResultController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{TestResultController.clearForm()}">
+                            <h:commandButton rendered="#{testResultController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{testResultController.clearForm()}">
                                 <f:ajax execute="@this" render="testResult-form"/>
                             </h:commandButton>
                         </div>
                     </h:form>
                 </div>
-            </div>
-            <!-- Delete Modals -->
-            <ui:repeat value="#{TestResultController.testResults}" var="testResult">
-                <div class="modal fade modal#{testResult.id}" tabindex="-1">
-                    <div class="modal-dialog">
-                        <h:panelGroup layout="block" class="modal-content" id="delete-modal#{testResult.id}">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Tahlil Silme</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Bu tahlili silmek istediğinizden emin misiniz!</p>
-                                <pre>
+            </div> 
+            <div class="modal fade modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <h:panelGroup layout="block" class="modal-content" id="delete-modal">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Tahlil Silme</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bu tahlili silmek istediğinizden emin misiniz!</p>
+                            <pre>
                                 <b>Tarih :</b> #{testResult.date}<br />
                                 <b>Test Türü :</b> #{testResult.testType}<br />
                                 <b>Test Adı :</b> #{testResult.testName}<br />
                                 <b>Normal Değer :</b> #{testResult.testNormalValue}<br />
                                 <b>Değer :</b> #{testResult.testValue}<br />
-                                </pre>
-                            </div>
-                            <div class="modal-footer">
-                                <h:form>
-                                    <button onclick="$('.modal#{testResult.id}').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                    <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal#{testResult.id}').modal('hide')" action="#{TestResultController.deleteEntity(testResult.id)}">
-                                        <f:ajax execute="@this" render="testResult-table"/>
-                                    </h:commandButton>
-                                </h:form>
-                            </div>
-                        </h:panelGroup>
-                    </div>
+                            </pre>
+                        </div>
+                        <div class="modal-footer">
+                            <h:form>
+                                <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{testResultController.DeleteEntity()}">
+                                    <f:ajax execute="@this" render="testResult-table"/>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+                    </h:panelGroup>
                 </div>
-                <!-- Edit Modals -->
-                <div class="modal fade modal-edit#{testResult.id}" tabindex="-1">
-                    <div class="modal-dialog">
-                        <h:panelGroup layout="block" class="modal-content" id="edit-modal#{testResult.id}">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Tahlil Güncelleme</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <h:form id="edit-form#{testResult.id}">
-                                    <div class="form-group">
-                                        <label for="inputDate">Tarih</label>
-                                        <h:inputText styleClass="form-control" value="#{testResult.date}"></h:inputText>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputTestType">Test Türü</label>
-                                        <h:inputText styleClass="form-control" value="#{testResult.testType}"></h:inputText>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputTestName">Test Adı</label>
-                                        <h:inputText styleClass="form-control" value="#{testResult.testName}"></h:inputText>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputTestNormalValue">Normal Değer</label>
-                                        <h:inputText styleClass="form-control" value="#{testResult.testNormalValue}"></h:inputText>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputTestValue">Değer</label>
-                                        <h:inputText styleClass="form-control" value="#{testResult.testValue}"></h:inputText>
-                                    </div>
-                                </h:form>
-                            </div>
-                            <div class="modal-footer">
-                                <h:form>
-                                    <button onclick="$('.modal-edit#{testResult.id}').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                    <h:commandButton styleClass="btn btn-info" value="Güncelle" onclick="$('.modal-edit#{testResult.id}').modal('hide')" action="#{TestResultController.updateEntity(testResult)}">
-                                        <f:ajax execute="edit-form#{testResult.id}" render="testResult-table"/>
-                                    </h:commandButton>
-                                </h:form>
-                            </div>
-                        </h:panelGroup>
-                    </div>
-                </div>
-            </ui:repeat>
+            </div>
         </div>
     </ui:define>
 </ui:composition>

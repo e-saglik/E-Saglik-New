@@ -61,10 +61,10 @@
                             <h:inputText type="date" styleClass="form-control" value="#{emergencyNoteController.entity.date}"></h:inputText>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{emergencyNoteController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{emergencyNoteController.update()}">
+                            <h:commandButton rendered="#{emergencyNoteController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{emergencyNoteController.UpdateEntity()}">
                                 <f:ajax execute="note-form" render="note-form note-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{emergencyNoteController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{emergencyNoteController.create()}">
+                            <h:commandButton rendered="#{emergencyNoteController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{emergencyNoteController.AddEntity()}">
                                 <f:ajax execute="note-form" render="note-form note-table"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{emergencyNoteController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{emergencyNoteController.clearForm()}">
@@ -93,7 +93,7 @@
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{emergencyNoteController.DeleteEntity(emergencyNoteController.entity.id)}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{emergencyNoteController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="note-table"/>
                                 </h:commandButton>
                             </h:form>

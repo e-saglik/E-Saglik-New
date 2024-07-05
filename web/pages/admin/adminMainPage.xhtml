@@ -45,7 +45,11 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
-                       
+                        <pre>Bulunduğnuz Sayfa #{doctorController.page}, Toplam Sayfa #{doctorController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{doctorController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{doctorController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
                     </h:form>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">

@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="disease-table-form">         
-                        <h:dataTable styleClass="table table-striped" value="#{DiseaseController.getEntityList()}" var="disease">
+                        <h:dataTable styleClass="table table-striped" value="#{diseaseController.GetEntityList()}" var="disease">
                             <h:column>
                                 <f:facet name="header">Adı</f:facet>
                                     #{disease.name}
@@ -37,110 +37,70 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
-                        <pre>Bulunduğnuz Sayfa #{doctorController.page}, Toplam Sayfa #{doctorController.pageCount}</pre>
+                        <pre>Bulunduğnuz Sayfa #{diseaseController.page}, Toplam Sayfa #{diseaseController.pageCount}</pre>
                         <div class="btn-group">
-                            <h:commandButton action="#{doctorController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{doctorController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{diseaseController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{diseaseController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
                         </div>
                     </h:form>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="disease-form">
-                        <h:inputText value="#{DiseaseController.entity.id}" style="display: none;"></h:inputText>
+                        <h:inputText value="#{diseaseController.entity.id}"></h:inputText>
                         <div class="form-group">
                             <label for="inputName">Adı</label>
-                            <h:inputText styleClass="form-control" value="#{DiseaseController.entity.name}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{diseaseController.entity.name}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputDescription">Açıklama</label>
-                            <h:inputText styleClass="form-control" value="#{DiseaseController.entity.description}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{diseaseController.entity.description}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputPatient">Hasta</label>
-                            <h:selectOneMenu styleClass="form-control" value="#{DiseaseController.entity.patient}">
+                            <h:selectOneMenu styleClass="form-control" value="#{diseaseController.entity.patient}">
                                 <f:selectItems value="#{PatientController.patients}" var="patient" itemValue="#{patient}" itemLabel="#{patient.name}" />
                             </h:selectOneMenu>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{DiseaseController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{DiseaseController.update()}">
+                            <h:commandButton rendered="#{diseaseController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{diseaseController.UpdateEntity()}">
                                 <f:ajax execute="disease-form" render="disease-form disease-table-form"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{DiseaseController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{DiseaseController.create()}">
+                            <h:commandButton rendered="#{diseaseController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{diseaseController.AddEntity()}">
                                 <f:ajax execute="disease-form" render="disease-form disease-table-form"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{DiseaseController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{DiseaseController.clearForm()}">
+                            <h:commandButton rendered="#{diseaseController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{diseaseController.clearForm()}">
                                 <f:ajax execute="@this" render="disease-form"/>
                             </h:commandButton>
                         </div>
                     </h:form>
                 </div>
             </div>
-            <!-- Delete Modals -->
-            <ui:repeat value="#{DiseaseController.getEntityList()}" var="disease">
-                <div class="modal fade modal#{disease.id}" tabindex="-1">
-                    <div class="modal-dialog">
-                        <h:panelGroup layout="block" class="modal-content" id="delete-modal#{disease.id}">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Hastalık Silme</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Bu hastalığı silmek istediğinizden emin misiniz!</p>
-                                <pre>
+            <div class="modal fade modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <h:panelGroup layout="block" class="modal-content" id="delete-modal">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Hastalık Silme</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bu hastalığı silmek istediğinizden emin misiniz!</p>
+                            <pre>
                                 <b>Adı :</b> #{disease.name}<br />
                                 <b>Açıklama :</b> #{disease.description}<br />
                                 <b>Hasta :</b> #{disease.patient.name}<br />
-                                </pre>
-                            </div>
-                            <div class="modal-footer">
-                                <h:form>
-                                    <button onclick="$('.modal#{disease.id}').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                    <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal#{disease.id}').modal('hide')" action="#{DiseaseController.deleteEntity(disease.id)}">
-                                        <f:ajax execute="@this" render="disease-table-form"/>
-                                    </h:commandButton>
-                                </h:form>
-                            </div>
-                        </h:panelGroup>
-                    </div>
+                            </pre>
+                        </div>
+                        <div class="modal-footer">
+                            <h:form>
+                                <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{diseaseController.DeleteEntity()}">
+                                    <f:ajax execute="@this" render="disease-table-form"/>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+                    </h:panelGroup>
                 </div>
-                <!-- Edit Modals -->
-                <div class="modal fade modal-edit#{disease.id}" tabindex="-1">
-                    <div class="modal-dialog">
-                        <h:panelGroup layout="block" class="modal-content" id="edit-modal#{disease.id}">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Hastalık Güncelleme</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <h:form id="edit-form#{disease.id}">
-                                    <div class="form-group">
-                                        <label for="inputName">Adı</label>
-                                        <h:inputText styleClass="form-control" value="#{disease.name}"></h:inputText>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputDescription">Açıklama</label>
-                                        <h:inputText styleClass="form-control" value="#{disease.description}"></h:inputText>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPatient">Hasta</label>
-                                        <h:selectOneMenu styleClass="form-control" value="#{disease.patient}">
-                                            <f:selectItems value="#{PatientController.patients}" var="patient" itemValue="#{patient}" itemLabel="#{patient.name}" />
-                                        </h:selectOneMenu>
-                                    </div>
-                                </h:form>
-                            </div>
-                            <div class="modal-footer">
-                                <h:form>
-                                    <button onclick="$('.modal-edit#{disease.id}').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                    <h:commandButton styleClass="btn btn-info" value="Güncelle" onclick="$('.modal-edit#{disease.id}').modal('hide')" action="#{DiseaseController.updateEntity(disease)}">
-                                        <f:ajax execute="edit-form#{disease.id}" render="disease-table-form"/>
-                                    </h:commandButton>
-                                </h:form>
-                            </div>
-                        </h:panelGroup>
-                    </div>
-                </div>
-            </ui:repeat>
+            </div>
         </div>
     </ui:define>
 </ui:composition>

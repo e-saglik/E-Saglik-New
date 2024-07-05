@@ -2,13 +2,10 @@ package Controller;
 
 import DAO.DoctorDAO;
 import Entity.Doctor;
-import jakarta.annotation.Resource;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named
