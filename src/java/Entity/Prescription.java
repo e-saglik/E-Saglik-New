@@ -6,6 +6,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "prescriptions")
 @NamedQuery(name = "Prescription.findAll", query = "SELECT p FROM Prescription p")
-public class Prescription extends BaseEntity implements Serializable{
+public class Prescription extends BaseEntity implements Serializable {
 
     @Column(name = "dosage")
     private String dosage;
@@ -23,8 +25,11 @@ public class Prescription extends BaseEntity implements Serializable{
 
     @Column(name = "instructions")
     private String instructions;
-    
 
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
+   
     public Prescription() {
     }
 
@@ -33,6 +38,17 @@ public class Prescription extends BaseEntity implements Serializable{
         this.dosage = dosage;
         this.medicationList = medicationList;
         this.instructions = instructions;
+    }
+
+    public Patient getPatient() {
+        if (patient == null) {
+            patient = new Patient();
+        }
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public String getDosage() {
