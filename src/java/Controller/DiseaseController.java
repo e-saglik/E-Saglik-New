@@ -2,16 +2,24 @@ package Controller;
 
 import DAO.DiseaseDAO;
 import Entity.Disease;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
-public class DiseaseController extends BaseController<Disease> {
+@Named
+@SessionScoped
+public class DiseaseController extends BaseController<Disease>  implements Serializable{
 
+    @EJB
     private DiseaseDAO diseaseDao;
+
     private Disease disease;
     private List<Disease> diseaseList;
 
     public DiseaseController() {
-
+        super(Disease.class);
     }
 
     public DiseaseDAO getDiseaseDao() {
@@ -43,11 +51,9 @@ public class DiseaseController extends BaseController<Disease> {
     }
 
     @Override
-    public void AddEntity(Disease disease) {
-        if (diseaseDao == null) {
-            diseaseDao = new DiseaseDAO();
-        }
-        diseaseDao.Create(disease);
+    public void AddEntity() {
+        getDiseaseDao().Create(this.entity);
+        this.entity = new Disease();
 
     }
 
@@ -62,27 +68,19 @@ public class DiseaseController extends BaseController<Disease> {
 
     @Override
     public List<Disease> GetEntityList() {
-        if (diseaseDao == null) {
-            diseaseDao = new DiseaseDAO();
-        }
-        diseaseDao.GetList();
-        return null;
+        return getDiseaseDao().GetList();
     }
 
     @Override
-    public void UpdateEntity(int id, Disease disease) {
-        if (diseaseDao == null) {
-            diseaseDao = new DiseaseDAO();
-        }
-        diseaseDao.Update(disease);
+    public void UpdateEntity() {
+        getDiseaseDao().Update(disease);
+        this.entity = new Disease();
     }
 
     @Override
     public void DeleteEntity() {
-        if (diseaseDao == null) {
-            diseaseDao = new DiseaseDAO();
-        }
-        diseaseDao.Delete(disease);
+              diseaseDao.Delete(entity);
+        this.entity = new Disease();
     }
 
 }
