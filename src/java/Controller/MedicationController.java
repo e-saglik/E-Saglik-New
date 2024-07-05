@@ -19,10 +19,65 @@ public class MedicationController extends BaseController<Medication> implements 
     private MedicationDAO medicationDao;
     private List<Medication> medicationList;
 
+     private int page = 1;
+    private int pageSize = 10;
+    private int pageCount;
+    
     public MedicationController() {
         super(Medication.class);
     }
 
+    public void next() {
+        if (this.page == getPageCount()) {
+            this.page = 1;
+        } else {
+            this.page++;
+        }
+
+    }
+
+    public void previous() {
+        if (this.page == 1) {
+            this.page = this.getPageCount();
+        } else {
+            this.page--;
+        }
+
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount = (int) Math.ceil(getMedicationDao().Count() / (double) pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public void clearForm() {
+        this.entity = new Medication();
+    }
+
+    public void updateForm(Medication doc) {
+        this.entity = doc;
+    }
+    
     public MedicationDAO getMedicationDao() {
         return medicationDao;
     }

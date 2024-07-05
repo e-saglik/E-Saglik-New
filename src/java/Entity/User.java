@@ -19,7 +19,7 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQuery(name = "User.findAll", query = "SELECT t FROM User t")
+@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User extends BaseEntity implements Serializable {
 
     @Id
