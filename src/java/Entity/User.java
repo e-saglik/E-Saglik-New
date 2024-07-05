@@ -17,9 +17,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "vaccine")
+@Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQuery(name = "Vaccination_schedules.findAll", query = "SELECT t FROM Vaccination_schedules t")
+@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User extends BaseEntity implements Serializable {
 
     @Id
