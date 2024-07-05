@@ -12,53 +12,53 @@ import java.util.List;
 
 @Named
 @SessionScoped
-public class PrescriptionController extends BaseController<Prescription> implements Serializable{
+public class PrescriptionController extends BaseController<Prescription> implements Serializable {
 
     private Prescription entity;
     @EJB
-    private PrescriptionDAO prescriptionDao;
-    private Prescription prescription;
-    private List<Prescription> prescriptionList;
-
-
+    private PrescriptionDAO dao;
     private List<Prescription> list;
     
-    
-     private int page = 1;
+    private int page = 1;
     private int pageSize = 10;
     private int pageCount;
+
     public PrescriptionController() {
         super(Prescription.class);
     }
 
-    public PrescriptionDAO getPrescriptionDao() {
-        if (this.prescriptionDao == null) {
-            this.prescriptionDao = new PrescriptionDAO();
+    public PrescriptionDAO getDao() {
+        if (this.dao == null) {
+            this.dao = new PrescriptionDAO();
         }
-        return prescriptionDao;
+        return dao;
     }
 
-    public void setPrescriptionDao(PrescriptionDAO prescriptionDao) {
-        this.prescriptionDao = prescriptionDao;
+    public void setDao(PrescriptionDAO dao) {
+        this.dao = dao;
     }
 
     public Prescription getPrescription() {
-        return prescription;
+        if (entity == null) {
+            entity = new Prescription();
+        }
+        return entity;
     }
 
     public void setPrescription(Prescription prescription) {
-        this.prescription = prescription;
+        this.entity = prescription;
     }
 
-    public List<Prescription> getPrescriptionList() {
-        return prescriptionList;
+    public List<Prescription> getList() {
+        this.list = this.getDao().GetList();
+        return list;
     }
 
-    public void setPrescriptionList(List<Prescription> prescriptionList) {
-        this.prescriptionList = prescriptionList;
+    public void setList(List<Prescription> list) {
+        this.list = list;
     }
-    
-     public void next() {
+
+    public void next() {
         if (this.page == getPageCount()) {
             this.page = 1;
         } else {
@@ -93,7 +93,7 @@ public class PrescriptionController extends BaseController<Prescription> impleme
     }
 
     public int getPageCount() {
-        this.pageCount = (int) Math.ceil(getPrescriptionDao().Count() / (double) pageSize);
+        this.pageCount = (int) Math.ceil(getDao().Count() / (double) pageSize);
         return pageCount;
     }
 
@@ -109,38 +109,36 @@ public class PrescriptionController extends BaseController<Prescription> impleme
         this.entity = doc;
     }
 
-
-
-   @Override
+    @Override
     public Prescription GetEntityById(int id) {
-        if (prescriptionDao == null) {
-            prescriptionDao = new PrescriptionDAO();
+        if (dao == null) {
+            dao = new PrescriptionDAO();
         }
-        prescriptionDao.GetById(id);
+        dao.GetById(id);
         return null;
     }
 
     @Override
-    public List<Prescription> GetEntityList() {  
-        return  getPrescriptionDao().GetList();
+    public List<Prescription> GetEntityList() {
+        return getDao().GetList();
     }
 
     @Override
     public void UpdateEntity() {
-        getPrescriptionDao().Update(entity);
-        entity = new Prescription();       
+        getDao().Update(entity);
+        entity = new Prescription();
     }
 
     @Override
     public void DeleteEntity() {
-        getPrescriptionDao().Delete(entity);
-        entity = new Prescription();       
+        getDao().Delete(entity);
+        entity = new Prescription();
     }
 
     @Override
     public void AddEntity() {
-        getPrescriptionDao().Create(entity);
-        entity = new Prescription();       
+        getDao().Create(entity);
+        entity = new Prescription();
     }
 
     public Prescription getEntity() {
@@ -150,15 +148,5 @@ public class PrescriptionController extends BaseController<Prescription> impleme
     public void setEntity(Prescription entity) {
         this.entity = entity;
     }
-
-    public List<Prescription> getList() {
-        return list;
-    }
-
-    public void setList(List<Prescription> list) {
-        this.list = list;
-    }
-    
-    
 
 }

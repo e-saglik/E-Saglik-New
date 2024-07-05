@@ -3,16 +3,23 @@ package Controller;
 import DAO.AbstractDAO;
 import DAO.MedicationDAO;
 import Entity.Medication;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
-public class MedicationController extends BaseController<Medication> {
-
+@Named
+@SessionScoped
+public class MedicationController extends BaseController<Medication> implements Serializable{
+    
+    @EJB
     private MedicationDAO medicationDao;
     private Medication medication;
     private List<Medication> medicationList;
 
     public MedicationController() {
-
+        super(Medication.class);
     }
 
     public MedicationDAO getMedicationDao() {
@@ -40,7 +47,7 @@ public class MedicationController extends BaseController<Medication> {
     }
 
     @Override
-    public void AddEntity(Medication medication) {
+    public void AddEntity() {
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }
@@ -59,15 +66,11 @@ public class MedicationController extends BaseController<Medication> {
 
     @Override
     public List<Medication> GetEntityList() {
-        if (medicationDao == null) {
-            medicationDao = new MedicationDAO();
-        }
-        medicationDao.GetList();
-        return null;
+        return getMedicationDao().GetList();
     }
 
     @Override
-    public void UpdateEntity(int id, Medication medication) {
+    public void UpdateEntity() {
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }

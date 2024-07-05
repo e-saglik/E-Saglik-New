@@ -18,8 +18,8 @@ public class DoctorController extends BaseController<Doctor> implements Serializ
     private Doctor entity;
     @EJB
     private DoctorDAO dao;
-
     private List<Doctor> list;
+
     private int page = 1;
     private int pageSize = 10;
     private int pageCount;
@@ -118,10 +118,10 @@ public class DoctorController extends BaseController<Doctor> implements Serializ
 
     @Override
     public Doctor GetEntityById(int id) {
-        if (dao == null) {
-            dao = new DoctorDAO();
+        if (getDao() == null) {
+            dao =  new DoctorDAO();
         }
-        dao.GetById(id);
+        getDao().GetById(id);
         return null;
     }
 
@@ -139,7 +139,7 @@ public class DoctorController extends BaseController<Doctor> implements Serializ
     @Override
     public void DeleteEntity() {
 
-        dao.Delete(entity);
+        getDao().Delete(entity);
         this.entity = new Doctor();
     }
 

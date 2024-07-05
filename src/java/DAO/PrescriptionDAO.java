@@ -14,9 +14,4 @@ public class PrescriptionDAO extends AbstractDAO<Prescription> implements Serial
         super(Prescription.class);
     }
     
-    @Override
-    public List<Prescription> GetList() {
-        Query q = entityManager.createQuery("SELECT id, dosage, instructions, name\n" + "FROM public.prescriptions;", entityClass);
-        return q.getResultList();
-    }
 }
