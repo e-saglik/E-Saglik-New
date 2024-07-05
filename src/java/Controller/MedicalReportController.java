@@ -6,11 +6,12 @@ import Entity.MedicalReport;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
 @Named
 @SessionScoped
-public class MedicalReportController extends BaseController<MedicalReport> {
+public class MedicalReportController extends BaseController<MedicalReport> implements Serializable{
 
     @EJB
     private MedicalReportDAO medicalReportDao;
