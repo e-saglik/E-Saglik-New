@@ -15,12 +15,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "doctor")
-public class Doctor extends User implements Serializable{
+@NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM Doctor d")
+public class Doctor extends User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @Column(name = "specialization")
     private String specialization;
 

@@ -2,29 +2,29 @@ package Controller;
 
 import DAO.DoctorDAO;
 import Entity.Doctor;
-import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
 @Named
-@ViewScoped
-public class DoctorController implements Serializable {
+@SessionScoped
+public class DoctorController extends BaseController<Doctor> implements Serializable{
 
-    @Inject
-    private DoctorDAO doctorDAO; // DoctorDAO dependency injection
-
+    
     private Doctor entity;
+    @EJB
+    private DoctorDAO dao;
     private List<Doctor> list;
     private int page = 1;
     private int pageSize = 10;
     private int pageCount;
 
-    @PostConstruct
-    public void init() {
-        entity = new Doctor();
+    public DoctorController(Class<Doctor> entityClass) {
+        super(entityClass);
     }
 
     public void next() {
@@ -33,6 +33,7 @@ public class DoctorController implements Serializable {
         } else {
             this.page++;
         }
+
     }
 
     public void previous() {
@@ -41,6 +42,7 @@ public class DoctorController implements Serializable {
         } else {
             this.page--;
         }
+
     }
 
     public int getPage() {
@@ -60,7 +62,7 @@ public class DoctorController implements Serializable {
     }
 
     public int getPageCount() {
-        this.pageCount = (int) Math.ceil(doctorDAO.Count() / (double) pageSize);
+        this.pageCount = (int) Math.ceil(getDao().Count() / (double) pageSize);
         return pageCount;
     }
 
@@ -77,22 +79,72 @@ public class DoctorController implements Serializable {
     }
 
     public void update() {
-        doctorDAO.Update(this.entity);
+        this.getDao().Update(this.entity);
         this.entity = new Doctor();
     }
 
     public void create() {
-        doctorDAO.Create(this.entity);
+        this.getDao().Create(this.entity);
         this.entity = new Doctor();
     }
 
-    public List<Doctor> GetEntityList() {
-        this.list = doctorDAO.GetList();
+    public DoctorDAO getDao() {
+        if (this.dao == null) {
+            this.dao = new DoctorDAO();
+        }
+        return dao;
+    }
+
+    public void setDao(DoctorDAO dao) {
+        this.dao = dao;
+    }
+
+    public List<Doctor> getList() {
+        this.list = this.getDao().GetList();
         return list;
     }
 
     public void setList(List<Doctor> list) {
         this.list = list;
+    }
+
+    @Override
+    public void AddEntity(Doctor entity) {
+        if (dao == null) {
+            dao = new DoctorDAO();
+        }
+        dao.Create(entity);
+
+    }
+
+    @Override
+    public Doctor GetEntityById(int id) {
+        if (dao == null) {
+            dao = new DoctorDAO();
+        }
+        dao.GetById(id);
+        return null;
+    }
+
+    @Override
+    public List<Doctor> GetEntityList() {              
+        return  this.list = this.getDao().GetList();
+    }
+
+    @Override
+    public void UpdateEntity(int id, Doctor entity) {
+        if (dao == null) {
+            dao = new DoctorDAO();
+        }
+        dao.Update(entity);
+    }
+
+    @Override
+    public void DeleteEntity() {
+        if (dao == null) {
+            dao = new DoctorDAO();
+        }
+        dao.Delete(entity);
     }
 
     public Doctor getEntity() {
@@ -105,4 +157,5 @@ public class DoctorController implements Serializable {
     public void setEntity(Doctor entity) {
         this.entity = entity;
     }
+
 }
