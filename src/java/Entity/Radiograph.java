@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "radiographs")
-@NamedQuery(name = "radiographs.findAll", query = "SELECT r FROM radiographs r")
+@NamedQuery(name = "Radiograph.findAll", query = "SELECT r FROM Radiograph r")
 public class Radiograph extends BaseEntity implements Serializable {
 
     @Temporal(TemporalType.DATE)
