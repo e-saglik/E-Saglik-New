@@ -2,16 +2,25 @@ package Controller;
 
 import DAO.AppointmentDAO;
 import Entity.Appointment;
+import Entity.Disease;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
-public class AppointmentController extends BaseController<Appointment> {
+@Named
+@SessionScoped
+public class AppointmentController extends BaseController<Appointment> implements Serializable {
 
+    @EJB
     private AppointmentDAO appointmentDao;
+    
     private Appointment appointment;
     private List<Appointment> appointmentList;
 
     public AppointmentController() {
-
+        super(Appointment.class);
     }
 
     public AppointmentDAO getAppointmentDao() {
@@ -43,12 +52,9 @@ public class AppointmentController extends BaseController<Appointment> {
     }
 
     @Override
-    public void AddEntity(Appointment appointment) {
-        if (appointmentDao == null) {
-            appointmentDao = new AppointmentDAO();
-        }
-        appointmentDao.Create(appointment);
-
+    public void AddEntity() {
+         getAppointmentDao().Create(this.entity);
+        this.entity = new Appointment();
     }
 
     @Override
@@ -62,27 +68,19 @@ public class AppointmentController extends BaseController<Appointment> {
 
     @Override
     public List<Appointment> GetEntityList() {
-        if (appointmentDao == null) {
-            appointmentDao = new AppointmentDAO();
-        }
-        appointmentDao.GetList();
-        return null;
+        return getAppointmentDao().GetList();
     }
 
     @Override
-    public void UpdateEntity(int id, Appointment appointment) {
-        if (appointmentDao == null) {
-            appointmentDao = new AppointmentDAO();
-        }
-        appointmentDao.Update(appointment);
+    public void UpdateEntity() {
+        getAppointmentDao().Update(appointment);
+        this.entity = new Appointment();
     }
 
     @Override
     public void DeleteEntity() {
-        if (appointmentDao == null) {
-            appointmentDao = new AppointmentDAO();
-        }
-        appointmentDao.Delete(appointment);
+        appointmentDao.Delete(entity);
+        this.entity = new Appointment();
     }
 
 }
