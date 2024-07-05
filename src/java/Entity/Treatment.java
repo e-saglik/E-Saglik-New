@@ -5,13 +5,16 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "treatments")
-public class Treatment extends BaseEntity {
+@NamedQuery(name = "Treatments.findAll", query = "SELECT t FROM Treatments t")
+public class Treatment extends BaseEntity implements Serializable {
     
     @Temporal(TemporalType.DATE)
     @Column(name = "start_date")

@@ -3,13 +3,16 @@ package Entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "radiographs")
-public class Radiograph extends BaseEntity {
+@NamedQuery(name = "radiographs.findAll", query = "SELECT r FROM radiographs r")
+public class Radiograph extends BaseEntity implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "rg_date")

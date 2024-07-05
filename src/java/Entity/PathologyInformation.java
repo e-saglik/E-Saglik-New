@@ -2,12 +2,15 @@ package Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "PathologyInformation")
-public class PathologyInformation extends BaseEntity {
+@Table(name = "pathologyinformation")
+@NamedQuery(name = "PathologyInformation.findAll", query = "SELECT p FROM PathologyInformation p")
+public class PathologyInformation extends BaseEntity implements Serializable {
     @Column(name = "information_date")
     private Date informationDate;
 

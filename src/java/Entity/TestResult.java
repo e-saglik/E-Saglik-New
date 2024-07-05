@@ -5,13 +5,16 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "test_results")
-public class TestResult extends BaseEntity {
+@NamedQuery(name = "test_results.findAll", query = "SELECT r FROM test_results r")
+public class TestResult extends BaseEntity implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date")
@@ -28,8 +31,8 @@ public class TestResult extends BaseEntity {
 
     @Column(name = "test_value")
     private String testValue;
-    
-     @ManyToOne
+
+    @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
