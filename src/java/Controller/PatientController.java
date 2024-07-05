@@ -45,7 +45,7 @@ public class PatientController extends BaseController<Patient> implements Serial
 
  
     @Override
-    public void AddEntity(Patient patient) {
+    public void AddEntity() {
         if (patientDao == null) {
             patientDao = new PatientDAO();
         }
@@ -71,7 +71,7 @@ public class PatientController extends BaseController<Patient> implements Serial
     }
 
     @Override
-    public void UpdateEntity(int id, Patient patient) {
+    public void UpdateEntity() {
         if (patientDao == null) {
             patientDao = new PatientDAO();
         }
@@ -86,13 +86,4 @@ public class PatientController extends BaseController<Patient> implements Serial
         patientDao.Delete(patient);
     }
 
-    @Override
-    public void AddEntity() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void UpdateEntity() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
