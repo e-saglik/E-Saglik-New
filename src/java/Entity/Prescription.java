@@ -23,6 +23,7 @@ public class Prescription extends BaseEntity implements Serializable{
 
     @Column(name = "instructions")
     private String instructions;
+    
 
     public Prescription() {
     }
