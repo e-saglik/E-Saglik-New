@@ -4,12 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 
 
 @Entity
 @Table(name = "allergy")
-public class Allergy extends BaseEntity {
+@NamedQuery(name = "Allergy.findAll", query = "SELECT a FROM Allergy a")
+public class Allergy extends BaseEntity implements Serializable{
 
     @Column(name = "type")
     private String type;
@@ -18,7 +21,7 @@ public class Allergy extends BaseEntity {
     private int severity;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "patientid")
     private Patient patient;
 
     public Allergy() {
@@ -30,6 +33,8 @@ public class Allergy extends BaseEntity {
         this.severity = severity;
         this.patient = patient;
     }
+    
+    
 
     public String getType() {
         return type;
@@ -54,6 +59,8 @@ public class Allergy extends BaseEntity {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
+    
+    
 
     @Override
     public String toString() {
