@@ -3,13 +3,85 @@ package Controller;
 import DAO.AbstractDAO;
 import DAO.PathologyInformationDAO;
 import Entity.PathologyInformation;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
-public class PathologyInformationController extends BaseController<PathologyInformation> {
+@Named
+@SessionScoped
+public class PathologyInformationController extends BaseController<PathologyInformation> implements Serializable{
 
+    @EJB
+    private PathologyInformationDAO pathologyInformationDao;
+    private PathologyInformation pathologyInformation;
+    private List<PathologyInformation> pathologyInformationList;
+
+     private int page = 1;
+    private int pageSize = 10;
+    private int pageCount;
     
-    public AbstractDAO getPathologyInformationDao() {
+    public PathologyInformationController() {
+        super(PathologyInformation.class);
+    }
+    
+    public PathologyInformationDAO getPathologyInformationDao() {
+        if (this.pathologyInformationDao == null) {
+            this.pathologyInformationDao = new PathologyInformationDAO();
+        }
         return pathologyInformationDao;
+    }
+    
+    public void next() {
+        if (this.page == getPageCount()) {
+            this.page = 1;
+        } else {
+            this.page++;
+        }
+
+    }
+
+    public void previous() {
+        if (this.page == 1) {
+            this.page = this.getPageCount();
+        } else {
+            this.page--;
+        }
+
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount = (int) Math.ceil(getPathologyInformationDao().Count() / (double) pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public void clearForm() {
+        this.entity = new PathologyInformation();
+    }
+
+    public void updateForm(PathologyInformation doc) {
+        this.entity = doc;
     }
 
      public void setNotificationDao(PathologyInformationDAO pathologyInformationDao) {
@@ -32,56 +104,38 @@ public class PathologyInformationController extends BaseController<PathologyInfo
         this.pathologyInformationList = pathologyInformationList;
     }
 
-    private PathologyInformationDAO pathologyInformationDao;
-    private PathologyInformation pathologyInformation;
-    private List<PathologyInformation> pathologyInformationList;
-
-    public PathologyInformationController() {
-
-    }
-
+    
  
     @Override
-    public void AddEntity(PathologyInformation pathologyInformation) {
-        if (pathologyInformationDao == null) {
-            pathologyInformationDao = new PathologyInformationDAO();
-        }
-        pathologyInformationDao.Create(pathologyInformation);
-
+    public void AddEntity() {
+        getPathologyInformationDao().Create(this.entity);
+        this.entity = new PathologyInformation();
     }
 
     @Override
     public PathologyInformation GetEntityById(int id) {
-        if (pathologyInformationDao == null) {
-            pathologyInformationDao = new PathologyInformationDAO();
+        if (getPathologyInformationDao() == null) {
+            pathologyInformationDao =  new PathologyInformationDAO();
         }
-        pathologyInformationDao.GetById(id);
+        getPathologyInformationDao().GetById(id);
         return null;
     }
 
     @Override
     public List<PathologyInformation> GetEntityList() {
-        if (pathologyInformationDao == null) {
-            pathologyInformationDao = new PathologyInformationDAO();
-        }
-
-        return pathologyInformationDao.GetList();
+        return getPathologyInformationDao().GetList();
     }
 
     @Override
-    public void UpdateEntity(int id, PathologyInformation pathologyInformation) {
-        if (pathologyInformationDao == null) {
-            pathologyInformationDao = new PathologyInformationDAO();
-        }
-        pathologyInformationDao.Update(pathologyInformation);
+    public void UpdateEntity() {
+        getPathologyInformationDao().Update(entity);
+        this.entity = new PathologyInformation();
     }
 
     @Override
     public void DeleteEntity() {
-        if (pathologyInformationDao == null) {
-            pathologyInformationDao = new PathologyInformationDAO();
-        }
-        pathologyInformationDao.Delete(pathologyInformation);
+        getPathologyInformationDao().Delete(entity);
+        this.entity = new PathologyInformation();
     }
 
 

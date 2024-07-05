@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "vaccination_schedules")
-@NamedQuery(name = "Vaccination_schedules.findAll", query = "SELECT t FROM Vaccination_schedules t")
+@NamedQuery(name = "VaccinationSchedule.findAll", query = "SELECT t FROM VaccinationSchedule t")
 public class VaccinationSchedule extends BaseEntity implements Serializable {
 
     @ManyToOne

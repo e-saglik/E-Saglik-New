@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "test_results")
-@NamedQuery(name = "test_results.findAll", query = "SELECT r FROM test_results r")
+@NamedQuery(name = "TestResult.findAll", query = "SELECT r FROM TestResult r")
 public class TestResult extends BaseEntity implements Serializable {
 
     @Temporal(TemporalType.DATE)

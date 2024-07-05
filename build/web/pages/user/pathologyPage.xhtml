@@ -61,10 +61,10 @@
                             <h:inputTextarea styleClass="form-control" value="#{pathologyController.entity.information}"></h:inputTextarea>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{pathologyController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{pathologyController.update()}">
+                            <h:commandButton rendered="#{pathologyController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{pathologyController.UpdateEntity()}">
                                 <f:ajax execute="pathology-form" render="pathology-form pathology-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{pathologyController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{pathologyController.create()}">
+                            <h:commandButton rendered="#{pathologyController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{pathologyController.AddEntity()}">
                                 <f:ajax execute="pathology-form" render="pathology-form pathology-table"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{pathologyController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{pathologyController.clearForm()}">
@@ -93,7 +93,7 @@
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{pathologyController.DeleteEntity(pathologyController.entity.id)}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{pathologyController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="pathology-table"/>
                                 </h:commandButton>
                             </h:form>
