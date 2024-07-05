@@ -14,30 +14,26 @@
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="testResult-table-form">
-                        <div class="btn-group">
-                            <h:commandButton action="#{TestResultController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{TestResultController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
-                        </div>
                         <h:dataTable styleClass="table table-striped" value="#{TestResultController.testResults}" var="testResult" id="testResult-table">
                             <h:column>
                                 <f:facet name="header">Tarih</f:facet>
-                                #{testResult.date}
+                                    #{testResult.date}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Test Türü</f:facet>
-                                #{testResult.testType}
+                                    #{testResult.testType}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Test Adı</f:facet>
-                                #{testResult.testName}
+                                    #{testResult.testName}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Normal Değer</f:facet>
-                                #{testResult.testNormalValue}
+                                    #{testResult.testNormalValue}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Değer</f:facet>
-                                #{testResult.testValue}
+                                    #{testResult.testValue}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">İşlemler</f:facet>
@@ -50,6 +46,10 @@
                             </h:column>
                         </h:dataTable>
                         <pre>Bulunduğunuz Sayfa #{TestResultController.page}, Toplam Sayfa #{TestResultController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{TestResultController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{TestResultController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
                     </h:form>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">

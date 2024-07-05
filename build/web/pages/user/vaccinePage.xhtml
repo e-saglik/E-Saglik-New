@@ -10,13 +10,10 @@
     <h:outputStylesheet name="/css/style.css" />
     <ui:define name="content">
         <div class="container">
+            <h1>Aşı Takvimim</h1>
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
-                    <h:form id="vaccinationSchedule-table">
-                        <div class="btn-group">
-                            <h:commandButton action="#{vaccinationScheduleController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{vaccinationScheduleController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
-                        </div>
+                    <h:form id="vaccinationSchedule-table">                        
                         <h:dataTable styleClass="table table-striped" value="#{vaccinationScheduleController.GetEntityList()}" var="vaccinationSchedule">
                             <h:column>
                                 <f:facet name="header">Id</f:facet>
@@ -41,8 +38,12 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
+                        <pre>Bulunduğunuz Sayfa #{vaccinationScheduleController.page}, Toplam Sayfa #{vaccinationScheduleController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{vaccinationScheduleController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{vaccinationScheduleController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
                     </h:form>
-                    <pre>Bulunduğunuz Sayfa #{vaccinationScheduleController.page}, Toplam Sayfa #{vaccinationScheduleController.pageCount}</pre>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="vaccinationSchedule-form">

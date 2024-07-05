@@ -10,13 +10,10 @@
     <h:outputStylesheet name="/css/style.css" />
     <ui:define name="content">
         <div class="container">
+            <h1>Sigorta İşlemlerim</h1>
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="insurance-table">
-                        <div class="btn-group">
-                            <h:commandButton action="#{insuranceController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{insuranceController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
-                        </div>
                         <h:dataTable styleClass="table table-striped" value="#{insuranceController.GetEntityList()}" var="insurance">
                             <h:column>
                                 <f:facet name="header">Id</f:facet>
@@ -45,8 +42,12 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
+                        <pre>Bulunduğunuz Sayfa #{insuranceController.page}, Toplam Sayfa #{insuranceController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{insuranceController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{insuranceController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
                     </h:form>
-                    <pre>Bulunduğunuz Sayfa #{insuranceController.page}, Toplam Sayfa #{insuranceController.pageCount}</pre>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="insurance-form">

@@ -21,15 +21,15 @@
                         <h:dataTable styleClass="table table-striped" value="#{DiseaseController.getEntityList()}" var="disease">
                             <h:column>
                                 <f:facet name="header">Adı</f:facet>
-                                #{disease.name}
+                                    #{disease.name}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Açıklama</f:facet>
-                                #{disease.description}
+                                    #{disease.description}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Hasta</f:facet>
-                                #{disease.patient.name}
+                                    #{disease.patient.name}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">İşlemler</f:facet>
@@ -41,7 +41,11 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
-                        <pre>Bulunduğunuz Sayfa #{DiseaseController.page}, Toplam Sayfa #{DiseaseController.pageCount}</pre>
+                        <pre>Bulunduğnuz Sayfa #{doctorController.page}, Toplam Sayfa #{doctorController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{doctorController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{doctorController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
                     </h:form>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">

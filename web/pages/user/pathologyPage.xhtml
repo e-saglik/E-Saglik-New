@@ -10,13 +10,10 @@
     <h:outputStylesheet name="/css/style.css" />
     <ui:define name="content">
         <div class="container">
+            <h1>Patalojik Bilgilerim</h1>
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="pathology-table">
-                        <div class="btn-group">
-                            <h:commandButton action="#{pathologyController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{pathologyController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
-                        </div>
                         <h:dataTable styleClass="table table-striped" value="#{pathologyController.GetEntityList()}" var="pathology">
                             <h:column>
                                 <f:facet name="header">Patoloji Id</f:facet>
@@ -41,8 +38,12 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
+                        <pre>Bulunduğunuz Sayfa #{pathologyController.page}, Toplam Sayfa #{pathologyController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{pathologyController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{pathologyController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
                     </h:form>
-                    <pre>Bulunduğunuz Sayfa #{pathologyController.page}, Toplam Sayfa #{pathologyController.pageCount}</pre>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="pathology-form">

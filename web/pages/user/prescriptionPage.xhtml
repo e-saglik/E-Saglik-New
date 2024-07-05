@@ -8,20 +8,17 @@
 
     <h:outputStylesheet library="css" name="bootstrap.css" />
     <h:outputStylesheet name="/css/style.css" />
-    
+
     <ui:define name="content">
         <div class="container">
+            <h1>Reçetelerim</h1>
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="prescription-table">
-                        <div class="btn-group">
-                            <h:commandButton action="#{PrescriptionController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{PrescriptionController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
-                        </div>
                         <h:dataTable styleClass="table table-striped" value="#{PrescriptionController.GetEntityList()}" var="prescription">
                             <h:column>
                                 <f:facet name="header">Dozaj</f:facet>
-                                #{prescription.dosage}
+                                    #{prescription.dosage}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">İlaçlar</f:facet>
@@ -31,7 +28,7 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Talimatlar</f:facet>
-                                #{prescription.instructions}
+                                    #{prescription.instructions}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Sil</f:facet>
@@ -40,8 +37,12 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
+                        <pre>Bulunduğnuz Sayfa #{doctorController.page}, Toplam Sayfa #{doctorController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{doctorController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{doctorController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
                     </h:form>
-                    <pre>Bulunduğunuz Sayfa #{PrescriptionController.page}, Toplam Sayfa #{PrescriptionController.pageCount}</pre>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="prescription-form">
@@ -88,7 +89,7 @@
                                 <b>Dozaj :</b> #{PrescriptionController.entity.dosage}<br />
                                 <b>İlaçlar :</b>
                                 <ui:repeat value="#{PrescriptionController.entity.medicationList}" var="medication">
-                                    #{medication.name}<br />
+                                        #{medication.name}<br />
                                 </ui:repeat>
                                 <b>Talimatlar :</b> #{PrescriptionController.entity.instructions}<br />
                                 </pre>
@@ -107,7 +108,7 @@
             </div>
         </div>
     </ui:define>
-    
+
     <script>
         function addMedication() {
             var medicationsDiv = document.querySelector('#inputMedication');

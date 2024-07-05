@@ -8,28 +8,25 @@
 
     <h:outputStylesheet library="css" name="bootstrap.css" />
     <h:outputStylesheet name="/css/style.css" />
-    
+
     <ui:define name="content">
         <div class="container">
+            <h1>Raporlarım</h1>
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="medical-report-table">
-                        <div class="btn-group">
-                            <h:commandButton action="#{MedicalReportController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{MedicalReportController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
-                        </div>
                         <h:dataTable styleClass="table table-striped" value="#{MedicalReportController.GetEntityList()}" var="medicalReport">
                             <h:column>
                                 <f:facet name="header">Tarih</f:facet>
-                                #{medicalReport.medicalReportDate}
+                                    #{medicalReport.medicalReportDate}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Teşhis</f:facet>
-                                #{medicalReport.diagnosis}
+                                    #{medicalReport.diagnosis}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Açıklama</f:facet>
-                                #{medicalReport.description}
+                                    #{medicalReport.description}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Sil</f:facet>
@@ -38,8 +35,12 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
+                        <pre>Bulunduğunuz Sayfa #{MedicalReportController.page}, Toplam Sayfa #{MedicalReportController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{MedicalReportController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{MedicalReportController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
                     </h:form>
-                    <pre>Bulunduğunuz Sayfa #{MedicalReportController.page}, Toplam Sayfa #{MedicalReportController.pageCount}</pre>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="medical-report-form">
@@ -106,7 +107,7 @@
             </div>
         </div>
     </ui:define>
-    
+
     <script>
         function addTestResult() {
             var testResultsDiv = document.querySelector('#inputTestResults');

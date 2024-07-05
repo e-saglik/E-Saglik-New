@@ -10,13 +10,10 @@
     <h:outputStylesheet name="/css/style.css" />
     <ui:define name="content">
         <div class="container">
+            <h1>Dökümanlarım</h1>
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="document-table">
-                        <div class="btn-group">
-                            <h:commandButton action="#{documentController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{documentController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
-                        </div>
                         <h:dataTable styleClass="table table-striped" value="#{documentController.GetEntityList()}" var="document">
                             <h:column>
                                 <f:facet name="header">Id</f:facet>
@@ -45,8 +42,12 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
+                        <pre>Bulunduğunuz Sayfa #{documentController.page}, Toplam Sayfa #{documentController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{documentController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{documentController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
                     </h:form>
-                    <pre>Bulunduğunuz Sayfa #{documentController.page}, Toplam Sayfa #{documentController.pageCount}</pre>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="document-form">

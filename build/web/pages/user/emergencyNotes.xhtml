@@ -10,13 +10,10 @@
     <h:outputStylesheet name="/css/style.css" />
     <ui:define name="content">
         <div class="container">
+            <h1>Acil Durum Notlarım</h1>
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
-                    <h:form id="note-table">
-                        <div class="btn-group">
-                            <h:commandButton action="#{emergencyNoteController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{emergencyNoteController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
-                        </div>
+                    <h:form id="note-table">                
                         <h:dataTable styleClass="table table-striped" value="#{emergencyNoteController.GetEntityList()}" var="note">
                             <h:column>
                                 <f:facet name="header">Not Id</f:facet>
@@ -41,8 +38,12 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
+                        <pre>Bulunduğunuz Sayfa #{emergencyNoteController.page}, Toplam Sayfa #{emergencyNoteController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{emergencyNoteController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{emergencyNoteController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
                     </h:form>
-                    <pre>Bulunduğunuz Sayfa #{emergencyNoteController.page}, Toplam Sayfa #{emergencyNoteController.pageCount}</pre>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="note-form">
