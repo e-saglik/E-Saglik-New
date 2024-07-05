@@ -69,10 +69,10 @@
                             <h:inputText styleClass="form-control" value="#{insuranceController.entity.patient.name}"></h:inputText>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{insuranceController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{insuranceController.update()}">
+                            <h:commandButton rendered="#{insuranceController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{insuranceController.UpdateEntity()}">
                                 <f:ajax execute="insurance-form" render="insurance-form insurance-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{insuranceController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{insuranceController.create()}">
+                            <h:commandButton rendered="#{insuranceController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{insuranceController.AddEntity()}">
                                 <f:ajax execute="insurance-form" render="insurance-form insurance-table"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{insuranceController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{insuranceController.clearForm()}">
@@ -102,7 +102,7 @@
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{insuranceController.DeleteEntity(insuranceController.entity.id)}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{insuranceController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="insurance-table"/>
                                 </h:commandButton>
                             </h:form>
