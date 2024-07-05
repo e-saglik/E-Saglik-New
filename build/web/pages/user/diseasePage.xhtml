@@ -29,7 +29,7 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">İşlemler</f:facet>
-                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil">
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{diseaseController.updateForm(disease)}">
                                     <f:ajax execute="@this" render="delete-modal#{disease.id}"/>
                                 </h:commandButton>     
                             </h:column>

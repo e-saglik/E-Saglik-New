@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="pathology-table">
-                        <h:dataTable styleClass="table table-striped" value="#{pathologyController.GetEntityList()}" var="pathology">
+                        <h:dataTable styleClass="table table-striped" value="#{pathologyInformationController.GetEntityList()}" var="pathology">
                             <h:column>
                                 <f:facet name="header">Patoloji Id</f:facet>
                                     #{pathology.id}
@@ -33,41 +33,41 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Sil</f:facet>
-                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{pathologyController.updateForm(pathology)}">
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{pathologyInformationController.updateForm(pathology)}">
                                     <f:ajax execute="@this" render="delete-modal"/>
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
-                        <pre>Bulunduğunuz Sayfa #{pathologyController.page}, Toplam Sayfa #{pathologyController.pageCount}</pre>
+                        <pre>Bulunduğunuz Sayfa #{pathologyInformationController.page}, Toplam Sayfa #{pathologyInformationController.pageCount}</pre>
                         <div class="btn-group">
-                            <h:commandButton action="#{pathologyController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{pathologyController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{pathologyInformationController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{pathologyInformationController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
                         </div>
                     </h:form>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="pathology-form">
-                        <h:inputText value="#{pathologyController.entity.id}" style="display: none;"></h:inputText>
+                        <h:inputText value="#{pathologyInformationController.entity.id}" style="display: none;"></h:inputText>
                         <div class="form-group">
                             <label for="inputName">Adı</label>
-                            <h:inputText styleClass="form-control" value="#{pathologyController.entity.name}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{pathologyInformationController.entity.name}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputDate">Bilgi Tarihi</label>
-                            <h:inputText type="date" styleClass="form-control" value="#{pathologyController.entity.informationDate}"></h:inputText>
+                            <h:inputText type="date" styleClass="form-control" value="#{pathologyInformationController.entity.informationDate}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputInformation">Bilgi</label>
-                            <h:inputTextarea styleClass="form-control" value="#{pathologyController.entity.information}"></h:inputTextarea>
+                            <h:inputTextarea styleClass="form-control" value="#{pathologyInformationController.entity.information}"></h:inputTextarea>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{pathologyController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{pathologyController.UpdateEntity()}">
+                            <h:commandButton rendered="#{pathologyInformationController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{pathologyInformationController.UpdateEntity()}">
                                 <f:ajax execute="pathology-form" render="pathology-form pathology-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{pathologyController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{pathologyController.AddEntity()}">
+                            <h:commandButton rendered="#{pathologyInformationController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{pathologyInformationController.AddEntity()}">
                                 <f:ajax execute="pathology-form" render="pathology-form pathology-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{pathologyController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{pathologyController.clearForm()}">
+                            <h:commandButton rendered="#{pathologyInformationController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{pathologyInformationController.clearForm()}">
                                 <f:ajax execute="@this" render="pathology-form"/>
                             </h:commandButton>
                         </div>
@@ -84,16 +84,16 @@
                         <div class="modal-body">
                             <p>Bu patoloji bilgisini silmek istediğinizden emin misiniz!
                                 <pre>
-                                <b>Adı :</b> #{pathologyController.entity.name}<br />
-                                <b>Bilgi Tarihi :</b> #{pathologyController.entity.informationDate}<br />
-                                <b>Bilgi :</b> #{pathologyController.entity.information}<br />
+                                <b>Adı :</b> #{pathologyInformationController.entity.name}<br />
+                                <b>Bilgi Tarihi :</b> #{pathologyInformationController.entity.informationDate}<br />
+                                <b>Bilgi :</b> #{pathologyInformationController.entity.information}<br />
                                 </pre>
                             </p>
                         </div>
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{pathologyController.DeleteEntity()}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{pathologyInformationController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="pathology-table"/>
                                 </h:commandButton>
                             </h:form>
