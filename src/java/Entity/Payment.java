@@ -4,31 +4,35 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "Payment")
-public class Payment extends BaseEntity {
+@Table(name = "payment")
+@NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p")
+public class Payment extends BaseEntity implements Serializable {
+
     @Column(name = "payment_amount")
     private double paymentAmount;
 
     @Column(name = "payment_date")
     private Date paymentDate;
-    
-    @ManyToOne
-@JoinColumn(name = "patient_id")
-private Patient patient;
 
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
     public Payment() {
-        
+
     }
 
-    public Payment(double paymentAmount, Date paymentDate, int id, String name) {
+    public Payment(double paymentAmount, Date paymentDate, Patient patient, int id, String name) {
         super(id, name);
         this.paymentAmount = paymentAmount;
         this.paymentDate = paymentDate;
+        this.patient = patient;
     }
 
     public double getPaymentAmount() {
@@ -49,11 +53,11 @@ private Patient patient;
 
     @Override
     public String toString() {
-        return "Payment{" +
-                "id=" + getId() +
-                ", name='" + getName() + '\'' +
-                ", paymentAmount=" + paymentAmount +
-                ", paymentDate=" + paymentDate +
-                '}';
+        return "Payment{"
+                + "id=" + getId()
+                + ", name='" + getName() + '\''
+                + ", paymentAmount=" + paymentAmount
+                + ", paymentDate=" + paymentDate
+                + '}';
     }
 }

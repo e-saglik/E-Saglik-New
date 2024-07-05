@@ -6,12 +6,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "Hospital")
-public class Hospital extends BaseEntity {
+@Table(name = "hospital")
+@NamedQuery(name = "Hospital.findAll", query = "SELECT h FROM Hospital h")
+public class Hospital extends BaseEntity implements Serializable {
     @Column(name = "location")
     private String location;
 

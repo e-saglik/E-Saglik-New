@@ -10,14 +10,16 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "vaccine")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQuery(name = "Vaccination_schedules.findAll", query = "SELECT t FROM Vaccination_schedules t")
 public class User extends BaseEntity implements Serializable {
 
     @Id

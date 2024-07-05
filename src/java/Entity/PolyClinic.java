@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "PolyClinic")
+@NamedQuery(name = "PolyClinic.findAll", query = "SELECT p FROM PolyClinic p")
 public class PolyClinic extends BaseEntity {
     @Column(name = "location")
     private String location;
