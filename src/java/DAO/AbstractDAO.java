@@ -39,19 +39,8 @@ public abstract class AbstractDAO<T> implements Serializable {
     }
 
     public List<T> GetList() {
-        String jpql = "SELECT u, d FROM User u LEFT JOIN u.doctor d";
-    TypedQuery<Object[]> query = entityManager.createQuery(jpql, Object[].class);
-    List<Object[]> results = query.getResultList();
-
-    List<User> users = new ArrayList<>();
-    for (Object[] result : results) {
-        User user = (User) result[0];
-        Doctor doctor = (Doctor) result[1];
-        user.setDoctor(doctor); // Assuming there's a method to set the doctor in User entity
-        users.add(user);
-    }
-
-    return (List<T>) users;
+        Query q = entityManager.createQuery("select c from " + entityClass.getSimpleName() + " c order by c.id desc", entityClass);
+        return q.getResultList();
     }
 
     public void Delete(T entity) {

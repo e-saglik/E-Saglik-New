@@ -15,7 +15,7 @@ public class Prescription extends BaseEntity {
     @Column(name = "dosage")
     private String dosage;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "prescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Medication> medicationList;
 
     @Column(name = "instructions")

@@ -32,7 +32,7 @@ public class LoginFilter implements Filter{
         User u = (User) req.getSession().getAttribute("valid_user");
         
         if(u == null){
-            if( url.contains("user") || url.contains("doctor")){
+            if(url.contains("doctor")){
                res.sendRedirect(req.getContextPath() + "/login.xhtml");
             }
             else{

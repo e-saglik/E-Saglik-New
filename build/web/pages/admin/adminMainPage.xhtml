@@ -72,10 +72,10 @@
                             <h:inputText styleClass="form-control" value="#{doctorController.entity.email}"></h:inputText>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{doctorController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{doctorController.update()}">
+                            <h:commandButton rendered="#{doctorController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{doctorController.UpdateEntity()}">
                                 <f:ajax execute="user-form" render="user-form user-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{doctorController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{doctorController.create()}">
+                            <h:commandButton rendered="#{doctorController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{doctorController.AddEntity()}">
                                 <f:ajax execute="user-form" render="user-form user-table"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{doctorController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{doctorController.clearForm()}">
@@ -104,7 +104,7 @@
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{doctorController.DeleteEntity(doctorController.entity.id)}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{doctorController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="user-table"/>
                                 </h:commandButton>
                             </h:form>
