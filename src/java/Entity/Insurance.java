@@ -4,11 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "insurance")
-public class Insurance extends BaseEntity {
+@NamedQuery(name = "Insurance.findAll", query = "SELECT i FROM Insurance i")
+public class Insurance extends BaseEntity implements Serializable{
     @Column(name = "provider")
     private String provider;
 
@@ -53,6 +56,8 @@ public class Insurance extends BaseEntity {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
+    
+    
 
     @Override
     public String toString() {

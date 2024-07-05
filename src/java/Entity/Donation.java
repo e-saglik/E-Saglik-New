@@ -1,8 +1,15 @@
 package Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Donation extends BaseEntity {
+@Entity
+@Table(name = "Donation")
+@NamedQuery(name = "Donation.findAll", query = "SELECT d FROM Donation d")
+public class Donation extends BaseEntity implements Serializable {
     private String donationType;
     private String donorName;
     private Date donationDate;
