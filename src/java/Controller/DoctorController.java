@@ -8,23 +8,24 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
 @SessionScoped
-public class DoctorController extends BaseController<Doctor> implements Serializable{
+public class DoctorController extends BaseController<Doctor> implements Serializable {
 
-    
     private Doctor entity;
     @EJB
     private DoctorDAO dao;
+    
     private List<Doctor> list;
     private int page = 1;
     private int pageSize = 10;
     private int pageCount;
 
-    public DoctorController(Class<Doctor> entityClass) {
-        super(entityClass);
+    public DoctorController() {
+        super(Doctor.class);
     }
 
     public void next() {
@@ -127,8 +128,9 @@ public class DoctorController extends BaseController<Doctor> implements Serializ
     }
 
     @Override
-    public List<Doctor> GetEntityList() {              
-        return  this.list = this.getDao().GetList();
+    public List<Doctor> GetEntityList() {
+        System.out.println(dao.GetList()+"fjıoajfıowajfoı");
+        return dao.GetList();
     }
 
     @Override
@@ -148,8 +150,8 @@ public class DoctorController extends BaseController<Doctor> implements Serializ
     }
 
     public Doctor getEntity() {
-        if (this.entity == null) {
-            this.entity = new Doctor();
+        if (entity == null) {
+            entity = new Doctor();
         }
         return entity;
     }

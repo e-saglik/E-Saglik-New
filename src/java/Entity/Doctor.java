@@ -14,13 +14,9 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "doctor")
 @NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM Doctor d")
 public class Doctor extends User implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
     @Column(name = "specialization")
     private String specialization;
@@ -44,14 +40,15 @@ public class Doctor extends User implements Serializable {
         // Default constructor
     }
 
-    public Doctor(String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name,
-                  String specialization, String hospital, String prescription, String appointment) {
+    public Doctor(String specialization, String hospital, String prescription, String appointment, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
         super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
         this.specialization = specialization;
         this.hospital = hospital;
         this.prescription = prescription;
         this.appointment = appointment;
     }
+    
+    
 
     // Getters and setters
 
