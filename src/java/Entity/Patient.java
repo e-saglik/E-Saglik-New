@@ -7,21 +7,24 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "Patient")
-public class Patient extends User {
+@NamedQuery(name = "Patient.findAll", query = "SELECT p FROM Patient p")
+public class Patient extends BaseEntity implements Serializable {
 
-    @Column(name = "date_of_birth")
+    @Column(name = "dateofbirth")
     private Date dateOfBirth;
 
-    @Column(name = "blood_type")
+    @Column(name = "bloodtype")
     private String bloodType;
 
     @Column(name = "appointment")
@@ -52,11 +55,11 @@ public class Patient extends User {
     private List<Allergy> allergyList;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "insurance_id")
+    @JoinColumn(name = "insurance")
     private Insurance insurance;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vaccination_schedule_id")
+    @JoinColumn(name = "vaccinationschedule")
     private VaccinationSchedule vaccinationSchedule;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
