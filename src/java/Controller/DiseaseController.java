@@ -19,7 +19,7 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
     private List<Disease> diseaseList;
 
     public DiseaseController() {
-        super(Disease.class);
+        super(Disease.class);       
     }
 
     public DiseaseDAO getDiseaseDao() {
@@ -79,7 +79,7 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
 
     @Override
     public void DeleteEntity() {
-              diseaseDao.Delete(entity);
+        diseaseDao.Delete(entity);
         this.entity = new Disease();
     }
 

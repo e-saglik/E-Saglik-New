@@ -3,15 +3,30 @@ package Controller;
 import DAO.AbstractDAO;
 import DAO.HospitalDAO;
 import Entity.Hospital;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
-public class HospitalController extends BaseController<Hospital> {
+@Named
+@SessionScoped
+public class HospitalController extends BaseController<Hospital> implements Serializable {
 
+    @EJB
     private HospitalDAO hospitalDao;
+
     private Hospital hospital;
     private List<Hospital> hospitalList;
 
+    public HospitalController() {
+        super(Hospital.class);
+    }
+
     public AbstractDAO getHospitalDao() {
+       if (this.hospitalDao == null) {
+            this.hospitalDao = new HospitalDAO();
+        }
         return hospitalDao;
     }
 
@@ -28,6 +43,7 @@ public class HospitalController extends BaseController<Hospital> {
     }
 
     public List<Hospital> getHospitalList() {
+        this.hospitalList = this.getHospitalDao().GetList();
         return hospitalList;
     }
 
@@ -35,16 +51,10 @@ public class HospitalController extends BaseController<Hospital> {
         this.hospitalList = hospitalList;
     }
 
-    public HospitalController() {
- 
-    }
-
     @Override
-    public void AddEntity(Hospital hospital) {
-        if (hospitalDao == null) {
-            hospitalDao = new HospitalDAO();
-        }
-        hospitalDao.Create(hospital);
+    public void AddEntity() {
+        getHospitalDao().Create(this.entity);
+        this.entity = new Hospital();
 
     }
 
@@ -59,27 +69,19 @@ public class HospitalController extends BaseController<Hospital> {
 
     @Override
     public List<Hospital> GetEntityList() {
-        if (hospitalDao == null) {
-            hospitalDao = new HospitalDAO();
-        }
-        hospitalDao.GetList();
-        return null;
+        return getHospitalDao().GetList();
     }
 
     @Override
-    public void UpdateEntity(int id, Hospital hospital) {
-if (hospitalDao == null) {
-            hospitalDao = new HospitalDAO();
-        }
-        hospitalDao.Update(hospital);
+    public void UpdateEntity() {
+        getHospitalDao().Update(hospital);
+        this.entity = new Hospital();
     }
 
     @Override
     public void DeleteEntity() {
-        if (hospitalDao == null) {
-            hospitalDao = new HospitalDAO();
-        }
-        hospitalDao.Delete(hospital);
+        hospitalDao.Delete(entity);
+        this.entity = new Hospital();
     }
 
 }

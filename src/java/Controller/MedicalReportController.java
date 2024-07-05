@@ -3,19 +3,29 @@ package Controller;
 import DAO.AbstractDAO;
 import DAO.MedicalReportDAO;
 import Entity.MedicalReport;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 import java.util.List;
 
+@Named
+@SessionScoped
 public class MedicalReportController extends BaseController<MedicalReport> {
 
+    @EJB
     private MedicalReportDAO medicalReportDao;
+
     private MedicalReport medicalReport;
     private List<MedicalReport> medicalReportList;
 
     public MedicalReportController() {
-
+        super(MedicalReport.class);
     }
 
     public AbstractDAO getMedicalReportDao() {
+        if (this.medicalReportDao == null) {
+            this.medicalReportDao = new MedicalReportDAO();
+        }
         return medicalReportDao;
     }
 
@@ -32,6 +42,7 @@ public class MedicalReportController extends BaseController<MedicalReport> {
     }
 
     public List<MedicalReport> getMedicalReportList() {
+        this.medicalReportList = this.getMedicalReportDao().GetList();
         return medicalReportList;
     }
 
@@ -40,11 +51,9 @@ public class MedicalReportController extends BaseController<MedicalReport> {
     }
 
     @Override
-    public void AddEntity(MedicalReport medicalReport) {
-        if (medicalReportDao == null) {
-            medicalReportDao = new MedicalReportDAO();
-        }
-        medicalReportDao.Create(medicalReport);
+    public void AddEntity() {
+        getMedicalReportDao().Create(this.entity);
+        this.entity = new MedicalReport();
 
     }
 
@@ -60,29 +69,20 @@ public class MedicalReportController extends BaseController<MedicalReport> {
 
     @Override
     public List<MedicalReport> GetEntityList() {
-        if (medicalReportDao == null) {
-            medicalReportDao = new MedicalReportDAO();
-        }
-        medicalReportDao.GetList();
-
-        return null;
+        return getMedicalReportDao().GetList();
     }
 
     @Override
-    public void UpdateEntity(int id, MedicalReport medicalReport) {
-        if (medicalReportDao == null) {
-            medicalReportDao = new MedicalReportDAO();
-        }
-        medicalReportDao.Update(medicalReport);
+    public void UpdateEntity() {
+       getMedicalReportDao().Update(medicalReport);
+        this.entity = new MedicalReport();
 
     }
 
     @Override
     public void DeleteEntity() {
-        if (medicalReportDao == null) {
-            medicalReportDao = new MedicalReportDAO();
-        }
-        medicalReportDao.Delete(medicalReport);
+        medicalReportDao.Delete(entity);
+        this.entity = new MedicalReport();
 
     }
 
