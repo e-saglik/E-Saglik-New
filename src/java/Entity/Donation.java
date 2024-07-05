@@ -1,5 +1,6 @@
 package Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
@@ -7,15 +8,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "Donation")
+@Table(name = "donation")
 @NamedQuery(name = "Donation.findAll", query = "SELECT d FROM Donation d")
 public class Donation extends BaseEntity implements Serializable {
+
+    @Column(name = "donation_type")
     private String donationType;
+    
+    @Column(name = "donor_name")
     private String donorName;
+    
+    @Column(name = "donation_date")
     private Date donationDate;
 
     public Donation() {
-    
+
     }
 
     public Donation(String donationType, String donorName, Date donationDate, int id, String name) {
@@ -51,10 +58,10 @@ public class Donation extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Donation{" +
-                "donationType='" + donationType + '\'' +
-                ", donorName='" + donorName + '\'' +
-                ", donationDate=" + donationDate +
-                '}';
+        return "Donation{"
+                + "donationType='" + donationType + '\''
+                + ", donorName='" + donorName + '\''
+                + ", donationDate=" + donationDate
+                + '}';
     }
 }

@@ -2,11 +2,14 @@ package Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "Pharmacy")
-public class Pharmacy extends BaseEntity {
+@NamedQuery(name = "Pharmacy.findAll", query = "SELECT p FROM Pharmacy p")
+public class Pharmacy extends BaseEntity implements Serializable {
     @Column(name = "location")
     private String location;
 

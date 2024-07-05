@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Table(name = "insurance")
 @NamedQuery(name = "Insurance.findAll", query = "SELECT i FROM Insurance i")
 public class Insurance extends BaseEntity implements Serializable{
+    
     @Column(name = "provider")
     private String provider;
 
