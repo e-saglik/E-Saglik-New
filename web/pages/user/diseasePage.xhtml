@@ -13,11 +13,7 @@
             <h1>Hastalıklarım</h1>
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
-                    <h:form id="disease-table-form">
-                        <div class="btn-group">
-                            <h:commandButton action="#{DiseaseController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{DiseaseController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
-                        </div>
+                    <h:form id="disease-table-form">         
                         <h:dataTable styleClass="table table-striped" value="#{DiseaseController.getEntityList()}" var="disease">
                             <h:column>
                                 <f:facet name="header">Adı</f:facet>

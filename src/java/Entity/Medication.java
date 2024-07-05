@@ -2,6 +2,9 @@ package Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
@@ -11,7 +14,16 @@ import java.io.Serializable;
 @Entity
 @Table(name = "medication")
 @NamedQuery(name = "Medication.findAll", query = "SELECT m FROM Medication m")
-public class Medication extends BaseEntity implements Serializable {
+public class Medication implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+    
+    @Column(name = "name")
+    private String name;
+    
     @Column(name = "dosage")
     private String dosage;
  
@@ -27,7 +39,8 @@ public class Medication extends BaseEntity implements Serializable {
     }
 
     public Medication(String dosage, Prescription prescription, Patient patient, int id, String name) {
-        super(id, name);
+        this.id = id;
+        this.name = name;
         this.dosage = dosage;
         this.prescription = prescription;
         this.patient = patient;
@@ -57,16 +70,24 @@ public class Medication extends BaseEntity implements Serializable {
         this.patient = patient;
     }
 
-    @Override
-    public String toString() {
-        return "Medication{" +
-                "id=" + getId() +
-                ", name='" + getName() + '\'' +
-                ", dosage='" + dosage + '\'' +
-                ", prescription=" + prescription +
-                ", patient=" + patient +
-                '}';
+
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
     
     
 }
