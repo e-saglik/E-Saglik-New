@@ -2,11 +2,14 @@ package Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "document")
-public class Document extends BaseEntity {
+@NamedQuery(name = "Document.findAll", query = "SELECT d FROM Document d")
+public class Document extends BaseEntity implements Serializable {
 
     @Column(name = "title")
     private String title;
