@@ -40,10 +40,10 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
-                        <pre>Bulunduğnuz Sayfa #{doctorController.page}, Toplam Sayfa #{doctorController.pageCount}</pre>
+                        <pre>Bulunduğnuz Sayfa #{radiographController.page}, Toplam Sayfa #{radiographController.pageCount}</pre>
                         <div class="btn-group">
-                            <h:commandButton action="#{doctorController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{doctorController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{radiographController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{radiographController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
                         </div>
                     </h:form>
                 </div>
@@ -63,10 +63,10 @@
                             <h:inputFile value="#{radiographController.file}" styleClass="custom-file"></h:inputFile>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{radiographController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{radiographController.update()}">
+                            <h:commandButton rendered="#{radiographController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{radiographController.UpdateEntity()}">
                                 <f:ajax execute="radiograph-form" render="radiograph-form radiograph-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{radiographController.entity.id == 0}" styleClass="btn btn-primary" value="Ekle" action="#{radiographController.create()}">
+                            <h:commandButton rendered="#{radiographController.entity.id == 0}" styleClass="btn btn-primary" value="Ekle" action="#{radiographController.AddEntity()}">
                                 <f:ajax execute="radiograph-form" render="radiograph-form radiograph-table"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{radiographController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{radiographController.clearForm()}">
@@ -95,7 +95,7 @@
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{radiographController.DeleteEntity(radiographController.entity.id)}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{radiographController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="radiograph-table"/>
                                 </h:commandButton>
                             </h:form>

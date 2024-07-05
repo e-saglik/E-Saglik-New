@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="medical-report-table">
-                        <h:dataTable styleClass="table table-striped" value="#{MedicalReportController.GetEntityList()}" var="medicalReport">
+                        <h:dataTable styleClass="table table-striped" value="#{medicalReportController.GetEntityList()}" var="medicalReport">
                             <h:column>
                                 <f:facet name="header">Tarih</f:facet>
                                     #{medicalReport.medicalReportDate}
@@ -30,48 +30,48 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Sil</f:facet>
-                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{MedicalReportController.updateForm(medicalReport)}">
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{medicalReportController.updateForm(medicalReport)}">
                                     <f:ajax execute="@this" render="delete-modal"/>
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
-                        <pre>Bulunduğunuz Sayfa #{MedicalReportController.page}, Toplam Sayfa #{MedicalReportController.pageCount}</pre>
+                        <pre>Bulunduğunuz Sayfa #{medicalReportController.page}, Toplam Sayfa #{medicalReportController.pageCount}</pre>
                         <div class="btn-group">
-                            <h:commandButton action="#{MedicalReportController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{MedicalReportController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{medicalReportController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{medicalReportController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
                         </div>
                     </h:form>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="medical-report-form">
-                        <h:inputText value="#{MedicalReportController.entity.id}" style="display: none;"></h:inputText>
+                        <h:inputText value="#{medicalReportController.entity.id}" style="display: none;"></h:inputText>
                         <div class="form-group">
                             <label for="inputDate">Tarih</label>
-                            <h:inputText type="date" styleClass="form-control" value="#{MedicalReportController.entity.medicalReportDate}"></h:inputText>
+                            <h:inputText type="date" styleClass="form-control" value="#{medicalReportController.entity.medicalReportDate}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputDiagnosis">Teşhis</label>
-                            <h:inputText styleClass="form-control" value="#{MedicalReportController.entity.diagnosis}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{medicalReportController.entity.diagnosis}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputDescription">Açıklama</label>
-                            <h:inputTextarea styleClass="form-control" value="#{MedicalReportController.entity.description}"></h:inputTextarea>
+                            <h:inputTextarea styleClass="form-control" value="#{medicalReportController.entity.description}"></h:inputTextarea>
                         </div>
                         <div class="form-group" id="inputTestResults">
                             <label for="inputTestResults">Test Sonuçları</label>
-                            <ui:repeat value="#{MedicalReportController.entity.testResults}" var="testResult">
+                            <ui:repeat value="#{medicalReportController.entity.testResults}" var="testResult">
                                 <h:inputText styleClass="form-control" value="#{testResult}"></h:inputText>
                             </ui:repeat>
                         </div>
                         <button type="button" class="btn btn-secondary" onclick="addTestResult()">Test Sonucu Ekle</button>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{MedicalReportController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{MedicalReportController.update()}">
+                            <h:commandButton rendered="#{medicalReportController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{medicalReportController.UpdateEntity()}">
                                 <f:ajax execute="medical-report-form" render="medical-report-form medical-report-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{MedicalReportController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{MedicalReportController.create()}">
+                            <h:commandButton rendered="#{medicalReportController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{medicalReportController.AddEntity()}">
                                 <f:ajax execute="medical-report-form" render="medical-report-form medical-report-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{MedicalReportController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{MedicalReportController.clearForm()}">
+                            <h:commandButton rendered="#{medicalReportController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{medicalReportController.clearForm()}">
                                 <f:ajax execute="@this" render="medical-report-form"/>
                             </h:commandButton>
                         </div>
@@ -88,16 +88,16 @@
                         <div class="modal-body">
                             <p>Bu tıbbi raporu silmek istediğinizden emin misiniz!
                                 <pre>
-                                <b>Tarih :</b> #{MedicalReportController.entity.medicalReportDate}<br />
-                                <b>Teşhis :</b> #{MedicalReportController.entity.diagnosis}<br />
-                                <b>Açıklama :</b> #{MedicalReportController.entity.description}<br />
+                                <b>Tarih :</b> #{medicalReportController.entity.medicalReportDate}<br />
+                                <b>Teşhis :</b> #{medicalReportController.entity.diagnosis}<br />
+                                <b>Açıklama :</b> #{medicalReportController.entity.description}<br />
                                 </pre>
                             </p>
                         </div>
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{MedicalReportController.DeleteEntity(MedicalReportController.entity.id)}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{medicalReportController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="medical-report-table"/>
                                 </h:commandButton>
                             </h:form>
