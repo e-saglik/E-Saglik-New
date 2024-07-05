@@ -17,7 +17,7 @@
                         <h:dataTable styleClass="table table-striped" value="#{AllergyController.GetEntityList()}" var="allergy">
                             <h:column>
                                 <f:facet name="header">Adı</f:facet>
-                                    #{allergy.name}
+                                    #{allergy.patientid}
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">Tür</f:facet>
@@ -46,7 +46,7 @@
                         <h:inputText value="#{AllergyController.entity.id}" style="display: none;"></h:inputText>
                         <div class="form-group">
                             <label for="inputName">Adı</label>
-                            <h:inputText styleClass="form-control" value="#{AllergyController.entity.name}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{AllergyController.entity.patient}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputType">Tür</label>
@@ -63,10 +63,10 @@
                             </h:selectOneMenu>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{AllergyController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{AllergyController.update()}">
+                            <h:commandButton rendered="#{AllergyController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{AllergyController.Update()}">
                                 <f:ajax execute="allergy-form" render="allergy-form allergy-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{AllergyController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{AllergyController.create()}">
+                            <h:commandButton rendered="#{AllergyController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{AllergyController.Create()}">
                                 <f:ajax execute="allergy-form" render="allergy-form allergy-table"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{AllergyController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{AllergyController.clearForm()}">
