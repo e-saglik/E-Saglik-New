@@ -19,9 +19,13 @@ public class VaccineController extends BaseController<Vaccine> implements Serial
 
     private Vaccine vaccine;
     private List<Vaccine> vaccineList;
-     private int page = 1;
+    private int page = 1;
     private int pageSize = 10;
     private int pageCount;
+
+    public VaccineController() {
+        super(Vaccine.class);
+    }
 
     public void next() {
         if (this.page == getPageCount()) {
@@ -74,10 +78,6 @@ public class VaccineController extends BaseController<Vaccine> implements Serial
         this.entity = vacc;
     }
 
-    public VaccineController() {
-        super(Vaccine.class);
-    }
-
     public VaccineDAO getDao() {
         if (this.vaccineDao == null) {
             this.vaccineDao = new VaccineDAO();
@@ -128,7 +128,7 @@ public class VaccineController extends BaseController<Vaccine> implements Serial
 
     @Override
     public void DeleteEntity() {
-         getDao().Delete(entity);
+        getDao().Delete(entity);
         this.entity = new Vaccine();
     }
 

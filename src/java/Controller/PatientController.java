@@ -15,8 +15,8 @@ public class PatientController extends BaseController<Patient> implements Serial
     private Patient patient;
     private List<Patient> patientList;
 
-    public PatientController(Class<Patient> entityClass) {
-        super(entityClass);
+    public PatientController() {
+        super(Patient.class);
     }
 
     public PatientDAO getPatientDao() {
