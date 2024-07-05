@@ -30,10 +30,10 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
-                        <pre>Bulunduğunuz Sayfa #{vaccinationScheduleController.page}, Toplam Sayfa #{vaccinationScheduleController.pageCount}</pre>
+                        <pre>Bulunduğunuz Sayfa #{medicationController.page}, Toplam Sayfa #{medicationController.pageCount}</pre>
                         <div class="btn-group">
-                            <h:commandButton action="#{vaccinationScheduleController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{vaccinationScheduleController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{medicationController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{medicationController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
                         </div>
                     </h:form>
                 </div>
@@ -49,10 +49,10 @@
                             <h:inputText styleClass="form-control" value="#{medicationController.entity.dosage}"></h:inputText>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{medicationController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{medicationController.update()}">
+                            <h:commandButton rendered="#{medicationController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{medicationController.UpdateEntity()}">
                                 <f:ajax execute="medication-form" render="medication-form medication-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{medicationController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{medicationController.create()}">
+                            <h:commandButton rendered="#{medicationController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{medicationController.AddEntity()}">
                                 <f:ajax execute="medication-form" render="medication-form medication-table"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{medicationController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{medicationController.clearForm()}">
@@ -80,7 +80,7 @@
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{medicationController.DeleteEntity(medicationController.entity.id)}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{medicationController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="medication-table"/>
                                 </h:commandButton>
                             </h:form>
