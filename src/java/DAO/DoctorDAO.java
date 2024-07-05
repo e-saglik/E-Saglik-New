@@ -12,5 +12,4 @@ public class DoctorDAO extends AbstractDAO<Doctor> implements Serializable {
     public DoctorDAO() {
         super(Doctor.class);
     }
-
 }

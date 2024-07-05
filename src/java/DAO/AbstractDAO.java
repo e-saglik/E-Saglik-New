@@ -1,26 +1,16 @@
 package DAO;
 
-import jakarta.ejb.Local;
-import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import java.io.Serializable;
 import java.util.List;
 
-@Local
-@Stateless
 public abstract class AbstractDAO<T> implements Serializable {
 
     @PersistenceContext(unitName = "E-SaglikPU")
-    protected EntityManagerFactory entityManagerFactory;
     protected EntityManager entityManager;
     private Class<T> entityClass;
-
-    public AbstractDAO() {
-    }
 
     public AbstractDAO(Class<T> ec) {
         this.entityClass = ec;
@@ -45,18 +35,18 @@ public abstract class AbstractDAO<T> implements Serializable {
     }
 
     public T GetById(int id) {
-        return (T) entityManager.find(entityClass, id);
+        return entityManager.find(entityClass, id);
     }
 
     public List<T> FindRange(int[] range) {
-        jakarta.persistence.Query q = entityManager.createQuery("SELECT e FROM " + entityClass.getName() + " e", entityClass);
+        Query q = entityManager.createQuery("SELECT e FROM " + entityClass.getName() + " e", entityClass);
         q.setMaxResults(range[1] - range[0]);
         q.setFirstResult(range[0]);
         return q.getResultList();
     }
 
     public int Count() {
-        jakarta.persistence.Query q = entityManager.createQuery("SELECT COUNT(e) FROM " + entityClass.getName() + " e");
+        Query q = entityManager.createQuery("SELECT COUNT(e) FROM " + entityClass.getName() + " e");
         return ((Long) q.getSingleResult()).intValue();
     }
 }
