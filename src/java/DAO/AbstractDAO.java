@@ -17,7 +17,7 @@ public abstract class AbstractDAO<T> implements Serializable {
     @PersistenceContext(unitName = "E-SaglikPU")
     protected EntityManagerFactory entityManagerFactory;
     protected EntityManager entityManager;
-    private Class<T> entityClass;
+    protected Class<T> entityClass;
 
     public AbstractDAO() {
     }

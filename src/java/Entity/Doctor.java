@@ -2,16 +2,25 @@ package Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "doctor")
-public class Doctor extends User {
+public class Doctor extends User implements Serializable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
     @Column(name = "specialization")
     private String specialization;
 
@@ -31,24 +40,11 @@ public class Doctor extends User {
     private Set<Role> roles;
 
     public Doctor() {
+        // Default constructor
     }
 
-    public Doctor(int id, String name, String specialization) {
-        super(id, name);
-        this.specialization = specialization;
-    }
-
-    public Doctor(String specialization, String hospital, String prescription, String appointment, List<Patient> patientList, Set<Role> roles, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
-        super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
-        this.specialization = specialization;
-        this.hospital = hospital;
-        this.prescription = prescription;
-        this.appointment = appointment;
-        this.patientList = patientList;
-        this.roles = roles;
-    }
-
-    public Doctor(String specialization, String hospital, String prescription, String appointment, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
+    public Doctor(String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name,
+                  String specialization, String hospital, String prescription, String appointment) {
         super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
         this.specialization = specialization;
         this.hospital = hospital;
@@ -56,13 +52,7 @@ public class Doctor extends User {
         this.appointment = appointment;
     }
 
-    public void prescribeMedication() {
-        // Implementation
-    }
-
-    public void requestTest() {
-        // Implementation
-    }
+    // Getters and setters
 
     public String getSpecialization() {
         return specialization;
@@ -112,15 +102,16 @@ public class Doctor extends User {
         this.roles = roles;
     }
 
+    // toString() method for debugging and logging purposes
     @Override
     public String toString() {
         return "Doctor{" +
-                "specialization='" + specialization + '\'' +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", specialization='" + specialization + '\'' +
                 ", hospital='" + hospital + '\'' +
                 ", prescription='" + prescription + '\'' +
                 ", appointment='" + appointment + '\'' +
-                ", patientList=" + patientList +
-                ", roles=" + roles +
                 '}';
     }
 }
