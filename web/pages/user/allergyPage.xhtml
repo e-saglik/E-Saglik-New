@@ -14,10 +14,10 @@
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="allergy-table">
-                        <h:dataTable styleClass="table table-striped" value="#{AllergyController.GetEntityList()}" var="allergy">
+                        <h:dataTable styleClass="table table-striped" value="#{allergyController.GetEntityList()}" var="allergy">
                             <h:column>
                                 <f:facet name="header">Adı</f:facet>
-                                    #{allergy.patientid}
+                                    #{allergy.name}
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">Tür</f:facet>
@@ -29,32 +29,32 @@
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">Sil</f:facet>
-                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{AllergyController.updateForm(allergy)}">
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{allergyController.updateForm(allergy)}">
                                     <f:ajax execute="@this" render="delete-modal"/>
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
-                        <pre>Bulunduğnuz Sayfa #{AllergyController.page}, Toplam Sayfa #{AllergyController.pageCount}</pre>
+                        <pre>Bulunduğnuz Sayfa #{allergyController.page}, Toplam Sayfa #{allergyController.pageCount}</pre>
                         <div class="btn-group">
-                            <h:commandButton action="#{AllergyController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{AllergyController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{allergyController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{allergyController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
                         </div>
                     </h:form>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="allergy-form">
-                        <h:inputText value="#{AllergyController.entity.id}" style="display: none;"></h:inputText>
+                        <h:inputText value="#{allergyController.entity.id}" style="display: none;"></h:inputText>
                         <div class="form-group">
                             <label for="inputName">Adı</label>
-                            <h:inputText styleClass="form-control" value="#{AllergyController.entity.patient}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{allergyController.entity.name}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputType">Tür</label>
-                            <h:inputText styleClass="form-control" value="#{AllergyController.entity.type}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{allergyController.entity.type}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputSeverity">Şiddet</label>
-                            <h:selectOneMenu styleClass="form-control" value="#{AllergyController.entity.severity}">
+                            <h:selectOneMenu styleClass="form-control" value="#{allergyController.entity.severity}">
                                 <f:selectItem itemValue="1" itemLabel="Düşük" />
                                 <f:selectItem itemValue="2" itemLabel="Orta" />
                                 <f:selectItem itemValue="3" itemLabel="Yüksek" />
@@ -63,13 +63,13 @@
                             </h:selectOneMenu>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{AllergyController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{AllergyController.Update()}">
+                            <h:commandButton rendered="#{allergyController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{allergyController.UpdateEntity()}">
                                 <f:ajax execute="allergy-form" render="allergy-form allergy-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{AllergyController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{AllergyController.Create()}">
+                            <h:commandButton rendered="#{allergyController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{allergyController.AddEntity()}">
                                 <f:ajax execute="allergy-form" render="allergy-form allergy-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{AllergyController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{AllergyController.clearForm()}">
+                            <h:commandButton rendered="#{allergyController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{allergyController.clearForm()}">
                                 <f:ajax execute="@this" render="allergy-form"/>
                             </h:commandButton>
                         </div>
@@ -86,16 +86,16 @@
                         <div class="modal-body">
                             <p>Bu alerjiyi silmek istediğinizden emin misiniz!
                                 <pre>
-                                <b>Adı :</b> #{AllergyController.entity.name}<br />
-                                <b>Tür :</b> #{AllergyController.entity.type}<br />
-                                <b>Şiddet :</b> #{AllergyController.entity.severity}<br />
+                                <b>Adı :</b> #{allergyController.entity.name}<br />
+                                <b>Tür :</b> #{allergyController.entity.type}<br />
+                                <b>Şiddet :</b> #{allergyController.entity.severity}<br />
                                 </pre>
                             </p>
                         </div>
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{AllergyController.DeleteEntity(AllergyController.entity.id)}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{allergyController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="allergy-table"/>
                                 </h:commandButton>
                             </h:form>

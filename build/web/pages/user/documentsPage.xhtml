@@ -69,10 +69,10 @@
                             <h:inputText styleClass="form-control" value="#{documentController.entity.fileName}"></h:inputText>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{documentController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{documentController.update()}">
+                            <h:commandButton rendered="#{documentController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{documentController.UpdateEntity()}">
                                 <f:ajax execute="document-form" render="document-form document-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{documentController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{documentController.create()}">
+                            <h:commandButton rendered="#{documentController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{documentController.AddEntity()}">
                                 <f:ajax execute="document-form" render="document-form document-table"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{documentController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{documentController.clearForm()}">
@@ -102,7 +102,7 @@
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{documentController.DeleteEntity(documentController.entity.id)}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{documentController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="document-table"/>
                                 </h:commandButton>
                             </h:form>
