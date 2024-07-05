@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="prescription-table">
-                        <h:dataTable styleClass="table table-striped" value="#{PrescriptionController.GetEntityList()}" var="prescription">
+                        <h:dataTable styleClass="table table-striped" value="#{prescriptionController.GetEntityList()}" var="prescription">
                             <h:column>
                                 <f:facet name="header">Dozaj</f:facet>
                                     #{prescription.dosage}
@@ -32,44 +32,44 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Sil</f:facet>
-                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{PrescriptionController.updateForm(prescription)}">
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{prescriptionController.updateForm(prescription)}">
                                     <f:ajax execute="@this" render="delete-modal"/>
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
-                        <pre>Bulunduğnuz Sayfa #{doctorController.page}, Toplam Sayfa #{doctorController.pageCount}</pre>
+                        <pre>Bulunduğnuz Sayfa #{prescriptionController.page}, Toplam Sayfa #{prescriptionController.pageCount}</pre>
                         <div class="btn-group">
-                            <h:commandButton action="#{doctorController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{doctorController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{prescriptionController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{prescriptionController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
                         </div>
                     </h:form>
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="prescription-form">
-                        <h:inputText value="#{PrescriptionController.entity.id}" style="display: none;"></h:inputText>
+                        <h:inputText value="#{prescriptionController.entity.id}" style="display: none;"></h:inputText>
                         <div class="form-group">
                             <label for="inputDosage">Dozaj</label>
-                            <h:inputText styleClass="form-control" value="#{PrescriptionController.entity.dosage}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{prescriptionController.entity.dosage}"></h:inputText>
                         </div>
                         <div class="form-group" id="inputMedication">
                             <label for="inputMedication">İlaçlar</label>
-                            <ui:repeat value="#{PrescriptionController.entity.medicationList}" var="medication">
+                            <ui:repeat value="#{prescriptionController.entity.medicationList}" var="medication">
                                 <h:inputText styleClass="form-control" value="#{medication.name}"></h:inputText>
                             </ui:repeat>
                         </div>
                         <button type="button" class="btn btn-secondary" onclick="addMedication()">İlaç Ekle</button>
                         <div class="form-group">
                             <label for="inputInstructions">Talimatlar</label>
-                            <h:inputTextarea styleClass="form-control" value="#{PrescriptionController.entity.instructions}"></h:inputTextarea>
+                            <h:inputTextarea styleClass="form-control" value="#{prescriptionController.entity.instructions}"></h:inputTextarea>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{PrescriptionController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{prescriptionController.UpdateEntity()}">
+                            <h:commandButton rendered="#{prescriptionController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{prescriptionController.UpdateEntity()}">
                                 <f:ajax execute="prescription-form" render="prescription-form prescription-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{PrescriptionController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{PrescriptionController.AddEntity()}">
+                            <h:commandButton rendered="#{prescriptionController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{prescriptionController.AddEntity()}">
                                 <f:ajax execute="prescription-form" render="prescription-form prescription-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{PrescriptionController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{PrescriptionController.clearForm()}">
+                            <h:commandButton rendered="#{prescriptionController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{prescriptionController.clearForm()}">
                                 <f:ajax execute="@this" render="prescription-form"/>
                             </h:commandButton>
                         </div>
@@ -86,19 +86,19 @@
                         <div class="modal-body">
                             <p>Bu reçeteyi silmek istediğinizden emin misiniz!
                                 <pre>
-                                <b>Dozaj :</b> #{PrescriptionController.entity.dosage}<br />
+                                <b>Dozaj :</b> #{prescriptionController.entity.dosage}<br />
                                 <b>İlaçlar :</b>
-                                <ui:repeat value="#{PrescriptionController.entity.medicationList}" var="medication">
+                                <ui:repeat value="#{prescriptionController.entity.medicationList}" var="medication">
                                         #{medication.name}<br />
                                 </ui:repeat>
-                                <b>Talimatlar :</b> #{PrescriptionController.entity.instructions}<br />
+                                <b>Talimatlar :</b> #{prescriptionController.entity.instructions}<br />
                                 </pre>
                             </p>
                         </div>
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{PrescriptionController.DeleteEntity(PrescriptionController.entity.id)}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{prescriptionController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="prescription-table"/>
                                 </h:commandButton>
                             </h:form>
