@@ -1,9 +1,7 @@
 package Controller;
 
 import DAO.AbstractDAO;
-import DAO.DoctorDAO;
 import DAO.PrescriptionDAO;
-import Entity.Doctor;
 import Entity.Prescription;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
@@ -13,20 +11,30 @@ import java.io.Serializable;
 import java.util.List;
 
 @Named
-@ViewScoped
+@SessionScoped
 public class PrescriptionController extends BaseController<Prescription> implements Serializable{
 
     private Prescription entity;
     @EJB
-    private PrescriptionDAO dao;
+    private PrescriptionDAO prescriptionDao;
+    private Prescription prescription;
+    private List<Prescription> prescriptionList;
+
 
     private List<Prescription> list;
     
+    
+     private int page = 1;
+    private int pageSize = 10;
+    private int pageCount;
     public PrescriptionController() {
         super(Prescription.class);
     }
 
-    public AbstractDAO getPrescriptionDao() {
+    public PrescriptionDAO getPrescriptionDao() {
+        if (this.prescriptionDao == null) {
+            this.prescriptionDao = new PrescriptionDAO();
+        }
         return prescriptionDao;
     }
 
@@ -49,10 +57,58 @@ public class PrescriptionController extends BaseController<Prescription> impleme
     public void setPrescriptionList(List<Prescription> prescriptionList) {
         this.prescriptionList = prescriptionList;
     }
+    
+     public void next() {
+        if (this.page == getPageCount()) {
+            this.page = 1;
+        } else {
+            this.page++;
+        }
 
-    private PrescriptionDAO prescriptionDao;
-    private Prescription prescription;
-    private List<Prescription> prescriptionList;
+    }
+
+    public void previous() {
+        if (this.page == 1) {
+            this.page = this.getPageCount();
+        } else {
+            this.page--;
+        }
+
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount = (int) Math.ceil(getPrescriptionDao().Count() / (double) pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public void clearForm() {
+        this.entity = new Prescription();
+    }
+
+    public void updateForm(Prescription doc) {
+        this.entity = doc;
+    }
+
 
 
    @Override
@@ -66,24 +122,24 @@ public class PrescriptionController extends BaseController<Prescription> impleme
 
     @Override
     public List<Prescription> GetEntityList() {  
-        return  getDao().GetList();
+        return  getPrescriptionDao().GetList();
     }
 
     @Override
     public void UpdateEntity() {
-        getDao().Update(entity);
+        getPrescriptionDao().Update(entity);
         entity = new Prescription();       
     }
 
     @Override
     public void DeleteEntity() {
-        getDao().Delete(entity);
+        getPrescriptionDao().Delete(entity);
         entity = new Prescription();       
     }
 
     @Override
     public void AddEntity() {
-        getDao().Create(entity);
+        getPrescriptionDao().Create(entity);
         entity = new Prescription();       
     }
 
@@ -93,14 +149,6 @@ public class PrescriptionController extends BaseController<Prescription> impleme
 
     public void setEntity(Prescription entity) {
         this.entity = entity;
-    }
-
-    public PrescriptionDAO getDao() {
-        return dao;
-    }
-
-    public void setDao(PrescriptionDAO dao) {
-        this.dao = dao;
     }
 
     public List<Prescription> getList() {
