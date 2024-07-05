@@ -129,7 +129,6 @@ public class DoctorController extends BaseController<Doctor> implements Serializ
 
     @Override
     public List<Doctor> GetEntityList() {
-        System.out.println(dao.GetList()+"fjıoajfıowajfoı");
         return dao.GetList();
     }
 

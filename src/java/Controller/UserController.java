@@ -76,7 +76,6 @@ public class UserController extends BaseController<User> implements Serializable
         if (userDao == null) {
             userDao = new UserDAO();
         }
-        userDao.GetList();
 
         return userDao.GetList();
     }

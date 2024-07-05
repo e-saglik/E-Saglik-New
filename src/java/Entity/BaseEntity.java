@@ -12,10 +12,10 @@ import java.io.Serializable;
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class BaseEntity implements Serializable{
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name = "id")
+private int id;
 
     @Column(name = "name")
     private String name;

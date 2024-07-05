@@ -15,5 +15,13 @@ public class DoctorDAO extends AbstractDAO<Doctor> implements Serializable {
         super(Doctor.class);
     }
     
+    @Override
+    public List<Doctor> GetList(){
+        List<Doctor> doctors = entityManager.createQuery(
+                    "SELECT d FROM Doctor d", Doctor.class)
+                    .getResultList();
+        
+        return doctors;
+    }
     
 }

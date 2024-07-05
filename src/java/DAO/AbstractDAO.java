@@ -1,5 +1,7 @@
 package DAO;
 
+import Entity.Doctor;
+import Entity.User;
 import jakarta.ejb.Local;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.Persistence;
@@ -7,7 +9,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Local
@@ -35,8 +39,19 @@ public abstract class AbstractDAO<T> implements Serializable {
     }
 
     public List<T> GetList() {
-        Query q = this.entityManager.createQuery("select c from " + entityClass.getSimpleName() + " c order by c.id desc", entityClass);
-        return q.getResultList();
+        String jpql = "SELECT u, d FROM User u LEFT JOIN u.doctor d";
+    TypedQuery<Object[]> query = entityManager.createQuery(jpql, Object[].class);
+    List<Object[]> results = query.getResultList();
+
+    List<User> users = new ArrayList<>();
+    for (Object[] result : results) {
+        User user = (User) result[0];
+        Doctor doctor = (Doctor) result[1];
+        user.setDoctor(doctor); // Assuming there's a method to set the doctor in User entity
+        users.add(user);
+    }
+
+    return (List<T>) users;
     }
 
     public void Delete(T entity) {
@@ -45,7 +60,8 @@ public abstract class AbstractDAO<T> implements Serializable {
     }
 
     public T GetById(int id) {
-        return (T) entityManager.find(entityClass, id);
+//        return (T) entityManager.find(entityClass, id);
+return null;
     }
 
     public List<T> FindRange(int[] range) {

@@ -2,6 +2,8 @@ package Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
 
@@ -14,6 +16,10 @@ public class Notification extends BaseEntity {
     @Column(name = "notification_date")
     private Date notificationDate;
 
+    @ManyToOne
+@JoinColumn(name = "patient_id")
+private Patient patient;
+    
     public Notification() {
     
     }

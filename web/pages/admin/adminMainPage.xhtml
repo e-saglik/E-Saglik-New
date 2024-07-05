@@ -13,14 +13,14 @@
             <div class="row">
                 <div class="col-md-8" style="padding-right: 0">
                     <h:form id="user-table">
-                        <h:dataTable styleClass="table table-striped" value="#{doctorController.GetEntityById(0)}" var="user">
+                        <h:dataTable styleClass="table table-striped" value="#{doctorController.GetEntityList()}" var="user">
                             <h:column>
                                 <f:facet name="header">Kullanıcı Id</f:facet>
                                     #{user.id}
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">Kullanıcı Adı</f:facet>
-                                    #{user.name}
+                                    #{user.firstName}
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">İsim</f:facet>
@@ -53,7 +53,7 @@
                         <h:inputText value="#{doctorController.entity.id}"></h:inputText>
                         <div class="form-group">
                             <label for="inputName">Kullanıcı Adı</label>
-                            <h:inputText styleClass="form-control" value="#{doctorController.entity.name}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{doctorController.entity.firstName}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputName">İsim</label>
@@ -95,7 +95,7 @@
                         <div class="modal-body">
                             <p>Bu kullanıcıyı silmek istediğinizden emin misiniz!
                                 <pre>
-                                <b>Kullanıcı Adı :</b> #{doctorController.entity.name}<br />
+                                <b>Kullanıcı Adı :</b> #{doctorController.entity.firstName}<br />
                                 <b>İsim :</b> #{doctorController.entity.firstName}<br />
                                 <b>Soyisim :</b> #{doctorController.entity.lastName}<br />
                                 </pre>

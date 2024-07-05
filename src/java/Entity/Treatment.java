@@ -3,6 +3,8 @@ package Entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
@@ -21,6 +23,11 @@ public class Treatment extends BaseEntity {
 
     @Column(name = "description")
     private String description;
+    
+    @ManyToOne
+@JoinColumn(name = "patient_id")
+private Patient patient;
+
 
     public Treatment() {
     }
