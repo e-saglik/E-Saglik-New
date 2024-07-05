@@ -14,8 +14,8 @@ import java.util.List;
 @Stateless
 public abstract class AbstractDAO<T> implements Serializable {
 
+    
     @PersistenceContext(unitName = "E-SaglikPU")
-    protected EntityManagerFactory entityManagerFactory;
     protected EntityManager entityManager;
     protected Class<T> entityClass;
 
