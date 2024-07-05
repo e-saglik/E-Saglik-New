@@ -11,11 +11,12 @@ import java.util.List;
 
 @Named
 @SessionScoped
-public class MedicationController extends BaseController<Medication> implements Serializable{
+public class MedicationController extends BaseController<Medication> implements Serializable {
+
+    private Medication medication;
     
     @EJB
     private MedicationDAO medicationDao;
-    private Medication medication;
     private List<Medication> medicationList;
 
     public MedicationController() {

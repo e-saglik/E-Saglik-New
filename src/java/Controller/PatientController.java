@@ -2,13 +2,22 @@ package Controller;
 
 import DAO.PatientDAO;
 import Entity.Patient;
+import jakarta.ejb.Local;
+import jakarta.ejb.Stateless;
+import java.io.Serializable;
 import java.util.List;
 
-public class PatientController extends BaseController<Patient> {
+@Local
+@Stateless
+public class PatientController extends BaseController<Patient> implements Serializable {
 
     private PatientDAO patientDao;
     private Patient patient;
     private List<Patient> patientList;
+
+    public PatientController(Class<Patient> entityClass) {
+        super(entityClass);
+    }
 
     public PatientDAO getPatientDao() {
         return patientDao;
@@ -34,10 +43,7 @@ public class PatientController extends BaseController<Patient> {
         this.patientList = patientList;
     }
 
-    public PatientController() {
-
-    }
-
+ 
     @Override
     public void AddEntity(Patient patient) {
         if (patientDao == null) {
@@ -78,5 +84,15 @@ public class PatientController extends BaseController<Patient> {
             patientDao = new PatientDAO();
         }
         patientDao.Delete(patient);
+    }
+
+    @Override
+    public void AddEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void UpdateEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
