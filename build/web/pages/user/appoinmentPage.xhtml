@@ -11,100 +11,11 @@
     
     <ui:define name="content">
         <div class="container">
+            <h1>Randevu</h1>
             <div class="row">
-                <div class="col-md-8" style="padding-right: 0">
-                    <h:form id="appointment-table">
-                        <div class="btn-group">
-                            <h:commandButton action="#{AppointmentController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                            <h:commandButton action="#{AppointmentController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
-                        </div>
-                        <h:dataTable styleClass="table table-striped" value="#{AppointmentController.GetEntityList()}" var="appointment">
-                            <h:column>
-                                <f:facet name="header">Tarih</f:facet>
-                                #{appointment.appointmentDate}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Saat</f:facet>
-                                #{appointment.appointmentTime}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Durum</f:facet>
-                                #{appointment.status}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Poliklinik</f:facet>
-                                #{appointment.polyClinic.name}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Sil</f:facet>
-                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{AppointmentController.updateForm(appointment)}">
-                                    <f:ajax execute="@this" render="delete-modal"/>
-                                </h:commandButton>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
-                    <pre>Bulunduğunuz Sayfa #{AppointmentController.page}, Toplam Sayfa #{AppointmentController.pageCount}</pre>
-                </div>
-                <div class="col-md-4" style="padding-right: 0">
-                    <h:form id="appointment-form">
-                        <h:inputText value="#{AppointmentController.entity.id}" style="display: none;"></h:inputText>
-                        <div class="form-group">
-                            <label for="inputDate">Tarih</label>
-                            <h:inputText styleClass="form-control" value="#{AppointmentController.entity.appointmentDate}" placeholder="YYYY-MM-DD"></h:inputText>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputTime">Saat</label>
-                            <h:inputText styleClass="form-control" value="#{AppointmentController.entity.appointmentTime}" placeholder="HH:MM"></h:inputText>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputStatus">Durum</label>
-                            <h:inputText styleClass="form-control" value="#{AppointmentController.entity.status}"></h:inputText>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPolyClinic">Poliklinik</label>
-                            <h:inputText styleClass="form-control" value="#{AppointmentController.entity.polyClinic.name}"></h:inputText>
-                        </div>
-                        <div class="btn-group">
-                            <h:commandButton rendered="#{AppointmentController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{AppointmentController.update()}">
-                                <f:ajax execute="appointment-form" render="appointment-form appointment-table"/>
-                            </h:commandButton>
-                            <h:commandButton rendered="#{AppointmentController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{AppointmentController.create()}">
-                                <f:ajax execute="appointment-form" render="appointment-form appointment-table"/>
-                            </h:commandButton>
-                            <h:commandButton rendered="#{AppointmentController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{AppointmentController.clearForm()}">
-                                <f:ajax execute="@this" render="appointment-form"/>
-                            </h:commandButton>
-                        </div>
-                    </h:form>
-                </div>
-            </div>
-            <div class="modal" tabindex="-1">
-                <div class="modal-dialog">
-                    <h:panelGroup layout="block" class="modal-content" id="delete-modal">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Silme işlemi</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Bu randevuyu silmek istediğinizden emin misiniz!
-                                <pre>
-                                <b>Tarih :</b> #{AppointmentController.entity.appointmentDate}<br />
-                                <b>Saat :</b> #{AppointmentController.entity.appointmentTime}<br />
-                                <b>Durum :</b> #{AppointmentController.entity.status}<br />
-                                <b>Poliklinik :</b> #{AppointmentController.entity.polyClinic.name}<br />
-                                </pre>
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <h:form>
-                                <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{AppointmentController.DeleteEntity(AppointmentController.entity.id)}">
-                                    <f:ajax execute="@this" render="appointment-table"/>
-                                </h:commandButton>
-                            </h:form>
-                        </div>
-                    </h:panelGroup>
-                </div>
+                
+                
+                
             </div>
         </div>
     </ui:define>
