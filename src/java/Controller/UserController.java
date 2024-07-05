@@ -2,31 +2,39 @@ package Controller;
 
 import DAO.UserDAO;
 import Entity.User;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
 @Named
-@ViewScoped
-public class UserController extends BaseController<User> {
+@SessionScoped
+public class UserController extends BaseController<User> implements Serializable {
 
+    @EJB
     private UserDAO userDao;
+    
     private User user;
     private List<User> userList;
 
-    public String login(){
-        if(this.user.getEmail().equals("kullanıcı") && this.user.getPassword().equals("123")){
+    public UserController() {
+        super(User.class);
+    }
+
+    public String login() {
+        if (getUser().getEmail().equals("kullanıcı") && getUser().getPassword().equals("123")) {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("valid_user", this.user);
-            return "/index?faces-redirct=true";
-        }
-        else{
+            return "/index?faces-redirect=true";
+        } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hatalı kullanıcı adı veya şifre"));
             return "/login";
         }
     }
-    
+
     public UserDAO getUserDao() {
         return userDao;
     }
@@ -36,8 +44,8 @@ public class UserController extends BaseController<User> {
     }
 
     public User getUser() {
-        if(this.user == null){
-            this.user= new User();
+        if (this.user == null) {
+            this.user = new User();
         }
         return user;
     }
@@ -54,11 +62,7 @@ public class UserController extends BaseController<User> {
         this.userList = userList;
     }
 
-    public UserController() {
-
-    }
-
-   @Override
+    @Override
     public User GetEntityById(int id) {
         if (userDao == null) {
             userDao = new UserDAO();
@@ -100,5 +104,4 @@ public class UserController extends BaseController<User> {
         }
         userDao.Create(user);
     }
-
 }

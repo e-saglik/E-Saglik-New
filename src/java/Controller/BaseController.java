@@ -5,31 +5,32 @@ import java.util.List;
 import jakarta.inject.Named;
 
 @Named
-public abstract class BaseController<Entity> implements Serializable {
-    private Entity entity;
+public abstract class BaseController<E>{
+    
+    protected E entity;
+    private List<E> list;
+    private final Class<E> entityClass;
 
-    public BaseController() {
+
+    public BaseController(Class<E> entityClass) {
+        this.entityClass = entityClass;
     }
 
-    public BaseController(Entity entity) {
-        this.entity = entity;
-    }
+    public abstract void AddEntity(E entity);
 
-    public abstract void AddEntity(Entity entity);
+    public abstract E GetEntityById(int id);
 
-    public abstract Entity GetEntityById(int id);
+    public abstract List<E> GetEntityList();
 
-    public abstract List<Entity> GetEntityList();
-
-    public abstract void UpdateEntity(int id, Entity entity);
+    public abstract void UpdateEntity(int id, E entity);
 
     public abstract void DeleteEntity();
 
-    public Entity getEntity() {
+    public E getEntity() {
         return entity;
     }
 
-    public void setEntity(Entity entity) {
+    public void setEntity(E entity) {
         this.entity = entity;
     }
 }

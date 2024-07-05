@@ -4,15 +4,20 @@ import DAO.AdminDAO;
 import Entity.Admin;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
 @Named
 @ViewScoped
-public class AdminController extends BaseController<Admin> {
+public class AdminController extends BaseController<Admin> implements Serializable{
 
     private AdminDAO adminDao;
     private Admin admin;
     private List<Admin> adminList;
+
+    public AdminController(Class<Admin> entityClass) {
+        super(entityClass);
+    }
 
     public AdminDAO getAdminDao() {
         if (this.adminDao == null) {
@@ -40,10 +45,6 @@ public class AdminController extends BaseController<Admin> {
 
     public void setAdminList(List<Admin> adminList) {
         this.adminList = adminList;
-    }
-
-    public AdminController() {
-
     }
 
     @Override

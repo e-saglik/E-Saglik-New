@@ -4,20 +4,28 @@ import DAO.DoctorDAO;
 import Entity.Doctor;
 import jakarta.annotation.Resource;
 import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
 @Named
-@ViewScoped
-public class DoctorController extends BaseController<Doctor> {
+@SessionScoped
+public class DoctorController extends BaseController<Doctor> implements Serializable{
 
+    
     private Doctor entity;
+    @EJB
     private DoctorDAO dao;
     private List<Doctor> list;
     private int page = 1;
     private int pageSize = 10;
     private int pageCount;
+
+    public DoctorController(Class<Doctor> entityClass) {
+        super(entityClass);
+    }
 
     public void next() {
         if (this.page == getPageCount()) {
@@ -100,10 +108,6 @@ public class DoctorController extends BaseController<Doctor> {
         this.list = list;
     }
 
-    public DoctorController() {
-
-    }
-
     @Override
     public void AddEntity(Doctor entity) {
         if (dao == null) {
@@ -123,13 +127,8 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     @Override
-    public List<Doctor> GetEntityList() {
-        if (dao == null) {
-            dao = new DoctorDAO();
-        }
-        dao.GetList();
-
-        return dao.GetList();
+    public List<Doctor> GetEntityList() {              
+        return  this.list = this.getDao().GetList();
     }
 
     @Override
