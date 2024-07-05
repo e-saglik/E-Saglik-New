@@ -6,16 +6,19 @@ import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.NamedQuery;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "prescriptions")
-public class Prescription extends BaseEntity {
+@NamedQuery(name = "Prescription.findAll", query = "SELECT p FROM Prescription p")
+public class Prescription extends BaseEntity implements Serializable{
 
     @Column(name = "dosage")
     private String dosage;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "prescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Medication> medicationList;
 
     @Column(name = "instructions")

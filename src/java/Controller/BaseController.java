@@ -15,13 +15,13 @@ public abstract class BaseController<E> {
         this.entityClass = entityClass;
     }
 
-    public abstract void AddEntity(E entity);
+    public abstract void AddEntity();
 
     public abstract E GetEntityById(int id);
 
     public abstract List<E> GetEntityList();
 
-    public abstract void UpdateEntity(int id, E entity);
+    public abstract void UpdateEntity();
 
     public abstract void DeleteEntity();
 

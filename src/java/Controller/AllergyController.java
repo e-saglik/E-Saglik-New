@@ -2,16 +2,25 @@ package Controller;
 
 import DAO.AllergyDAO;
 import Entity.Allergy;
+import Entity.Doctor;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
-public class AllergyController extends BaseController<Allergy> {
+@Named
+@SessionScoped
+public class AllergyController extends BaseController<Allergy> implements Serializable {
 
+    @EJB
     private AllergyDAO allergyDao;
+
     private Allergy allergy;
     private List<Allergy> allergyList;
 
     public AllergyController() {
-
+        super(Allergy.class);
     }
 
     public AllergyDAO getAllergyDao() {
@@ -43,11 +52,9 @@ public class AllergyController extends BaseController<Allergy> {
     }
 
     @Override
-    public void AddEntity(Allergy allergy) {
-        if (allergyDao == null) {
-            allergyDao = new AllergyDAO();
-        }
-        allergyDao.Create(allergy);
+    public void AddEntity() {
+        getAllergyDao().Create(this.entity);
+        this.entity = new Allergy();
 
     }
 
@@ -62,27 +69,19 @@ public class AllergyController extends BaseController<Allergy> {
 
     @Override
     public List<Allergy> GetEntityList() {
-        if (allergyDao == null) {
-            allergyDao = new AllergyDAO();
-        }
-        allergyList = allergyDao.GetList();
-        return allergyList;
+         return getAllergyDao().GetList();
     }
 
     @Override
-    public void UpdateEntity(int id, Allergy allergy) {
-        if (allergyDao == null) {
-            allergyDao = new AllergyDAO();
-        }
-        allergyDao.Update(allergy);
+    public void UpdateEntity() {
+        getAllergyDao().Update(allergy);
+        this.entity = new Allergy();
     }
 
     @Override
     public void DeleteEntity() {
-        if (allergyDao == null) {
-            allergyDao = new AllergyDAO();
-        }
-        allergyDao.Delete(allergy);
+             allergyDao.Delete(entity);
+        this.entity = new Allergy();
     }
 
 }

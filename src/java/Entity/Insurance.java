@@ -7,7 +7,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Insurance")
+@Table(name = "insurance")
 public class Insurance extends BaseEntity {
     @Column(name = "provider")
     private String provider;

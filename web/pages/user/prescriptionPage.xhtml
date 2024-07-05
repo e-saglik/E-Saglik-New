@@ -63,10 +63,10 @@
                             <h:inputTextarea styleClass="form-control" value="#{PrescriptionController.entity.instructions}"></h:inputTextarea>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{PrescriptionController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{PrescriptionController.update()}">
+                            <h:commandButton rendered="#{PrescriptionController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{prescriptionController.UpdateEntity()}">
                                 <f:ajax execute="prescription-form" render="prescription-form prescription-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{PrescriptionController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{PrescriptionController.create()}">
+                            <h:commandButton rendered="#{PrescriptionController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{PrescriptionController.AddEntity()}">
                                 <f:ajax execute="prescription-form" render="prescription-form prescription-table"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{PrescriptionController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{PrescriptionController.clearForm()}">

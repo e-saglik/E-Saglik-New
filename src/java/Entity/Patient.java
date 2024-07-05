@@ -35,9 +35,10 @@ public class Patient extends User {
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<TestResult> testResultList;
+
     @ManyToOne
-@JoinColumn(name = "doctor_id")
-private Doctor doctor;
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -67,7 +68,6 @@ private Doctor doctor;
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Notification> notificationList;
 
-
     public Patient() {
     }
 
@@ -88,33 +88,7 @@ private Doctor doctor;
         this.notificationList = notificationList;
     }
 
-    public Patient(Date dateOfBirth, String bloodType, String appointment, List<Medication> medicationList, List<MedicalReport> medicalReportList, List<TestResult> testResultList, Doctor doctor, List<Disease> diseaseList, List<Allergy> allergyList, Insurance insurance, VaccinationSchedule vaccinationSchedule, List<Treatment> treatmentList, List<Payment> paymentList, List<Notification> notificationList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address) {
-        super(firstName, lastName, email, password, gender, phoneNumber, address);
-        this.dateOfBirth = dateOfBirth;
-        this.bloodType = bloodType;
-        this.appointment = appointment;
-        this.medicationList = medicationList;
-        this.medicalReportList = medicalReportList;
-        this.testResultList = testResultList;
-        this.doctor = doctor;
-        this.diseaseList = diseaseList;
-        this.allergyList = allergyList;
-        this.insurance = insurance;
-        this.vaccinationSchedule = vaccinationSchedule;
-        this.treatmentList = treatmentList;
-        this.paymentList = paymentList;
-        this.notificationList = notificationList;
-    }
-
-    
-
-    public void makeAppointment() {
-        // Implement appointment making logic
-    }
-
-    public void viewMedicalReport() {
-        // Implement medical report viewing logic
-    }
+    // Getters and setters
 
     public Date getDateOfBirth() {
         return dateOfBirth;
@@ -162,6 +136,14 @@ private Doctor doctor;
 
     public void setTestResultList(List<TestResult> testResultList) {
         this.testResultList = testResultList;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public List<Disease> getDiseaseList() {
@@ -219,6 +201,4 @@ private Doctor doctor;
     public void setNotificationList(List<Notification> notificationList) {
         this.notificationList = notificationList;
     }
-
-
 }

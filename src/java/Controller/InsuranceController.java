@@ -3,16 +3,17 @@ package Controller;
 import DAO.AbstractDAO;
 import DAO.InsuranceDAO;
 import Entity.Insurance;
+import java.io.Serializable;
 import java.util.List;
 
-public class InsuranceController extends BaseController<Insurance> {
+public class InsuranceController extends BaseController<Insurance> implements Serializable{
 
     private InsuranceDAO ınsuranceDao;
     private Insurance ınsurance;
     private List<Insurance> ınsuranceList;
 
     public InsuranceController() {
-
+        super(Insurance.class);
     }
 
     public AbstractDAO getInsuranceDao() {
@@ -40,7 +41,7 @@ public class InsuranceController extends BaseController<Insurance> {
     }
 
     @Override
-    public void AddEntity(Insurance insurance) {
+    public void AddEntity() {
         if (ınsuranceDao == null) {
             ınsuranceDao = new InsuranceDAO();
         }
@@ -66,7 +67,7 @@ public class InsuranceController extends BaseController<Insurance> {
     }
 
     @Override
-    public void UpdateEntity(int id, Insurance ınsurance) {
+    public void UpdateEntity() {
 if (ınsuranceDao == null) {
             ınsuranceDao = new InsuranceDAO();
         }

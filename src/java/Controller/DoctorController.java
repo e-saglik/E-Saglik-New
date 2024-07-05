@@ -18,8 +18,8 @@ public class DoctorController extends BaseController<Doctor> implements Serializ
     private Doctor entity;
     @EJB
     private DoctorDAO dao;
-    
     private List<Doctor> list;
+
     private int page = 1;
     private int pageSize = 10;
     private int pageCount;
@@ -79,16 +79,6 @@ public class DoctorController extends BaseController<Doctor> implements Serializ
         this.entity = doc;
     }
 
-    public void update() {
-        this.getDao().Update(this.entity);
-        this.entity = new Doctor();
-    }
-
-    public void create() {
-        this.getDao().Create(this.entity);
-        this.entity = new Doctor();
-    }
-
     public DoctorDAO getDao() {
         if (this.dao == null) {
             this.dao = new DoctorDAO();
@@ -109,45 +99,6 @@ public class DoctorController extends BaseController<Doctor> implements Serializ
         this.list = list;
     }
 
-    @Override
-    public void AddEntity(Doctor entity) {
-        if (dao == null) {
-            dao = new DoctorDAO();
-        }
-        dao.Create(entity);
-
-    }
-
-    @Override
-    public Doctor GetEntityById(int id) {
-        if (dao == null) {
-            dao = new DoctorDAO();
-        }
-        dao.GetById(id);
-        return null;
-    }
-
-    @Override
-    public List<Doctor> GetEntityList() {
-        return dao.GetList();
-    }
-
-    @Override
-    public void UpdateEntity(int id, Doctor entity) {
-        if (dao == null) {
-            dao = new DoctorDAO();
-        }
-        dao.Update(entity);
-    }
-
-    @Override
-    public void DeleteEntity() {
-        if (dao == null) {
-            dao = new DoctorDAO();
-        }
-        dao.Delete(entity);
-    }
-
     public Doctor getEntity() {
         if (entity == null) {
             entity = new Doctor();
@@ -157,6 +108,39 @@ public class DoctorController extends BaseController<Doctor> implements Serializ
 
     public void setEntity(Doctor entity) {
         this.entity = entity;
+    }
+
+    @Override
+    public void AddEntity() {
+        getDao().Create(this.entity);
+        this.entity = new Doctor();
+    }
+
+    @Override
+    public Doctor GetEntityById(int id) {
+        if (getDao() == null) {
+            dao =  new DoctorDAO();
+        }
+        getDao().GetById(id);
+        return null;
+    }
+
+    @Override
+    public List<Doctor> GetEntityList() {
+        return getDao().GetList();
+    }
+
+    @Override
+    public void UpdateEntity() {
+        getDao().Update(entity);
+        this.entity = new Doctor();
+    }
+
+    @Override
+    public void DeleteEntity() {
+
+        getDao().Delete(entity);
+        this.entity = new Doctor();
     }
 
 }
