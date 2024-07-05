@@ -105,8 +105,8 @@ public class PrescriptionController extends BaseController<Prescription> impleme
         this.entity = new Prescription();
     }
 
-    public void updateForm(Prescription doc) {
-        this.entity = doc;
+    public void updateForm(Prescription pre) {
+        this.entity = pre;
     }
 
     @Override
@@ -142,6 +142,9 @@ public class PrescriptionController extends BaseController<Prescription> impleme
     }
 
     public Prescription getEntity() {
+        if (entity == null) {
+            entity = new Prescription();
+        }
         return entity;
     }
 
