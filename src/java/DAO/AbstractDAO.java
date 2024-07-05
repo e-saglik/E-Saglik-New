@@ -2,6 +2,7 @@ package DAO;
 
 import jakarta.ejb.Local;
 import jakarta.ejb.Stateless;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
@@ -48,14 +49,14 @@ public abstract class AbstractDAO<T> implements Serializable {
     }
 
     public List<T> FindRange(int[] range) {
-        jakarta.persistence.Query q = entityManager.createQuery("SELECT e FROM " + entityClass.getName() + " e", entityClass);
+        Query q = entityManager.createQuery("SELECT e FROM " + entityClass.getName() + " e", entityClass);
         q.setMaxResults(range[1] - range[0]);
         q.setFirstResult(range[0]);
         return q.getResultList();
     }
 
     public int Count() {
-        jakarta.persistence.Query q = entityManager.createQuery("SELECT COUNT(e) FROM " + entityClass.getName() + " e");
+        Query q = entityManager.createQuery("SELECT COUNT(e) FROM " + entityClass.getName() + " e");
         return ((Long) q.getSingleResult()).intValue();
     }
 }

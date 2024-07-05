@@ -2,6 +2,8 @@ package Controller;
 
 import DAO.DoctorDAO;
 import Entity.Doctor;
+import jakarta.annotation.Resource;
+import jakarta.ejb.EJB;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.util.List;
@@ -13,30 +15,28 @@ public class DoctorController extends BaseController<Doctor> {
     private Doctor entity;
     private DoctorDAO dao;
     private List<Doctor> list;
-    private int page=1;
-    private int pageSize=10;
+    private int page = 1;
+    private int pageSize = 10;
     private int pageCount;
-    
-    public void next(){
-        if(this.page == getPageCount()){
-            this.page=1;
+
+    public void next() {
+        if (this.page == getPageCount()) {
+            this.page = 1;
+        } else {
+            this.page++;
         }
-        else{
-            this.page++;    
-        }
-        
+
     }
 
-    public void previous(){
-        if(this.page == 1){
-            this.page=this.getPageCount();
+    public void previous() {
+        if (this.page == 1) {
+            this.page = this.getPageCount();
+        } else {
+            this.page--;
         }
-        else{
-            this.page--;    
-        }
-        
+
     }
-    
+
     public int getPage() {
         return page;
     }
@@ -54,14 +54,14 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     public int getPageCount() {
-        this.pageCount = (int) Math.ceil(getDao().Count()/(double)pageSize);
+        this.pageCount = (int) Math.ceil(getDao().Count() / (double) pageSize);
         return pageCount;
     }
 
     public void setPageCount(int pageCount) {
         this.pageCount = pageCount;
     }
-    
+
     public void clearForm() {
         this.entity = new Doctor();
     }
@@ -72,7 +72,7 @@ public class DoctorController extends BaseController<Doctor> {
 
     public void update() {
         this.getDao().Update(this.entity);
-        this.entity = new Doctor();  
+        this.entity = new Doctor();
     }
 
     public void create() {
