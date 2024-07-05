@@ -63,10 +63,10 @@
                             <h:inputText styleClass="form-control" value="#{vaccinationScheduleController.entity.dueDate}" type="date"></h:inputText>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{vaccinationScheduleController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{vaccinationScheduleController.update()}">
+                            <h:commandButton rendered="#{vaccinationScheduleController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{vaccinationScheduleController.UpdateEntity()}">
                                 <f:ajax execute="vaccinationSchedule-form" render="vaccinationSchedule-form vaccinationSchedule-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{vaccinationScheduleController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{vaccinationScheduleController.create()}">
+                            <h:commandButton rendered="#{vaccinationScheduleController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{vaccinationScheduleController.AddEntity()}">
                                 <f:ajax execute="vaccinationSchedule-form" render="vaccinationSchedule-form vaccinationSchedule-table"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{vaccinationScheduleController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{vaccinationScheduleController.clearForm()}">
@@ -95,7 +95,7 @@
                         <div class="modal-footer">
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{vaccinationScheduleController.DeleteEntity(vaccinationScheduleController.entity.id)}">
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{vaccinationScheduleController.DeleteEntity()}">
                                     <f:ajax execute="@this" render="vaccinationSchedule-table"/>
                                 </h:commandButton>
                             </h:form>

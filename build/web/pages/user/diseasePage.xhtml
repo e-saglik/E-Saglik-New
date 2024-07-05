@@ -29,12 +29,9 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">İşlemler</f:facet>
-                                <h:commandButton onclick="$('.modal#{disease.id}').modal('show')" styleClass="btn btn-warning" value="Sil">
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{diseaseController.updateForm(disease)}">
                                     <f:ajax execute="@this" render="delete-modal#{disease.id}"/>
-                                </h:commandButton>
-                                <h:commandButton onclick="$('.modal-edit#{disease.id}').modal('show')" styleClass="btn btn-info" value="Güncelle">
-                                    <f:ajax execute="@this" render="edit-modal#{disease.id}"/>
-                                </h:commandButton>
+                                </h:commandButton>     
                             </h:column>
                         </h:dataTable>
                         <pre>Bulunduğnuz Sayfa #{diseaseController.page}, Toplam Sayfa #{diseaseController.pageCount}</pre>
@@ -57,9 +54,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputPatient">Hasta</label>
-                            <h:selectOneMenu styleClass="form-control" value="#{diseaseController.entity.patient}">
-                                <f:selectItems value="#{PatientController.patients}" var="patient" itemValue="#{patient}" itemLabel="#{patient.name}" />
-                            </h:selectOneMenu>
+                            <h:inputText styleClass="form-control" value="#{diseaseController.entity.patient}"></h:inputText>
                         </div>
                         <div class="btn-group">
                             <h:commandButton rendered="#{diseaseController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{diseaseController.UpdateEntity()}">
@@ -85,8 +80,8 @@
                         <div class="modal-body">
                             <p>Bu hastalığı silmek istediğinizden emin misiniz!</p>
                             <pre>
-                                <b>Adı :</b> #{disease.name}<br />
-                                <b>Açıklama :</b> #{disease.description}<br />
+                                <b>Adı :</b> #{disease.entity.name}<br />
+                                <b>Açıklama :</b> #{disease.entity.description}<br />
                                 <b>Hasta :</b> #{disease.patient.name}<br />
                             </pre>
                         </div>
