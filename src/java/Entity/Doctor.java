@@ -11,17 +11,13 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "doctor")
 @NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM Doctor d")
-public class Doctor extends User implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+public class Doctor extends BaseEntity implements Serializable {
+    
     @Column(name = "specialization")
     private String specialization;
 
@@ -37,23 +33,33 @@ public class Doctor extends User implements Serializable {
     @OneToMany(mappedBy = "doctor")
     private List<Patient> patientList;
 
-    @ManyToMany
-    private Set<Role> roles;
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "first_name")
+    private String firstName;
 
     public Doctor() {
         // Default constructor
     }
 
-    public Doctor(String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name,
-                  String specialization, String hospital, String prescription, String appointment) {
-        super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
+    public Doctor(String specialization, String hospital, String prescription, String appointment, int id, String name, String email, String gender, String lastName, String firstName) {        
+        super(id,name);
         this.specialization = specialization;
         this.hospital = hospital;
         this.prescription = prescription;
         this.appointment = appointment;
+        this.email = email;
+        this.gender = gender;
+        this.lastName = lastName;
+        this.firstName = firstName;
     }
-
-    // Getters and setters
 
     public String getSpecialization() {
         return specialization;
@@ -95,24 +101,52 @@ public class Doctor extends User implements Serializable {
         this.patientList = patientList;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    // toString() method for debugging and logging purposes
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
+    
+
     @Override
     public String toString() {
         return "Doctor{" +
-                "id=" + getId() +
-                ", name='" + getName() + '\'' +
                 ", specialization='" + specialization + '\'' +
                 ", hospital='" + hospital + '\'' +
                 ", prescription='" + prescription + '\'' +
                 ", appointment='" + appointment + '\'' +
+                ", email='" + email + '\'' +
+                ", gender='" + gender + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 '}';
     }
 }

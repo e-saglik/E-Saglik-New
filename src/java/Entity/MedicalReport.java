@@ -2,8 +2,12 @@ package Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "MedicalReport")
@@ -16,6 +20,10 @@ public class MedicalReport extends BaseEntity {
 
     @Column(name = "description")
     private String description;
+    
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
     public MedicalReport() {
     

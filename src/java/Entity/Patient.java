@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -34,6 +35,9 @@ public class Patient extends User {
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<TestResult> testResultList;
+    @ManyToOne
+@JoinColumn(name = "doctor_id")
+private Doctor doctor;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -63,25 +67,18 @@ public class Patient extends User {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Notification> notificationList;
 
-    @ManyToMany
-    @JoinTable(
-            name = "patient_role",
-            joinColumns = @JoinColumn(name = "patient_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles;
 
     public Patient() {
     }
 
-    public Patient(Date dateOfBirth, String bloodType, String appointment, List<Medication> medicationList, List<MedicalReport> medicalReportList, List<TestResult> testResultList, List<Disease> diseaseList, List<Allergy> allergyList, Insurance insurance, VaccinationSchedule vaccinationSchedule, List<Treatment> treatmentList, List<Payment> paymentList, List<Notification> notificationList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
-        super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
+    public Patient(Date dateOfBirth, String bloodType, String appointment, List<Medication> medicationList, List<MedicalReport> medicalReportList, List<TestResult> testResultList, Doctor doctor, List<Disease> diseaseList, List<Allergy> allergyList, Insurance insurance, VaccinationSchedule vaccinationSchedule, List<Treatment> treatmentList, List<Payment> paymentList, List<Notification> notificationList) {
         this.dateOfBirth = dateOfBirth;
         this.bloodType = bloodType;
         this.appointment = appointment;
         this.medicationList = medicationList;
         this.medicalReportList = medicalReportList;
         this.testResultList = testResultList;
+        this.doctor = doctor;
         this.diseaseList = diseaseList;
         this.allergyList = allergyList;
         this.insurance = insurance;
@@ -90,6 +87,26 @@ public class Patient extends User {
         this.paymentList = paymentList;
         this.notificationList = notificationList;
     }
+
+    public Patient(Date dateOfBirth, String bloodType, String appointment, List<Medication> medicationList, List<MedicalReport> medicalReportList, List<TestResult> testResultList, Doctor doctor, List<Disease> diseaseList, List<Allergy> allergyList, Insurance insurance, VaccinationSchedule vaccinationSchedule, List<Treatment> treatmentList, List<Payment> paymentList, List<Notification> notificationList, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address) {
+        super(firstName, lastName, email, password, gender, phoneNumber, address);
+        this.dateOfBirth = dateOfBirth;
+        this.bloodType = bloodType;
+        this.appointment = appointment;
+        this.medicationList = medicationList;
+        this.medicalReportList = medicalReportList;
+        this.testResultList = testResultList;
+        this.doctor = doctor;
+        this.diseaseList = diseaseList;
+        this.allergyList = allergyList;
+        this.insurance = insurance;
+        this.vaccinationSchedule = vaccinationSchedule;
+        this.treatmentList = treatmentList;
+        this.paymentList = paymentList;
+        this.notificationList = notificationList;
+    }
+
+    
 
     public void makeAppointment() {
         // Implement appointment making logic
@@ -203,31 +220,5 @@ public class Patient extends User {
         this.notificationList = notificationList;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "dateOfBirth=" + dateOfBirth +
-                ", bloodType='" + bloodType + '\'' +
-                ", appointment='" + appointment + '\'' +
-                ", medicationList=" + medicationList +
-                ", medicalReportList=" + medicalReportList +
-                ", testResultList=" + testResultList +
-                ", diseaseList=" + diseaseList +
-                ", allergyList=" + allergyList +
-                ", insurance=" + insurance +
-                ", vaccinationSchedule=" + vaccinationSchedule +
-                ", treatmentList=" + treatmentList +
-                ", paymentList=" + paymentList +
-                ", notificationList=" + notificationList +
-                ", roles=" + roles +
-                '}';
-    }
 }

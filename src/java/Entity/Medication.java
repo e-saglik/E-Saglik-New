@@ -2,6 +2,8 @@ package Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -9,6 +11,10 @@ import jakarta.persistence.Table;
 public class Medication extends BaseEntity {
     @Column(name = "dosage")
     private String dosage;
+    
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
     public Medication() {
     

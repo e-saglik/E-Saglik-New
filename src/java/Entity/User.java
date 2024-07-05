@@ -2,6 +2,9 @@ package Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
@@ -15,8 +18,13 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User extends BaseEntity implements Serializable{
+public class User extends BaseEntity implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+    
     @Column(name = "first_name")
     private String firstName;
 
@@ -38,21 +46,12 @@ public class User extends BaseEntity implements Serializable{
     @Column(name = "address")
     private String address;
 
-    @ManyToMany
-    @JoinTable(name = "user_role",
-               joinColumns = @JoinColumn(name = "user_id"),
-               inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
-
     public User() {
+        // Default constructor
     }
 
-    public User(int id, String name) {
-        super(id, name);
-    }
-
-    public User(String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
-        super(id, name);
+    // Constructor with necessary fields
+    public User(String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -117,15 +116,6 @@ public class User extends BaseEntity implements Serializable{
     public void setAddress(String address) {
         this.address = address;
     }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -137,5 +127,9 @@ public class User extends BaseEntity implements Serializable{
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+    public void setDoctor(Doctor doctor) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

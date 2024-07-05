@@ -1,5 +1,5 @@
 
-package Main;
+package main;
 
 import Controller.BaseController;
 import Controller.DoctorController;
@@ -17,6 +17,8 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) {
+        
+        
 //        
 //        List<Patient> patientList = new ArrayList<>();
 //        patientList.add(new Patient()); // Örnek bir hasta ID'si ekleyelim

@@ -14,11 +14,13 @@ public class Admin extends User {
     public Admin() {
     }
 
-    public Admin(String authorizationLevel, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address, int id, String name) {
-        super(firstName, lastName, email, password, gender, phoneNumber, address, id, name);
+    public Admin(String authorizationLevel, String firstName, String lastName, String email, String password, String gender, String phoneNumber, String address) {
+        super(firstName, lastName, email, password, gender, phoneNumber, address);
         this.authorizationLevel = authorizationLevel;
     }
 
+  
+    
     public void addDoctor() {
         // Implementasyon
     }
