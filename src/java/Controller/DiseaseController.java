@@ -114,10 +114,10 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
 
     @Override
     public Disease GetEntityById(int id) {
-        if (diseaseDao == null) {
+        if (getDiseaseDao() == null) {
             diseaseDao = new DiseaseDAO();
         }
-        diseaseDao.GetById(id);
+        getDiseaseDao().GetById(id);
         return null;
     }
 
@@ -134,7 +134,7 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
 
     @Override
     public void DeleteEntity() {
-        diseaseDao.Delete(entity);
+        getDiseaseDao().Delete(entity);
         this.entity = new Disease();
     }
 
