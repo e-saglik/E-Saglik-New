@@ -54,7 +54,7 @@
                         <h:inputText value="#{testResultController.testResult.id}"></h:inputText>
                         <div class="form-group">
                             <label for="inputDate">Tarih</label>
-                            <h:inputText styleClass="form-control" value="#{testResultController.testResult.date}"></h:inputText>
+                            <h:inputText type="date" styleClass="form-control" value="#{testResultController.testResult.date}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestType">Test Türü</label>
@@ -73,13 +73,13 @@
                             <h:inputText styleClass="form-control" value="#{testResultController.testResult.testValue}"></h:inputText>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{testResultController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{testResultController.UpdateEntity()}">
+                            <h:commandButton rendered="#{testResultController.testResult.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{testResultController.UpdateEntity()}">
                                 <f:ajax execute="testResult-form" render="testResult-form testResult-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{testResultController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{testResultController.AddEntity()}">
+                            <h:commandButton rendered="#{testResultController.testResult.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{testResultController.AddEntity()}">
                                 <f:ajax execute="testResult-form" render="testResult-form testResult-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{testResultController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{testResultController.clearForm()}">
+                            <h:commandButton rendered="#{testResultController.testResult.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{testResultController.clearForm()}">
                                 <f:ajax execute="@this" render="testResult-form"/>
                             </h:commandButton>
                         </div>

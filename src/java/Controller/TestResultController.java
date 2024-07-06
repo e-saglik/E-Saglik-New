@@ -87,10 +87,10 @@ public class TestResultController extends BaseController<TestResult> implements 
     }
 
     public TestResult getTestResult() {
-        if (entity == null) {
-            entity = new TestResult();
+        if (testResult == null) {
+            testResult = new TestResult();
         }
-        return entity;
+        return testResult;
     }
 
     public void setTestResult(TestResult testResult) {
@@ -108,8 +108,8 @@ public class TestResultController extends BaseController<TestResult> implements 
 
     @Override
     public void AddEntity() {
-        getTestResultDao().Create(entity);
-        entity = new TestResult();
+        getTestResultDao().Create(testResult);
+        testResult = new TestResult();
     }
 
     @Override
@@ -127,13 +127,13 @@ public class TestResultController extends BaseController<TestResult> implements 
 
     @Override
     public void UpdateEntity() {
-        getTestResultDao().Update(entity);
-        entity = new TestResult();
+        getTestResultDao().Update(testResult);
+        testResult = new TestResult();
     }
 
     @Override
     public void DeleteEntity() {
-        getTestResultDao().Delete(entity);
-        entity = new TestResult();
+        getTestResultDao().Delete(testResult);
+        testResult = new TestResult();
     }
 }
