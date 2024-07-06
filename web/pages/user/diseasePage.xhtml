@@ -17,7 +17,9 @@
                         <h:dataTable styleClass="table table-striped" value="#{diseaseController.GetEntityList()}" var="disease">
                             <h:column>
                                 <f:facet name="header">Adı</f:facet>
-                                <h:commandLink action="#{diseaseController.updateForm(disease)}" value="#{disease.name}"></h:commandLink>
+                                <h:commandLink action="#{diseaseController.updateForm(disease)}" value="#{disease.name}">
+                                    <f:ajax execute="@this" render="disease-form" />
+                                </h:commandLink>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Açıklama</f:facet>
@@ -28,9 +30,9 @@
                                     #{disease.patient.name}
                             </h:column>
                             <h:column>
-                                <f:facet name="header">İşlemler</f:facet>
+                                <f:facet name="header">Sil</f:facet>
                                 <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{diseaseController.updateForm(disease)}">
-                                    <f:ajax execute="@this" render="delete-modal#{disease.id}"/>
+                                    <f:ajax execute="@this" render="delete-modal"/>
                                 </h:commandButton>     
                             </h:column>
                         </h:dataTable>
@@ -54,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputPatient">Hasta</label>
-                            <h:selectOneMenu id="inputPatient" value="#{diseaseController.entity.patient}">
+                            <h:selectOneMenu id="inputPatient" styleClass="form-control" value="#{diseaseController.entity.patient}">
                                 <f:selectItems value="#{patientController.GetEntityList()}" var="patient" itemValue="#{patient}" itemLabel="#{patient.name}" />
                             </h:selectOneMenu>
                         </div>
@@ -82,9 +84,9 @@
                         <div class="modal-body">
                             <p>Bu hastalığı silmek istediğinizden emin misiniz!</p>
                             <pre>
-                                <b>Adı :</b> #{disease.disease.name}<br />
-                                <b>Açıklama :</b> #{disease.disease.description}<br />
-                                <b>Hasta :</b> #{disease.patient.name}<br />
+                                <b>Adı :</b> #{diseaseController.entity.name}<br />
+                                <b>Açıklama :</b> #{diseaseController.entity.description}<br />
+                                <b>Hasta :</b> #{diseaseController.entity.patient.name}<br />
                             </pre>
                         </div>
                         <div class="modal-footer">

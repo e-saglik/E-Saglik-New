@@ -69,11 +69,11 @@ public class TestResultController extends BaseController<TestResult> implements 
     }
 
     public void clearForm() {
-        this.entity = new TestResult();
+        this.testResult = new TestResult();
     }
 
     public void updateForm(TestResult testResult) {
-        this.entity = testResult;
+        this.testResult = testResult;
     }
 
     public TestResultDAO getTestResultDao() {

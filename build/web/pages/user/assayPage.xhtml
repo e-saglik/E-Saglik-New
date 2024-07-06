@@ -25,7 +25,7 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Test Adı</f:facet>
-                                    #{testResult.testName}
+                                <h:commandLink action="#{testResultController.updateForm(testResult)}" value="#{testResult.testName}"></h:commandLink>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Normal Değer</f:facet>
@@ -37,8 +37,8 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Sil</f:facet>
-                                <h:commandButton onclick="$('.modal#{testResult.id}').modal('show')" styleClass="btn btn-warning" value="Sil">
-                                    <f:ajax execute="@this" render="delete-modal#{testResult.id}"/>
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{testResultController.updateForm(testResult)}">
+                                    <f:ajax execute="@this" render="delete-modal"/>
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
@@ -51,26 +51,26 @@
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="testResult-form">
-                        <h:inputText value="#{testResultController.entity.id}" style="display: none;"></h:inputText>
+                        <h:inputText value="#{testResultController.testResult.id}"></h:inputText>
                         <div class="form-group">
                             <label for="inputDate">Tarih</label>
-                            <h:inputText styleClass="form-control" value="#{testResultController.entity.date}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.testResult.date}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestType">Test Türü</label>
-                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testType}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.testResult.testType}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestName">Test Adı</label>
-                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testName}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.testResult.testName}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestNormalValue">Normal Değer</label>
-                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testNormalValue}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.testResult.testNormalValue}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestValue">Değer</label>
-                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testValue}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.testResult.testValue}"></h:inputText>
                         </div>
                         <div class="btn-group">
                             <h:commandButton rendered="#{testResultController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{testResultController.UpdateEntity()}">
@@ -96,11 +96,11 @@
                         <div class="modal-body">
                             <p>Bu tahlili silmek istediğinizden emin misiniz!</p>
                             <pre>
-                                <b>Tarih :</b> #{testResult.date}<br />
-                                <b>Test Türü :</b> #{testResult.testType}<br />
-                                <b>Test Adı :</b> #{testResult.testName}<br />
-                                <b>Normal Değer :</b> #{testResult.testNormalValue}<br />
-                                <b>Değer :</b> #{testResult.testValue}<br />
+                                <b>Tarih :</b> #{testResultController.testResult.date}<br />
+                                <b>Test Türü :</b> #{testResultController.testResult.testType}<br />
+                                <b>Test Adı :</b> #{testResultController.testResult.testName}<br />
+                                <b>Normal Değer :</b> #{testResultController.testResult.testNormalValue}<br />
+                                <b>Değer :</b> #{testResultController.testResult.testValue}<br />
                             </pre>
                         </div>
                         <div class="modal-footer">
