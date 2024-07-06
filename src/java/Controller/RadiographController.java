@@ -15,7 +15,6 @@ public class RadiographController extends BaseController<Radiograph> implements 
 
     @EJB
     private RadiographDAO radiographDao;
-
     private Radiograph radiograph;
     private List<Radiograph> radiographList;
 

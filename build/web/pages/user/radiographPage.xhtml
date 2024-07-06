@@ -30,7 +30,7 @@
                             <h:column>
                                 <f:facet name="header">Resim</f:facet>
                                 <h:panelGroup layout="block">
-                                    <h:graphicImage width="100" value="/file/#{radiograph.filename}"/>
+                                    <h:graphicImage width="100" value="/file/#{radiograph.image}"/>
                                 </h:panelGroup>
                             </h:column> 
                             <h:column>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputFile">Dosya</label>
-                            <h:inputFile value="#{radiographController.file}" styleClass="custom-file"></h:inputFile>
+                            <h:inputFile value="#{radiographController.entity.image}" styleClass="custom-file"></h:inputFile>
                         </div>
                         <div class="btn-group">
                             <h:commandButton rendered="#{radiographController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{radiographController.UpdateEntity()}">

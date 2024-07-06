@@ -3,9 +3,12 @@ package Entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,15 +22,13 @@ public class Radiograph extends BaseEntity implements Serializable {
     private Date RGDate;
 
     @Column(name = "image")
-    private String image;
+    private File image;
+    
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
     public Radiograph() {
-    }
-
-    public Radiograph(Date RGDate, String image, int id, String name) {
-        super(id, name);
-        this.RGDate = RGDate;
-        this.image = image;
     }
 
     public Date getRGDate() {
@@ -38,13 +39,28 @@ public class Radiograph extends BaseEntity implements Serializable {
         this.RGDate = RGDate;
     }
 
-    public String getImage() {
+    public File getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(File image) {
         this.image = image;
     }
+
+    public Patient getPatient() {
+        if(patient == null){
+            patient = new Patient();
+        }
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+    
+    
+    
+    
 
     @Override
     public String toString() {

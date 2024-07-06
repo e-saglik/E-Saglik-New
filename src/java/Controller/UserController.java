@@ -16,8 +16,7 @@ import java.util.List;
 public class UserController extends BaseController<User> implements Serializable {
 
     @EJB
-    private UserDAO userDao;
-    
+    private UserDAO userDao;   
     private User user;
     private List<User> userList;
 

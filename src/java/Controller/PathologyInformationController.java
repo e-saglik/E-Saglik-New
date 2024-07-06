@@ -1,6 +1,5 @@
 package Controller;
 
-import DAO.AbstractDAO;
 import DAO.PathologyInformationDAO;
 import Entity.PathologyInformation;
 import jakarta.ejb.EJB;
