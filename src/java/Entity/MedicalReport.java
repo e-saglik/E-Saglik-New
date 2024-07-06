@@ -16,7 +16,7 @@ import java.util.List;
 @NamedQuery(name = "MedicalReport.findAll", query = "SELECT m FROM MedicalReport m")
 public class MedicalReport extends BaseEntity implements Serializable {
 
-    @Column(name = "medical_report_date")
+    @Column(name = "medicalreportdate")
     private Date medicalReportDate;
 
     @Column(name = "diagnosis")
@@ -31,14 +31,6 @@ public class MedicalReport extends BaseEntity implements Serializable {
 
     public MedicalReport() {
 
-    }
-
-    public MedicalReport(Date medicalReportDate, String diagnosis, String description, Patient patient, int id, String name) {
-        super(id, name);
-        this.medicalReportDate = medicalReportDate;
-        this.diagnosis = diagnosis;
-        this.description = description;
-        this.patient = patient;
     }
 
     public Date getMedicalReportDate() {
@@ -64,6 +56,19 @@ public class MedicalReport extends BaseEntity implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Patient getPatient() {
+        if(patient == null){
+            patient = new Patient();
+        }
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+    
+    
 
     @Override
     public String toString() {

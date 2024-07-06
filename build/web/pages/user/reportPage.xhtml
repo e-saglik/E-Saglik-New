@@ -57,12 +57,7 @@
                             <label for="inputDescription">Açıklama</label>
                             <h:inputTextarea styleClass="form-control" value="#{medicalReportController.entity.description}"></h:inputTextarea>
                         </div>
-                        <div class="form-group" id="inputTestResults">
-                            <label for="inputTestResults">Test Sonuçları</label>
-                            <ui:repeat value="#{medicalReportController.entity.testResults}" var="testResult">
-                                <h:inputText styleClass="form-control" value="#{testResult}"></h:inputText>
-                            </ui:repeat>
-                        </div>
+                        
                         <button type="button" class="btn btn-secondary" onclick="addTestResult()">Test Sonucu Ekle</button>
                         <div class="btn-group">
                             <h:commandButton rendered="#{medicalReportController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{medicalReportController.UpdateEntity()}">
