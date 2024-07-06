@@ -18,10 +18,10 @@
                         <h:commandButton action="#{navigationController.page('loginDoctor')}" styleClass="btn btn-info" value="Doktor Girişi"/>
                         <h:panelGrid columns="2" cellpadding="10">
                             <h:outputLabel value="Kullanıcı Adı:" for="username" />
-                            <h:inputText id="username" value="#{userController.user.email}" class="form-control" />
+                            <h:inputText id="username" value="#{userController.entity.email}" class="form-control" />
 
                             <h:outputLabel value="Sifre:" for="password" />
-                            <h:inputSecret id="password" value="#{userController.user.password}" class="form-control" />
+                            <h:inputSecret id="password" value="#{userController.entity.password}" class="form-control" />
                         </h:panelGrid>
                         <h:commandButton action="#{userController.login()}" value="Giriş" styleClass="btn btn-primary btn-block" />
                     </h:form>
