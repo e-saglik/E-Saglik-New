@@ -12,9 +12,10 @@ import java.util.List;
 @SessionScoped
 public class DoctorController extends BaseController<Doctor> implements Serializable {
 
-    private Doctor entity;
+    
     @EJB
     private DoctorDAO dao;
+    private Doctor entity;
     private List<Doctor> list;
 
     private int page = 1;
