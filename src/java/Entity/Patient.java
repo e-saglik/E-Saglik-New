@@ -11,16 +11,19 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "Patient")
 @NamedQuery(name = "Patient.findAll", query = "SELECT p FROM Patient p")
 public class Patient extends BaseEntity implements Serializable {
 
+    @NotNull(message = "Date of birth cannot be null")
+    @Past(message = "Date of birth must be in the past")
     @Column(name = "dateofbirth")
     private Date dateOfBirth;
 

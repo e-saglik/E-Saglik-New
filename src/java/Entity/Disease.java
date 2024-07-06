@@ -6,6 +6,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -13,9 +14,11 @@ import java.io.Serializable;
 @NamedQuery(name = "Disease.findAll", query = "SELECT d FROM Disease d")
 public class Disease extends BaseEntity implements Serializable {
 
+    @NotNull(message = "Description cannot be null")
     @Column(name = "description")
     private String description;
 
+    @NotNull(message = "Patient cannot be null")
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
@@ -28,8 +31,6 @@ public class Disease extends BaseEntity implements Serializable {
         this.description = description;
         this.patient = patient;
     }
-
-    
 
     public String getDescription() {
         return description;
@@ -46,6 +47,4 @@ public class Disease extends BaseEntity implements Serializable {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
-
-   
 }
