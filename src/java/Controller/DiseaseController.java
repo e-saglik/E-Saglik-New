@@ -10,7 +10,7 @@ import java.util.List;
 
 @Named
 @SessionScoped
-public class DiseaseController extends BaseController<Disease>  implements Serializable{
+public class DiseaseController extends BaseController<Disease> implements Serializable {
 
     @EJB
     private DiseaseDAO diseaseDao;
@@ -18,7 +18,6 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
     private Disease disease;
     private List<Disease> diseaseList;
 
-    
     private int page = 1;
     private int pageSize = 10;
     private int pageCount;
@@ -71,8 +70,9 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
     public void updateForm(Disease dis) {
         this.entity = dis;
     }
+
     public DiseaseController() {
-        super(Disease.class);       
+        super(Disease.class);
     }
 
     public DiseaseDAO getDiseaseDao() {
