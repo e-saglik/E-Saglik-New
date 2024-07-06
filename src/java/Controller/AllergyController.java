@@ -15,8 +15,7 @@ public class AllergyController extends BaseController<Allergy> implements Serial
 
     @EJB
     private AllergyDAO dao;
-
-    private Allergy allergy;
+    private Allergy entity;
     private List<Allergy> allergyList;
 
     private int page = 1;
@@ -25,14 +24,6 @@ public class AllergyController extends BaseController<Allergy> implements Serial
     
     public AllergyController() {
         super(Allergy.class);
-    }
-
-    public Allergy getEntity() {
-        return entity;
-    }
-
-    public void setEntity(Allergy entity) {
-        this.entity = entity;
     }
 
     public AllergyDAO getDao() {
@@ -46,12 +37,15 @@ public class AllergyController extends BaseController<Allergy> implements Serial
         this.dao = dao;
     }
 
-    public Allergy getAllergy() {
-        return allergy;
+    public Allergy getEntity() {
+        if (entity == null) {
+            entity = new Allergy();
+        }
+        return entity;
     }
 
-    public void setAllergy(Allergy allergy) {
-        this.allergy = allergy;
+    public void setEntity(Allergy entity) {
+        this.entity = entity;
     }
 
     public List<Allergy> getAllergyList() {
@@ -137,7 +131,7 @@ public class AllergyController extends BaseController<Allergy> implements Serial
 
     @Override
     public void UpdateEntity() {
-        getDao().Update(allergy);
+        getDao().Update(entity);
         this.entity = new Allergy();
     }
 

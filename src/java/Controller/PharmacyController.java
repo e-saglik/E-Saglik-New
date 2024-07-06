@@ -8,7 +8,7 @@ import java.util.List;
 public class PharmacyController extends BaseController<Pharmacy> {
 
     private PharmacyDAO pharmacyDao;
-    private Pharmacy pharmacy;
+    private Pharmacy entity;
     private List<Pharmacy> pharmacyList;
 
     public PharmacyController() {
@@ -23,12 +23,15 @@ public class PharmacyController extends BaseController<Pharmacy> {
         this.pharmacyDao = pharmacyDao;
     }
 
-    public Pharmacy getPharmacy() {
-        return pharmacy;
+    public Pharmacy getEntity() {
+        if (entity == null) {
+            entity = new Pharmacy();
+        }
+        return entity;
     }
 
-    public void setPharmacy(Pharmacy pharmacy) {
-        this.pharmacy = pharmacy;
+    public void setEntity(Pharmacy entity) {
+        this.entity = entity;
     }
 
     public List<Pharmacy> getPharmacyList() {
@@ -63,7 +66,7 @@ public class PharmacyController extends BaseController<Pharmacy> {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }
-        pharmacyDao.Update(pharmacy);
+        pharmacyDao.Update(entity);
     }
 
     @Override
@@ -71,7 +74,7 @@ public class PharmacyController extends BaseController<Pharmacy> {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }
-        pharmacyDao.Delete(pharmacy);
+        pharmacyDao.Delete(entity);
     }
 
     @Override
@@ -79,6 +82,6 @@ public class PharmacyController extends BaseController<Pharmacy> {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }
-        pharmacyDao.Create(pharmacy);
+        pharmacyDao.Create(entity);
     }
 }

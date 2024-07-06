@@ -1,8 +1,6 @@
 package Controller;
 
-import DAO.AbstractDAO;
 import DAO.VaccinationScheduleDAO;
-import Entity.Doctor;
 import Entity.VaccinationSchedule;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
@@ -16,8 +14,7 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
 
     @EJB
     private VaccinationScheduleDAO scheduleDao;
-
-    private VaccinationSchedule schedule;
+    private VaccinationSchedule entity;
     private List<VaccinationSchedule> scheduleList;
     
     private int page = 1;
@@ -89,12 +86,15 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
         this.scheduleDao = scheduleDao;
     }
 
-    public VaccinationSchedule getSchedule() {
-        return schedule;
+    public VaccinationSchedule getEntity() {
+        if (entity == null) {
+            entity = new VaccinationSchedule();
+        }
+        return entity;
     }
 
-    public void setSchedule(VaccinationSchedule schedule) {
-        this.schedule = schedule;
+    public void setEntity(VaccinationSchedule entity) {
+        this.entity = entity;
     }
 
     public List<VaccinationSchedule> getScheduleList() {

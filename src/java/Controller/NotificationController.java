@@ -15,9 +15,8 @@ import java.util.List;
 public class NotificationController extends BaseController<Notification> implements Serializable{
 
     @EJB
-    private NotificationDAO notificationDao;
-    
-    private Notification notification;
+    private NotificationDAO notificationDao;   
+    private Notification entity;
     private List<Notification> notificationList;
 
     public NotificationController() {
@@ -35,12 +34,15 @@ super(Notification.class);
         this.notificationDao = notificationDao;
     }
 
-    public Notification getNotification() {
-        return notification;
+    public Notification getEntity() {
+        if (entity == null) {
+            entity = new Notification();
+        }
+        return entity;
     }
 
-    public void setNotification(Notification notification) {
-        this.notification = notification;
+    public void setEntity(Notification entity) {
+        this.entity = entity;
     }
 
     public List<Notification> getNotificationList() {
@@ -75,7 +77,7 @@ super(Notification.class);
 
     @Override
     public void UpdateEntity() {
-        getNotificationDao().Update(notification);
+        getNotificationDao().Update(entity);
         this.entity = new Notification();
     }
 

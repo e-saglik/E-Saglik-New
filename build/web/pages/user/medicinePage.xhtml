@@ -17,7 +17,7 @@
                         <h:dataTable styleClass="table table-striped" value="#{medicationController.GetEntityList()}" var="medication">
                             <h:column>
                                 <f:facet name="header">Adı</f:facet>
-                                    #{medication.name}
+                                <h:commandLink action="#{medicationController.updateForm(medication)}" value="#{medication.name}"></h:commandLink>
                             </h:column> 
                             <h:column>
                                 <f:facet name="header">Dozaj</f:facet>

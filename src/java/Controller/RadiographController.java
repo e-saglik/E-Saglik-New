@@ -16,7 +16,7 @@ public class RadiographController extends BaseController<Radiograph> implements 
 
     @EJB
     private RadiographDAO radiographDao;
-    private Radiograph radiograph;
+    private Radiograph entity;
     private List<Radiograph> radiographList;
 
     private int page = 1;
@@ -78,13 +78,6 @@ public class RadiographController extends BaseController<Radiograph> implements 
         this.entity = rad;
     }
 
-    public Radiograph getEntity() {
-        return entity;
-    }
-
-    public void setEntity(Radiograph entity) {
-        this.entity = entity;
-    }
 
     public RadiographDAO getRadiographDao() {
         if (this.radiographDao == null) {
@@ -97,12 +90,15 @@ public class RadiographController extends BaseController<Radiograph> implements 
         this.radiographDao = radiographDao;
     }
 
-    public Radiograph getRadiograph() {
-        return radiograph;
+    public Radiograph getEntity() {
+        if (entity == null) {
+            entity = new Radiograph();
+        }
+        return entity;
     }
 
-    public void setRadiograph(Radiograph radiograph) {
-        this.radiograph = radiograph;
+    public void setEntity(Radiograph entity) {
+        this.entity = entity;
     }
 
     public List<Radiograph> getRadiographList() {

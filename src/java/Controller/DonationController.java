@@ -14,8 +14,7 @@ public class DonationController extends BaseController<Donation> implements Seri
 
     @EJB
     private DonationDAO donationDao;
-
-    private Donation donation;
+    private Donation entity;
     private List<Donation> donationList;
 
     private int page = 1;
@@ -88,12 +87,15 @@ public class DonationController extends BaseController<Donation> implements Seri
         this.donationDao = donationDao;
     }
 
-    public Donation getDonation() {
-        return donation;
+    public Donation getEntity() {
+        if (entity == null) {
+            entity = new Donation();
+        }
+        return entity;
     }
 
-    public void setDonation(Donation donation) {
-        this.donation = donation;
+    public void setEntity(Donation entity) {
+        this.entity = entity;
     }
 
     public List<Donation> getDonationList() {

@@ -10,28 +10,28 @@ import java.util.List;
 
 @Named
 @SessionScoped
-public class PathologyInformationController extends BaseController<PathologyInformation> implements Serializable{
+public class PathologyInformationController extends BaseController<PathologyInformation> implements Serializable {
 
     @EJB
     private PathologyInformationDAO pathologyInformationDao;
-    private PathologyInformation pathologyInformation;
+    private PathologyInformation entity;
     private List<PathologyInformation> pathologyInformationList;
 
-     private int page = 1;
+    private int page = 1;
     private int pageSize = 10;
     private int pageCount;
-    
+
     public PathologyInformationController() {
         super(PathologyInformation.class);
     }
-    
+
     public PathologyInformationDAO getPathologyInformationDao() {
         if (this.pathologyInformationDao == null) {
             this.pathologyInformationDao = new PathologyInformationDAO();
         }
         return pathologyInformationDao;
     }
-    
+
     public void next() {
         if (this.page == getPageCount()) {
             this.page = 1;
@@ -83,19 +83,19 @@ public class PathologyInformationController extends BaseController<PathologyInfo
         this.entity = doc;
     }
 
-     public void setNotificationDao(PathologyInformationDAO pathologyInformationDao) {
+    public void setNotificationDao(PathologyInformationDAO pathologyInformationDao) {
         this.pathologyInformationDao = pathologyInformationDao;
     }
 
-    public PathologyInformation getPathologyInformation() {
-        if(pathologyInformation == null){
-            pathologyInformation = new PathologyInformation();
+    public PathologyInformation getEntity() {
+        if (entity == null) {
+            entity = new PathologyInformation();
         }
-        return pathologyInformation;
+        return entity;
     }
 
-    public void setPathologyInformation(PathologyInformation pathologyInformation) {
-        this.pathologyInformation = pathologyInformation;
+    public void setEntity(PathologyInformation entity) {
+        this.entity = entity;
     }
 
     public List<PathologyInformation> getPathologyInformationList() {
@@ -107,8 +107,6 @@ public class PathologyInformationController extends BaseController<PathologyInfo
         this.pathologyInformationList = pathologyInformationList;
     }
 
-    
- 
     @Override
     public void AddEntity() {
         getPathologyInformationDao().Create(this.entity);
@@ -118,7 +116,7 @@ public class PathologyInformationController extends BaseController<PathologyInfo
     @Override
     public PathologyInformation GetEntityById(int id) {
         if (getPathologyInformationDao() == null) {
-            pathologyInformationDao =  new PathologyInformationDAO();
+            pathologyInformationDao = new PathologyInformationDAO();
         }
         getPathologyInformationDao().GetById(id);
         return null;
@@ -140,6 +138,5 @@ public class PathologyInformationController extends BaseController<PathologyInfo
         getPathologyInformationDao().Delete(entity);
         this.entity = new PathologyInformation();
     }
-
 
 }

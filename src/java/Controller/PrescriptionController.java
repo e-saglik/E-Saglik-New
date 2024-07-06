@@ -14,11 +14,11 @@ import java.util.List;
 @SessionScoped
 public class PrescriptionController extends BaseController<Prescription> implements Serializable {
 
-    private Prescription entity;
     @EJB
     private PrescriptionDAO dao;
+    private Prescription entity;
     private List<Prescription> list;
-    
+
     private int page = 1;
     private int pageSize = 10;
     private int pageCount;

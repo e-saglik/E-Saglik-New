@@ -16,9 +16,9 @@ public class VaccineController extends BaseController<Vaccine> implements Serial
 
     @EJB
     private VaccineDAO vaccineDao;
-
-    private Vaccine vaccine;
+    private Vaccine entity;
     private List<Vaccine> vaccineList;
+    
     private int page = 1;
     private int pageSize = 10;
     private int pageCount;
@@ -89,12 +89,15 @@ public class VaccineController extends BaseController<Vaccine> implements Serial
         this.vaccineDao = vaccineDao;
     }
 
-    public Vaccine getVaccine() {
-        return vaccine;
+    public Vaccine getEntity() {
+                if (entity == null) {
+            entity = new Vaccine();
+        }
+        return entity;
     }
 
-    public void setVaccine(Vaccine vaccine) {
-        this.vaccine = vaccine;
+    public void setEntity(Vaccine entity) {
+        this.entity = entity;
     }
 
     public List<Vaccine> getVaccineList() {
@@ -122,7 +125,7 @@ public class VaccineController extends BaseController<Vaccine> implements Serial
 
     @Override
     public void UpdateEntity() {
-        getDao().Update(vaccine);
+        getDao().Update(entity);
         this.entity = new Vaccine();
     }
 

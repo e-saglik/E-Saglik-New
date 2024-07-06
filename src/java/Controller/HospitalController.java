@@ -15,8 +15,7 @@ public class HospitalController extends BaseController<Hospital> implements Seri
 
     @EJB
     private HospitalDAO hospitalDao;
-
-    private Hospital hospital;
+    private Hospital entity;
     private List<Hospital> hospitalList;
 
     public HospitalController() {
@@ -34,12 +33,15 @@ public class HospitalController extends BaseController<Hospital> implements Seri
         this.hospitalDao = hospitalDao;
     }
 
-    public Hospital getHospital() {
-        return hospital;
+    public Hospital getEntity() {
+        if (entity == null) {
+            entity = new Hospital();
+        }
+        return entity;
     }
 
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
+    public void setEntity(Hospital entity) {
+        this.entity = entity;
     }
 
     public List<Hospital> getHospitalList() {
@@ -74,7 +76,7 @@ public class HospitalController extends BaseController<Hospital> implements Seri
 
     @Override
     public void UpdateEntity() {
-        getHospitalDao().Update(hospital);
+        getHospitalDao().Update(entity);
         this.entity = new Hospital();
     }
 

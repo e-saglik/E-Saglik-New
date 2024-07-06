@@ -15,8 +15,7 @@ public class TreatmentController extends BaseController<Treatment> implements Se
 
     @EJB
     private TreatmentDAO treatmentDao;
-
-    private Treatment treatment;
+    private Treatment entity;
     private List<Treatment> treatmentList;
 
     private int page = 1;
@@ -89,12 +88,15 @@ public class TreatmentController extends BaseController<Treatment> implements Se
         this.treatmentDao = treatmentDao;
     }
 
-    public Treatment getTreatment() {
-        return treatment;
+    public Treatment getEntity() {
+        if (entity == null) {
+            entity = new Treatment();
+        }
+        return entity;
     }
 
-    public void setTreatment(Treatment treatment) {
-        this.treatment = treatment;
+    public void setEntity(Treatment entity) {
+        this.entity = entity;
     }
 
     public List<Treatment> getTreatmentList() {

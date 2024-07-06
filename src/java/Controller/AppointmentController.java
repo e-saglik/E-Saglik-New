@@ -14,9 +14,8 @@ import java.util.List;
 public class AppointmentController extends BaseController<Appointment> implements Serializable {
 
     @EJB
-    private AppointmentDAO appointmentDao;
-    
-    private Appointment appointment;
+    private AppointmentDAO appointmentDao;   
+    private Appointment entity;
     private List<Appointment> appointmentList;
 
     public AppointmentController() {
@@ -34,12 +33,15 @@ public class AppointmentController extends BaseController<Appointment> implement
         this.appointmentDao = appointmentDao;
     }
 
-    public Appointment getAppointment() {
-        return appointment;
+    public Appointment getEntity() {
+        if (entity == null) {
+            entity = new Appointment();
+        }
+        return entity;
     }
 
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
+    public void setEntity(Appointment entity) {
+        this.entity = entity;
     }
 
     public List<Appointment> getAppointmentList() {
@@ -73,7 +75,7 @@ public class AppointmentController extends BaseController<Appointment> implement
 
     @Override
     public void UpdateEntity() {
-        getAppointmentDao().Update(appointment);
+        getAppointmentDao().Update(entity);
         this.entity = new Appointment();
     }
 

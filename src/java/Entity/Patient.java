@@ -46,12 +46,7 @@ public class Patient extends BaseEntity implements Serializable {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "Patient_Disease",
-            joinColumns = @JoinColumn(name = "patient_id"),
-            inverseJoinColumns = @JoinColumn(name = "disease_id")
-    )
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Disease> diseaseList;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)

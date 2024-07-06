@@ -14,8 +14,7 @@ public class DiseaseController extends BaseController<Disease> implements Serial
 
     @EJB
     private DiseaseDAO diseaseDao;
-
-    private Disease disease;
+    private Disease entity;
     private List<Disease> diseaseList;
 
     private int page = 1;
@@ -86,12 +85,15 @@ public class DiseaseController extends BaseController<Disease> implements Serial
         this.diseaseDao = diseaseDao;
     }
 
-    public Disease getDisease() {
-        return disease;
+    public Disease getEntity() {
+        if (entity == null) {
+            entity = new Disease();
+        }
+        return entity;
     }
 
-    public void setDisease(Disease disease) {
-        this.disease = disease;
+    public void setEntity(Disease entity) {
+        this.entity = entity;
     }
 
     public List<Disease> getDiseaseList() {
@@ -101,17 +103,6 @@ public class DiseaseController extends BaseController<Disease> implements Serial
 
     public void setDiseaseList(List<Disease> diseaseList) {
         this.diseaseList = diseaseList;
-    }
-
-    public Disease getEntity() {
-        if (this.entity == null) {
-            this.entity = new Disease();
-        }
-        return entity;
-    }
-
-    public void setEntity(Disease entity) {
-        this.entity = entity;
     }
 
     @Override
@@ -137,7 +128,7 @@ public class DiseaseController extends BaseController<Disease> implements Serial
 
     @Override
     public void UpdateEntity() {
-        getDiseaseDao().Update(disease);
+        getDiseaseDao().Update(entity);
         this.entity = new Disease();
     }
 

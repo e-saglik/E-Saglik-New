@@ -15,8 +15,7 @@ public class MedicalReportController extends BaseController<MedicalReport> imple
 
     @EJB
     private MedicalReportDAO medicalReportDao;
-
-    private MedicalReport medicalReport;
+    private MedicalReport entity;
     private List<MedicalReport> medicalReportList;
     
     private int page = 1;
@@ -89,12 +88,15 @@ public class MedicalReportController extends BaseController<MedicalReport> imple
         this.medicalReportDao = medicalReportDao;
     }
 
-    public MedicalReport getMedicalReport() {
-        return medicalReport;
+    public MedicalReport getEntity() {
+        if (entity == null) {
+            entity = new MedicalReport();
+        }
+        return entity;
     }
 
-    public void setMedicalReport(MedicalReport medicalReport) {
-        this.medicalReport = medicalReport;
+    public void setEntity(MedicalReport entity) {
+        this.entity = entity;
     }
 
     public List<MedicalReport> getMedicalReportList() {
@@ -130,7 +132,7 @@ public class MedicalReportController extends BaseController<MedicalReport> imple
 
     @Override
     public void UpdateEntity() {
-       getMedicalReportDao().Update(medicalReport);
+       getMedicalReportDao().Update(entity);
         this.entity = new MedicalReport();
 
     }
