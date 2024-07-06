@@ -17,7 +17,7 @@
                         <h:dataTable styleClass="table table-striped" value="#{diseaseController.GetEntityList()}" var="disease">
                             <h:column>
                                 <f:facet name="header">Adı</f:facet>
-                                    #{disease.name}
+                                <h:commandLink action="#{diseaseController.updateForm(disease)}" value="#{disease.name}"></h:commandLink>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Açıklama</f:facet>
@@ -82,8 +82,8 @@
                         <div class="modal-body">
                             <p>Bu hastalığı silmek istediğinizden emin misiniz!</p>
                             <pre>
-                                <b>Adı :</b> #{disease.entity.name}<br />
-                                <b>Açıklama :</b> #{disease.entity.description}<br />
+                                <b>Adı :</b> #{disease.disease.name}<br />
+                                <b>Açıklama :</b> #{disease.disease.description}<br />
                                 <b>Hasta :</b> #{disease.patient.name}<br />
                             </pre>
                         </div>

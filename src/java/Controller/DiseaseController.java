@@ -14,14 +14,16 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
 
     @EJB
     private DiseaseDAO diseaseDao;
-
-    private Disease disease;
+    private Disease entity;
     private List<Disease> diseaseList;
 
-    
     private int page = 1;
     private int pageSize = 10;
     private int pageCount;
+    
+    public DiseaseController() {
+        super(Disease.class);       
+    }
 
     public void next() {
         if (this.page == getPageCount()) {
@@ -71,9 +73,7 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
     public void updateForm(Disease dis) {
         this.entity = dis;
     }
-    public DiseaseController() {
-        super(Disease.class);       
-    }
+   
 
     public DiseaseDAO getDiseaseDao() {
         if (this.diseaseDao == null) {
@@ -86,12 +86,15 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
         this.diseaseDao = diseaseDao;
     }
 
-    public Disease getDisease() {
-        return disease;
+    public Disease getEntity() {
+         if (this.entity == null) {
+            this.entity = new Disease();
+        }
+        return entity;
     }
 
-    public void setDisease(Disease disease) {
-        this.disease = disease;
+    public void setEntity(Disease entity) {
+        this.entity = entity;
     }
 
     public List<Disease> getDiseaseList() {
@@ -103,22 +106,10 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
         this.diseaseList = diseaseList;
     }
 
-    public Disease getEntity() {
-        if (this.entity == null) {
-            this.entity = new Disease();
-        }
-        return entity;
-    }
-
-    public void setEntity(Disease entity) {
-        this.entity = entity;
-    }
-
     @Override
     public void AddEntity() {
         getDiseaseDao().Create(this.entity);
         this.entity = new Disease();
-
     }
 
     @Override
@@ -137,7 +128,7 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
 
     @Override
     public void UpdateEntity() {
-        getDiseaseDao().Update(disease);
+        getDiseaseDao().Update(entity);
         this.entity = new Disease();
     }
 
