@@ -107,7 +107,7 @@
                             <h:form>
                                 <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
                                 <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{testResultController.DeleteEntity()}">
-                                    <f:ajax execute="@this" render="testResult-table"/>
+                                    <f:ajax execute="@this" render="testResult-table-form"/>
                                 </h:commandButton>
                             </h:form>
                         </div>
