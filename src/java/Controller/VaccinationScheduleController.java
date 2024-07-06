@@ -14,8 +14,7 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
 
     @EJB
     private VaccinationScheduleDAO scheduleDao;
-
-    private VaccinationSchedule schedule;
+    private VaccinationSchedule entity;
     private List<VaccinationSchedule> scheduleList;
     
     private int page = 1;
@@ -87,12 +86,12 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
         this.scheduleDao = scheduleDao;
     }
 
-    public VaccinationSchedule getSchedule() {
-        return schedule;
+    public VaccinationSchedule getEntity() {
+        return entity;
     }
 
-    public void setSchedule(VaccinationSchedule schedule) {
-        this.schedule = schedule;
+    public void setEntity(VaccinationSchedule entity) {
+        this.entity = entity;
     }
 
     public List<VaccinationSchedule> getScheduleList() {

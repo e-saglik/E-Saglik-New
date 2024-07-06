@@ -15,8 +15,7 @@ public class PaymentController extends BaseController<Payment> implements Serial
 
     @EJB
     private PaymentDAO paymentDao;
-
-    private Payment payment;
+    private Payment entity;
     private List<Payment> paymentList;
 
     
@@ -91,12 +90,15 @@ public class PaymentController extends BaseController<Payment> implements Serial
         this.paymentDao = paymentDao;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public Payment getEntity() {
+        if (entity == null) {
+            entity = new Payment();
+        }
+        return entity;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setEntity(Payment entity) {
+        this.entity = entity;
     }
 
     public List<Payment> getPaymentList() {

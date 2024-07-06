@@ -14,7 +14,7 @@ public class TestResultController extends BaseController<TestResult> implements 
 
     @EJB
     private TestResultDAO testResultDao;
-    private TestResult testResult;
+    private TestResult entity;
     private List<TestResult> testResultList;
 
     private int page = 1;
@@ -78,22 +78,22 @@ public class TestResultController extends BaseController<TestResult> implements 
     }
 
     public void clearForm() {
-        this.testResult = new TestResult();
+        this.entity = new TestResult();
     }
 
     public void updateForm(TestResult testResult) {
-        this.testResult = testResult;
+        this.entity = testResult;
     }
 
-    public TestResult getTestResult() {
-        if (testResult == null) {
-            testResult = new TestResult();
+    public TestResult getEntity() {
+        if (entity == null) {
+            entity = new TestResult();
         }
-        return testResult;
+        return entity;
     }
 
-    public void setTestResult(TestResult testResult) {
-        this.testResult = testResult;
+    public void setEntity(TestResult entity) {
+        this.entity = entity;
     }
 
     public List<TestResult> getTestResultList() {
@@ -107,8 +107,8 @@ public class TestResultController extends BaseController<TestResult> implements 
 
     @Override
     public void AddEntity() {
-        getTestResultDao().Create(testResult);
-        testResult = new TestResult();
+        getTestResultDao().Create(entity);
+        entity = new TestResult();
     }
 
     @Override
@@ -126,13 +126,13 @@ public class TestResultController extends BaseController<TestResult> implements 
 
     @Override
     public void UpdateEntity() {
-        getTestResultDao().Update(testResult);
-        testResult = new TestResult();
+        getTestResultDao().Update(entity);
+        entity = new TestResult();
     }
 
     @Override
     public void DeleteEntity() {
-        getTestResultDao().Delete(testResult);
-        testResult = new TestResult();
+        getTestResultDao().Delete(entity);
+        entity = new TestResult();
     }
 }

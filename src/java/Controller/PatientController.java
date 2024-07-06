@@ -14,7 +14,7 @@ public class PatientController extends BaseController<Patient> implements Serial
 
     @EJB
     private PatientDAO patientDao;
-    private Patient patient;
+    private Patient entity;
     private List<Patient> patientList;
     
     private int page = 1;
@@ -33,15 +33,15 @@ public class PatientController extends BaseController<Patient> implements Serial
         this.patientDao = patientDao;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public Patient getEntity() {
+        return entity;
     }
 
-    public void setPatient(Patient patient) {
-        if(patient == null){
-            patient = new Patient();
+    public void setEntity(Patient entity) {
+        if(entity == null){
+            entity = new Patient();
         }
-        this.patient = patient;
+        this.entity = entity;
     }
 
     public List<Patient> getPatientList() {
@@ -101,20 +101,7 @@ public class PatientController extends BaseController<Patient> implements Serial
 
     public void updateForm(Patient rad) {
         this.entity = rad;
-    }
-
-    public Patient getEntity() {
-        if(entity == null){
-            entity = new Patient();
-        }
-        return entity;
-    }
-
-    public void setEntity(Patient entity) {
-        this.entity = entity;
-    }
-    
-    
+    }    
  
     @Override
     public Patient GetEntityById(int id) {
