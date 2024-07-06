@@ -89,6 +89,9 @@ public class PathologyInformationController extends BaseController<PathologyInfo
     }
 
     public PathologyInformation getPathologyInformation() {
+        if(pathologyInformation == null){
+            pathologyInformation = new PathologyInformation();
+        }
         return pathologyInformation;
     }
 
@@ -97,6 +100,7 @@ public class PathologyInformationController extends BaseController<PathologyInfo
     }
 
     public List<PathologyInformation> getPathologyInformationList() {
+        this.pathologyInformationList = this.getPathologyInformationDao().GetList();
         return pathologyInformationList;
     }
 
