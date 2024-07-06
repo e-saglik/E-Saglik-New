@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputPatient">Hasta</label>
-                            <h:selectOneMenu id="inputPatient" styleClass="form-control" value="#{diseaseController.entity.patient}">
+                            <h:selectOneMenu id="inputPatient" styleClass="form-control" value="#{diseaseController.entity.patient.id}">
                                 <f:selectItems value="#{patientController.GetEntityList()}" var="patient" itemValue="#{patient}" itemLabel="#{patient.name}" />
                             </h:selectOneMenu>
                         </div>
