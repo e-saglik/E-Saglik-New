@@ -2,6 +2,7 @@ package Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
@@ -11,12 +12,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "vaccination_schedules")
+@Table(name = "vaccinationschedule")
 @NamedQuery(name = "VaccinationSchedule.findAll", query = "SELECT t FROM VaccinationSchedule t")
 public class VaccinationSchedule extends BaseEntity implements Serializable {
 
     @ManyToOne
-    private Vaccine vaccineName;
+    @JoinColumn(name = "vaccine_id")
+    private Vaccine vaccine;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "due_date")
@@ -27,16 +29,16 @@ public class VaccinationSchedule extends BaseEntity implements Serializable {
 
     public VaccinationSchedule(Vaccine vaccineName, Date dueDate, int id, String name) {
         super(id, name);
-        this.vaccineName = vaccineName;
+        this.vaccine = vaccineName;
         this.dueDate = dueDate;
     }
 
-    public Vaccine getVaccineName() {
-        return vaccineName;
+    public Vaccine getVaccine() {
+        return vaccine;
     }
 
-    public void setVaccineName(Vaccine vaccineName) {
-        this.vaccineName = vaccineName;
+    public void setVaccine(Vaccine vaccine) {
+        this.vaccine = vaccine;
     }
 
     public Date getDueDate() {
@@ -49,6 +51,6 @@ public class VaccinationSchedule extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "VaccinationSchedule{" + "vaccineName=" + vaccineName + ", dueDate=" + dueDate + '}';
+        return "VaccinationSchedule{" + "vaccineName=" + vaccine + ", dueDate=" + dueDate + '}';
     }
 }

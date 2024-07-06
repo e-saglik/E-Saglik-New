@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "vaccines")
+@Table(name = "vaccine")
 public class Vaccine extends BaseEntity {
     
     @Column(name = "type")
