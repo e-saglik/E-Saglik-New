@@ -6,6 +6,7 @@ import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -16,7 +17,7 @@ public class PatientController extends BaseController<Patient> implements Serial
     private PatientDAO patientDao;
     private Patient entity;
     private List<Patient> patientList;
-    
+
     private int page = 1;
     private int pageSize = 10;
     private int pageCount;
@@ -41,7 +42,7 @@ public class PatientController extends BaseController<Patient> implements Serial
     }
 
     public void setEntity(Patient entity) {
-        if(entity == null){
+        if (entity == null) {
             entity = new Patient();
         }
         this.entity = entity;
@@ -104,8 +105,19 @@ public class PatientController extends BaseController<Patient> implements Serial
 
     public void updateForm(Patient rad) {
         this.entity = rad;
-    }    
- 
+    }
+
+    public List<String> GetPatientNames() {
+        List<Patient> patients = patientDao.GetList();
+        List<String> patientNames = new ArrayList<>();
+
+        for (Patient patient : patients) {
+            patientNames.add(patient.getName());
+        }
+
+        return patientNames;
+    }
+
     @Override
     public Patient GetEntityById(int id) {
         if (getPatientDao() == null) {
@@ -127,13 +139,13 @@ public class PatientController extends BaseController<Patient> implements Serial
     }
 
     @Override
-    public void DeleteEntity() {     
+    public void DeleteEntity() {
         getPatientDao().Delete(entity);
         this.entity = new Patient();
     }
 
     @Override
-    public void AddEntity() {    
+    public void AddEntity() {
         getPatientDao().Create(entity);
         this.entity = new Patient();
     }

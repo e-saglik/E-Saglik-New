@@ -107,9 +107,15 @@ public class DiseaseController extends BaseController<Disease> implements Serial
 
     @Override
     public void AddEntity() {
-        getDiseaseDao().Create(this.entity);
-        this.entity = new Disease();
-
+        try {
+            System.out.println("Creating entity: " + this.entity);
+            getDiseaseDao().Create(this.entity);
+            System.out.println("Entity created successfully: " + this.entity);
+            this.entity = new Disease();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while adding entity", e);
+        }
     }
 
     @Override
@@ -137,5 +143,4 @@ public class DiseaseController extends BaseController<Disease> implements Serial
         diseaseDao.Delete(entity);
         this.entity = new Disease();
     }
-
 }

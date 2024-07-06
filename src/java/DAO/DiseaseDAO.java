@@ -13,4 +13,15 @@ public class DiseaseDAO extends AbstractDAO<Disease> implements Serializable {
         super(Disease.class);
     }
 
+     @Override
+    public void Create(Disease entity) {
+        try {
+            entityManager.persist(entity);
+            entityManager.flush();  // Ensure the changes are saved immediately
+            System.out.println("Entity created successfully: " + entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while creating entity", e);
+        }
+    }
 }
