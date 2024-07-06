@@ -88,6 +88,19 @@ public class TestResult extends BaseEntity implements Serializable {
         this.testValue = testValue;
     }
 
+    public Patient getPatient() {
+        if(patient == null){
+            patient = new Patient();
+        }
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "TestResult{" + "date=" + date + ", testType=" + testType + ", testName=" + testName + ", testNormalValue=" + testNormalValue + ", testValue=" + testValue + '}';
