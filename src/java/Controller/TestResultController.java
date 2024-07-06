@@ -3,11 +3,81 @@ package Controller;
 import DAO.AbstractDAO;
 import DAO.TestResultDAO;
 import Entity.TestResult;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
-public class TestResultController extends BaseController<TestResult> {
+@Named
+@SessionScoped
+public class TestResultController extends BaseController<TestResult> implements Serializable {
 
-    public AbstractDAO getTestResultDao() {
+    @EJB
+    private TestResultDAO testResultDao;
+    private TestResult testResult;
+    private List<TestResult> testResultList;
+    
+    private int page = 1;
+    private int pageSize = 10;
+    private int pageCount;
+    
+    public TestResultController() {
+        super(TestResult.class);
+    }
+    
+    public void next() {
+        if (this.page == getPageCount()) {
+            this.page = 1;
+        } else {
+            this.page++;
+        }
+
+    }
+
+    public void previous() {
+        if (this.page == 1) {
+            this.page = this.getPageCount();
+        } else {
+            this.page--;
+        }
+
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount = (int) Math.ceil(getTestResultDao().Count() / (double) pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public void clearForm() {
+        this.entity = new TestResult();
+    }
+
+    public void updateForm(TestResult testResult) {
+        this.entity = testResult;
+    }
+
+    public TestResultDAO getTestResultDao() {
         return testResultDao;
     }
 
@@ -31,55 +101,45 @@ public class TestResultController extends BaseController<TestResult> {
         this.testResultList = testResultList;
     }
 
-    private TestResultDAO testResultDao;
-    private TestResult testResult;
-    private List<TestResult> testResultList;
-
-    public TestResultController() {
-
-    }
+    
 
    @Override
-    public TestResult GetEntityById(int id) {
+    public void AddEntity() {
         if (testResultDao == null) {
             testResultDao = new TestResultDAO();
         }
-        testResultDao.GetById(id);
+        testResultDao.Create(testResult);
+
+    }
+
+    @Override
+    public TestResult GetEntityById(int id) {
+        if (getTestResultDao() == null) {
+            testResultDao = new TestResultDAO();
+        }
+        getTestResultDao().GetById(id);
         return null;
     }
 
     @Override
     public List<TestResult> GetEntityList() {
-        if (testResultDao == null) {
-            testResultDao = new TestResultDAO();
-        }
-        testResultDao.GetList();
-
-        return testResultDao.GetList();
+        return getTestResultDao().GetList();
     }
 
     @Override
-    public void UpdateEntity(int id, TestResult testResult) {
-        if (testResultDao == null) {
+    public void UpdateEntity() {
+        if (getTestResultDao() == null) {
             testResultDao = new TestResultDAO();
         }
-        testResultDao.Update(testResult);
+        getTestResultDao().Update(testResult);
     }
 
     @Override
     public void DeleteEntity() {
-        if (testResultDao == null) {
+        if (getTestResultDao() == null) {
             testResultDao = new TestResultDAO();
         }
-        testResultDao.Delete(testResult);
-    }
-
-    @Override
-    public void AddEntity(TestResult entity) {
-        if (testResultDao == null) {
-            testResultDao = new TestResultDAO();
-        }
-        testResultDao.Create(testResult);
+        getTestResultDao().Delete(testResult);
     }
 
 
