@@ -22,7 +22,7 @@ public class VaccinationScheduleConverter extends BaseConverter<VaccinationSched
         return "VaccinationSchedule{" +
             "id=" + schedule.getId() +
             ", name='" + schedule.getName() + '\'' +
-            ", vaccineName='" + schedule.getVaccineName().getName() + '\'' +
+            ", vaccineName='" + schedule.getVaccine().getName() + '\'' +
             ", dueDate='" + dateFormat.format(schedule.getDueDate()) + '\'' +
             '}';
     }

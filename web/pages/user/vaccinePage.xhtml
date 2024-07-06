@@ -53,9 +53,9 @@
                             <h:inputText styleClass="form-control" value="#{vaccinationScheduleController.entity.name}"></h:inputText>
                         </div>
                         <div class="form-group">
-                            <label for="inputVaccineName">Aşı Adı</label>
-                            <h:selectOneMenu value="#{vaccinationScheduleController.entity.vaccineName}" styleClass="form-control">
-                                <f:selectItems value="#{vaccinationScheduleController.entity.vaccineName}" var="vaccine" itemValue="#{vaccine}" itemLabel="#{vaccine.name}" />
+                            <label for="inputVaccine">Aşı Adı</label>
+                            <h:selectOneMenu value="#{vaccinationScheduleController.entity.vaccine}" styleClass="form-control">
+                                <f:selectItems value="#{vaccinationScheduleController.entity.vaccine}" var="vaccine" itemValue="#{vaccine}" itemLabel="#{vaccine.name}" />
                             </h:selectOneMenu>
                         </div>
                         <div class="form-group">
@@ -87,7 +87,7 @@
                             <p>Bu aşı takvimini silmek istediğinizden emin misiniz!
                                 <pre>
                                 <b>Ad :</b> #{vaccinationScheduleController.entity.name}<br />
-                                <b>Aşı Adı :</b> #{vaccinationScheduleController.entity.vaccineName.name}<br />
+                                <b>Aşı Adı :</b> #{vaccinationScheduleController.entity.vaccine.name}<br />
                                 <b>Son Tarih :</b> #{vaccinationScheduleController.entity.dueDate}<br />
                                 </pre>
                             </p>
