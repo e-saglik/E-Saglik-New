@@ -29,7 +29,6 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
         } else {
             this.page++;
         }
-
     }
 
     public void previous() {
@@ -38,7 +37,6 @@ public class DiseaseController extends BaseController<Disease>  implements Seria
         } else {
             this.page--;
         }
-
     }
 
     public int getPage() {
