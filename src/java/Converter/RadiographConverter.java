@@ -72,7 +72,7 @@ public class RadiographConverter extends BaseConverter<Radiograph> {
                 }
             }
         }
-        return new Radiograph(RGDate, image, id, name);
+        return new Radiograph();
     }
 
 }

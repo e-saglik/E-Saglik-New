@@ -14,13 +14,13 @@ public class AdminConverter extends BaseConverter<Admin> {
         return "Admin{" +
             "id=" + admin.getId() +
             ", name='" + admin.getName() + '\'' +
-            ", firstName='" + admin.getFirstName() + '\'' +
-            ", lastName='" + admin.getLastName() + '\'' +
-            ", email='" + admin.getEmail() + '\'' +
-            ", password='" + admin.getPassword() + '\'' +
-            ", gender='" + admin.getGender() + '\'' +
-            ", phoneNumber='" + admin.getPhoneNumber() + '\'' +
-            ", address='" + admin.getAddress() + '\'' +
+//            ", firstName='" + admin.getFirstName() + '\'' +
+//            ", lastName='" + admin.getLastName() + '\'' +
+//            ", email='" + admin.getEmail() + '\'' +
+//            ", password='" + admin.getPassword() + '\'' +
+//            ", gender='" + admin.getGender() + '\'' +
+//            ", phoneNumber='" + admin.getPhoneNumber() + '\'' +
+//            ", address='" + admin.getAddress() + '\'' +
             ", authorizationLevel='" + admin.getAuthorizationLevel() + '\'' +
             '}';
     }
@@ -49,27 +49,27 @@ public class AdminConverter extends BaseConverter<Admin> {
                     case "name":
                         admin.setName(value);
                         break;
-                    case "firstName":
-                        admin.setFirstName(value);
-                        break;
-                    case "lastName":
-                        admin.setLastName(value);
-                        break;
-                    case "email":
-                        admin.setEmail(value);
-                        break;
-                    case "password":
-                        admin.setPassword(value);
-                        break;
-                    case "gender":
-                        admin.setGender(value);
-                        break;
-                    case "phoneNumber":
-                        admin.setPhoneNumber(value);
-                        break;
-                    case "address":
-                        admin.setAddress(value);
-                        break;
+////                    case "firstName":
+////                        admin.setFirstName(value);
+////                        break;
+////                    case "lastName":
+////                        admin.setLastName(value);
+////                        break;
+////                    case "email":
+////                        admin.setEmail(value);
+////                        break;
+////                    case "password":
+////                        admin.setPassword(value);
+////                        break;
+////                    case "gender":
+////                        admin.setGender(value);
+////                        break;
+////                    case "phoneNumber":
+////                        admin.setPhoneNumber(value);
+////                        break;
+////                    case "address":
+////                        admin.setAddress(value);
+//                        break;
                     case "authorizationLevel":
                         admin.setAuthorizationLevel(value);
                         break;

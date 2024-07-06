@@ -72,6 +72,6 @@ public class PathologyInformationConverter extends BaseConverter<PathologyInform
                 }
             }
         }
-        return new PathologyInformation(informationDate, information, id, name);
+        return new PathologyInformation();
     }
 }

@@ -53,6 +53,6 @@ public class MedicationConverter extends BaseConverter<Medication> {
                 }
             }
         }
-        return new Medication(dosage, id, name);
+        return new Medication();
     }
 }

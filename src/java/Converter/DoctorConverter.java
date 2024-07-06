@@ -24,10 +24,10 @@ public class DoctorConverter extends BaseConverter<Doctor> {
             ", firstName='" + doctor.getFirstName() + '\'' +
             ", lastName='" + doctor.getLastName() + '\'' +
             ", email='" + doctor.getEmail() + '\'' +
-            ", password='" + doctor.getPassword() + '\'' +
-            ", gender='" + doctor.getGender() + '\'' +
-            ", phoneNumber='" + doctor.getPhoneNumber() + '\'' +
-            ", address='" + doctor.getAddress() + '\'' +
+//            ", password='" + doctor.getPassword() + '\'' +
+//            ", gender='" + doctor.getGender() + '\'' +
+//            ", phoneNumber='" + doctor.getPhoneNumber() + '\'' +
+//            ", address='" + doctor.getAddress() + '\'' +
             ", specialization='" + doctor.getSpecialization() + '\'' +
             ", hospital='" + doctor.getHospital() + '\'' +
             ", prescription='" + doctor.getPrescription() + '\'' +
@@ -68,18 +68,18 @@ public class DoctorConverter extends BaseConverter<Doctor> {
                     case "email":
                         doctor.setEmail(value);
                         break;
-                    case "password":
-                        doctor.setPassword(value);
-                        break;
+////                    case "password":
+////                        doctor.setPassword(value);
+////                        break;
                     case "gender":
                         doctor.setGender(value);
                         break;
-                    case "phoneNumber":
-                        doctor.setPhoneNumber(value);
-                        break;
-                    case "address":
-                        doctor.setAddress(value);
-                        break;
+//                    case "phoneNumber":
+//                        doctor.setPhoneNumber(value);
+//                        break;
+//                    case "address":
+//                        doctor.setAddress(value);
+//                        break;
                     case "specialization":
                         doctor.setSpecialization(value);
                         break;
