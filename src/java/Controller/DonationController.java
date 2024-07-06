@@ -2,16 +2,28 @@ package Controller;
 
 import DAO.DonationDAO;
 import Entity.Donation;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
-public class DonationController extends BaseController<Donation> {
+@Named
+@SessionScoped
+public class DonationController extends BaseController<Donation> implements Serializable {
 
+    @EJB
     private DonationDAO donationDao;
+
     private Donation donation;
     private List<Donation> donationList;
 
-    public DonationController() {
+    private int page = 1;
+    private int pageSize = 10;
+    private int pageCount;
 
+    public DonationController() {
+        super(Donation.class);
     }
 
     public DonationDAO getDonationDao() {
@@ -21,6 +33,57 @@ public class DonationController extends BaseController<Donation> {
         return donationDao;
     }
 
+    
+    public void next() {
+        if (this.page == getPageCount()) {
+            this.page = 1;
+        } else {
+            this.page++;
+        }
+
+    }
+
+    public void previous() {
+        if (this.page == 1) {
+            this.page = this.getPageCount();
+        } else {
+            this.page--;
+        }
+
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount = (int) Math.ceil(getDonationDao().Count() / (double) pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public void clearForm() {
+        this.entity = new Donation();
+    }
+
+    public void updateForm(Donation don) {
+        this.entity = don;
+    }
     public void setDonationDao(DonationDAO donationDao) {
         this.donationDao = donationDao;
     }
@@ -43,11 +106,9 @@ public class DonationController extends BaseController<Donation> {
     }
 
     @Override
-    public void AddEntity(Donation donation) {
-        if (donationDao == null) {
-            donationDao = new DonationDAO();
-        }
-        donationDao.Create(donation);
+    public void AddEntity() {
+        getDonationDao().Create(this.entity);
+        this.entity = new Donation();
 
     }
 
@@ -62,28 +123,19 @@ public class DonationController extends BaseController<Donation> {
 
     @Override
     public List<Donation> GetEntityList() {
-        if (donationDao == null) {
-            donationDao = new DonationDAO();
-        }
-        donationDao.GetList();
-
-        return null;
+        return getDonationDao().GetList();
     }
 
     @Override
-    public void UpdateEntity(int id, Donation donation) {
-        if (donationDao == null) {
-            donationDao = new DonationDAO();
-        }
-        donationDao.Update(donation);
+    public void UpdateEntity() {
+        getDonationDao().Update(entity);
+        this.entity = new Donation();
     }
 
     @Override
     public void DeleteEntity() {
-        if (donationDao == null) {
-            donationDao = new DonationDAO();
-        }
-        donationDao.Delete(donation);
+        getDonationDao().Delete(entity);
+        this.entity = new Donation();
     }
-    
+
 }
