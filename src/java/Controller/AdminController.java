@@ -91,6 +91,9 @@ public class AdminController extends BaseController<Admin> implements Serializab
     }
 
     public Admin getEntity() {
+        if (entity == null) {
+            entity = new Admin();
+        }
         return entity;
     }
 

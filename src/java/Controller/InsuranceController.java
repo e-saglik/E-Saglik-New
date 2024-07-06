@@ -35,6 +35,9 @@ public class InsuranceController extends BaseController<Insurance> implements Se
     }
 
     public Insurance getEntity() {
+        if (entity == null) {
+            entity = new Insurance();
+        }
         return entity;
     }
 

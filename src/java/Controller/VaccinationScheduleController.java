@@ -87,6 +87,9 @@ public class VaccinationScheduleController extends BaseController<VaccinationSch
     }
 
     public VaccinationSchedule getEntity() {
+        if (entity == null) {
+            entity = new VaccinationSchedule();
+        }
         return entity;
     }
 

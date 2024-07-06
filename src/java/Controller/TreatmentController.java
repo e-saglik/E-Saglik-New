@@ -89,6 +89,9 @@ public class TreatmentController extends BaseController<Treatment> implements Se
     }
 
     public Treatment getEntity() {
+        if (entity == null) {
+            entity = new Treatment();
+        }
         return entity;
     }
 
