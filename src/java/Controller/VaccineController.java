@@ -128,7 +128,7 @@ public class VaccineController extends BaseController<Vaccine> implements Serial
 
     @Override
     public void DeleteEntity() {
-        getDao().Delete(BaseController.this.entity);
+        getDao().Delete(entity);
         this.entity = new Vaccine();
     }
 
