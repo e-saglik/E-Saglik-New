@@ -1,6 +1,5 @@
 package Controller;
 
-import DAO.AbstractDAO;
 import DAO.TestResultDAO;
 import Entity.TestResult;
 import jakarta.ejb.EJB;
