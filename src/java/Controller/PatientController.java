@@ -102,6 +102,19 @@ public class PatientController extends BaseController<Patient> implements Serial
     public void updateForm(Patient rad) {
         this.entity = rad;
     }
+
+    public Patient getEntity() {
+        if(entity == null){
+            entity = new Patient();
+        }
+        return entity;
+    }
+
+    public void setEntity(Patient entity) {
+        this.entity = entity;
+    }
+    
+    
  
     @Override
     public Patient GetEntityById(int id) {
