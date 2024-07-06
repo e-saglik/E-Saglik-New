@@ -29,6 +29,8 @@ public class Disease extends BaseEntity implements Serializable {
         this.patient = patient;
     }
 
+    
+
     public String getDescription() {
         return description;
     }
@@ -45,8 +47,5 @@ public class Disease extends BaseEntity implements Serializable {
         this.patient = patient;
     }
 
-    @Override
-    public String toString() {
-        return "Disease{" + "description=" + description + '}';
-    }
+   
 }
