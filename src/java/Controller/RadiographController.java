@@ -3,11 +3,93 @@ package Controller;
 import DAO.AbstractDAO;
 import DAO.RadiographDAO;
 import Entity.Radiograph;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
-public class RadiographController extends BaseController<Radiograph> {
+@Named
+@SessionScoped
+public class RadiographController extends BaseController<Radiograph> implements Serializable {
 
-    public AbstractDAO getRadiographDao() {
+    @EJB
+    private RadiographDAO radiographDao;
+
+    private Radiograph radiograph;
+    private List<Radiograph> radiographList;
+
+    private int page = 1;
+    private int pageSize = 10;
+    private int pageCount;
+
+    public RadiographController() {
+        super(Radiograph.class);
+    }
+
+    public void next() {
+        if (this.page == getPageCount()) {
+            this.page = 1;
+        } else {
+            this.page++;
+        }
+
+    }
+
+    public void previous() {
+        if (this.page == 1) {
+            this.page = this.getPageCount();
+        } else {
+            this.page--;
+        }
+
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount = (int) Math.ceil(getRadiographDao().Count() / (double) pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public void clearForm() {
+        this.entity = new Radiograph();
+    }
+
+    public void updateForm(Radiograph rad) {
+        this.entity = rad;
+    }
+
+    public Radiograph getEntity() {
+        return entity;
+    }
+
+    public void setEntity(Radiograph entity) {
+        this.entity = entity;
+    }
+
+    public RadiographDAO getRadiographDao() {
+        if (this.radiographDao == null) {
+            this.radiographDao = new RadiographDAO();
+        }
         return radiographDao;
     }
 
@@ -24,6 +106,7 @@ public class RadiographController extends BaseController<Radiograph> {
     }
 
     public List<Radiograph> getRadiographList() {
+        this.radiographList = this.getRadiographDao().GetList();
         return radiographList;
     }
 
@@ -31,15 +114,7 @@ public class RadiographController extends BaseController<Radiograph> {
         this.radiographList = radiographList;
     }
 
-    private RadiographDAO radiographDao;
-    private Radiograph radiograph;
-    private List<Radiograph> radiographList;
-
-    public RadiographController() {
-
-    }
-
-   @Override
+    @Override
     public Radiograph GetEntityById(int id) {
         if (radiographDao == null) {
             radiographDao = new RadiographDAO();
@@ -50,37 +125,27 @@ public class RadiographController extends BaseController<Radiograph> {
 
     @Override
     public List<Radiograph> GetEntityList() {
-        if (radiographDao == null) {
-            radiographDao = new RadiographDAO();
-        }
-        radiographDao.GetList();
-
-        return radiographDao.GetList();
+        return getRadiographDao().GetList();
     }
 
     @Override
-    public void UpdateEntity(int id, Radiograph radiograph) {
-        if (radiographDao == null) {
-            radiographDao = new RadiographDAO();
-        }
-        radiographDao.Update(radiograph);
+    public void UpdateEntity() {
+        getRadiographDao().Update(entity);
+        this.entity = new Radiograph();
     }
 
     @Override
     public void DeleteEntity() {
-        if (radiographDao == null) {
-            radiographDao = new RadiographDAO();
-        }
-        radiographDao.Delete(radiograph);
+        
+        getRadiographDao().Delete(entity);
+        this.entity = new Radiograph();
     }
 
     @Override
-    public void AddEntity(Radiograph entity) {
-        if (radiographDao == null) {
-            radiographDao = new RadiographDAO();
-        }
-        radiographDao.Create(radiograph);
+    public void AddEntity() {
+        
+        getRadiographDao().Create(entity);
+        this.entity = new Radiograph();
     }
-
 
 }
