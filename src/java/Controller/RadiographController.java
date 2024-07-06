@@ -134,15 +134,13 @@ public class RadiographController extends BaseController<Radiograph> implements 
     }
 
     @Override
-    public void DeleteEntity() {
-        
+    public void DeleteEntity() {     
         getRadiographDao().Delete(entity);
         this.entity = new Radiograph();
     }
 
     @Override
-    public void AddEntity() {
-        
+    public void AddEntity() {    
         getRadiographDao().Create(entity);
         this.entity = new Radiograph();
     }

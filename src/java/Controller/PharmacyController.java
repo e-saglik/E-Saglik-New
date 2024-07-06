@@ -7,7 +7,15 @@ import java.util.List;
 
 public class PharmacyController extends BaseController<Pharmacy> {
 
-    public AbstractDAO getPharmacyDao() {
+    private PharmacyDAO pharmacyDao;
+    private Pharmacy pharmacy;
+    private List<Pharmacy> pharmacyList;
+
+    public PharmacyController() {
+        super(Pharmacy.class);
+    }
+
+    public PharmacyDAO getPharmacyDao() {
         return pharmacyDao;
     }
 
@@ -31,16 +39,7 @@ public class PharmacyController extends BaseController<Pharmacy> {
         this.pharmacyList = pharmacyList;
     }
 
-    private PharmacyDAO pharmacyDao;
-    private Pharmacy pharmacy;
-    private List<Pharmacy> pharmacyList;
-
-    public PharmacyController() {
-
-    }
-
-
-   @Override
+    @Override
     public Pharmacy GetEntityById(int id) {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
@@ -60,7 +59,7 @@ public class PharmacyController extends BaseController<Pharmacy> {
     }
 
     @Override
-    public void UpdateEntity(int id, Pharmacy pharmacy) {
+    public void UpdateEntity() {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }
@@ -76,7 +75,7 @@ public class PharmacyController extends BaseController<Pharmacy> {
     }
 
     @Override
-    public void AddEntity(Pharmacy entity) {
+    public void AddEntity() {
         if (pharmacyDao == null) {
             pharmacyDao = new PharmacyDAO();
         }

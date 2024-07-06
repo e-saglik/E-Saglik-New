@@ -21,8 +21,11 @@ public class Radiograph extends BaseEntity implements Serializable {
     @Column(name = "rg_date")
     private Date RGDate;
 
-    @Column(name = "image")
+    
     private File image;
+    
+    @Column(name = "image")
+    private Byte encrypted;
     
     @ManyToOne
     @JoinColumn(name = "patient_id")
@@ -56,6 +59,14 @@ public class Radiograph extends BaseEntity implements Serializable {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public Byte getEncrypted() {
+        return Byte.decode(image.toString());
+    }
+
+    public void setEncrypted(Byte encrypted) {
+        this.encrypted = encrypted;
     }
     
     
