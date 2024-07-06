@@ -2,7 +2,6 @@ package Converter;
 
 import Entity.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -16,30 +15,24 @@ public class PatientConverter extends BaseConverter<Patient> {
 
     @Override
     public String ConvertToString(Patient patient) {
-        return "Patient{"
-                + "dateOfBirth=" + patient.getDateOfBirth()
-                + ", bloodType='" + patient.getBloodType() + '\''
-                + ", appointment='" + patient.getAppointment() + '\''
-                + ", medicationList=" + patient.getMedicationList()
-                + ", medicalReportList=" + patient.getMedicalReportList()
-                + ", testResultList=" + patient.getTestResultList()
-                + ", diseaseList=" + patient.getDiseaseList()
-                + ", allergyList=" + patient.getAllergyList()
-                + ", insurance='" + patient.getInsurance() + '\''
-                + ", vaccinationSchedule='" + patient.getVaccinationSchedule() + '\''
-                + ", treatmentList=" + patient.getTreatmentList()
-                + ", paymentList=" + patient.getPaymentList()
-                + ", notificationList=" + patient.getNotificationList()
-                + ", firstName='" + patient.getFirstName() + '\''
-                + ", lastName='" + patient.getLastName() + '\''
-                + ", email='" + patient.getEmail() + '\''
-                + ", password='" + patient.getPassword() + '\''
-                + ", gender='" + patient.getGender() + '\''
-                + ", phoneNumber='" + patient.getPhoneNumber() + '\''
-                + ", address='" + patient.getAddress() + '\''
-                + ", id=" + patient.getId()
-                + ", name='" + patient.getName() + '\''
-                + '}';
+        return "Patient{" +
+                "dateOfBirth=" + patient.getDateOfBirth().getTime() +
+                ", bloodType='" + patient.getBloodType() + '\'' +
+                ", appointment='" + patient.getAppointment() + '\'' +
+                ", medicationList=" + convertListToString(patient.getMedicationList()) +
+                ", medicalReportList=" + convertListToString(patient.getMedicalReportList()) +
+                ", testResultList=" + convertListToString(patient.getTestResultList()) +
+                ", doctor=" + (patient.getDoctor() != null ? patient.getDoctor().getId() : null) +
+                ", diseaseList=" + convertListToString(patient.getDiseaseList()) +
+                ", allergyList=" + convertListToString(patient.getAllergyList()) +
+                ", insurance=" + (patient.getInsurance() != null ? patient.getInsurance().getId() : null) +
+                ", vaccinationSchedule=" + (patient.getVaccinationSchedule() != null ? patient.getVaccinationSchedule().getId() : null) +
+                ", treatmentList=" + convertListToString(patient.getTreatmentList()) +
+                ", paymentList=" + convertListToString(patient.getPaymentList()) +
+                ", notificationList=" + convertListToString(patient.getNotificationList()) +
+                ", id=" + patient.getId() +
+                ", name='" + patient.getName() + '\'' +
+                '}';
     }
 
     @Override
@@ -55,6 +48,7 @@ public class PatientConverter extends BaseConverter<Patient> {
         } else {
             System.out.println("ID not found.");
         }
+
         String[] parts = string.split(", ");
         for (String part : parts) {
             String[] keyValue = part.split("=");
@@ -63,7 +57,7 @@ public class PatientConverter extends BaseConverter<Patient> {
                 String value = keyValue[1];
                 switch (key) {
                     case "dateOfBirth":
-                        patient.setDateOfBirth(new Date(value)); // Assuming a proper Date conversion
+                        patient.setDateOfBirth(new Date(Long.parseLong(value))); // Assuming value is a long representing milliseconds
                         break;
                     case "bloodType":
                         patient.setBloodType(value);
@@ -83,6 +77,11 @@ public class PatientConverter extends BaseConverter<Patient> {
                         TestResultConverter trc = new TestResultConverter();
                         patient.setTestResultList(convertToEntityList(value, trc));
                         break;
+                    case "doctor":
+                        Doctor doctor = new Doctor();
+                        doctor.setId(Integer.parseInt(value)); // Assuming value is the doctor's ID
+                        patient.setDoctor(doctor);
+                        break;
                     case "diseaseList":
                         DiseaseConverter dc = new DiseaseConverter();
                         patient.setDiseaseList(convertToEntityList(value, dc));
@@ -92,8 +91,8 @@ public class PatientConverter extends BaseConverter<Patient> {
                         patient.setAllergyList(convertToEntityList(value, ac));
                         break;
                     case "insurance":
-                        InsuranceConverter ıc = new InsuranceConverter();
-                        patient.setInsurance(ıc.ConvertToEntity(value));
+                        InsuranceConverter ic = new InsuranceConverter();
+                        patient.setInsurance(ic.ConvertToEntity(value));
                         break;
                     case "vaccinationSchedule":
                         VaccinationScheduleConverter vsc = new VaccinationScheduleConverter();
@@ -111,30 +110,6 @@ public class PatientConverter extends BaseConverter<Patient> {
                         NotificationConverter nc = new NotificationConverter();
                         patient.setNotificationList(convertToEntityList(value, nc));
                         break;
-                    case "firstName":
-                        patient.setFirstName(value);
-                        break;
-                    case "lastName":
-                        patient.setLastName(value);
-                        break;
-                    case "email":
-                        patient.setEmail(value);
-                        break;
-                    case "password":
-                        patient.setPassword(value);
-                        break;
-                    case "gender":
-                        patient.setGender(value);
-                        break;
-                    case "phoneNumber":
-                        patient.setPhoneNumber(value);
-                        break;
-                    case "address":
-                        patient.setAddress(value);
-                        break;
-                    case "id":
-                        patient.setId(Integer.parseInt(value));
-                        break;
                     case "name":
                         patient.setName(value);
                         break;
@@ -148,16 +123,32 @@ public class PatientConverter extends BaseConverter<Patient> {
     }
 
     private <T> List<T> convertToEntityList(String value, BaseConverter<T> converter) {
-        value = value.replace("[", "").replace("]", "");
-        String[] parts = value.split(", ");
         List<T> list = new ArrayList<>();
-        for (String part : parts) {
-            try {
-                list.add(converter.ConvertToEntity(part));
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
+        if (value != null && !value.isEmpty()) {
+            String[] parts = value.replace("[", "").replace("]", "").split(", ");
+            for (String part : parts) {
+                try {
+                    list.add(converter.ConvertToEntity(part));
+                } catch (InstantiationException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return list;
     }
+    
+    private <T> String convertListToString(List<T> list) {
+    if (list == null || list.isEmpty()) {
+        return "[]";
+    }
+    StringBuilder sb = new StringBuilder();
+    sb.append("[");
+    for (T item : list) {
+        sb.append(item.toString()).append(", ");
+    }
+    sb.setLength(sb.length() - 2); // Remove the last ", "
+    sb.append("]");
+    return sb.toString();
+}
+
 }
