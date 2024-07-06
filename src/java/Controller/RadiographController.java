@@ -91,6 +91,9 @@ public class RadiographController extends BaseController<Radiograph> implements 
     }
 
     public Radiograph getEntity() {
+        if (entity == null) {
+            entity = new Radiograph();
+        }
         return entity;
     }
 

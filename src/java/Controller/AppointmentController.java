@@ -34,6 +34,9 @@ public class AppointmentController extends BaseController<Appointment> implement
     }
 
     public Appointment getEntity() {
+        if (entity == null) {
+            entity = new Appointment();
+        }
         return entity;
     }
 

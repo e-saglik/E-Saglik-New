@@ -86,6 +86,9 @@ public class DiseaseController extends BaseController<Disease> implements Serial
     }
 
     public Disease getEntity() {
+        if (entity == null) {
+            entity = new Disease();
+        }
         return entity;
     }
 

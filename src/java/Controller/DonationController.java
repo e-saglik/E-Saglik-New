@@ -88,6 +88,9 @@ public class DonationController extends BaseController<Donation> implements Seri
     }
 
     public Donation getEntity() {
+        if (entity == null) {
+            entity = new Donation();
+        }
         return entity;
     }
 

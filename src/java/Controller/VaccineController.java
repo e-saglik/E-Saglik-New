@@ -90,6 +90,9 @@ public class VaccineController extends BaseController<Vaccine> implements Serial
     }
 
     public Vaccine getEntity() {
+                if (entity == null) {
+            entity = new Vaccine();
+        }
         return entity;
     }
 

@@ -24,6 +24,9 @@ public class PharmacyController extends BaseController<Pharmacy> {
     }
 
     public Pharmacy getEntity() {
+        if (entity == null) {
+            entity = new Pharmacy();
+        }
         return entity;
     }
 

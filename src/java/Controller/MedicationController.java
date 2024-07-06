@@ -86,6 +86,9 @@ public class MedicationController extends BaseController<Medication> implements 
     }
 
     public Medication getEntity() {
+        if (entity == null) {
+            entity = new Medication();
+        }
         return entity;
     }
 

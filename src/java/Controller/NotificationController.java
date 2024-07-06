@@ -35,6 +35,9 @@ super(Notification.class);
     }
 
     public Notification getEntity() {
+        if (entity == null) {
+            entity = new Notification();
+        }
         return entity;
     }
 
