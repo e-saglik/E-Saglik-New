@@ -54,7 +54,9 @@
                         </div>
                         <div class="form-group">
                             <label for="inputPatient">Hasta</label>
-                            <h:inputText styleClass="form-control" value="#{diseaseController.entity.patient}"></h:inputText>
+                            <h:selectOneMenu id="inputPatient" value="#{diseaseController.entity.patient}">
+                                <f:selectItems value="#{patientController.GetEntityList()}" var="patient" itemValue="#{patient}" itemLabel="#{patient.name}" />
+                            </h:selectOneMenu>
                         </div>
                         <div class="btn-group">
                             <h:commandButton rendered="#{diseaseController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{diseaseController.UpdateEntity()}">
