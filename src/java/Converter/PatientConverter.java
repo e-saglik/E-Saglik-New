@@ -1,154 +1,42 @@
 package Converter;
 
-import Entity.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import DAO.PatientDAO;
+import Entity.Patient;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.convert.Converter;
+import jakarta.faces.convert.FacesConverter;
+import jakarta.inject.Named;
+import java.io.Serializable;
 
-public class PatientConverter extends BaseConverter<Patient> {
+@Named
+@RequestScoped
+@FacesConverter(value = "patientConverter", managed = true)
+public class PatientConverter implements Converter<Patient>, Serializable {
 
-    public PatientConverter() {
-        super();
+    @EJB
+    private PatientDAO dao;
+
+    @Override
+    public Patient getAsObject(FacesContext fc, UIComponent uic, String string) {
+        if (string == null || string.isEmpty()) {
+            return null;
+        }
+        try {
+            int id = Integer.parseInt(string);
+            return dao.GetById(id); // Assuming dao.getById(id) retrieves the Patient entity from the database
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid ID format");
+        }
     }
 
     @Override
-    public String ConvertToString(Patient patient) {
-        return "Patient{" +
-                "dateOfBirth=" + patient.getDateOfBirth().getTime() +
-                ", bloodType='" + patient.getBloodType() + '\'' +
-                ", appointment='" + patient.getAppointment() + '\'' +
-                ", medicationList=" + convertListToString(patient.getMedicationList()) +
-                ", medicalReportList=" + convertListToString(patient.getMedicalReportList()) +
-                ", testResultList=" + convertListToString(patient.getTestResultList()) +
-                ", doctor=" + (patient.getDoctor() != null ? patient.getDoctor().getId() : null) +
-                ", diseaseList=" + convertListToString(patient.getDiseaseList()) +
-                ", allergyList=" + convertListToString(patient.getAllergyList()) +
-                ", insurance=" + (patient.getInsurance() != null ? patient.getInsurance().getId() : null) +
-                ", vaccinationSchedule=" + (patient.getVaccinationSchedule() != null ? patient.getVaccinationSchedule().getId() : null) +
-                ", treatmentList=" + convertListToString(patient.getTreatmentList()) +
-                ", paymentList=" + convertListToString(patient.getPaymentList()) +
-                ", notificationList=" + convertListToString(patient.getNotificationList()) +
-                ", id=" + patient.getId() +
-                ", name='" + patient.getName() + '\'' +
-                '}';
-    }
-
-    @Override
-    public Patient ConvertToEntity(String string) throws IllegalAccessException, InstantiationException {
-        Patient patient = new Patient();
-        String pattern = "id=(\\d+)";
-        Pattern regexPattern = Pattern.compile(pattern);
-        Matcher matcher = regexPattern.matcher(string);
-
-        if (matcher.find()) {
-            String idString = matcher.group(1); // Grup 1, parantez içindeki ifadeyi temsil eder
-            patient.setId(Integer.parseInt(idString));
-        } else {
-            System.out.println("ID not found.");
+    public String getAsString(FacesContext fc, UIComponent uic, Patient patient) {
+        if (patient == null) {
+            return null;
         }
-
-        String[] parts = string.split(", ");
-        for (String part : parts) {
-            String[] keyValue = part.split("=");
-            if (keyValue.length == 2) {
-                String key = keyValue[0];
-                String value = keyValue[1];
-                switch (key) {
-                    case "dateOfBirth":
-                        patient.setDateOfBirth(new Date(Long.parseLong(value))); // Assuming value is a long representing milliseconds
-                        break;
-                    case "bloodType":
-                        patient.setBloodType(value);
-                        break;
-                    case "appointment":
-                        patient.setAppointment(value);
-                        break;
-                    case "medicationList":
-                        MedicationConverter mc = new MedicationConverter();
-                        patient.setMedicationList(convertToEntityList(value, mc));
-                        break;
-                    case "medicalReportList":
-                        MedicalReportConverter mrc = new MedicalReportConverter();
-                        patient.setMedicalReportList(convertToEntityList(value, mrc));
-                        break;
-                    case "testResultList":
-                        TestResultConverter trc = new TestResultConverter();
-                        patient.setTestResultList(convertToEntityList(value, trc));
-                        break;
-                    case "doctor":
-                        Doctor doctor = new Doctor();
-                        doctor.setId(Integer.parseInt(value)); // Assuming value is the doctor's ID
-                        patient.setDoctor(doctor);
-                        break;
-                    case "diseaseList":
-                        DiseaseConverter dc = new DiseaseConverter();
-                        patient.setDiseaseList(convertToEntityList(value, dc));
-                        break;
-                    case "allergyList":
-                        AllergyConverter ac = new AllergyConverter();
-                        patient.setAllergyList(convertToEntityList(value, ac));
-                        break;
-                    case "insurance":
-                        InsuranceConverter ic = new InsuranceConverter();
-                        patient.setInsurance(ic.ConvertToEntity(value));
-                        break;
-                    case "vaccinationSchedule":
-                        VaccinationScheduleConverter vsc = new VaccinationScheduleConverter();
-                        patient.setVaccinationSchedule(vsc.ConvertToEntity(value));
-                        break;
-                    case "treatmentList":
-                        TreatmentConverter tc = new TreatmentConverter();
-                        patient.setTreatmentList(convertToEntityList(value, tc));
-                        break;
-                    case "paymentList":
-                        PaymentConverter pc = new PaymentConverter();
-                        patient.setPaymentList(convertToEntityList(value, pc));
-                        break;
-                    case "notificationList":
-                        NotificationConverter nc = new NotificationConverter();
-                        patient.setNotificationList(convertToEntityList(value, nc));
-                        break;
-                    case "name":
-                        patient.setName(value);
-                        break;
-                    default:
-                        // Handle unknown key or ignore
-                        break;
-                }
-            }
-        }
-        return patient;
+        return String.valueOf(patient.getId()); // Assuming Patient has a getId() method returning its unique identifier
     }
-
-    private <T> List<T> convertToEntityList(String value, BaseConverter<T> converter) {
-        List<T> list = new ArrayList<>();
-        if (value != null && !value.isEmpty()) {
-            String[] parts = value.replace("[", "").replace("]", "").split(", ");
-            for (String part : parts) {
-                try {
-                    list.add(converter.ConvertToEntity(part));
-                } catch (InstantiationException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return list;
-    }
-    
-    private <T> String convertListToString(List<T> list) {
-    if (list == null || list.isEmpty()) {
-        return "[]";
-    }
-    StringBuilder sb = new StringBuilder();
-    sb.append("[");
-    for (T item : list) {
-        sb.append(item.toString()).append(", ");
-    }
-    sb.setLength(sb.length() - 2); // Remove the last ", "
-    sb.append("]");
-    return sb.toString();
-}
-
 }

@@ -25,7 +25,7 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Hasta</f:facet>
-                                    #{disease.patient.name}
+                                    #{disease.patient}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Sil</f:facet>
@@ -46,18 +46,19 @@
                         <h:inputText value="#{diseaseController.entity.id}" style="display:none;"/>
                         <div class="form-group">
                             <label for="inputName">Adı</label>
-                            <h:inputText styleClass="form-control" value="#{diseaseController.entity.name}"></h:inputText>
+                            <h:inputText id="inputName" styleClass="form-control" value="#{diseaseController.entity.name}" />
                         </div>
                         <div class="form-group">
                             <label for="inputDescription">Açıklama</label>
-                            <h:inputText styleClass="form-control" value="#{diseaseController.entity.description}"></h:inputText>
+                            <h:inputText id="inputDescription" styleClass="form-control" value="#{diseaseController.entity.description}" />
                         </div>
                         <div class="form-group">
                             <label for="inputPatient">Hasta</label>
-                            <h:selectOneMenu id="inputPatient" styleClass="form-control" value="#{diseaseController.entity.patient.name}">
-                                <f:selectItem itemValue="" itemLabel="Seçiniz" />
-                                <f:selectItems value="#{patientController.GetPatientNames()}" />
+                            <h:selectOneMenu styleClass="form-select" converter="patientConverter" value="#{diseaseController.selectedPatient}">
+                                <f:selectItem itemLabel="Seçiniz" itemValue="#{null}" />
+                                <f:selectItems value="#{patientController.GetEntityList()}" var="p" itemValue="#{p}" itemLabel="#{p.name}" />
                             </h:selectOneMenu>
+                         
                         </div>
                         <div class="btn-group">
                             <h:commandButton rendered="#{diseaseController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{diseaseController.UpdateEntity()}">

@@ -14,12 +14,11 @@ import java.io.Serializable;
 @NamedQuery(name = "Disease.findAll", query = "SELECT d FROM Disease d")
 public class Disease extends BaseEntity implements Serializable {
 
-    @NotNull(message = "Description cannot be null")
     @Column(name = "description")
     private String description;
 
-    @NotNull(message = "Patient cannot be null")
-    @ManyToOne
+
+    @ManyToOne(targetEntity = Patient.class)
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
@@ -31,6 +30,19 @@ public class Disease extends BaseEntity implements Serializable {
         this.description = description;
         this.patient = patient;
     }
+
+    public Disease(String description, Patient patient) {
+        this.description = description;
+        this.patient = patient;
+    }
+
+    public Disease(String description, Patient patient, String name) {
+        super(name);
+        this.description = description;
+        this.patient = patient;
+    }
+    
+    
 
     public String getDescription() {
         return description;
@@ -47,4 +59,11 @@ public class Disease extends BaseEntity implements Serializable {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
+
+    @Override
+    public String toString() {
+        return "Disease{" + "description=" + description + ", patient=" + patient + '}';
+    }
+    
+    
 }

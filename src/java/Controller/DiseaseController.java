@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.DiseaseDAO;
 import Entity.Disease;
+import Entity.Patient;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
@@ -16,6 +17,7 @@ public class DiseaseController extends BaseController<Disease> implements Serial
     private DiseaseDAO diseaseDao;
     private Disease entity;
     private List<Disease> diseaseList;
+    private Patient selectedPatient;
 
     private int page = 1;
     private int pageSize = 10;
@@ -108,10 +110,11 @@ public class DiseaseController extends BaseController<Disease> implements Serial
     @Override
     public void AddEntity() {
         try {
-            System.out.println("Creating entity: " + this.entity);
-            getDiseaseDao().Create(this.entity);
-            System.out.println("Entity created successfully: " + this.entity);
-            this.entity = new Disease();
+            System.out.println("Creating entity: " + entity);
+            entity.setPatient(selectedPatient);
+            getDiseaseDao().Create(entity);
+            System.out.println("Entity created successfully: " + entity);
+            entity = new Disease();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error while adding entity", e);
@@ -143,4 +146,14 @@ public class DiseaseController extends BaseController<Disease> implements Serial
         diseaseDao.Delete(entity);
         this.entity = new Disease();
     }
+
+    public Patient getSelectedPatient() {
+        return selectedPatient;
+    }
+
+    public void setSelectedPatient(Patient selectedPatient) {
+        this.selectedPatient = selectedPatient;
+    }
+    
+    
 }

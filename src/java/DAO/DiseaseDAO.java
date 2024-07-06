@@ -16,8 +16,12 @@ public class DiseaseDAO extends AbstractDAO<Disease> implements Serializable {
      @Override
     public void Create(Disease entity) {
         try {
-            entityManager.persist(entity);
-            entityManager.flush();  // Ensure the changes are saved immediately
+            String sql = "INSERT INTO disease (name, description, patient_id) VALUES (:name, :description, :patientId)";
+            entityManager.createNativeQuery(sql)
+                    .setParameter("name", entity.getName())
+                    .setParameter("description", entity.getDescription())
+                    .setParameter("patientId", entity.getPatient().getId())
+                    .executeUpdate();
             System.out.println("Entity created successfully: " + entity);
         } catch (Exception e) {
             e.printStackTrace();

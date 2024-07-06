@@ -3,13 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/workspace/E-Saglik-New/src/java/Entity/Prescription.java</file>
-            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/MedicationController.java</file>
-            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/DoctorController.java</file>
-            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/PrescriptionController.java</file>
-            <file>file:/C:/workspace/E-Saglik-New/src/java/DAO/MedicationDAO.java</file>
-            <file>file:/C:/workspace/E-Saglik-New/src/java/DAO/PrescriptionDAO.java</file>
-            <file>file:/C:/workspace/E-Saglik-New/src/java/Entity/Doctor.java</file>
+            <file>file:/C:/Users/zafer/Documents/NetBeansProjects/E-Saglik-New/src/java/DAO/AbstractDAO.java</file>
+            <file>file:/C:/Users/zafer/Documents/NetBeansProjects/E-Saglik-New/src/java/DAO/DiseaseDAO.java</file>
+            <file>file:/C:/Users/zafer/Documents/NetBeansProjects/E-Saglik-New/src/java/Converter/PatientConverter.java</file>
+            <file>file:/C:/Users/zafer/Documents/NetBeansProjects/E-Saglik-New/src/java/Entity/Patient.java</file>
+            <file>file:/C:/Users/zafer/Documents/NetBeansProjects/E-Saglik-New/src/java/Controller/DiseaseController.java</file>
+            <file>file:/C:/Users/zafer/Documents/NetBeansProjects/E-Saglik-New/src/java/Controller/PatientController.java</file>
+            <file>file:/C:/Users/zafer/Documents/NetBeansProjects/E-Saglik-New/src/java/Entity/Disease.java</file>
+            <file>file:/C:/Users/zafer/Documents/NetBeansProjects/E-Saglik-New/web/pages/user/diseasePage.xhtml</file>
+            <file>file:/C:/Users/zafer/Documents/NetBeansProjects/E-Saglik-New/web/pages/user/reportPage.xhtml</file>
+            <file>file:/C:/Users/zafer/Documents/NetBeansProjects/E-Saglik-New/src/java/Controller/PrescriptionController.java</file>
+            <file>file:/C:/Users/zafer/Documents/NetBeansProjects/E-Saglik-New/web/pages/user/medicinePage.xhtml</file>
         </group>
     </open-files>
 </project-private>

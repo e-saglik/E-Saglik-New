@@ -20,6 +20,7 @@ import java.util.List;
 @Entity
 @Table(name = "Patient")
 @NamedQuery(name = "Patient.findAll", query = "SELECT p FROM Patient p")
+@NamedQuery(name = "findByID", query = "select c from Patient c where c.id=:id")
 public class Patient extends BaseEntity implements Serializable {
 
     @NotNull(message = "Date of birth cannot be null")
