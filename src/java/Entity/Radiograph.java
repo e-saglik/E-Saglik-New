@@ -21,10 +21,10 @@ public class Radiograph extends BaseEntity implements Serializable {
     @Column(name = "rg_date")
     private Date RGDate;
 
-    
+    @Column(name = "image", insertable = false, updatable = false)
     private File image;
     
-    @Column(name = "image")
+ 
     private Byte encrypted;
     
     @ManyToOne
