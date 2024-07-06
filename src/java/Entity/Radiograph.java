@@ -24,9 +24,6 @@ public class Radiograph extends BaseEntity implements Serializable {
     @Column(name = "image", insertable = false, updatable = false)
     private File image;
     
- 
-    private Byte encrypted;
-    
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
@@ -61,13 +58,6 @@ public class Radiograph extends BaseEntity implements Serializable {
         this.patient = patient;
     }
 
-    public Byte getEncrypted() {
-        return Byte.decode(image.toString());
-    }
-
-    public void setEncrypted(Byte encrypted) {
-        this.encrypted = encrypted;
-    }
     
     
     
