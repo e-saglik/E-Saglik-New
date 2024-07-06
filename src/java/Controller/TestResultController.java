@@ -14,24 +14,35 @@ public class TestResultController extends BaseController<TestResult> implements 
 
     @EJB
     private TestResultDAO testResultDao;
+
     private TestResult testResult;
     private List<TestResult> testResultList;
-    
+
     private int page = 1;
     private int pageSize = 10;
     private int pageCount;
-    
+
     public TestResultController() {
         super(TestResult.class);
     }
-    
+
+    public TestResultDAO getTestResultDao() {
+        if (this.testResultDao == null) {
+            this.testResultDao = new TestResultDAO();
+        }
+        return testResultDao;
+    }
+
+    public void setTestResultDao(TestResultDAO testResultDao) {
+        this.testResultDao = testResultDao;
+    }
+
     public void next() {
         if (this.page == getPageCount()) {
             this.page = 1;
         } else {
             this.page++;
         }
-
     }
 
     public void previous() {
@@ -40,7 +51,6 @@ public class TestResultController extends BaseController<TestResult> implements 
         } else {
             this.page--;
         }
-
     }
 
     public int getPage() {
@@ -69,23 +79,18 @@ public class TestResultController extends BaseController<TestResult> implements 
     }
 
     public void clearForm() {
-        this.entity = new TestResult();
+        this.testResult = new TestResult();
     }
 
     public void updateForm(TestResult testResult) {
-        this.entity = testResult;
-    }
-
-    public TestResultDAO getTestResultDao() {
-        return testResultDao;
-    }
-
-    public void setTestResultDao(TestResultDAO testResultDao) {
-        this.testResultDao = testResultDao;
+        this.testResult = testResult;
     }
 
     public TestResult getTestResult() {
-        return testResult;
+        if (entity == null) {
+            entity = new TestResult();
+        }
+        return entity;
     }
 
     public void setTestResult(TestResult testResult) {
@@ -93,6 +98,7 @@ public class TestResultController extends BaseController<TestResult> implements 
     }
 
     public List<TestResult> getTestResultList() {
+        this.testResultList = this.getTestResultDao().GetList();
         return testResultList;
     }
 
@@ -100,15 +106,10 @@ public class TestResultController extends BaseController<TestResult> implements 
         this.testResultList = testResultList;
     }
 
-    
-
-   @Override
+    @Override
     public void AddEntity() {
-        if (testResultDao == null) {
-            testResultDao = new TestResultDAO();
-        }
-        testResultDao.Create(testResult);
-
+        getTestResultDao().Create(entity);
+        entity = new TestResult();
     }
 
     @Override
@@ -116,8 +117,7 @@ public class TestResultController extends BaseController<TestResult> implements 
         if (getTestResultDao() == null) {
             testResultDao = new TestResultDAO();
         }
-        getTestResultDao().GetById(id);
-        return null;
+        return getTestResultDao().GetById(id);
     }
 
     @Override
@@ -127,19 +127,13 @@ public class TestResultController extends BaseController<TestResult> implements 
 
     @Override
     public void UpdateEntity() {
-        if (getTestResultDao() == null) {
-            testResultDao = new TestResultDAO();
-        }
-        getTestResultDao().Update(testResult);
+        getTestResultDao().Update(entity);
+        entity = new TestResult();
     }
 
     @Override
     public void DeleteEntity() {
-        if (getTestResultDao() == null) {
-            testResultDao = new TestResultDAO();
-        }
-        getTestResultDao().Delete(testResult);
+        getTestResultDao().Delete(entity);
+        entity = new TestResult();
     }
-
-
 }

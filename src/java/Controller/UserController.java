@@ -17,7 +17,7 @@ public class UserController extends BaseController<User> implements Serializable
 
     @EJB
     private UserDAO userDao;   
-    private User user;
+    private User entity;
     private List<User> userList;
 
     public UserController() {
@@ -25,8 +25,8 @@ public class UserController extends BaseController<User> implements Serializable
     }
 
     public String login() {
-        if (getUser().getEmail().equals("kullanıcı") && getUser().getPassword().equals("123")) {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("valid_user", this.user);
+        if (getEntity().getEmail().equals("kullanıcı") && getEntity().getPassword().equals("123")) {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("valid_user", this.entity);
             return "/index?faces-redirect=true";
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Hatalı kullanıcı adı veya şifre"));
@@ -42,15 +42,15 @@ public class UserController extends BaseController<User> implements Serializable
         this.userDao = userDao;
     }
 
-    public User getUser() {
-        if (this.user == null) {
-            this.user = new User();
+    public User getEntity() {
+        if (this.entity == null) {
+            this.entity = new User();
         }
-        return user;
+        return entity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setEntity(User entity) {
+        this.entity = entity;
     }
 
     public List<User> getUserList() {
@@ -61,7 +61,7 @@ public class UserController extends BaseController<User> implements Serializable
         this.userList = userList;
     }
 
-    @Override
+     @Override
     public User GetEntityById(int id) {
         if (userDao == null) {
             userDao = new UserDAO();
@@ -72,34 +72,24 @@ public class UserController extends BaseController<User> implements Serializable
 
     @Override
     public List<User> GetEntityList() {
-        if (userDao == null) {
-            userDao = new UserDAO();
-        }
-
-        return userDao.GetList();
+        return getUserDao().GetList();
     }
 
     @Override
-    public void UpdateEntity(int id, User user) {
-        if (userDao == null) {
-            userDao = new UserDAO();
-        }
-        userDao.Update(user);
+    public void UpdateEntity() {
+        getUserDao().Update(entity);
+        this.entity = new User();
     }
 
     @Override
-    public void DeleteEntity() {
-        if (userDao == null) {
-            userDao = new UserDAO();
-        }
-        userDao.Delete(user);
+    public void DeleteEntity() {     
+        getUserDao().Delete(entity);
+        this.entity = new User();
     }
 
     @Override
-    public void AddEntity(User entity) {
-        if (userDao == null) {
-            userDao = new UserDAO();
-        }
-        userDao.Create(user);
+    public void AddEntity() {    
+        getUserDao().Create(entity);
+        this.entity = new User();
     }
 }
