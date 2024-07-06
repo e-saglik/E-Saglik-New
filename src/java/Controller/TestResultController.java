@@ -14,7 +14,6 @@ public class TestResultController extends BaseController<TestResult> implements 
 
     @EJB
     private TestResultDAO testResultDao;
-
     private TestResult testResult;
     private List<TestResult> testResultList;
 

@@ -1,8 +1,6 @@
 package Controller;
 
-import DAO.AbstractDAO;
 import DAO.VaccinationScheduleDAO;
-import Entity.Doctor;
 import Entity.VaccinationSchedule;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
