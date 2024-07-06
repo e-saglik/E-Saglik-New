@@ -4,6 +4,7 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
                 template="/template/template.xhtml">
 
     <h:outputStylesheet library="css" name="bootstrap.css" />
@@ -47,7 +48,9 @@
                         <h:inputText value="#{medicalReportController.entity.id}" ></h:inputText>
                         <div class="form-group">
                             <label for="inputDate">Tarih</label>
-                            <h:inputText type="date" styleClass="form-control" value="#{medicalReportController.entity.medicalReportDate}"></h:inputText>
+                            <h:inputText type="date" styleClass="form-control" value="#{medicalReportController.entity.medicalReportDate}"> 
+                                <f:convertDateTime pattern="yyyy/MM/dd" />
+                            </h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputDiagnosis">Teşhis</label>
@@ -57,7 +60,7 @@
                             <label for="inputDescription">Açıklama</label>
                             <h:inputTextarea styleClass="form-control" value="#{medicalReportController.entity.description}"></h:inputTextarea>
                         </div>
-                        
+
                         <button type="button" class="btn btn-secondary" onclick="addTestResult()">Test Sonucu Ekle</button>
                         <div class="btn-group">
                             <h:commandButton rendered="#{medicalReportController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{medicalReportController.UpdateEntity()}">

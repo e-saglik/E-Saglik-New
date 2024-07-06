@@ -106,11 +106,8 @@ public class MedicationController extends BaseController<Medication> implements 
 
     @Override
     public void AddEntity() {
-        if (medicationDao == null) {
-            medicationDao = new MedicationDAO();
-        }
-        medicationDao.Create(entity);
-
+        getMedicationDao().Create(entity);
+        entity = new Medication();
     }
 
     @Override
