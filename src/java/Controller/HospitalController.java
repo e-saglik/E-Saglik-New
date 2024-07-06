@@ -34,6 +34,9 @@ public class HospitalController extends BaseController<Hospital> implements Seri
     }
 
     public Hospital getEntity() {
+        if (entity == null) {
+            entity = new Hospital();
+        }
         return entity;
     }
 

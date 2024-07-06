@@ -34,6 +34,9 @@ public class PatientController extends BaseController<Patient> implements Serial
     }
 
     public Patient getEntity() {
+        if (entity == null) {
+            entity = new Patient();
+        }
         return entity;
     }
 

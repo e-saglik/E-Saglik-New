@@ -38,6 +38,9 @@ public class AllergyController extends BaseController<Allergy> implements Serial
     }
 
     public Allergy getEntity() {
+        if (entity == null) {
+            entity = new Allergy();
+        }
         return entity;
     }
 

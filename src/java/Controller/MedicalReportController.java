@@ -89,6 +89,9 @@ public class MedicalReportController extends BaseController<MedicalReport> imple
     }
 
     public MedicalReport getEntity() {
+        if (entity == null) {
+            entity = new MedicalReport();
+        }
         return entity;
     }
 
