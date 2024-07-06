@@ -51,35 +51,35 @@
                 </div>
                 <div class="col-md-4" style="padding-right: 0">
                     <h:form id="testResult-form">
-                        <h:inputText value="#{testResultController.testResult.id}"></h:inputText>
+                        <h:inputText value="#{testResultController.entity.id}"></h:inputText>
                         <div class="form-group">
                             <label for="inputDate">Tarih</label>
-                            <h:inputText type="date" styleClass="form-control" value="#{testResultController.testResult.date}"></h:inputText>
+                            <h:inputText type="date" styleClass="form-control" value="#{testResultController.entity.date}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestType">Test Türü</label>
-                            <h:inputText styleClass="form-control" value="#{testResultController.testResult.testType}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testType}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestName">Test Adı</label>
-                            <h:inputText styleClass="form-control" value="#{testResultController.testResult.testName}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testName}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestNormalValue">Normal Değer</label>
-                            <h:inputText styleClass="form-control" value="#{testResultController.testResult.testNormalValue}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testNormalValue}"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="inputTestValue">Değer</label>
-                            <h:inputText styleClass="form-control" value="#{testResultController.testResult.testValue}"></h:inputText>
+                            <h:inputText styleClass="form-control" value="#{testResultController.entity.testValue}"></h:inputText>
                         </div>
                         <div class="btn-group">
-                            <h:commandButton rendered="#{testResultController.testResult.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{testResultController.UpdateEntity()}">
+                            <h:commandButton rendered="#{testResultController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{testResultController.UpdateEntity()}">
                                 <f:ajax execute="testResult-form" render="testResult-form testResult-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{testResultController.testResult.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{testResultController.AddEntity()}">
+                            <h:commandButton rendered="#{testResultController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{testResultController.AddEntity()}">
                                 <f:ajax execute="testResult-form" render="testResult-form testResult-table"/>
                             </h:commandButton>
-                            <h:commandButton rendered="#{testResultController.testResult.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{testResultController.clearForm()}">
+                            <h:commandButton rendered="#{testResultController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{testResultController.clearForm()}">
                                 <f:ajax execute="@this" render="testResult-form"/>
                             </h:commandButton>
                         </div>
@@ -96,11 +96,11 @@
                         <div class="modal-body">
                             <p>Bu tahlili silmek istediğinizden emin misiniz!</p>
                             <pre>
-                                <b>Tarih :</b> #{testResultController.testResult.date}<br />
-                                <b>Test Türü :</b> #{testResultController.testResult.testType}<br />
-                                <b>Test Adı :</b> #{testResultController.testResult.testName}<br />
-                                <b>Normal Değer :</b> #{testResultController.testResult.testNormalValue}<br />
-                                <b>Değer :</b> #{testResultController.testResult.testValue}<br />
+                                <b>Tarih :</b> #{testResultController.entity.date}<br />
+                                <b>Test Türü :</b> #{testResultController.entity.testType}<br />
+                                <b>Test Adı :</b> #{testResultController.entity.testName}<br />
+                                <b>Normal Değer :</b> #{testResultController.entity.testNormalValue}<br />
+                                <b>Değer :</b> #{testResultController.entity.testValue}<br />
                             </pre>
                         </div>
                         <div class="modal-footer">

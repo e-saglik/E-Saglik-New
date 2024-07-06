@@ -13,16 +13,15 @@ import java.util.List;
 @SessionScoped
 public class MedicationController extends BaseController<Medication> implements Serializable {
 
-    private Medication medication;
-    
     @EJB
     private MedicationDAO medicationDao;
+    private Medication entity;
     private List<Medication> medicationList;
 
-     private int page = 1;
+    private int page = 1;
     private int pageSize = 10;
     private int pageCount;
-    
+
     public MedicationController() {
         super(Medication.class);
     }
@@ -77,7 +76,7 @@ public class MedicationController extends BaseController<Medication> implements 
     public void updateForm(Medication doc) {
         this.entity = doc;
     }
-    
+
     public MedicationDAO getMedicationDao() {
         return medicationDao;
     }
@@ -86,12 +85,12 @@ public class MedicationController extends BaseController<Medication> implements 
         this.medicationDao = medicationDao;
     }
 
-    public Medication getMedication() {
-        return medication;
+    public Medication getEntity() {
+        return entity;
     }
 
-    public void setMedication(Medication medication) {
-        this.medication = medication;
+    public void setEntity(Medication entity) {
+        this.entity = entity;
     }
 
     public List<Medication> getMedicationList() {
@@ -107,7 +106,7 @@ public class MedicationController extends BaseController<Medication> implements 
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }
-        medicationDao.Create(medication);
+        medicationDao.Create(entity);
 
     }
 
@@ -130,7 +129,7 @@ public class MedicationController extends BaseController<Medication> implements 
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }
-        medicationDao.Update(medication);
+        medicationDao.Update(entity);
     }
 
     @Override
@@ -138,7 +137,7 @@ public class MedicationController extends BaseController<Medication> implements 
         if (medicationDao == null) {
             medicationDao = new MedicationDAO();
         }
-        medicationDao.Delete(medication);
+        medicationDao.Delete(entity);
     }
 
 }

@@ -15,7 +15,7 @@ public class InsuranceController extends BaseController<Insurance> implements Se
 
     @EJB
     private InsuranceDAO ınsuranceDao;
-    private Insurance ınsurance;
+    private Insurance entity;
     private List<Insurance> ınsuranceList;
 
     private int page = 1;
@@ -34,12 +34,12 @@ public class InsuranceController extends BaseController<Insurance> implements Se
         this.ınsuranceDao = ınsuranceDao;
     }
 
-    public Insurance getInsurance() {
-        return ınsurance;
+    public Insurance getEntity() {
+        return entity;
     }
 
-    public void setInsurance(Insurance ınsurance) {
-        this.ınsurance = ınsurance;
+    public void setEntity(Insurance entity) {
+        this.entity = entity;
     }
 
     public List<Insurance> getInsuranceList() {

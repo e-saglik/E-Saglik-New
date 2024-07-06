@@ -1,24 +1,17 @@
 package DAO;
 
-import Entity.Doctor;
-import Entity.User;
 import jakarta.ejb.Local;
 import jakarta.ejb.Stateless;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Local
 @Stateless
 public abstract class AbstractDAO<T> implements Serializable {
 
-    
     @PersistenceContext(unitName = "E-SaglikPU")
     protected EntityManager entityManager;
     protected Class<T> entityClass;
@@ -31,37 +24,71 @@ public abstract class AbstractDAO<T> implements Serializable {
     }
 
     public void Create(T entity) {
-        entityManager.persist(entity);
+        try {
+            entityManager.persist(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while creating entity", e);
+        }
     }
 
     public void Update(T entity) {
-        entityManager.merge(entity);
+        try {
+            entityManager.merge(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while updating entity", e);
+        }
     }
 
     public List<T> GetList() {
-        Query q = entityManager.createQuery("select c from " + entityClass.getSimpleName() + " c order by c.id desc", entityClass);
-        return q.getResultList();
+        try {
+            Query q = entityManager.createQuery("select c from " + entityClass.getSimpleName() + " c order by c.id desc", entityClass);
+            return q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while getting list of entities", e);
+        }
     }
 
     public void Delete(T entity) {
-        entityManager.remove(entityManager.merge(entity));
-        entityManager.flush();
+        try {
+            entityManager.remove(entityManager.merge(entity));
+            entityManager.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while deleting entity", e);
+        }
     }
 
     public T GetById(int id) {
-//        return (T) entityManager.find(entityClass, id);
-return null;
+        try {
+            return entityManager.find(entityClass, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while getting entity by ID", e);
+        }
     }
 
     public List<T> FindRange(int[] range) {
-        Query q = entityManager.createQuery("SELECT e FROM " + entityClass.getName() + " e", entityClass);
-        q.setMaxResults(range[1] - range[0]);
-        q.setFirstResult(range[0]);
-        return q.getResultList();
+        try {
+            Query q = entityManager.createQuery("SELECT e FROM " + entityClass.getName() + " e", entityClass);
+            q.setMaxResults(range[1] - range[0]);
+            q.setFirstResult(range[0]);
+            return q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while finding range of entities", e);
+        }
     }
 
     public int Count() {
-        Query q = entityManager.createQuery("SELECT COUNT(e) FROM " + entityClass.getName() + " e");
-        return ((Long) q.getSingleResult()).intValue();
+        try {
+            Query q = entityManager.createQuery("SELECT COUNT(e) FROM " + entityClass.getName() + " e");
+            return ((Long) q.getSingleResult()).intValue();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while counting entities", e);
+        }
     }
 }
