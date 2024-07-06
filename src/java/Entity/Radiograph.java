@@ -58,11 +58,6 @@ public class Radiograph extends BaseEntity implements Serializable {
         this.patient = patient;
     }
 
-    
-    
-    
-    
-
     @Override
     public String toString() {
         return "Radiograph{" + "RGDate=" + RGDate + ", image=" + image + '}';

@@ -207,4 +207,6 @@ public class Patient extends BaseEntity implements Serializable {
     public void setNotificationList(List<Notification> notificationList) {
         this.notificationList = notificationList;
     }
+    
+    
 }

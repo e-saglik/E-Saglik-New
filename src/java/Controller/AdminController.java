@@ -14,9 +14,8 @@ import java.util.List;
 public class AdminController extends BaseController<Admin> implements Serializable{
 
     @EJB
-    private AdminDAO adminDao;
-    
-    private Admin admin;
+    private AdminDAO adminDao;   
+    private Admin entity;
     private List<Admin> adminList;
 
     private int page = 1;
@@ -91,12 +90,12 @@ public class AdminController extends BaseController<Admin> implements Serializab
         this.adminDao = adminDao;
     }
 
-    public Admin getAdmin() {
-        return admin;
+    public Admin getEntity() {
+        return entity;
     }
 
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
+    public void setEntity(Admin entity) {
+        this.entity = entity;
     }
 
     public List<Admin> getAdminList() {
