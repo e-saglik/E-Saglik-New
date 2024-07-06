@@ -7,14 +7,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -26,25 +26,39 @@ public class User extends BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    
+
+    @NotBlank(message = "First name is mandatory")
+    @Size(min = 1, max = 50, message = "First name must be between 1 and 50 characters")
     @Column(name = "first_name")
     private String firstName;
 
+    @NotBlank(message = "Last name is mandatory")
+    @Size(min = 1, max = 50, message = "Last name must be between 1 and 50 characters")
     @Column(name = "last_name")
     private String lastName;
 
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "Email should be valid")
     @Column(name = "email")
     private String email;
 
+    @NotBlank(message = "Password is mandatory")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
     @Column(name = "password")
     private String password;
 
+    @NotBlank(message = "Gender is mandatory")
+    @Pattern(regexp = "Male|Female|Other", message = "Gender must be Male, Female, or Other")
     @Column(name = "gender")
     private String gender;
 
+    @NotBlank(message = "Phone number is mandatory")
+    @Pattern(regexp = "^\\+?[0-9. ()-]{7,25}$", message = "Phone number is invalid")
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @NotBlank(message = "Address is mandatory")
+    @Size(min = 1, max = 100, message = "Address must be between 1 and 100 characters")
     @Column(name = "address")
     private String address;
 
@@ -118,6 +132,7 @@ public class User extends BaseEntity implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+
     @Override
     public String toString() {
         return "User{" +
